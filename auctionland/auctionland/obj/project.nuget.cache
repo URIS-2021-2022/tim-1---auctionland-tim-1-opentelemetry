@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "z8+HnyZekHEHG3nZFOH50gHLxAxBxu8OuORv8rYypuqCHr0A7xuPwpem4BheXEwNDBZevCZ4xKu2eg80k25tFw==",
+  "dgSpecHash": "rdml8R6GQBcgNspwNT5N3ortCY31jncNboTT2Dpfu1RkyD8vXosVC4CN8ItC+zRwilEFeX+xYAJ2aay8wmkN3g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\auctionland.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Ana Zuber\\Desktop\\faks_projekti\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\auctionland.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ana Zuber\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
+  ],
   "logs": []
 }

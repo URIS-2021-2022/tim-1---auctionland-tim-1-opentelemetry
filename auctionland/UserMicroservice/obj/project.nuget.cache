@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "fdj5eyvDWwIWT7TOMEvIvGRqQfM52ImeuJCKZEGUADOQmzsNQNTfR18sdxKbfdjKMDTbRiYBw5riajz+ZcGX3A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ana Zuber\\Desktop\\faks_projekti\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\UserMicroservice\\UserMicroservice.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ana Zuber\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}
