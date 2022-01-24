@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "aiURBYKD5ZMWvd6zLrdtd0NhaqYzhVQegBHoVsWOz77Gqc6jI+37PgcgoA2mgUOY1QYrh8uFMJAJXBoKJJgjhg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Zeljana\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\DocumentMicroservice\\DocumentMicroservice.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Zeljana\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
+    "C:\\Users\\Zeljana\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

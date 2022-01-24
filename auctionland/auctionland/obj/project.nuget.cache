@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z8+HnyZekHEHG3nZFOH50gHLxAxBxu8OuORv8rYypuqCHr0A7xuPwpem4BheXEwNDBZevCZ4xKu2eg80k25tFw==",
+  "dgSpecHash": "fOjvuiQkFkRZPVNy8BSA7EP0WbBr5zOktEk3vDvZo6TIQjz8Z0AAS9itpwikQKlENaTmx8ej48v9rQ610lvv9w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\auctionland.csproj",
+  "projectFilePath": "C:\\Users\\Zeljana\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\auctionland.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
