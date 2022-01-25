@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UserMicroservice.Entities;
 
 namespace UserMicroservice.Data
@@ -17,5 +15,6 @@ namespace UserMicroservice.Data
         User Update(User user);
 
         void Delete(Guid id);
+        bool UserWithCredentialsExists(string userName, string password);
     }
 }

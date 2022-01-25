@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UserMicroservice.Data;
 using UserMicroservice.Entities;
 using UserMicroservice.Models;
