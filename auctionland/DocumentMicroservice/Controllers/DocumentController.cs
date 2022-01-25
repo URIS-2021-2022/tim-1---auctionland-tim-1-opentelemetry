@@ -31,7 +31,7 @@ namespace DocumentMicroservice.Controllers
 
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpGet("{examRegistrationId}")] //Dodatak na rutu koja je definisana na nivou kontrolera
+        [HttpGet("{documentID}")] //Dodatak na rutu koja je definisana na nivou kontrolera
         public ActionResult<ResponseDocumentDto> GetDocument(Guid documentID) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
             var document = documentService.GetDocumentById(documentID);
@@ -81,10 +81,9 @@ namespace DocumentMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpDelete("{examRegistrationId}")]
+        [HttpDelete("{documentID}")]
         public IActionResult DeleteExamRegistration(Guid documentID)
         {
-            //TODO: Dodati logiku da se studentu vrate sredstva na račun ukoliko se obriše prijava ispita
             try
             {
                 var document = documentService.GetDocumentById(documentID);

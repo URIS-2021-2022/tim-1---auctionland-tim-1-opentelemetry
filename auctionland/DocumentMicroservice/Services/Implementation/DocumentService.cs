@@ -27,7 +27,7 @@ namespace DocumentMicroservice.Services.Implementation
                 DocumentDate = requestDocumentDto.DocumentDate,
                 DocumentSubmissionDate = requestDocumentDto.DocumentSubmissionDate,
                 DocumentTemplate = requestDocumentDto.DocumentTemplate,
-                ListOfDocumentsId = requestDocumentDto.ListOfDocumentsId
+                ListOfDocuments = requestDocumentDto.ListOfDocuments
             };
 
             documentRepository.CreateDocument(document);
@@ -39,7 +39,7 @@ namespace DocumentMicroservice.Services.Implementation
                 DocumentDate = document.DocumentDate,
                 DocumentSubmissionDate = document.DocumentSubmissionDate,
                 DocumentTemplate = document.DocumentTemplate,
-                ListOfDocumentsId = document.ListOfDocumentsId
+                ListOfDocuments = document.ListOfDocuments
             };
 
             return response;
@@ -64,7 +64,7 @@ namespace DocumentMicroservice.Services.Implementation
                     DocumentDate = document.DocumentDate,
                     DocumentSubmissionDate = document.DocumentSubmissionDate,
                     DocumentTemplate = document.DocumentTemplate,
-                    ListOfDocumentsId = document.ListOfDocumentsId
+                    ListOfDocuments = document.ListOfDocuments
                 };
                 responseDocumentDtos.Add(responseDto);
             }
@@ -84,7 +84,7 @@ namespace DocumentMicroservice.Services.Implementation
                 DocumentDate = document.DocumentDate,
                 DocumentSubmissionDate = document.DocumentSubmissionDate,
                 DocumentTemplate = document.DocumentTemplate,
-                ListOfDocumentsId = document.ListOfDocumentsId
+                ListOfDocuments = document.ListOfDocuments
             };
 
             return response;
@@ -99,7 +99,7 @@ namespace DocumentMicroservice.Services.Implementation
                 DocumentDate = requestDocumentDto.DocumentDate,
                 DocumentSubmissionDate = requestDocumentDto.DocumentSubmissionDate,
                 DocumentTemplate = requestDocumentDto.DocumentTemplate,
-                ListOfDocumentsId = requestDocumentDto.ListOfDocumentsId
+                ListOfDocuments = requestDocumentDto.ListOfDocuments
             };
 
             documentRepository.UpdateDocument(document);
@@ -111,7 +111,7 @@ namespace DocumentMicroservice.Services.Implementation
                 DocumentDate = document.DocumentDate,
                 DocumentSubmissionDate = document.DocumentSubmissionDate,
                 DocumentTemplate = document.DocumentTemplate,
-                ListOfDocumentsId = document.ListOfDocumentsId
+                ListOfDocuments = document.ListOfDocuments
             };
 
             return response;

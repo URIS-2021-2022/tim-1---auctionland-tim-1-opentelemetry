@@ -13,6 +13,6 @@ namespace DocumentMicroservice.Models
         public DateTime DocumentDate { get; set; }
         public DateTime DocumentSubmissionDate { get; set; }
         public string DocumentTemplate { get; set; }
-        public ListOfDocuments ListOfDocumentsId { get; set; }
+        public ListOfDocuments ListOfDocuments { get; set; }
     }
 }

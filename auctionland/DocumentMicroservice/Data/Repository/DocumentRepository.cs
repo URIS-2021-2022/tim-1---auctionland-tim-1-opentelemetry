@@ -8,7 +8,7 @@ namespace DocumentMicroservice.Services.Repository
 {
     public class DocumentRepository : IDocumentRepository
     {
-        private readonly List<Document> documents = new List<Document>();
+        private readonly DocumentContext documentContext;
 
         public Document CreateDocument(Document document)
         {
@@ -16,24 +16,24 @@ namespace DocumentMicroservice.Services.Repository
 
             document.DocumentId = Guid.NewGuid();
 
-            documents.Add(document);
+            documentContext.Documents.Add(document);
             return document;
         }
 
         public void DeleteDocument(Guid documentID)
         {
             var registration = GetDocumentById(documentID);
-            documents.Remove(registration);
+            documentContext.Documents.Remove(registration);
         }
 
         public List<Document> GetAllDocuments()
         {
-            return documents;
+            return documentContext.Documents.ToList();
         }
 
         public Document GetDocumentById(Guid documentID)
         {
-            return documents.FirstOrDefault(e => e.DocumentId == documentID);
+            return documentContext.Documents.FirstOrDefault(e => e.DocumentId == documentID);
         }
 
         public Document UpdateDocument(Document document)

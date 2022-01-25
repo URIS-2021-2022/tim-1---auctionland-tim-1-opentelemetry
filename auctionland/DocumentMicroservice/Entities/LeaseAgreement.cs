@@ -15,7 +15,11 @@ namespace DocumentMicroservice.Entities
 
         public DateTime LeaseAgreementEntryDate { get; set; }
 
-        //public int ClanKomisijeID { get; set; }
+        //public Komisija ministerID { get; set; }
+
+        //public PublicBidding PublicBiddingID { get; set; }
+
+        //public Lice LiceID { get; set; }
 
         public DateTime DeadlineForLandRestitution { get; set; }
 
