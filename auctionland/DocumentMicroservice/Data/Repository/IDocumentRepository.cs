@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Services.Repository
 {
-    interface IDocumentRepository
+    public interface IDocumentRepository
     {
         Document CreateDocument(Document document);
 

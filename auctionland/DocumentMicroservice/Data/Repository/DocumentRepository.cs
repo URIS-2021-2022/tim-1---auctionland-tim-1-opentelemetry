@@ -16,14 +16,15 @@ namespace DocumentMicroservice.Services.Repository
 
             document.DocumentId = Guid.NewGuid();
 
+
             documentContext.Documents.Add(document);
             return document;
         }
 
         public void DeleteDocument(Guid documentID)
         {
-            var registration = GetDocumentById(documentID);
-            documentContext.Documents.Remove(registration);
+            var document = GetDocumentById(documentID);
+            documentContext.Documents.Remove(document);
         }
 
         public List<Document> GetAllDocuments()

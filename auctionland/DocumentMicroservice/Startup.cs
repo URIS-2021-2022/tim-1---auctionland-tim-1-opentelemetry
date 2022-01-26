@@ -89,7 +89,7 @@ namespace DocumentMicroservice
 
             //Konfigurisanje Jwt autentifikacije za projekat
             //Registrujemo Jwt autentifikacionu shemu i definisemo sve potrebne Jwt opcije
-            /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -101,7 +101,7 @@ namespace DocumentMicroservice
                     ValidAudience = Configuration["Jwt:Issuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
-            });*/
+            });
 
             services.AddScoped<IDocumentRepository, DocumentRepository>(); //Koristimo konkretni repozitorijum
 
@@ -113,11 +113,11 @@ namespace DocumentMicroservice
                         Title = "Auction Land API: Document",
                         Version = "1",
                         //Često treba da dodamo neke dodatne informacije
-                        Description = "Pomoću ovog API-ja može da se vrši prijava ispita, modifikacija prijava ispita kao i pregled kreiranih prijava ispita.",
+                        Description = "Pomoću ovog API-ja može da se vrši dodavanje novog dokumenta, modifikacija postojećih dokumenata kao i pregled kreiranih dokumenata.",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact
                         {
-                            Name = "Marko Marković",
-                            Email = "marko@mail.com",
+                            Name = "Željana Amidžić",
+                            Email = "zeljana@mail.com",
                             Url = new Uri("http://www.ftn.uns.ac.rs/")
                         },
                         License = new Microsoft.OpenApi.Models.OpenApiLicense
