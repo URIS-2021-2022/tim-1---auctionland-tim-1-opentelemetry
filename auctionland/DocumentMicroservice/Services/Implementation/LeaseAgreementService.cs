@@ -17,6 +17,9 @@ namespace DocumentMicroservice.Services.Implementation
                 LeaseTypeOfGuarantee = leaseDto.LeaseTypeOfGuarantee,
                 LeaseAgreementMaturities = leaseDto.LeaseAgreementMaturities,
                 LeaseAgreementEntryDate = leaseDto.LeaseAgreementEntryDate,
+                MinisterID = leaseDto.MinisterID,
+                PublicBiddingID = leaseDto.PublicBiddingID,
+                PersonID = leaseDto.PersonID,
                 DeadlineForLandRestitution = leaseDto.DeadlineForLandRestitution,
                 PlaceOfSigning = leaseDto.PlaceOfSigning,
                 DateOfSigning = leaseDto.DateOfSigning
@@ -29,6 +32,9 @@ namespace DocumentMicroservice.Services.Implementation
                 LeaseTypeOfGuarantee = leaseAgreement.LeaseTypeOfGuarantee,
                 LeaseAgreementMaturities = leaseAgreement.LeaseAgreementMaturities,
                 LeaseAgreementEntryDate = leaseAgreement.LeaseAgreementEntryDate,
+                MinisterID = leaseAgreement.MinisterID,
+                PublicBiddingID = leaseAgreement.PublicBiddingID,
+                PersonID = leaseAgreement.PersonID,
                 DeadlineForLandRestitution = leaseAgreement.DeadlineForLandRestitution,
                 PlaceOfSigning = leaseAgreement.PlaceOfSigning,
                 DateOfSigning = leaseAgreement.DateOfSigning
@@ -54,10 +60,12 @@ namespace DocumentMicroservice.Services.Implementation
                     LeaseTypeOfGuarantee = lease.LeaseTypeOfGuarantee,
                     LeaseAgreementMaturities = lease.LeaseAgreementMaturities,
                     LeaseAgreementEntryDate = lease.LeaseAgreementEntryDate,
+                    MinisterID = lease.MinisterID,
+                    PublicBiddingID = lease.PublicBiddingID,
+                    PersonID = lease.PersonID,
                     DeadlineForLandRestitution = lease.DeadlineForLandRestitution,
                     PlaceOfSigning = lease.PlaceOfSigning,
                     DateOfSigning = lease.DateOfSigning
-                    
                 };
                 responseLeasesDtos.Add(responseDto);
             }
@@ -75,6 +83,9 @@ namespace DocumentMicroservice.Services.Implementation
                 LeaseTypeOfGuarantee = lease.LeaseTypeOfGuarantee,
                 LeaseAgreementMaturities = lease.LeaseAgreementMaturities,
                 LeaseAgreementEntryDate = lease.LeaseAgreementEntryDate,
+                MinisterID = lease.MinisterID,
+                PublicBiddingID = lease.PublicBiddingID,
+                PersonID = lease.PersonID,
                 DeadlineForLandRestitution = lease.DeadlineForLandRestitution,
                 PlaceOfSigning = lease.PlaceOfSigning,
                 DateOfSigning = lease.DateOfSigning
@@ -90,6 +101,9 @@ namespace DocumentMicroservice.Services.Implementation
                 LeaseTypeOfGuarantee = leaseDto.LeaseTypeOfGuarantee,
                 LeaseAgreementMaturities = leaseDto.LeaseAgreementMaturities,
                 LeaseAgreementEntryDate = leaseDto.LeaseAgreementEntryDate,
+                MinisterID = leaseDto.MinisterID,
+                PublicBiddingID = leaseDto.PublicBiddingID,
+                PersonID = leaseDto.PersonID,
                 DeadlineForLandRestitution = leaseDto.DeadlineForLandRestitution,
                 PlaceOfSigning = leaseDto.PlaceOfSigning,
                 DateOfSigning = leaseDto.DateOfSigning
@@ -102,6 +116,9 @@ namespace DocumentMicroservice.Services.Implementation
                 LeaseTypeOfGuarantee = leaseAgreement.LeaseTypeOfGuarantee,
                 LeaseAgreementMaturities = leaseAgreement.LeaseAgreementMaturities,
                 LeaseAgreementEntryDate = leaseAgreement.LeaseAgreementEntryDate,
+                MinisterID = leaseAgreement.MinisterID,
+                PublicBiddingID = leaseAgreement.PublicBiddingID,
+                PersonID = leaseAgreement.PersonID,
                 DeadlineForLandRestitution = leaseAgreement.DeadlineForLandRestitution,
                 PlaceOfSigning = leaseAgreement.PlaceOfSigning,
                 DateOfSigning = leaseAgreement.DateOfSigning

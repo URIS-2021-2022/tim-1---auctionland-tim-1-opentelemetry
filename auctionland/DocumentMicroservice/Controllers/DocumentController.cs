@@ -1,5 +1,7 @@
-﻿using DocumentMicroservice.Models;
+﻿using AutoMapper;
+using DocumentMicroservice.Models;
 using DocumentMicroservice.Services.Implementation;
+using DocumentMicroservice.Services.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +15,18 @@ namespace DocumentMicroservice.Controllers
     [ApiController]
     [Route("api/document")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
+    //[Authorize]
     public class DocumentController : ControllerBase
     {
-        private readonly DocumentService documentService;
+        //private readonly DocumentService _documentService;
+        private readonly IDocumentRepository documentRepository;
+        private readonly IMapper mapper;
+
+        public DocumentController(IDocumentRepository documentRepository, IMapper mapper)
+        {
+            this.documentRepository = documentRepository;
+            this.mapper = mapper;
+        }
 
         [HttpGet]
         [HttpHead] //Podržavamo i HTTP head zahtev koji nam vraća samo zaglavlja u odgovoru    
@@ -24,11 +34,18 @@ namespace DocumentMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<ResponseDocumentDto>> GetAllDocuments()
         {
-            //fale provere da li je nocontent
-            //Ukoliko smo našli neke prijava vratiti status 200 i listu pronađenih prijava (DTO objekti)
-            return Ok(documentService.GetAllDocuments());
-        }
+            var documents = documentRepository.GetAllDocuments();
 
+            //Ukoliko nismo pronašli ni jednu prijavu vratiti status 204 (NoContent)
+            if (documents == null || documents.Count == 0)
+            {
+                return NoContent();
+            }
+
+            //Ukoliko smo našli neke prijava vratiti status 200 i listu pronađenih prijava (DTO objekti)
+            return Ok(mapper.Map<List<ResponseDocumentDto>>(documents));
+        }
+        /*
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{documentID}")] //Dodatak na rutu koja je definisana na nivou kontrolera
@@ -100,6 +117,6 @@ namespace DocumentMicroservice.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
-        }
+        }*/
     }
 }

@@ -10,6 +10,11 @@ namespace DocumentMicroservice.Services.Repository
     {
         private readonly DocumentContext documentContext;
 
+        public DocumentRepository(DocumentContext documentContext)
+        {
+            this.documentContext = documentContext;
+        }
+
         public Document CreateDocument(Document document)
         {
             document = new Document();

@@ -21,11 +21,17 @@ namespace DocumentMicroservice.Entities
         [Column("datetime")]
         public DateTime LeaseAgreementEntryDate { get; set; }
 
-        //public Komisija ministerID { get; set; }
+        #region Comision
+        public Guid MinisterID { get; set; }
+        #endregion
 
-        //public PublicBidding PublicBiddingID { get; set; }
+        #region PublicBidding
+        public Guid PublicBiddingID { get; set; }
+        #endregion
 
-        //public Lice LiceID { get; set; }
+        #region Person
+        public Guid PersonID { get; set; }
+        #endregion
 
         [Column("datetime")]
         public DateTime DeadlineForLandRestitution { get; set; }

@@ -1,4 +1,6 @@
 ﻿using DocumentMicroservice.Entities;
+using DocumentMicroservice.Services;
+using DocumentMicroservice.Services.Implementation;
 using DocumentMicroservice.Services.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +36,8 @@ namespace DocumentMicroservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IDocumentRepository, DocumentRepository>(); //Koristimo konkretni repozitorijum
+
             services.AddControllers(setup =>
             {
                 setup.ReturnHttpNotAcceptable = true;            }
@@ -89,7 +93,7 @@ namespace DocumentMicroservice
 
             //Konfigurisanje Jwt autentifikacije za projekat
             //Registrujemo Jwt autentifikacionu shemu i definisemo sve potrebne Jwt opcije
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -101,10 +105,8 @@ namespace DocumentMicroservice
                     ValidAudience = Configuration["Jwt:Issuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
-            });
-
-            services.AddScoped<IDocumentRepository, DocumentRepository>(); //Koristimo konkretni repozitorijum
-
+            });*/
+            
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("DocumentOpenApiSpecification",
@@ -127,15 +129,6 @@ namespace DocumentMicroservice
                         },
                         TermsOfService = new Uri("http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
                     });
-
-                //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
-                //var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
-
-                //Pravimo putanju do XML fajla sa komentarima
-                //var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
-
-                //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
-                //setupAction.IncludeXmlComments(xmlCommentsPath);
             });
 
             //Dodajemo DbContext koji želimo da koristimo
@@ -176,7 +169,7 @@ namespace DocumentMicroservice
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -11,12 +11,11 @@ namespace DocumentMicroservice.Services.Implementation
 {
     public class DocumentService : IDocument
     {
-        private readonly IMapper mapper;
-        private readonly IDocumentRepository documentRepository;
+        private readonly IDocumentRepository _documentRepository;
 
-        public DocumentService(IMapper mapper)
+        public DocumentService(IDocumentRepository documentRepository)
         {
-            this.mapper = mapper;
+            _documentRepository = documentRepository;
         }
 
         public ResponseDocumentDto CreateDocument(RequestDocumentDto requestDocumentDto)
@@ -30,7 +29,7 @@ namespace DocumentMicroservice.Services.Implementation
                 ListOfDocuments = requestDocumentDto.ListOfDocuments
             };
 
-            documentRepository.CreateDocument(document);
+            _documentRepository.CreateDocument(document);
 
             ResponseDocumentDto response = new ResponseDocumentDto()
             {
@@ -47,12 +46,12 @@ namespace DocumentMicroservice.Services.Implementation
 
         public void DeleteDocument(Guid documentID)
         {
-            documentRepository.DeleteDocument(documentID);
+            _documentRepository.DeleteDocument(documentID);
         }
 
         public List<ResponseDocumentDto> GetAllDocuments()
         {
-            List<Document> documents = documentRepository.GetAllDocuments();
+            List<Document> documents = _documentRepository.GetAllDocuments();
             List<ResponseDocumentDto> responseDocumentDtos = new List<ResponseDocumentDto>();
 
             foreach (Document document in documents)
@@ -75,7 +74,7 @@ namespace DocumentMicroservice.Services.Implementation
         
         public ResponseDocumentDto GetDocumentById(Guid documentID)
         {
-            Document document = documentRepository.GetDocumentById(documentID);
+            Document document = _documentRepository.GetDocumentById(documentID);
 
             ResponseDocumentDto response = new ResponseDocumentDto()
             {
@@ -102,7 +101,7 @@ namespace DocumentMicroservice.Services.Implementation
                 ListOfDocuments = requestDocumentDto.ListOfDocuments
             };
 
-            documentRepository.UpdateDocument(document);
+            _documentRepository.UpdateDocument(document);
 
             ResponseDocumentDto response = new ResponseDocumentDto()
             {

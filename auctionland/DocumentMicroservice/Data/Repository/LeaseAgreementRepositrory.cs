@@ -8,7 +8,7 @@ namespace DocumentMicroservice.Data.Repository
 {
     public class LeaseAgreementRepositrory : ILeaseAgreementRepository
     {
-        private readonly LeaseAgreementContext agreementContext;
+        private readonly DocumentContext agreementContext;
         public LeaseAgreement CreateLease(LeaseAgreement leaseAgreement)
         {
             leaseAgreement = new LeaseAgreement();

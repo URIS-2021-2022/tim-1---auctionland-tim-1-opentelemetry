@@ -7,5 +7,14 @@ namespace PublicBiddingRegistrationMicroservice.Entities
 {
     public class ApplicationForPublicBidding
     {
+        public Guid ApplicationId { get; set; }
+
+        #region Payment
+        public Guid PaymentId { get; set; }
+        #endregion
+
+        #region Buyer
+        public Guid BuyerId { get; set; }
+        #endregion
     }
 }

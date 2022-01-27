@@ -8,7 +8,6 @@ namespace DocumentMicroservice.Models
 {
     public class ResponseListOfDocumentsDto
     {
-        public List<Document> documentsInList { get; set; }
         public DateTime ListCreationDate { get; set; }
     }
 }

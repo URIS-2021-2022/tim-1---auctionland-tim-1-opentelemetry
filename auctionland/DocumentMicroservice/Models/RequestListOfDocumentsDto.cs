@@ -9,8 +9,6 @@ namespace DocumentMicroservice.Models
 {
     public class RequestListOfDocumentsDto
     {
-        public List<Document> documentsInList { get; set; }
-
         [Required]
         public DateTime ListCreationDate { get; set; }
     }

@@ -12,7 +12,7 @@ namespace DocumentMicroservice.Entities
         /// </summary>
         public Guid ListOfDocumentsId { get; set; }
 
-        public List<LeaseAgreement> documentsInList { get; set; }
+        //public List<Document> documentsInList { get; set; }
 
         public DateTime ListCreationDate { get; set; }
     }
