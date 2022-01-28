@@ -84,6 +84,29 @@ namespace PublicBiddingRegistrationMicroservice
             services.AddSingleton<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             //services.AddRazorPages();
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("ApplicationOpenApiSpecification",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "Public Bidding Application API",
+                        Version = "1",
+                        //Često treba da dodamo neke dodatne informacije
+                        Description = "Pomoću ovog API-ja može da se vrši prijava ispita, modifikacija prijava ispita kao i pregled kreiranih prijava ispita.",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                        {
+                            Name = "Marko Marković",
+                            Email = "marko@mail.com",
+                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        },
+                        License = new Microsoft.OpenApi.Models.OpenApiLicense
+                        {
+                            Name = "FTN licence",
+                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        },
+                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +122,15 @@ namespace PublicBiddingRegistrationMicroservice
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(setupAction =>
+            {
+                //Podesavamo endpoint gde Swagger UI moze da pronadje OpenAPI specifikaciju
+                setupAction.SwaggerEndpoint("/swagger/ApplicationOpenApiSpecification/swagger.json", "Public Bidding Application API");
+                setupAction.RoutePrefix = ""; //Dokumentacija ce sada biti dostupna na root-u (ne mora da se pise /swagger)
+            });
 
             app.UseEndpoints(endpoints =>
             {

@@ -7,6 +7,8 @@ namespace PublicBiddingRegistrationMicroservice.Models
 {
     public class PaymentUpdateDto
     {
+        public Guid PaymentId { get; set; }
+
         public int AccountNumber { get; set; }
 
         public int ReferenceNumber { get; set; }

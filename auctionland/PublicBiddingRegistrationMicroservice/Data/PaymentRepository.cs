@@ -42,28 +42,55 @@ namespace PublicBiddingRegistrationMicroservice.Data
 
         public List<PaymentForApplication> GetPayments()
         {
-            Console.WriteLine("Svi");
             return PaymentForApplications.ToList();
         }
 
         public PaymentForApplication GetPaymentsById(Guid paymentId)
         {
-            throw new NotImplementedException();
+            return PaymentForApplications.FirstOrDefault(e => e.PaymentId.Equals(paymentId));
         }
 
         public PaymentConfirmation CreatePayment(PaymentForApplication payment)
         {
-            throw new NotImplementedException();
+            payment.PaymentId = Guid.NewGuid();
+            PaymentForApplications.Add(payment);
+            PaymentForApplication pay = GetPaymentsById(payment.PaymentId);
+
+            return new PaymentConfirmation
+            {
+                PaymentId = pay.PaymentId,
+                AccountNumber = pay.AccountNumber,
+                ReferenceNumber = pay.ReferenceNumber,
+                PurposeOfPayment = pay.PurposeOfPayment,
+                DateOfPayment = pay.DateOfPayment,
+                PublicBiddingId = pay.PublicBiddingId
+            };
         }
 
         public PaymentConfirmation UpdatePayment(PaymentForApplication payment)
         {
-            throw new NotImplementedException();
+            PaymentForApplication pay = GetPaymentsById(payment.PaymentId);
+
+            pay.AccountNumber = payment.AccountNumber;
+            pay.ReferenceNumber = payment.ReferenceNumber;
+            pay.PurposeOfPayment = payment.PurposeOfPayment;
+            pay.DateOfPayment = payment.DateOfPayment;
+            pay.PublicBiddingId = payment.PublicBiddingId;
+
+            return new PaymentConfirmation
+            {
+                PaymentId = pay.PaymentId,
+                AccountNumber = pay.AccountNumber,
+                ReferenceNumber = pay.ReferenceNumber,
+                PurposeOfPayment = pay.PurposeOfPayment,
+                DateOfPayment = pay.DateOfPayment,
+                PublicBiddingId = pay.PublicBiddingId
+            };
         }
 
         public void DeletePayment(Guid paymentId)
         {
-            throw new NotImplementedException();
+            PaymentForApplications.Remove(PaymentForApplications.FirstOrDefault(e => e.PaymentId.Equals(paymentId)));
         }
     }
 }
