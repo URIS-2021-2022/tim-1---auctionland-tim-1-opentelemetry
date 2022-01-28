@@ -17,11 +17,11 @@ namespace PublicBiddingRegistrationMicroservice.Entities
         }
 
         public DbSet<ApplicationForPublicBidding> ApplicationForPublicBidding { get; set; }
-        public DbSet<PaymentForApplication> paymentForApplications { get; set; }
+        public DbSet<PaymentForApplication> PaymentForApplications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("ApplicationForPublicBiddinfDB"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("ApplicationForPublicBiddingDB"));
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -37,7 +37,7 @@ namespace PublicBiddingRegistrationMicroservice.Entities
             {
                 PaymentId = Guid.Parse("8ac08292-9406-45cf-aff4-0c9447880779"),
                 AccountNumber = 154564,
-                ReferenceNumber = 8554654684,
+                ReferenceNumber = 855464,
                 PurposeOfPayment = "Some purpose",
                 DateOfPayment = DateTime.Parse("2020-11-15T09:00:00"),
                 PublicBiddingId = Guid.Parse("7344fd85-ab0e-4da3-9fa4-d65af38e001f")

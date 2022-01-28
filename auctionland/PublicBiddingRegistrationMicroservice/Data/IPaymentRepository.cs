@@ -14,8 +14,10 @@ namespace PublicBiddingRegistrationMicroservice.Data
 
         PaymentConfirmation CreatePayment(PaymentForApplication payment);
 
-        PaymentConfirmation UpdatePayment(PaymentForApplication payment);
+        void UpdatePayment(PaymentForApplication payment);
 
         void DeletePayment(Guid paymentId);
+
+        bool SaveChanges();
     }
 }

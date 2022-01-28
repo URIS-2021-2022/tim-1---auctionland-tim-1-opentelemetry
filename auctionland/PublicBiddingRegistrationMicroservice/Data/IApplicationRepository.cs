@@ -14,8 +14,10 @@ namespace PublicBiddingRegistrationMicroservice.Data
 
         ApplicationConfirmation CreateApplication(ApplicationForPublicBidding applicationForPublicBidding);
 
-        ApplicationConfirmation UpdateApplication(ApplicationForPublicBidding applicationForPublicBidding);
+        void UpdateApplication(ApplicationForPublicBidding applicationForPublicBidding);
 
         void DeleteAplication(Guid applicationId);
+
+        bool SaveChanges();
     }
 }

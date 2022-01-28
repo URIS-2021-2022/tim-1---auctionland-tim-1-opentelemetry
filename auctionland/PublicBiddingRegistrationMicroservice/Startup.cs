@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PublicBiddingRegistrationMicroservice.Data;
+using PublicBiddingRegistrationMicroservice.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +82,7 @@ namespace PublicBiddingRegistrationMicroservice
             });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddSingleton<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             //services.AddRazorPages();
             services.AddSwaggerGen(setupAction =>
@@ -92,11 +93,11 @@ namespace PublicBiddingRegistrationMicroservice
                         Title = "Public Bidding Application API",
                         Version = "1",
                         //Često treba da dodamo neke dodatne informacije
-                        Description = "Pomoću ovog API-ja može da se vrši prijava ispita, modifikacija prijava ispita kao i pregled kreiranih prijava ispita.",
+                        Description = "API omogucava pregled i upravljanje prijavama za javno nadmetanje.",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact
                         {
-                            Name = "Marko Marković",
-                            Email = "marko@mail.com",
+                            Name = "Zeljana Amidzic",
+                            Email = "zeks@mail.com",
                             Url = new Uri("http://www.ftn.uns.ac.rs/")
                         },
                         License = new Microsoft.OpenApi.Models.OpenApiLicense
@@ -107,6 +108,9 @@ namespace PublicBiddingRegistrationMicroservice
                         TermsOfService = new Uri("http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
                     });
             });
+
+            //Dodajemo DbContext koji želimo da koristimo
+            services.AddDbContext<ApplicationContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
