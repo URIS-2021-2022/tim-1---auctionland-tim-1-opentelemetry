@@ -7,8 +7,8 @@ namespace PublicBiddingMicroservice.Entities
 {
     public class Stage
     {
-        public Guid Id { get; set; }
+        public Guid StageId { get; set; }
 
-        public DateTime date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

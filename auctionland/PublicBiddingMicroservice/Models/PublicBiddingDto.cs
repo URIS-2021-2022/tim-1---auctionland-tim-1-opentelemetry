@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace PublicBiddingMicroservice.Models
+namespace PublicBiddingMicroservice.Models 
 {
-    public class PublicBiddingDto
+    public class PublicBiddingUpdateDto
     {
+        public Guid PublicBiddingId { get; set; }
         public DateTime Date { get; set; }
 
         public DateTime StartTime { get; set; }
@@ -30,6 +32,5 @@ namespace PublicBiddingMicroservice.Models
 
         public string Status { get; set; }
 
-        public Stage Stage { get; set; }
     }
 }

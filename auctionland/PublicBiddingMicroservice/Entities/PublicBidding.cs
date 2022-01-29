@@ -7,7 +7,7 @@ namespace PublicBiddingMicroservice.Entities
 {
     public class PublicBidding
     {
-        public Guid Id { get; set; }
+        public Guid PublicBiddingId { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -31,6 +31,5 @@ namespace PublicBiddingMicroservice.Entities
 
         public string Status { get; set; }
 
-        public Stage Stage { get; set; }
     }
 }
