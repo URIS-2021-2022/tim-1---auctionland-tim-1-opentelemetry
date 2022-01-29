@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace UserMicroservice.Entities
+namespace UserMicroservice.Models
 {
-    public class User
+    /// <summary>
+    /// Model za ažuriranje prijave ispita
+    /// </summary>
+    public class UserUpdateDto : IValidatableObject
     {
         public Guid Id { get; set; }
 
@@ -12,12 +15,14 @@ namespace UserMicroservice.Entities
 
         public string LastName { get; set; }
 
+        [Required(ErrorMessage = "Obavezno je uneti username korisnika.")]
         public string Username { get; set; }
 
         public string Email { get; set; }
 
         public string Password { get; set; }
 
+        public string Salt { get; set; }
 
         #region UserType
         public Guid UserTypeId { get; set; }
@@ -25,6 +30,10 @@ namespace UserMicroservice.Entities
         public string UserTypeName { get; set; }
         #endregion
 
-        public string Salt { get; set; }
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            throw new NotImplementedException();
+        }
+       
     }
 }

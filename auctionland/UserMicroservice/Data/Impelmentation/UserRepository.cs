@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UserMicroservice.Entities;
@@ -8,37 +9,46 @@ namespace UserMicroservice.Data.Impelmentation
     public class UserRepository : IUserRepository
     {
         private readonly UserContext context;
+        private readonly IMapper mapper;
 
-        public User Create(User user)
+        public UserRepository(UserContext context, IMapper mapper)
         {
-            user.Id = Guid.NewGuid();
-            context.Users.Add(user);
-            return user;
+            this.context = context;
+            this.mapper = mapper;
         }
 
-        public void Delete(Guid id)
+        public bool SaveChanges()
         {
-            context.Users.Remove(context.Users.FirstOrDefault(e => e.Id == id));
+            return context.SaveChanges() > 0;
         }
 
-        public List<User> GetAll()
+        public List<User> GetUsers(string firstName = null, string lastName = null)
         {
-            return context.Users.ToList();
+            return context.Users.Where(e => (firstName == null || e.FirstName == firstName) &&
+                                                        (lastName == null || e.LastName == lastName)).ToList();
         }
 
-        public User GetById(Guid id)
+        public User GetUserById(Guid userId)
         {
-            return context.Users.FirstOrDefault(e => e.Id == id);
+            return context.Users.FirstOrDefault(e => e.Id == userId);
         }
 
-        public User Update(User user)
+        public UserConfirmation CreateUser(User user)
         {
-            return user;
+            var createdEntity = context.Add(user);
+            return mapper.Map<UserConfirmation>(createdEntity.Entity);
         }
 
-        public bool UserWithCredentialsExists(string userName, string password)
+        public void UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            //Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze
+            //i kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane
+        }
+
+        public void DeleteUser(Guid userId)
+        {
+            var registration = GetUserById(userId);
+            context.Remove(registration);
         }
     }
 }

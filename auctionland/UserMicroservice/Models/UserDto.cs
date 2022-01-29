@@ -1,10 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace UserMicroservice.Entities
+namespace UserMicroservice.Models
 {
-    public class User
+    /// <summary>
+    /// DTO za prijavu ispita
+    /// </summary>
+    public class UserDto
     {
         public Guid Id { get; set; }
 

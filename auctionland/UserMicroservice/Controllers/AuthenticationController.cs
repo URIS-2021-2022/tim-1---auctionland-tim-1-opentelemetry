@@ -6,7 +6,7 @@ using UserMicroservice.Models;
 namespace UserMicroservice.Controllers
 {
     [ApiController]    
-    [Route("api/users")]
+    [Route("api/auth/users")]
     [Produces("application/json", "application/xml")]
     public class AuthenticationController : ControllerBase
     {

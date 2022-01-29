@@ -10,7 +10,7 @@ namespace UserMicroservice.Models
         /// <summary>
         /// Korisničko ime
         /// </summary>
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         /// <summary>
         /// Korisnička lozinka

@@ -1,10 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserMicroservice.Entities
 {
-    public class User
+    /// <summary>
+    /// Predstavlja potvrdu prijave ispita.
+    /// </summary>
+    public class UserConfirmation
     {
         public Guid Id { get; set; }
 

@@ -4,17 +4,18 @@ using UserMicroservice.Entities;
 
 namespace UserMicroservice.Data
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
-        List<User> GetAll();
+        List<User> GetUsers(string firstName = null, string lastName = null);
 
-        User GetById(Guid id);
+        User GetUserById(Guid id);
 
-        User Create(User user);
+        UserConfirmation CreateUser(User user);
 
-        User Update(User user);
+        void UpdateUser(User user);
 
-        void Delete(Guid id);
-        bool UserWithCredentialsExists(string userName, string password);
+        void DeleteUser(Guid id);
+
+        bool SaveChanges();
     }
 }

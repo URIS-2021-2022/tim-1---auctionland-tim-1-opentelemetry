@@ -4,23 +4,20 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using UserMicroservice.Data;
-using UserMicroservice.Helpers;
 using UserMicroservice.Models;
 
-
-
-namespace ExamRegistrationService.Helpers
+namespace UserMicroservice.Helpers
 {
     public class AuthenticationHelper : IAuthenticationHelper
     {
         private readonly IConfiguration configuration;
-        private readonly IUserRepository userRepository;
-        
-        /*public AuthenticationHelper(IConfiguration configuration, IUserRepository userRepository)
+        private readonly IUserAuthRepository userRepository;
+
+        public AuthenticationHelper(IConfiguration configuration, IUserAuthRepository userRepository)
         {
             this.configuration = configuration;
             this.userRepository = userRepository;
-        }*/
+        }
 
         /// <summary>
         /// Vrši autentifikaciju principala
@@ -29,13 +26,14 @@ namespace ExamRegistrationService.Helpers
         /// <returns></returns>
         public bool AuthenticatePrincipal(Principal principal)
         {
-            if (userRepository.UserWithCredentialsExists(principal.UserName, principal.Password))
+            if (userRepository.UserWithCredentialsExists(principal.Username, principal.Password))
             {
                 return true;
             }
 
             return false;
         }
+
         /// <summary>
         /// Generiše novi token za autentifikovanog principala
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,11 +8,14 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IO;
+using System.Text;
 using UserMicroservice.Data;
 using UserMicroservice.Data.Impelmentation;
 using UserMicroservice.Entities;
+using UserMicroservice.Helpers;
 
 namespace UserMicroservice
 {
@@ -24,6 +28,7 @@ namespace UserMicroservice
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             //setup.ReturnHttpNotAcceptable = true -> Vraća status 406 (NotAcceptable) ukoliko klijent u Accept header-u zahteva traži neki format koji ne podržavamo (npr. application/xml)
@@ -85,7 +90,7 @@ namespace UserMicroservice
 
             //Konfigurisanje Jwt autentifikacije za projekat
             //Registrujemo Jwt autentifikacionu shemu i definisemo sve potrebne Jwt opcije
-           /* services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -106,11 +111,9 @@ namespace UserMicroservice
                 - Singleton objects are the same for every request.
                Full link: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0#overview-of-dependency-injection
              */
-            //services.AddSingleton<IExamRegistrationRepository, ExamRegistrationMockRepository>(); //Koristimo mock repozitorijum
-            services.AddScoped<IUserRepository, UserRepository>(); //Koristimo konkretni repozitorijum
-            /*services.AddSingleton<IUserRepository, UserMockRepository>();
+            services.AddSingleton<IUserAuthRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
-            services.AddScoped<IExamBillingService, ExamBillingService>();*/
+            services.AddScoped<IUserRepository, UserRepository>();       
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("UserOpenApiSpecification",
@@ -119,7 +122,7 @@ namespace UserMicroservice
                         Title = "User API",
                         Version = "1",
                         //Često treba da dodamo neke dodatne informacije
-                        Description = "Pomoću ovog API-ja može da se vrši kreiranje novog korisnika, pregled postojećih korisnika, izmjena korisnika kao i brisanje korisnika.",
+                        Description = "Pomoću ovog API-ja može da se vrši kreiranje korisnika izmjena korisnika kao i brisanje i pregled svih korisnika.",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact
                         {
                             Name = "Marko Marković",
@@ -131,17 +134,17 @@ namespace UserMicroservice
                             Name = "FTN licence",
                             Url = new Uri("http://www.ftn.uns.ac.rs/")
                         },
-                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
+                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/userTermsOfService")
                     });
 
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
-                //var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+               // var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
 
                 //Pravimo putanju do XML fajla sa komentarima
-                //var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+               // var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
                 //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
-                //setupAction.IncludeXmlComments(xmlCommentsPath);
+               // setupAction.IncludeXmlComments(xmlCommentsPath);
             });
 
             //Dodajemo DbContext koji želimo da koristimo
@@ -155,7 +158,7 @@ namespace UserMicroservice
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+            else //Ukoliko se nalazimo u Production modu postavljamo default poruku za greške koje nastaju na servisu
             {
                 app.UseExceptionHandler(appBuilder =>
                 {
@@ -166,17 +169,16 @@ namespace UserMicroservice
                     });
                 });
             }
-
             app.UseAuthentication();
             app.UseHttpsRedirection();
-            //app.UseStaticFiles();
 
             app.UseSwagger();
 
             app.UseSwaggerUI(setupAction =>
             {
+                //Podesavamo endpoint gde Swagger UI moze da pronadje OpenAPI specifikaciju
                 setupAction.SwaggerEndpoint("/swagger/UserOpenApiSpecification/swagger.json", "User API");
-                setupAction.RoutePrefix = "";
+                setupAction.RoutePrefix = ""; //Dokumentacija ce sada biti dostupna na root-u (ne mora da se pise /swagger)
             });
 
             app.UseRouting();
