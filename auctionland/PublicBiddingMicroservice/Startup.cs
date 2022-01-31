@@ -14,6 +14,8 @@ using PublicBiddingMicroservice.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using PublicBiddingMicroservice.Helpers;
+using PublicBiddingMicroservice.Data.Impelmentation;
 
 namespace PublicBiddingMicroservice
 {
@@ -109,12 +111,14 @@ namespace PublicBiddingMicroservice
                 - Singleton objects are the same for every request.
                Full link: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0#overview-of-dependency-injection
              */
-            services.AddSingleton<IStageRepository, StageMockRepository>(); //Koristimo mock repozitorijum
-            //services.AddScoped<IStageRepository, StageRepository>(); //Koristimo konkretni repozitorijum
-            services.AddSingleton<IPublicBiddingRepository, PublicBiddingMockRepository>(); //Koristimo mock repozitorijum
-            //services.AddScoped<IPublicBiddingRepository, PublicBiddingRepository>(); //Koristimo konkretni repozitorijum
-            services.AddSingleton<IAuctionRepository, AuctionMockRepository>(); //Koristimo mock repozitorijum
-            //services.AddScoped<IAuctionRepository, AuctionRepository>(); //Koristimo konkretni repozitorijum
+            //services.AddSingleton<IStageRepository, StageMockRepository>(); //Koristimo mock repozitorijum
+            services.AddScoped<IStageRepository, StageRepository>(); //Koristimo konkretni repozitorijum
+           // services.AddSingleton<IPublicBiddingRepository, PublicBiddingMockRepository>(); //Koristimo mock repozitorijum
+            services.AddScoped<IPublicBiddingRepository, PublicBiddingRepository>(); //Koristimo konkretni repozitorijum
+            //services.AddSingleton<IAuctionRepository, AuctionMockRepository>(); //Koristimo mock repozitorijum
+            services.AddScoped<IAuctionRepository, AuctionRepository>(); //Koristimo konkretni repozitorijum
+            services.AddSingleton<IUserAuthRepository, UserMockRepository>();
+            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("PublicBiddingOpenApiSpecification",

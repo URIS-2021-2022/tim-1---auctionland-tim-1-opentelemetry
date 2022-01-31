@@ -10,7 +10,7 @@ using PublicBiddingMicroservice.Entities;
 namespace PublicBiddingMicroservice.Migrations
 {
     [DbContext(typeof(PublicBiddingContext))]
-    [Migration("20220129180126_InitialCreate")]
+    [Migration("20220131124250_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
