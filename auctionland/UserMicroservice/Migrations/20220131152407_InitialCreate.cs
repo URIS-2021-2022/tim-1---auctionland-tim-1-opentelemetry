@@ -25,6 +25,16 @@ namespace UserMicroservice.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "FirstName", "LastName", "Password", "Salt", "UserTypeId", "UserTypeName", "Username" },
+                values: new object[] { new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), "petrović@gmail.com", "Petar", "Petrović", "12345", null, new Guid("21ad52f8-0281-4241-98b0-481566d25e4f"), "Type1", "Petar123" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "FirstName", "LastName", "Password", "Salt", "UserTypeId", "UserTypeName", "Username" },
+                values: new object[] { new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), "marković@gmail.com", "Marko", "Marković", "444", null, new Guid("9d8bab08-f442-4297-8ab5-ddfe08e335f3"), "Type1", "Marko123" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

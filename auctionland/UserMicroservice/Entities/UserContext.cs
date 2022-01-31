@@ -12,7 +12,7 @@ namespace UserMicroservice.Entities
     {
         private readonly IConfiguration configuration;
 
-        public UserContext(DbContextOptions options, IConfiguration configuration) //: base(options)
+        public UserContext(DbContextOptions options, IConfiguration configuration) : base(options)
         {
             this.configuration = configuration;
         }
@@ -29,7 +29,7 @@ namespace UserMicroservice.Entities
         /// </summary>
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            /*builder.Entity<User>()
+            builder.Entity<User>()
                 .HasData(new
                 {
                     Id = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
@@ -53,7 +53,7 @@ namespace UserMicroservice.Entities
                     Password = "444",
                     UserTypeId = Guid.Parse("9d8bab08-f442-4297-8ab5-ddfe08e335f3"),
                     UserTypeName = "Type1",
-                });*/
+                });
         }
     }
 }

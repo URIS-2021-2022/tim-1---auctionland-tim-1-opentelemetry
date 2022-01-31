@@ -111,7 +111,7 @@ namespace UserMicroservice
                 - Singleton objects are the same for every request.
                Full link: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0#overview-of-dependency-injection
              */
-            //services.AddSingleton<IUserAuthRepository, UserMockRepository>();//Koristimo mock repozitorijum
+            services.AddSingleton<IUserAuthRepository, UserMockRepository>();//Koristimo mock repozitorijum
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IUserRepository, UserRepository>();//Koristimo konkretni repozitorijum       
             services.AddSwaggerGen(setupAction =>

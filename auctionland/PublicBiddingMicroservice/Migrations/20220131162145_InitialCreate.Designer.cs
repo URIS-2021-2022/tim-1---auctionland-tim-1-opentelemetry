@@ -10,7 +10,7 @@ using PublicBiddingMicroservice.Entities;
 namespace PublicBiddingMicroservice.Migrations
 {
     [DbContext(typeof(PublicBiddingContext))]
-    [Migration("20220131124250_InitialCreate")]
+    [Migration("20220131162145_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,7 @@ namespace PublicBiddingMicroservice.Migrations
                     b.HasData(
                         new
                         {
-                            AuctionId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                            AuctionId = new Guid("4c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             ApplicationDeadline = new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Date = new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Number = 1,

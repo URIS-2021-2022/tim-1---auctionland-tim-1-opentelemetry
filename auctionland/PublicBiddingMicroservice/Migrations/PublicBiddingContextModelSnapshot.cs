@@ -47,7 +47,7 @@ namespace PublicBiddingMicroservice.Migrations
                     b.HasData(
                         new
                         {
-                            AuctionId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                            AuctionId = new Guid("4c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             ApplicationDeadline = new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Date = new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Number = 1,

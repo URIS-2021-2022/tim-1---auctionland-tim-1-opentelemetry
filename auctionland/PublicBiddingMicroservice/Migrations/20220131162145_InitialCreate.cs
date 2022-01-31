@@ -60,7 +60,7 @@ namespace PublicBiddingMicroservice.Migrations
             migrationBuilder.InsertData(
                 table: "Auctions",
                 columns: new[] { "AuctionId", "ApplicationDeadline", "Date", "Number", "PriceIncrease", "Year" },
-                values: new object[] { new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified), 1, 10.0, 2021 });
+                values: new object[] { new Guid("4c7ea607-8ddb-493a-87fa-4bf5893e965b"), new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified), 1, 10.0, 2021 });
 
             migrationBuilder.InsertData(
                 table: "PublicBiddings",

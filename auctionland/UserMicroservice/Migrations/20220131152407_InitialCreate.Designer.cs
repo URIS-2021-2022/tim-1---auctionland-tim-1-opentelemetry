@@ -10,7 +10,7 @@ using UserMicroservice.Entities;
 namespace UserMicroservice.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20220129133530_InitialCreate")]
+    [Migration("20220131152407_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,30 @@ namespace UserMicroservice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                            Email = "petrović@gmail.com",
+                            FirstName = "Petar",
+                            LastName = "Petrović",
+                            Password = "12345",
+                            UserTypeId = new Guid("21ad52f8-0281-4241-98b0-481566d25e4f"),
+                            UserTypeName = "Type1",
+                            Username = "Petar123"
+                        },
+                        new
+                        {
+                            Id = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                            Email = "marković@gmail.com",
+                            FirstName = "Marko",
+                            LastName = "Marković",
+                            Password = "444",
+                            UserTypeId = new Guid("9d8bab08-f442-4297-8ab5-ddfe08e335f3"),
+                            UserTypeName = "Type1",
+                            Username = "Marko123"
+                        });
                 });
 #pragma warning restore 612, 618
         }

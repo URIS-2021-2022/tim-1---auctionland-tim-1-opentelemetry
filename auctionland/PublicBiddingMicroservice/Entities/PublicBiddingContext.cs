@@ -57,7 +57,7 @@ namespace PublicBiddingMicroservice.Entities
             builder.Entity<Auction>()
                .HasData(new
                {
-                   AuctionId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                   AuctionId = Guid.Parse("4c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                    Number = 1,
                    Year = 2021,
                    Date = DateTime.Parse("2020-11-15T09:00:00"),
