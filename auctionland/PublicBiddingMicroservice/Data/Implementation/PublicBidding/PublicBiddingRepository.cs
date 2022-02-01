@@ -24,12 +24,12 @@ namespace PublicBiddingMicroservice.Data
 
         public List<PublicBidding> GetPublicBiddings(int numberOfParticipants = 0)
         {
-            return context.PublicBiddings.Where(e => (numberOfParticipants == 0 || e.NumberOfParticipants == numberOfParticipants)).ToList();
+            return context.PublicBidding.Where(e => (numberOfParticipants == 0 || e.NumberOfParticipants == numberOfParticipants)).ToList();
         }
 
         public PublicBidding GetPublicBiddingById(Guid stageId)
         {
-            return context.PublicBiddings.FirstOrDefault(e => e.PublicBiddingId == stageId);
+            return context.PublicBidding.FirstOrDefault(e => e.PublicBiddingId == stageId);
         }
 
         public PublicBiddingConfirmation CreatePublicBidding(PublicBidding stage)
@@ -46,7 +46,7 @@ namespace PublicBiddingMicroservice.Data
 
         public void DeletePublicBidding(Guid stageId)
         {
-            context.PublicBiddings.Remove(GetPublicBiddingById(stageId));
+            context.PublicBidding.Remove(GetPublicBiddingById(stageId));
         }
     }
 }

@@ -37,12 +37,17 @@ namespace PublicBiddingMicroservice.Migrations
                     b.Property<double>("PriceIncrease")
                         .HasColumnType("float");
 
+                    b.Property<Guid?>("StageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("AuctionId");
 
-                    b.ToTable("Auctions");
+                    b.HasIndex("StageId");
+
+                    b.ToTable("Auction");
 
                     b.HasData(
                         new
@@ -52,6 +57,7 @@ namespace PublicBiddingMicroservice.Migrations
                             Date = new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Number = 1,
                             PriceIncrease = 10.0,
+                            StageId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             Year = 2021
                         });
                 });
@@ -86,6 +92,9 @@ namespace PublicBiddingMicroservice.Migrations
                     b.Property<int>("NumberOfParticipants")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("StageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
@@ -97,7 +106,9 @@ namespace PublicBiddingMicroservice.Migrations
 
                     b.HasKey("PublicBiddingId");
 
-                    b.ToTable("PublicBiddings");
+                    b.HasIndex("StageId");
+
+                    b.ToTable("PublicBidding");
 
                     b.HasData(
                         new
@@ -111,6 +122,7 @@ namespace PublicBiddingMicroservice.Migrations
                             Exclude = true,
                             LeasePeriod = 1,
                             NumberOfParticipants = 12,
+                            StageId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             StartTime = new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             StartingPricePerHe = 10.0,
                             Status = "Status1"
@@ -128,7 +140,7 @@ namespace PublicBiddingMicroservice.Migrations
 
                     b.HasKey("StageId");
 
-                    b.ToTable("Stages");
+                    b.ToTable("Stage");
 
                     b.HasData(
                         new
@@ -136,6 +148,24 @@ namespace PublicBiddingMicroservice.Migrations
                             StageId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             Date = new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         });
+                });
+
+            modelBuilder.Entity("PublicBiddingMicroservice.Entities.Auction", b =>
+                {
+                    b.HasOne("PublicBiddingMicroservice.Entities.Stage", "Stage")
+                        .WithMany()
+                        .HasForeignKey("StageId");
+
+                    b.Navigation("Stage");
+                });
+
+            modelBuilder.Entity("PublicBiddingMicroservice.Entities.PublicBidding", b =>
+                {
+                    b.HasOne("PublicBiddingMicroservice.Entities.Stage", "Stage")
+                        .WithMany()
+                        .HasForeignKey("StageId");
+
+                    b.Navigation("Stage");
                 });
 #pragma warning restore 612, 618
         }

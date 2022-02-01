@@ -25,12 +25,12 @@ namespace PublicBiddingMicroservice.Data
 
         public List<Auction> GetAuctions()
         {
-            return context.Auctions.ToList();
+            return context.Auction.ToList();
         }
 
         public Auction GetAuctionById(Guid auctionId)
         {
-            return context.Auctions.FirstOrDefault (e => e.AuctionId == auctionId);
+            return context.Auction.FirstOrDefault (e => e.AuctionId == auctionId);
         }
 
         public AuctionConfirmation CreateAuction(Auction auction)
@@ -47,7 +47,7 @@ namespace PublicBiddingMicroservice.Data
 
         public void DeleteAuction(Guid auctionId)
         {
-            context.Auctions.Remove(GetAuctionById(auctionId));
+            context.Auction.Remove(GetAuctionById(auctionId));
         }
     }
 }

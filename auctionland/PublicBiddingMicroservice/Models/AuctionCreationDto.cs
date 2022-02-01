@@ -20,5 +20,6 @@ namespace PublicBiddingMicroservice.Models
 
         public DateTime ApplicationDeadline { get; set; }
 
+        public Guid StageId { get; set; }
     }
 }

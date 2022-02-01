@@ -1,6 +1,7 @@
 ﻿using PublicBiddingMicroservice.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +20,10 @@ namespace PublicBiddingMicroservice.Entities
         public double PriceIncrease { get; set; }
 
         public DateTime ApplicationDeadline { get; set; }
+
+        [ForeignKey("Stage")]
+        public Guid? StageId { get; set; }
+        public Stage Stage { get; set; }
 
     }
 }

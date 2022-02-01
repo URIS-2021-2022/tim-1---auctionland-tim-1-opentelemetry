@@ -32,5 +32,7 @@ namespace PublicBiddingMicroservice.Models
 
         public string Status { get; set; }
 
+        public Guid StageId { get; set; }
+
     }
 }

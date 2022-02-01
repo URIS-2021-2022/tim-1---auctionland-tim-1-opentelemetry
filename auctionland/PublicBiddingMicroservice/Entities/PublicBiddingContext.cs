@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PublicBiddingMicroservice.Entities
 {
@@ -16,9 +13,9 @@ namespace PublicBiddingMicroservice.Entities
             this.configuration = configuration;
         }
 
-        public DbSet<PublicBidding> PublicBiddings { get; set; }
-        public DbSet<Stage> Stages { get; set; }
-        public DbSet<Auction> Auctions { get; set; }
+        public DbSet<PublicBidding> PublicBidding { get; set; }
+        public DbSet<Stage> Stage { get; set; }
+        public DbSet<Auction> Auction { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,8 +27,15 @@ namespace PublicBiddingMicroservice.Entities
         /// </summary>
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Stage>()
+                .HasData(new Stage
+                {
+                    StageId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                    Date = DateTime.Parse("2020-11-15T09:00:00"),
+                });
+
             builder.Entity<PublicBidding>()
-                .HasData(new
+                .HasData(new PublicBidding
                 {
                     PublicBiddingId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                     Date = DateTime.Parse("2020-11-15T09:00:00"),
@@ -45,25 +49,19 @@ namespace PublicBiddingMicroservice.Entities
                     DepositReplenishment = 13.00,
                     Circle = 1,
                     Status = "Status1",
+                    StageId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                 });
 
-            builder.Entity<Stage>()
-                .HasData(new
-                {
-                    StageId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
-                    Date = DateTime.Parse("2020-11-15T09:00:00"),
-                    
-                });
             builder.Entity<Auction>()
-               .HasData(new
+               .HasData(new Auction
                {
                    AuctionId = Guid.Parse("4c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                    Number = 1,
                    Year = 2021,
                    Date = DateTime.Parse("2020-11-15T09:00:00"),
                    PriceIncrease = 10.00,
-                   ApplicationDeadline = DateTime.Parse("2020-11-15T09:00:00")
-
+                   ApplicationDeadline = DateTime.Parse("2020-11-15T09:00:00"),
+                   StageId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                });
         }
     }

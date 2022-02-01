@@ -25,12 +25,12 @@ namespace PublicBiddingMicroservice.Data
 
         public List<Stage> GetStages()
         {
-            return context.Stages.ToList();
+            return context.Stage.ToList();
         }
 
         public Stage GetStageById(Guid stageId)
         {
-            return context.Stages.FirstOrDefault (e => e.StageId == stageId);
+            return context.Stage.FirstOrDefault (e => e.StageId == stageId);
         }
 
         public StageConfirmation CreateStage(Stage stage)
@@ -47,7 +47,7 @@ namespace PublicBiddingMicroservice.Data
 
         public void DeleteStage(Guid stageId)
         {
-            context.Stages.Remove(GetStageById(stageId));
+            context.Stage.Remove(GetStageById(stageId));
         }
     }
 }

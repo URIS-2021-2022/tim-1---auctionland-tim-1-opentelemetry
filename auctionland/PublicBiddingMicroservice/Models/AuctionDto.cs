@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingMicroservice.Models
 {
-    public class AddressDto
+    public class AuctionDto
     {
-        //Naziv ulice
-        public string Street { get; set; }
+        public Guid AuctionId { get; set; }
 
-        //Broj kuce/stana
         public int Number { get; set; }
 
-        //Postanski broj
-        public string ZipCode { get; set; }
+        public int Year { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public double PriceIncrease { get; set; }
+
+        public DateTime ApplicationDeadline { get; set; }
+
+        public Guid StageId { get; set; }
 
     }
 }

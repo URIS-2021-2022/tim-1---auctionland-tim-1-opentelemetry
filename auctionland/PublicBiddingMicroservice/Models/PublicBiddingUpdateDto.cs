@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace PublicBiddingMicroservice.Models 
+namespace PublicBiddingMicroservice.Models
 {
-    public class PublicBiddingDto 
+    public class PublicBiddingDto
     {
         public Guid PublicBiddingId { get; set; }
         public DateTime Date { get; set; }
@@ -31,6 +31,8 @@ namespace PublicBiddingMicroservice.Models
         public int Circle { get; set; }
 
         public string Status { get; set; }
+
+        public Guid StageId { get; set; }
 
     }
 }

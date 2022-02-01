@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,6 +31,10 @@ namespace PublicBiddingMicroservice.Entities
         public int Circle { get; set; }
 
         public string Status { get; set; }
+
+        [ForeignKey("Stage")]
+        public Guid? StageId { get; set; }
+        public Stage Stage { get; set; }
 
     }
 }

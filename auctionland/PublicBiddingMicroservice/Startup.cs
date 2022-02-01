@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using PublicBiddingMicroservice.Helpers;
 using PublicBiddingMicroservice.Data.Impelmentation;
+using Microsoft.EntityFrameworkCore;
 
 namespace PublicBiddingMicroservice
 {
@@ -153,7 +154,7 @@ namespace PublicBiddingMicroservice
             });
 
             //Dodajemo DbContext koji želimo da koristimo
-            services.AddDbContext<PublicBiddingContext>();
+            services.AddDbContext<PublicBiddingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PublicBiddingDB"))); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
