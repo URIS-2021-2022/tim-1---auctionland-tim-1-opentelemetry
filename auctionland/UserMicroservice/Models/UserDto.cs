@@ -1,13 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using UserMicroservice.Entities;
 
 namespace UserMicroservice.Models
 {
     /// <summary>
-    /// DTO za prijavu ispita
+    /// DTO za korisnika
     /// </summary>
     public class UserDto
     {
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -19,13 +21,11 @@ namespace UserMicroservice.Models
 
         public string Password { get; set; }
 
-
-        #region UserType
-        public Guid UserTypeId { get; set; }
-
-        public string UserTypeName { get; set; }
-        #endregion
-
         public string Salt { get; set; }
+
+        [ForeignKey("UserType")]
+        public Guid? UserTypeId { get; set; }
+        public UserType UserType { get; set; }
+
     }
 }

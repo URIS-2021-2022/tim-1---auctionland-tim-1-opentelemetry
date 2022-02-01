@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using UserMicroservice.Entities;
 
 namespace UserMicroservice.Models
 {
@@ -9,7 +11,7 @@ namespace UserMicroservice.Models
     /// </summary>
     public class UserUpdateDto : IValidatableObject
     {
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -24,11 +26,9 @@ namespace UserMicroservice.Models
 
         public string Salt { get; set; }
 
-        #region UserType
-        public Guid UserTypeId { get; set; }
-
-        public string UserTypeName { get; set; }
-        #endregion
+        [ForeignKey("UserType")]
+        public Guid? UserTypeId { get; set; }
+        public UserType UserType { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

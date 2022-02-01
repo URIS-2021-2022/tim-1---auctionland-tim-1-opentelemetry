@@ -27,7 +27,7 @@ namespace UserMicroservice.Data.Impelmentation
             {
                 new User
                 {
-                    Id = Guid.Parse("CFD7FA84-8A27-4119-B6DB-5CFC1B0C94E1"),
+                    UserId = Guid.Parse("CFD7FA84-8A27-4119-B6DB-5CFC1B0C94E1"),
                     FirstName = "Petar",
                     LastName = "Petrovic",
                     Username = "petar.petrovic",

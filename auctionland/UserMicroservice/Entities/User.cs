@@ -6,7 +6,7 @@ namespace UserMicroservice.Entities
 {
     public class User
     {
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -18,13 +18,11 @@ namespace UserMicroservice.Entities
 
         public string Password { get; set; }
 
-
-        #region UserType
-        public Guid UserTypeId { get; set; }
-
-        public string UserTypeName { get; set; }
-        #endregion
-
         public string Salt { get; set; }
+
+        [ForeignKey("UserType")]
+        public Guid? UserTypeId { get; set; }
+        public UserType UserType { get; set; }
+
     }
 }

@@ -91,7 +91,7 @@ namespace UserService.Controllers
                 userRepository.SaveChanges(); //Perzistiramo promene
 
                 //Generisati identifikator novokreiranog resursa
-                string location = linkGenerator.GetPathByAction("GetUser", "User", new { userId = confirmation.Id });
+                string location = linkGenerator.GetPathByAction("GetUser", "User", new { userId = confirmation.UserId });
 
 
 
@@ -124,7 +124,7 @@ namespace UserService.Controllers
             try
             {
                 //Proveriti da li uopšte postoji korisnik koji pokušavamo da ažuriramo.
-                var oldUser = userRepository.GetUserById(user.Id);
+                var oldUser = userRepository.GetUserById(user.UserId);
                 if (oldUser == null)
                 {
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).

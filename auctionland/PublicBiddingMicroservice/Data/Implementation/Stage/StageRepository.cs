@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using PublicBiddingMicroservice.Entities;
 using System;
 using System.Collections.Generic;

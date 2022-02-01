@@ -114,6 +114,7 @@ namespace UserMicroservice
             services.AddSingleton<IUserAuthRepository, UserMockRepository>();//Koristimo mock repozitorijum
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IUserRepository, UserRepository>();//Koristimo konkretni repozitorijum       
+            services.AddScoped<IUserTypeRepository, UserTypeRepository>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("UserOpenApiSpecification",

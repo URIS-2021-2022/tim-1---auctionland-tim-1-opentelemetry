@@ -24,13 +24,13 @@ namespace UserMicroservice.Data.Impelmentation
 
         public List<User> GetUsers(string firstName = null, string lastName = null)
         {
-            return context.Users.Where(e => (firstName == null || e.FirstName == firstName) &&
+            return context.User.Where(e => (firstName == null || e.FirstName == firstName) &&
                                                         (lastName == null || e.LastName == lastName)).ToList();
         }
 
         public User GetUserById(Guid userId)
         {
-            return context.Users.FirstOrDefault(e => e.Id == userId);
+            return context.User.FirstOrDefault(e => e.UserId == userId);
         }
 
         public UserConfirmation CreateUser(User user)
@@ -47,8 +47,7 @@ namespace UserMicroservice.Data.Impelmentation
 
         public void DeleteUser(Guid userId)
         {
-            var registration = GetUserById(userId);
-            context.Remove(registration);
+            context.Remove(GetUserById(userId));
         }
     }
 }

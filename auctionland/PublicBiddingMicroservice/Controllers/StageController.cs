@@ -20,7 +20,6 @@ namespace PublicBiddingMicroservice.Controllers
         private readonly IStageRepository stageRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateStage)
         private readonly IMapper mapper;
-        //private readonly IExamBillingService billingService;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
         public StageController(IStageRepository stageRepository, LinkGenerator linkGenerator, IMapper mapper)
@@ -92,7 +91,7 @@ namespace PublicBiddingMicroservice.Controllers
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetStage", "Stage", new { stageId = confirmation.StageId });
 
-                //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (etape) i samom prijavom ispita.
+                //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (etape).
                 return Created(location, mapper.Map<StageConfirmationDto>(confirmation));
                 //return CreatedAtRoute(); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
@@ -141,7 +140,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Vrši brisanje jedne etape na osnovu ID-ja prijave.
+        /// Vrši brisanje jedne etape na osnovu ID-ja etape.
         /// </summary>
         /// <param name="stageId">ID etape/param>
         /// <returns>Status 204 (NoContent)</returns>

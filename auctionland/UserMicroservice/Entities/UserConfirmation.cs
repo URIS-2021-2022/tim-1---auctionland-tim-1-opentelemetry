@@ -1,13 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserMicroservice.Entities
 {
     /// <summary>
-    /// Predstavlja potvrdu prijave ispita.
+    /// Predstavlja potvrdu kreiranog korisnika.
     /// </summary>
     public class UserConfirmation
     {
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -18,14 +19,13 @@ namespace UserMicroservice.Entities
         public string Email { get; set; }
 
         public string Password { get; set; }
-
-
-        #region UserType
-        public Guid UserTypeId { get; set; }
-
-        public string UserTypeName { get; set; }
-        #endregion
-
+       
         public string Salt { get; set; }
+
+        [ForeignKey("UserType")]
+        public Guid? UserTypeId { get; set; }
+        public UserType UserType { get; set; }
+
     }
+
 }
