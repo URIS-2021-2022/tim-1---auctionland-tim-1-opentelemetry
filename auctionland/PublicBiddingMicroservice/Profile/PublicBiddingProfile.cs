@@ -4,14 +4,11 @@ using PublicBiddingMicroservice.Models;
 
 namespace PublicBiddingMicroservice.Profiles
 {
-    public class PublicBiddingProfile : Profile
+    public class AddressProfile : Profile
     {
-        public PublicBiddingProfile()
+        public AddressProfile()
         {
-            CreateMap<PublicBidding, PublicBiddingDto>();
-            CreateMap<PublicBiddingCreationDto, PublicBidding>();
-            CreateMap<PublicBiddingUpdateDto, PublicBidding>();
-            CreateMap<PublicBidding, PublicBidding>();
+            CreateMap<PublicBiddingCreationDto, AddressDto>();
         }
     }
 }

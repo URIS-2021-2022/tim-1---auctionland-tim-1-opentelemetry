@@ -16,6 +16,6 @@ namespace PublicBiddingMicroservice.Models
 
         //Postanski broj
         public string ZipCode { get; set; }
-
+        public Guid PublicBiddingId { get; internal set; }
     }
 }

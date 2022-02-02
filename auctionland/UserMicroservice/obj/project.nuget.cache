@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OvK1w/HPww0CrtWVRGqCOjGMlr0r+uhK3h15kx0Y+Pp90yoguW5St2LGAEMNF35RmE/16kctQQ9m1CyQUt0DMA==",
+  "dgSpecHash": "y/MdADIj8Ijnn37P7ziWflB2lswURg0e6BzsmBCS9uc5VOslh9sNMuMFgu8TkT+ts4WL0dHjb0GeX1fJ3M5B1Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ana Zuber\\Desktop\\faks_projekti\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\UserMicroservice\\UserMicroservice.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "C:\\Users\\Ana Zuber\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Ana Zuber\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Ana Zuber\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Ana Zuber\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Ana Zuber\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Ana Zuber\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\Ana Zuber\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",

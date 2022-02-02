@@ -8,6 +8,8 @@ using AutoMapper;
 using PublicBiddingMicroservice.Data;
 using PublicBiddingMicroservice.Models;
 using PublicBiddingMicroservice.Entities;
+using PublicBiddingMicroservice.ServiceCalls;
+using PublicBiddingMicroservice.Models.Exceptions;
 
 namespace PublicBiddingMicroservice.Controllers
 {
@@ -20,13 +22,15 @@ namespace PublicBiddingMicroservice.Controllers
         private readonly IPublicBiddingRepository publicBiddingRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreatePublicBidding)
         private readonly IMapper mapper;
+        private readonly IAddressService addressService;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public PublicBiddingController(IPublicBiddingRepository publicBiddingRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public PublicBiddingController(IPublicBiddingRepository publicBiddingRepository, LinkGenerator linkGenerator, IMapper mapper, IAddressService addressService)
         {
             this.publicBiddingRepository = publicBiddingRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.addressService = addressService;
         }
 
         /// <summary>
@@ -91,6 +95,18 @@ namespace PublicBiddingMicroservice.Controllers
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetPublicBidding", "PublicBidding", new { publicBiddingId = confirmation.PublicBiddingId });
+
+                var addressInfo = mapper.Map<AddressDto>(publicBidding);
+
+                addressInfo.PublicBiddingId = confirmation.PublicBiddingId;
+                bool createdAddress = addressService.GetAddressOfPubblicBidding(addressInfo);
+
+                //Ukoliko iz nekog razloga ne uspemo da naplatimo prijavu ispita ista se briše
+                if (!createdAddress)
+                {
+                    publicBiddingRepository.DeletePublicBidding(confirmation.PublicBiddingId);
+                    throw new AddressException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
+                }
 
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (javnog nadmetanja) i samim javnim nadmetanjem.
                 return Created(location, mapper.Map<PublicBiddingConfirmationDto>(confirmation));

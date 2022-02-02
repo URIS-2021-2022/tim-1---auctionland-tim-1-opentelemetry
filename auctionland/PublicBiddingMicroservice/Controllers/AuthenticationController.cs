@@ -6,7 +6,7 @@ using PublicBiddingMicroservice.Models;
 namespace PublicBiddingMicroservice.Controllers
 {
     [ApiController]    
-    [Route("api/auth/users")]
+    [Route("api/auth")]
     [Produces("application/json", "application/xml")]
     public class AuthenticationController : ControllerBase
     {

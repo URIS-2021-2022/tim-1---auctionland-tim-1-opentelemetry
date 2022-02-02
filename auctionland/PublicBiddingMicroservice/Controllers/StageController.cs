@@ -8,6 +8,7 @@ using AutoMapper;
 using PublicBiddingMicroservice.Models;
 using PublicBiddingMicroservice.Entities;
 using PublicBiddingMicroservice.Data;
+using PublicBiddingMicroservice.ServiceCalls;
 
 namespace PublicBiddingMicroservice.Controllers
 {
@@ -22,7 +23,7 @@ namespace PublicBiddingMicroservice.Controllers
         private readonly IMapper mapper;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public StageController(IStageRepository stageRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public StageController(IStageRepository stageRepository, LinkGenerator linkGenerator, IMapper mapper, IAddressService addressService)
         {
             this.stageRepository = stageRepository;
             this.linkGenerator = linkGenerator;

@@ -17,6 +17,7 @@ using System.Text;
 using PublicBiddingMicroservice.Helpers;
 using PublicBiddingMicroservice.Data.Impelmentation;
 using Microsoft.EntityFrameworkCore;
+using PublicBiddingMicroservice.ServiceCalls;
 
 namespace PublicBiddingMicroservice
 {
@@ -120,6 +121,7 @@ namespace PublicBiddingMicroservice
             services.AddScoped<IAuctionRepository, AuctionRepository>(); //Koristimo konkretni repozitorijum
             services.AddSingleton<IUserAuthRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
+            services.AddScoped<IAddressService, AddressService>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("PublicBiddingOpenApiSpecification",
