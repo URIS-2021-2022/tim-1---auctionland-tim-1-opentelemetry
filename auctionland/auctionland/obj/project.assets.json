@@ -8,23 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Korisnik\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\auctionland.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Source\\Repos\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\auctionland.csproj",
       "projectName": "auctionland",
-      "projectPath": "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\auctionland.csproj",
-      "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\obj\\",
+      "projectPath": "C:\\Users\\PC\\Source\\Repos\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\auctionland.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC\\Source\\Repos\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -67,7 +63,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
