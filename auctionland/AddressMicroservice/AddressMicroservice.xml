@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AddressMicroservice</name>
+    </assembly>
+    <members>
+        <member name="M:AddressMicroservice.Controllers.AddressController.GetAllAddresses">
+            <summary>
+            Vraca sve adrese.
+            </summary>
+            <returns>Lista svih adresa u sistemu.</returns>
+        </member>
+    </members>
+</doc>

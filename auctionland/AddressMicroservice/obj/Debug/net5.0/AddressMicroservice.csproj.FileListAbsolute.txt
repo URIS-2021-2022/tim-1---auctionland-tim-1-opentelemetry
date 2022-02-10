@@ -77,3 +77,4 @@ C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\Address
 C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\obj\Debug\net5.0\ref\AddressMicroservice.dll
 C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\obj\Debug\net5.0\AddressMicroservice.pdb
 C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\obj\Debug\net5.0\AddressMicroservice.genruntimeconfig.cache
+C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\bin\Debug\net5.0\AddressMicroservice.xml

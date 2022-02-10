@@ -14,6 +14,7 @@ namespace AddressMicroservice.Controllers
 {
     [ApiController]
     [Route("api/addresses")]
+    [Produces("application/json", "application/xml")]
     public class AddressController : ControllerBase
     {
         private readonly IAddressRepository addressRepository;
@@ -27,8 +28,14 @@ namespace AddressMicroservice.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Vraca sve adrese.
+        /// </summary>
+        /// <returns>Lista svih adresa u sistemu.</returns>
         [HttpGet]
         [HttpHead]
+        [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<AddressDto>> GetAllAddresses()
         {
             List<Address> addresses = addressRepository.GetAllAddresses();
@@ -39,6 +46,8 @@ namespace AddressMicroservice.Controllers
             return Ok(mapper.Map<List<AddressDto>>(addresses));
         }
 
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{addressID}")]
         public ActionResult<AddressDto> GetAddressById(Guid addressID)
         {
@@ -51,6 +60,9 @@ namespace AddressMicroservice.Controllers
         }
 
         [HttpPost]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<AddressConfirmationDto> CreateAddress([FromBody] AddressCreationDto addressCreation)
         {
             try
@@ -67,6 +79,9 @@ namespace AddressMicroservice.Controllers
             }
         }
 
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{addressID}")]
         public IActionResult DeleteAddress(Guid addressID)
         {
@@ -87,6 +102,10 @@ namespace AddressMicroservice.Controllers
         }
 
         [HttpPut]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<AddressConfirmationDto> UpdateAddress(AddressUpdateDto address)
         {
             try

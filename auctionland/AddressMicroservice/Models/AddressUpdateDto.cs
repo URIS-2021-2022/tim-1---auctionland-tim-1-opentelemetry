@@ -12,15 +12,14 @@ namespace AddressMicroservice.Models
         public Guid AddressID { get; set; }
 
         //Naziv ulice
-        public String Street { get; set; }
+        public string Street { get; set; }
 
         //Broj kuce/stana
-        [MaxLength(5)]
         public int Number { get; set; }
 
         //Postanski broj
         [Required(ErrorMessage = "Obavezno je uneti postanski broj.")]
-        public String ZipCode { get; set; }
+        public string ZipCode { get; set; }
 
         #region City
         // id grada
