@@ -10,5 +10,11 @@
             </summary>
             <returns>Lista svih adresa u sistemu.</returns>
         </member>
+        <member name="M:AddressMicroservice.Etities.AddressContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{AddressMicroservice.Etities.AddressContext})">
+            <summary>
+            
+            </summary>
+            <param name="options"></param>
+        </member>
     </members>
 </doc>

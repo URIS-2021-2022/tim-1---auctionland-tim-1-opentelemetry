@@ -1,5 +1,6 @@
 ﻿using AddressMicroservice.Data;
 using AddressMicroservice.Data.Implementation;
+using AddressMicroservice.Etities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -89,23 +91,9 @@ namespace AddressMicroservice
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
-            });
-
             // Znaci da cim se napravi objekat ExamRegistrationController-a i inject-uje IExamRegistrationRepository, kreira se jedna instanca objekta klase ExamRegistrationRepository
             // Kada se radi sa konkretnom bazom, umesto AddSingleton treba koristiti AddScopped
-            services.AddSingleton<IAddressRepository, AddressRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("AddressOpenApiSpecification",
@@ -137,6 +125,8 @@ namespace AddressMicroservice
                 //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
                 setupAction.IncludeXmlComments(xmlCommentsPath);
             });
+
+            services.AddDbContextPool<AddressContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AddressDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

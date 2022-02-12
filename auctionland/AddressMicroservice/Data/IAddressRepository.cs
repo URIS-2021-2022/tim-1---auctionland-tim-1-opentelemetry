@@ -14,8 +14,10 @@ namespace AddressMicroservice.Data
 
         AddressConfirmation CreateAddress(Address address);
 
-        AddressConfirmation UpdateAddress(Address address);
+        void UpdateAddress(Address address);
 
         void DeleteAddress(Guid addressID);
+
+        bool SaveChanges();
     }
 }

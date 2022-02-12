@@ -78,3 +78,7 @@ C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\Address
 C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\obj\Debug\net5.0\AddressMicroservice.pdb
 C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\obj\Debug\net5.0\AddressMicroservice.genruntimeconfig.cache
 C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\bin\Debug\net5.0\AddressMicroservice.xml
+C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Korisnik\Desktop\faks\IV\URIS\Mikroservisi\Projekat\auctionland\AddressMicroservice\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll

@@ -18,7 +18,7 @@ namespace AddressMicroservice.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IAddressRepository addressRepository;
-        private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateExamRegistration)
+        private readonly LinkGenerator linkGenerator; 
         private readonly IMapper mapper;
 
         public AddressController(IAddressRepository addressRepository, LinkGenerator linkGenerator, IMapper mapper)
@@ -38,7 +38,7 @@ namespace AddressMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<AddressDto>> GetAllAddresses()
         {
-            List<Address> addresses = addressRepository.GetAllAddresses();
+            var addresses = addressRepository.GetAllAddresses();
             if (addresses == null || addresses.Count == 0)
             {
                 return NoContent();
@@ -51,12 +51,12 @@ namespace AddressMicroservice.Controllers
         [HttpGet("{addressID}")]
         public ActionResult<AddressDto> GetAddressById(Guid addressID)
         {
-            Address addressModel = addressRepository.GetAddressById(addressID);
-            if (addressModel == null)
+            var address = addressRepository.GetAddressById(addressID);
+            if (address == null)
             {
                 return NotFound();
             }
-            return Ok(mapper.Map<AddressDto>(addressModel));
+            return Ok(mapper.Map<AddressDto>(address));
         }
 
         [HttpPost]
@@ -67,15 +67,17 @@ namespace AddressMicroservice.Controllers
         {
             try
             {
-                Address address = mapper.Map<Address>(addressCreation);
+                Address addressEntity = mapper.Map<Address>(addressCreation);
+                AddressConfirmation confirmation = addressRepository.CreateAddress(addressEntity);
+                addressRepository.SaveChanges();
 
-                AddressConfirmation confirmation = addressRepository.CreateAddress(address);
                 string location = linkGenerator.GetPathByAction("GetAddress", "Address", new { addressID = confirmation.AddressID });
+
                 return Created(location, mapper.Map<AddressConfirmationDto>(confirmation));
             }
             catch
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Create Error");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
             }
         }
 
@@ -87,17 +89,20 @@ namespace AddressMicroservice.Controllers
         {
             try
             {
-                Address addressModel = addressRepository.GetAddressById(addressID);
-                if (addressModel == null)
+                var address = addressRepository.GetAddressById(addressID);
+
+                if (address == null)
                 {
                     return NotFound();
                 }
+
                 addressRepository.DeleteAddress(addressID);
+                addressRepository.SaveChanges();
                 return NoContent();
             }
-            catch
+            catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
 
@@ -110,13 +115,17 @@ namespace AddressMicroservice.Controllers
         {
             try
             {
-                if (addressRepository.GetAddressById(address.AddressID) == null)
+                var oldAddress = addressRepository.GetAddressById(address.AddressID);
+                if (oldAddress == null)
                 {
-                    return NotFound();
+                    return NotFound(); 
                 }
                 Address addressEntity = mapper.Map<Address>(address);
-                AddressConfirmation confirmation = addressRepository.UpdateAddress(addressEntity);
-                return Ok(mapper.Map<AddressConfirmationDto>(confirmation));
+
+                mapper.Map(addressEntity, oldAddress); 
+
+                addressRepository.SaveChanges();
+                return Ok(mapper.Map<AddressDto>(oldAddress));
             }
             catch (Exception)
             {
