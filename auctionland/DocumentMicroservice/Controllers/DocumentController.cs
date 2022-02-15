@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using DocumentMicroservice.Entities;
 using DocumentMicroservice.Models;
 using DocumentMicroservice.Services.Implementation;
 using DocumentMicroservice.Services.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,21 +20,22 @@ namespace DocumentMicroservice.Controllers
     //[Authorize]
     public class DocumentController : ControllerBase
     {
-        //private readonly DocumentService _documentService;
         private readonly IDocumentRepository documentRepository;
         private readonly IMapper mapper;
+        private readonly LinkGenerator linkGenerator;
 
-        public DocumentController(IDocumentRepository documentRepository, IMapper mapper)
+        public DocumentController(IDocumentRepository documentRepository, IMapper mapper, LinkGenerator linkGenerator)
         {
             this.documentRepository = documentRepository;
             this.mapper = mapper;
+            this.linkGenerator = linkGenerator;
         }
 
         [HttpGet]
         [HttpHead] //Podržavamo i HTTP head zahtev koji nam vraća samo zaglavlja u odgovoru    
         [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<ResponseDocumentDto>> GetAllDocuments()
+        public ActionResult<List<DocumentCreationDto>> GetAllDocuments()
         {
             var documents = documentRepository.GetAllDocuments();
 
@@ -43,32 +46,39 @@ namespace DocumentMicroservice.Controllers
             }
 
             //Ukoliko smo našli neke prijava vratiti status 200 i listu pronađenih prijava (DTO objekti)
-            return Ok(mapper.Map<List<ResponseDocumentDto>>(documents));
+            return Ok(mapper.Map<List<DocumentDto>>(documents));
         }
-        /*
+        
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{documentID}")] //Dodatak na rutu koja je definisana na nivou kontrolera
-        public ActionResult<ResponseDocumentDto> GetDocument(Guid documentID) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
+        public ActionResult<DocumentDto> GetDocumentById(Guid documentID) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
-            var document = documentService.GetDocumentById(documentID);
+            Document document = documentRepository.GetDocumentById(documentID);
 
             if (document == null)
             {
                 return NotFound();
             }
-            return Ok(documentService.GetDocumentById(documentID));
+            return Ok(mapper.Map<DocumentDto>(document));
         }
-
+        
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ResponseDocumentDto> CreateDocument([FromBody] RequestDocumentDto documentDto)
+        public ActionResult<DocumentConfirmationDto> CreateDocument([FromBody] DocumentCreationDto documentDto)
         {
             try
             {
-                return documentService.CreateDocument(documentDto);
+                Document documentEntity = mapper.Map<Document>(documentDto);
+                DocumentConfirmation confirmation = documentRepository.CreateDocument(documentEntity);
+                documentRepository.SaveChanges(); //Perzistiramo promene
+
+                //Generisati identifikator novokreiranog resursa
+                string location = linkGenerator.GetPathByAction("GetDocumentById", "Document", new { documentID = confirmation.DocumentId });
+
+                return Created(location, mapper.Map<DocumentConfirmationDto>(confirmation));
             }
             catch (Exception ex)
             {
@@ -83,11 +93,21 @@ namespace DocumentMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ResponseDocumentDto> UpdateExamRegistration(RequestDocumentDto documentDto)
+        public ActionResult<DocumentDto> UpdateExamRegistration(DocumentUpdateDto documentDto)
         {
             try
             {
-                return Ok(documentService.UpdateDocument(documentDto));
+                var oldDocument = documentRepository.GetDocumentById(documentDto.DocumentId);
+                if (oldDocument == null)
+                {
+                    return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
+                }
+                Document documentEntity = mapper.Map<Document>(documentDto);
+
+                mapper.Map(documentEntity, oldDocument); //Update objekta koji treba da sačuvamo u bazi                
+
+                documentRepository.SaveChanges(); //Perzistiramo promene
+                return Ok(mapper.Map<DocumentDto>(oldDocument));
             }
             catch (Exception)
             {
@@ -95,28 +115,29 @@ namespace DocumentMicroservice.Controllers
             }
         }
 
+        [HttpDelete("{documentID}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpDelete("{documentID}")]
         public IActionResult DeleteExamRegistration(Guid documentID)
         {
             try
             {
-                var document = documentService.GetDocumentById(documentID);
+                var document = documentRepository.GetDocumentById(documentID);
 
                 if (document == null)
                 {
                     return NotFound();
                 }
 
-                documentService.DeleteDocument(documentID);
+                documentRepository.DeleteDocument(documentID);
+                documentRepository.SaveChanges();
                 return NoContent();
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
-        }*/
+        }
     }
 }

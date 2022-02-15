@@ -36,7 +36,10 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<ApplicationDto>> GetApplications()
         {
-            List<ApplicationForPublicBidding> applications = applicationRepository.GetApplications();
+            //List<ApplicationForPublicBidding> applications = applicationRepository.GetApplications();
+
+            var applications = applicationRepository.GetApplications();
+
             if (applications == null || applications.Count == 0)
             {
                 return NoContent();
@@ -70,15 +73,15 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
                 applicationRepository.SaveChanges(); //Perzistiramo promene
 
                 //Generisati identifikator novokreiranog resursa
-                string location = linkGenerator.GetPathByAction("GetAllApplication", "ApplicationForPublicBidding", new { ApplicationId = confirmation.ApplicationId });
+                string location = linkGenerator.GetPathByAction("GetApplicationById", "ApplicationForPublicBidding", new { applicationId = confirmation.ApplicationId });
 
                 //var billingInfo = mapper.Map<ExamRegistrationBillDto>(applicationCreation);
 
                 //TODO: treba da se doda neka logika kao provera da li ce moci da se unese prijava ali sam je za sada preskocila
 
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (prijave ispita) i samom prijavom ispita.
-                return Created(location, mapper.Map<ApplicationConformationDto>(confirmation));
-                //return CreatedAtRoute(); //Druga opcija za vraćanje kreiranog resursa i lokacije
+                //return Created(location, mapper.Map<ApplicationConformationDto>(confirmation));
+                return CreatedAtRoute(location, mapper.Map<ApplicationConformationDto>(confirmation)); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
             catch (Exception ex)
             {

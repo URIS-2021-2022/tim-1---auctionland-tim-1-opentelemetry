@@ -28,7 +28,7 @@ namespace DocumentMicroservice.Data.Repository
             throw new NotImplementedException();
         }
 
-        public ListOfDocuments CreateList(ListOfDocuments listOfDocumentsDto)
+        public ListOfDocumentsConfirmation CreateList(ListOfDocuments listOfDocumentsDto)
         {
             throw new NotImplementedException();
         }
@@ -38,9 +38,14 @@ namespace DocumentMicroservice.Data.Repository
             throw new NotImplementedException();
         }
 
-        public ListOfDocuments UpdateList(ListOfDocuments listOfDocumentsDto)
+        public void UpdateList(ListOfDocuments listOfDocumentsDto)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+        }
+
+        public bool SaveChanges()
+        {
+            return context.SaveChanges() > 0;
         }
     }
 }

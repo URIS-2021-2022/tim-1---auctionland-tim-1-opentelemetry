@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models
 {
-    public class ResponseDocumentDto
+    public class DocumentUpdateDto
     {
+        public Guid DocumentId { get; set; }
         public int DocumentSerialNumber { get; set; }
         public string DocumentName { get; set; }
         public DateTime DocumentDate { get; set; }

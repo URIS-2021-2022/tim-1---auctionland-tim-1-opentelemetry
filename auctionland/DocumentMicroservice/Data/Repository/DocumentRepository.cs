@@ -1,4 +1,5 @@
-﻿using DocumentMicroservice.Entities;
+﻿using AutoMapper;
+using DocumentMicroservice.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,25 @@ namespace DocumentMicroservice.Services.Repository
     public class DocumentRepository : IDocumentRepository
     {
         private readonly DocumentContext documentContext;
+        private readonly IMapper mapper;
 
-        public DocumentRepository(DocumentContext documentContext)
+        public DocumentRepository(DocumentContext documentContext, IMapper mapper)
         {
             this.documentContext = documentContext;
+            this.mapper = mapper;
         }
 
-        public Document CreateDocument(Document document)
+        public DocumentConfirmation CreateDocument(Document document)
         {
-            document = new Document();
+            /*document = new Document();
 
             document.DocumentId = Guid.NewGuid();
 
 
             documentContext.Documents.Add(document);
-            return document;
+            return document;*/
+            var createdEntity = documentContext.Add(document);
+            return mapper.Map<DocumentConfirmation>(createdEntity.Entity);
         }
 
         public void DeleteDocument(Guid documentID)
@@ -39,12 +44,17 @@ namespace DocumentMicroservice.Services.Repository
 
         public Document GetDocumentById(Guid documentID)
         {
-            return documentContext.Documents.FirstOrDefault(e => e.DocumentId == documentID);
+            return documentContext.Documents.FirstOrDefault(e => e.DocumentId.Equals(documentID));
         }
 
-        public Document UpdateDocument(Document document)
+        public bool SaveChanges()
         {
-            return document;
+            return documentContext.SaveChanges() > 0;
+        }
+
+        public void UpdateDocument(Document document)
+        {
+            //nista
         }
     }
 }

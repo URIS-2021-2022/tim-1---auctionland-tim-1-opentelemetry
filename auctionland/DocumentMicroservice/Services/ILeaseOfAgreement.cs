@@ -8,13 +8,13 @@ namespace DocumentMicroservice.Services
 {
     public interface ILeaseOfAgreement
     {
-        ResponseLeaseAgreementDto CreateLease(RequestLeaseAgreementDto leaseDto);
+        LeaseAgreementUpdateDto CreateLease(LeaseAgreementDto leaseDto);
 
-        ResponseLeaseAgreementDto UpdateLease(RequestLeaseAgreementDto leaseDto);
+        LeaseAgreementUpdateDto UpdateLease(LeaseAgreementDto leaseDto);
 
-        List<ResponseLeaseAgreementDto> GetAllLeases();
+        List<LeaseAgreementUpdateDto> GetAllLeases();
 
-        ResponseLeaseAgreementDto GetLeaseById(Guid leaseID);
+        LeaseAgreementUpdateDto GetLeaseById(Guid leaseID);
 
         void DeleteLease(Guid leaseID);
     }

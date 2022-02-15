@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingRegistrationMicroservice.Models
 {
-    public class ApplicationCreationDto
+    public class ApplicationCreationDto : IValidatableObject
     {
-        public Guid ApplicationId { get; set; }
-
         #region Payment
         [Required(ErrorMessage = "Obavezno je uneti broj uplate")]
         public Guid PaymentId { get; set; }
@@ -18,6 +16,16 @@ namespace PublicBiddingRegistrationMicroservice.Models
         #region Buyer
         [Required(ErrorMessage = "Obavezno je uneti uplatioca")]
         public Guid BuyerId { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (PaymentId == BuyerId)
+            {
+                yield return new ValidationResult(
+                   "Nije moguće kreirati prijavu u kojoj se jednakom vrednošću u sistemu identifikuju i kupac i uplata.",
+                   new[] { "ApplicationCreationDto" });
+            }
+        }
         #endregion
     }
 }

@@ -8,14 +8,16 @@ namespace DocumentMicroservice.Services.Repository
 {
     public interface IDocumentRepository
     {
-        Document CreateDocument(Document document);
+        DocumentConfirmation CreateDocument(Document document);
 
-        Document UpdateDocument(Document document);
+        void UpdateDocument(Document document);
 
         List<Document> GetAllDocuments();
 
         Document GetDocumentById(Guid documentID);
 
         void DeleteDocument(Guid documentID);
+
+        bool SaveChanges();
     }
 }

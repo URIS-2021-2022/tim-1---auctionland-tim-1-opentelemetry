@@ -18,7 +18,7 @@ namespace DocumentMicroservice.Services.Implementation
             _documentRepository = documentRepository;
         }
 
-        public ResponseDocumentDto CreateDocument(RequestDocumentDto requestDocumentDto)
+        public DocumentCreationDto CreateDocument(DocumentDto requestDocumentDto)
         {
             Document document = new Document(){
                 DocumentSerialNumber = requestDocumentDto.DocumentSerialNumber,
@@ -31,7 +31,7 @@ namespace DocumentMicroservice.Services.Implementation
 
             _documentRepository.CreateDocument(document);
 
-            ResponseDocumentDto response = new ResponseDocumentDto()
+            DocumentCreationDto response = new DocumentCreationDto()
             {
                 DocumentSerialNumber = document.DocumentSerialNumber,
                 DocumentName = document.DocumentName,
@@ -49,14 +49,14 @@ namespace DocumentMicroservice.Services.Implementation
             _documentRepository.DeleteDocument(documentID);
         }
 
-        public List<ResponseDocumentDto> GetAllDocuments()
+        public List<DocumentCreationDto> GetAllDocuments()
         {
             List<Document> documents = _documentRepository.GetAllDocuments();
-            List<ResponseDocumentDto> responseDocumentDtos = new List<ResponseDocumentDto>();
+            List<DocumentCreationDto> responseDocumentDtos = new List<DocumentCreationDto>();
 
             foreach (Document document in documents)
             {
-                ResponseDocumentDto responseDto = new ResponseDocumentDto()
+                DocumentCreationDto responseDto = new DocumentCreationDto()
                 {
                     DocumentSerialNumber = document.DocumentSerialNumber,
                     DocumentName = document.DocumentName,
@@ -72,11 +72,11 @@ namespace DocumentMicroservice.Services.Implementation
             return responseDocumentDtos;
         }
         
-        public ResponseDocumentDto GetDocumentById(Guid documentID)
+        public DocumentCreationDto GetDocumentById(Guid documentID)
         {
             Document document = _documentRepository.GetDocumentById(documentID);
 
-            ResponseDocumentDto response = new ResponseDocumentDto()
+            DocumentCreationDto response = new DocumentCreationDto()
             {
                 DocumentSerialNumber = document.DocumentSerialNumber,
                 DocumentName = document.DocumentName,
@@ -89,7 +89,7 @@ namespace DocumentMicroservice.Services.Implementation
             return response;
         }
 
-        public ResponseDocumentDto UpdateDocument(RequestDocumentDto requestDocumentDto)
+        public DocumentCreationDto UpdateDocument(DocumentDto requestDocumentDto)
         {
             Document document = new Document()
             {
@@ -103,7 +103,7 @@ namespace DocumentMicroservice.Services.Implementation
 
             _documentRepository.UpdateDocument(document);
 
-            ResponseDocumentDto response = new ResponseDocumentDto()
+            DocumentCreationDto response = new DocumentCreationDto()
             {
                 DocumentSerialNumber = document.DocumentSerialNumber,
                 DocumentName = document.DocumentName,

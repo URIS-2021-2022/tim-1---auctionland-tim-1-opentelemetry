@@ -8,13 +8,13 @@ namespace DocumentMicroservice.Services
 {
     public interface IListOfDocuments
     {
-        ResponseListOfDocumentsDto CreateList(RequestListOfDocumentsDto listOfDocumentsDto);
+        ListOfDocumentsDto CreateList(ListOfDocumentsDto listOfDocumentsDto);
 
-        ResponseListOfDocumentsDto UpdateList(RequestListOfDocumentsDto listOfDocumentsDto);
+        ListOfDocumentsDto UpdateList(ListOfDocumentsDto listOfDocumentsDto);
 
-        List<ResponseListOfDocumentsDto> GetAllLists();
+        List<ListOfDocumentsDto> GetAllLists();
 
-        ResponseListOfDocumentsDto GetListById(Guid listID);
+        ListOfDocumentsDto GetListById(Guid listID);
 
         void DeleteList(Guid listID);
     }

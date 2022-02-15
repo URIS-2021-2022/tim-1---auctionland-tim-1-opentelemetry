@@ -13,6 +13,7 @@ namespace PublicBiddingRegistrationMicroservice.Profiles
         public PaymentConfirmatioProfile()
         {
             CreateMap<PaymentConfirmation, PaymentConfirmationDto>();
+            CreateMap<PaymentForApplication, PaymentConfirmation>();
         }
     }
 }

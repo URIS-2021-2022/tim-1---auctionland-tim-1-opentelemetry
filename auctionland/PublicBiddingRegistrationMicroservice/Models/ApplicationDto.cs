@@ -7,6 +7,7 @@ namespace PublicBiddingRegistrationMicroservice.Models
 {
     public class ApplicationDto
     {
+        public Guid ApplicationId { get; set; }
         #region Payment
         public Guid PaymentId { get; set; }
         #endregion

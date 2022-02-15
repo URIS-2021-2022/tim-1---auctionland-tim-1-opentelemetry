@@ -8,14 +8,16 @@ namespace DocumentMicroservice.Data.Repository
 {
     public interface IListOfDocumentsRepository
     {
-        ListOfDocuments CreateList(ListOfDocuments listOfDocumentsDto);
+        ListOfDocumentsConfirmation CreateList(ListOfDocuments listOfDocumentsDto);
 
-        ListOfDocuments UpdateList(ListOfDocuments listOfDocumentsDto);
+        void UpdateList(ListOfDocuments listOfDocumentsDto);
 
         List<ListOfDocuments> GetAllLists();
 
         ListOfDocuments GetListById(Guid listID);
 
         void DeleteList(Guid listID);
+
+        bool SaveChanges();
     }
 }

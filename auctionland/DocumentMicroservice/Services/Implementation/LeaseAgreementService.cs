@@ -11,7 +11,7 @@ namespace DocumentMicroservice.Services.Implementation
     public class LeaseAgreementService : ILeaseOfAgreement
     {
         private readonly ILeaseAgreementRepository agreementRepository;
-        public ResponseLeaseAgreementDto CreateLease(RequestLeaseAgreementDto leaseDto)
+        public LeaseAgreementUpdateDto CreateLease(LeaseAgreementDto leaseDto)
         {
             LeaseAgreement leaseAgreement = new LeaseAgreement() {
                 LeaseTypeOfGuarantee = leaseDto.LeaseTypeOfGuarantee,
@@ -27,7 +27,7 @@ namespace DocumentMicroservice.Services.Implementation
 
             agreementRepository.CreateLease(leaseAgreement);
 
-            ResponseLeaseAgreementDto response = new ResponseLeaseAgreementDto()
+            LeaseAgreementUpdateDto response = new LeaseAgreementUpdateDto()
             {
                 LeaseTypeOfGuarantee = leaseAgreement.LeaseTypeOfGuarantee,
                 LeaseAgreementMaturities = leaseAgreement.LeaseAgreementMaturities,
@@ -48,14 +48,14 @@ namespace DocumentMicroservice.Services.Implementation
             agreementRepository.DeleteLease(leaseID);
         }
 
-        public List<ResponseLeaseAgreementDto> GetAllLeases()
+        public List<LeaseAgreementUpdateDto> GetAllLeases()
         {
             List<LeaseAgreement> leases = agreementRepository.GetAllLeases();
-            List<ResponseLeaseAgreementDto> responseLeasesDtos = new List<ResponseLeaseAgreementDto>();
+            List<LeaseAgreementUpdateDto> responseLeasesDtos = new List<LeaseAgreementUpdateDto>();
 
             foreach (LeaseAgreement lease in leases)
             {
-                ResponseLeaseAgreementDto responseDto = new ResponseLeaseAgreementDto()
+                LeaseAgreementUpdateDto responseDto = new LeaseAgreementUpdateDto()
                 {
                     LeaseTypeOfGuarantee = lease.LeaseTypeOfGuarantee,
                     LeaseAgreementMaturities = lease.LeaseAgreementMaturities,
@@ -74,11 +74,11 @@ namespace DocumentMicroservice.Services.Implementation
             return responseLeasesDtos;
         }
 
-        public ResponseLeaseAgreementDto GetLeaseById(Guid leaseID)
+        public LeaseAgreementUpdateDto GetLeaseById(Guid leaseID)
         {
             LeaseAgreement lease = agreementRepository.GetLeaseById(leaseID);
 
-            ResponseLeaseAgreementDto response = new ResponseLeaseAgreementDto()
+            LeaseAgreementUpdateDto response = new LeaseAgreementUpdateDto()
             {
                 LeaseTypeOfGuarantee = lease.LeaseTypeOfGuarantee,
                 LeaseAgreementMaturities = lease.LeaseAgreementMaturities,
@@ -94,7 +94,7 @@ namespace DocumentMicroservice.Services.Implementation
             return response;
         }
 
-        public ResponseLeaseAgreementDto UpdateLease(RequestLeaseAgreementDto leaseDto)
+        public LeaseAgreementUpdateDto UpdateLease(LeaseAgreementDto leaseDto)
         {
             LeaseAgreement leaseAgreement = new LeaseAgreement()
             {
@@ -111,7 +111,7 @@ namespace DocumentMicroservice.Services.Implementation
 
             agreementRepository.UpdateLease(leaseAgreement);
 
-            ResponseLeaseAgreementDto response = new ResponseLeaseAgreementDto()
+            LeaseAgreementUpdateDto response = new LeaseAgreementUpdateDto()
             {
                 LeaseTypeOfGuarantee = leaseAgreement.LeaseTypeOfGuarantee,
                 LeaseAgreementMaturities = leaseAgreement.LeaseAgreementMaturities,

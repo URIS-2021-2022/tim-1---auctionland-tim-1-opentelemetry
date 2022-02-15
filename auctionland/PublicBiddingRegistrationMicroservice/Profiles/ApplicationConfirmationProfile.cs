@@ -13,6 +13,7 @@ namespace PublicBiddingRegistrationMicroservice.Profiles
         public ApplicationConfirmationProfile()
         {
             CreateMap<ApplicationConfirmation, ApplicationConformationDto>();
+            CreateMap<ApplicationForPublicBidding, ApplicationConfirmation>();
         }
     }
 }

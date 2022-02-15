@@ -20,7 +20,7 @@ namespace PublicBiddingRegistrationMicroservice.Data
 
         public ApplicationConfirmation CreateApplication(ApplicationForPublicBidding applicationForPublicBidding)
         {
-            var createdEntity = context.ApplicationForPublicBidding.Add(applicationForPublicBidding);
+            var createdEntity = context.Add(applicationForPublicBidding);
             return mapper.Map<ApplicationConfirmation>(createdEntity.Entity);
         }
 

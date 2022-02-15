@@ -20,7 +20,7 @@ namespace PublicBiddingRegistrationMicroservice.Data
 
         public PaymentConfirmation CreatePayment(PaymentForApplication payment)
         {
-            var createdEntity = context.PaymentForApplications.Add(payment);
+            var createdEntity = context.Add(payment);
             return mapper.Map<PaymentConfirmation>(createdEntity.Entity);
         }
 

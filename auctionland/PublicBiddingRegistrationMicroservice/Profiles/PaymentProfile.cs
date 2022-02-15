@@ -13,8 +13,9 @@ namespace PublicBiddingRegistrationMicroservice.Profiles
         public PaymentProfile()
         {
             CreateMap<PaymentForApplication, PaymentDto>();
-            CreateMap<PaymentForApplication, PaymentCreationDto>();
-            CreateMap<PaymentForApplication, PaymentUpdateDto>();
+            CreateMap<PaymentCreationDto, PaymentForApplication>();
+            CreateMap<PaymentUpdateDto, PaymentForApplication>();
+            CreateMap<PaymentForApplication, PaymentForApplication>();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace DocumentMicroservice.Entities
     {
         private readonly IConfiguration configuration;
 
-        public DocumentContext(DbContextOptions<DocumentContext> options, IConfiguration configuration) : base(options)
+        public DocumentContext(DbContextOptions options, IConfiguration configuration)
         {
             this.configuration = configuration;
         }

@@ -8,6 +8,7 @@ namespace PublicBiddingRegistrationMicroservice.Entities
     public class PaymentConfirmation
     {
         public Guid PaymentId { get; set; }
+
         public int AccountNumber { get; set; }
 
         public int ReferenceNumber { get; set; }

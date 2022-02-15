@@ -8,14 +8,16 @@ namespace DocumentMicroservice.Data.Repository
 {
     public interface ILeaseAgreementRepository
     {
-        LeaseAgreement CreateLease(LeaseAgreement leaseAgreement);
+        LeaseAgreementConfirmation CreateLease(LeaseAgreement leaseAgreement);
 
-        LeaseAgreement UpdateLease(LeaseAgreement leaseAgreement);
+        void UpdateLease(LeaseAgreement leaseAgreement);
 
         List<LeaseAgreement> GetAllLeases();
 
         LeaseAgreement GetLeaseById(Guid leaseID);
 
         void DeleteLease(Guid leaseID);
+
+        bool SaveChanges();
     }
 }

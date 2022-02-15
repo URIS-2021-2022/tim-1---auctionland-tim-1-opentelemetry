@@ -17,14 +17,14 @@ namespace DocumentMicroservice.Services.Implementation
             this.listOfDocumentsRepository = listOfDocumentsRepository;
         }
 
-        public List<ResponseListOfDocumentsDto> GetAllLists()
+        public List<ListOfDocumentsDto> GetAllLists()
         {
             List<ListOfDocuments> lists = listOfDocumentsRepository.GetAllLists();
-            List<ResponseListOfDocumentsDto> responseListsDtos = new List<ResponseListOfDocumentsDto>();
+            List<ListOfDocumentsDto> responseListsDtos = new List<ListOfDocumentsDto>();
 
             foreach (ListOfDocuments list in lists)
             {
-                ResponseListOfDocumentsDto responseDto = new ResponseListOfDocumentsDto()
+                ListOfDocumentsDto responseDto = new ListOfDocumentsDto()
                 {
                     ListCreationDate = list.ListCreationDate
                 };
@@ -35,12 +35,12 @@ namespace DocumentMicroservice.Services.Implementation
             return responseListsDtos;
         }
 
-        public ResponseListOfDocumentsDto GetListById(Guid listID)
+        public ListOfDocumentsDto GetListById(Guid listID)
         {
             throw new NotImplementedException();
         }
 
-        public ResponseListOfDocumentsDto CreateList(RequestListOfDocumentsDto listOfDocumentsDto)
+        public ListOfDocumentsDto CreateList(ListOfDocumentsDto listOfDocumentsDto)
         {
             throw new NotImplementedException();
         }
@@ -50,7 +50,7 @@ namespace DocumentMicroservice.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public ResponseListOfDocumentsDto UpdateList(RequestListOfDocumentsDto listOfDocumentsDto)
+        public ListOfDocumentsDto UpdateList(ListOfDocumentsDto listOfDocumentsDto)
         {
             throw new NotImplementedException();
         }

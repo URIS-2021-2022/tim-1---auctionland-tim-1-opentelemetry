@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models
 {
-    public class RequestDocumentDto
+    public class DocumentDto
     {
+        public Guid DocumentId { get; set; }
         public int DocumentSerialNumber { get; set; }
         public string DocumentName { get; set; }
         public DateTime DocumentDate { get; set; }

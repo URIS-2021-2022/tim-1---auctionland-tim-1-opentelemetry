@@ -13,8 +13,9 @@ namespace PublicBiddingRegistrationMicroservice.Profiles
         public ApplicationProfile()
         {
             CreateMap<ApplicationForPublicBidding, ApplicationDto>();
-            CreateMap<ApplicationForPublicBidding, ApplicationCreationDto>();
-            CreateMap<ApplicationForPublicBidding, ApplicationUpdateDto>();
+            CreateMap<ApplicationCreationDto, ApplicationForPublicBidding>();
+            CreateMap<ApplicationUpdateDto, ApplicationForPublicBidding>();
+            CreateMap<ApplicationForPublicBidding, ApplicationForPublicBidding>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DocumentMicroservice.Entities;
+﻿using AutoMapper;
+using DocumentMicroservice.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,25 @@ namespace DocumentMicroservice.Data.Repository
     public class LeaseAgreementRepositrory : ILeaseAgreementRepository
     {
         private readonly DocumentContext agreementContext;
-        public LeaseAgreement CreateLease(LeaseAgreement leaseAgreement)
+        private readonly IMapper mapper;
+
+        public LeaseAgreementRepositrory(DocumentContext agreementContext, IMapper mapper)
         {
-            leaseAgreement = new LeaseAgreement();
+            this.agreementContext = agreementContext;
+            this.mapper = mapper;
+        }
+
+        public LeaseAgreementConfirmation CreateLease(LeaseAgreement leaseAgreement)
+        {
+            /*leaseAgreement = new LeaseAgreement();
 
             leaseAgreement.LeaseAgreementID = Guid.NewGuid();
 
 
             agreementContext.LeaseAgreements.Add(leaseAgreement);
-            return leaseAgreement;
+            return leaseAgreement;*/
+            var createdEntity = agreementContext.Add(leaseAgreement);
+            return mapper.Map<LeaseAgreementConfirmation>(createdEntity.Entity);
         }
 
         public void DeleteLease(Guid leaseID)
@@ -36,9 +47,14 @@ namespace DocumentMicroservice.Data.Repository
             return agreementContext.LeaseAgreements.FirstOrDefault(e => e.LeaseAgreementID == leaseID);
         }
 
-        public LeaseAgreement UpdateLease(LeaseAgreement leaseAgreement)
+        public bool SaveChanges()
         {
-            return leaseAgreement;
+            return agreementContext.SaveChanges() > 0;
+        }
+
+        public void UpdateLease(LeaseAgreement leaseAgreement)
+        {
+            //return leaseAgreement;
         }
     }
 }

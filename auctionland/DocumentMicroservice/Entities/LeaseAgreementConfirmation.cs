@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DocumentMicroservice.Models
+namespace DocumentMicroservice.Entities
 {
-    public class ResponseLeaseAgreementDto
+    public class LeaseAgreementConfirmation
     {
+        public Guid LeaseAgreementID { get; set; }
+
         public string LeaseTypeOfGuarantee { get; set; }
 
         public DateTime LeaseAgreementMaturities { get; set; }

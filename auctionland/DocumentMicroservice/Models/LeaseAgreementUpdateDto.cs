@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Models
 {
-    public class RequestLeaseAgreementDto
+    public class LeaseAgreementUpdateDto
     {
+        public Guid LeaseAgreementID { get; set; }
         public string LeaseTypeOfGuarantee { get; set; }
 
         public DateTime LeaseAgreementMaturities { get; set; }

@@ -34,7 +34,7 @@ namespace DocumentMicroservice.Controllers
         [HttpHead] //Podržavamo i HTTP head zahtev koji nam vraća samo zaglavlja u odgovoru    
         [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<ResponseListOfDocumentsDto>> GetAllList()
+        public ActionResult<List<ListOfDocumentsDto>> GetAllList()
         {
             var lists = listOfDocRep.GetAllLists();
 

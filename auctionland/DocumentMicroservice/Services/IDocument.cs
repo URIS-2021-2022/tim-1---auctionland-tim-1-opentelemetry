@@ -9,13 +9,13 @@ namespace DocumentMicroservice.Services
 {
     public interface IDocument
     {
-        ResponseDocumentDto CreateDocument(RequestDocumentDto requestDocumentDto);
+        DocumentCreationDto CreateDocument(DocumentDto requestDocumentDto);
 
-        ResponseDocumentDto UpdateDocument(RequestDocumentDto responseDocumentDto);
+        DocumentCreationDto UpdateDocument(DocumentDto responseDocumentDto);
 
-        List<ResponseDocumentDto> GetAllDocuments();
+        List<DocumentCreationDto> GetAllDocuments();
 
-        ResponseDocumentDto GetDocumentById(Guid documentID);
+        DocumentCreationDto GetDocumentById(Guid documentID);
 
         void DeleteDocument(Guid documentID);
 

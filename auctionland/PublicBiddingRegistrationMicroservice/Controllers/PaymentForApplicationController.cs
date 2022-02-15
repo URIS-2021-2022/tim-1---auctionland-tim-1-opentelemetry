@@ -70,7 +70,7 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
                 paymentRepository.SaveChanges();
 
                 // Dobar API treba da vrati lokator gde se taj resurs nalazi
-                string location = linkGenerator.GetPathByAction("GetAllPayments", "PaymentForApplication", new { paymentId = confirmation.PaymentId });
+                string location = linkGenerator.GetPathByAction("GetPaymentById", "PaymentForApplication", new { paymentId = confirmation.PaymentId });
                 return Created(location, mapper.Map<PaymentConfirmationDto>(confirmation));
             }
             catch
