@@ -73,7 +73,8 @@ namespace AddressMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetAddress", "Address", new { addressID = confirmation.AddressID });
 
-                return Created(location, mapper.Map<AddressConfirmationDto>(confirmation));
+                //return Created(location, mapper.Map<AddressConfirmationDto>(confirmation));
+                return CreatedAtRoute(location, mapper.Map<AddressConfirmationDto>(confirmation));
             }
             catch
             {

@@ -13,6 +13,7 @@ namespace AddressMicroservice.Profiles
         public AddressConfirmationProfile()
         {
             CreateMap<AddressConfirmation, AddressConfirmationDto>();
+            CreateMap<Address, AddressConfirmation>();
         }
     }
 }

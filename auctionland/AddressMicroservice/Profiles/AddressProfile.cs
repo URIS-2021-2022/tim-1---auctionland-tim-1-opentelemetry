@@ -15,12 +15,13 @@ namespace AddressMicroservice.Profiles
             CreateMap<Address, AddressDto>()
                 .ForMember(
                     dest => dest.Address,
-                    opt => opt.MapFrom(src => src.Street + " " + src.Number))
+                    opt => opt.MapFrom(src => $"{src.Street } { src.Number}"))
                 .ForMember(
                     dest => dest.City,
-                    opt => opt.MapFrom(src => src.CityName + ", " + src.ZipCode));
-            CreateMap<Address, AddressCreationDto>();
-            CreateMap<Address, AddressUpdateDto>();
+                    opt => opt.MapFrom(src => $" {src.CityName } {src.ZipCode}"));
+            CreateMap<AddressCreationDto,Address>();
+            CreateMap<AddressUpdateDto,Address>();
+            CreateMap<Address, Address>();
         }
         
     }
