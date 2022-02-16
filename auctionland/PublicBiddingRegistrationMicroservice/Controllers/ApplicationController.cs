@@ -119,7 +119,7 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ApplicationConformationDto> UpdateExamRegistration(ApplicationUpdateDto updateDto)
+        public ActionResult<ApplicationConformationDto> UpdateApplication(ApplicationUpdateDto updateDto)
         {
             try
             {

@@ -27,17 +27,17 @@ namespace DocumentMicroservice.Services.Repository
         public void DeleteDocument(Guid documentID)
         {
             var document = GetDocumentById(documentID);
-            documentContext.Documents.Remove(document);
+            documentContext.Document.Remove(document);
         }
 
         public List<Document> GetAllDocuments()
         {
-            return documentContext.Documents.ToList();
+            return documentContext.Document.ToList();
         }
 
         public Document GetDocumentById(Guid documentID)
         {
-            return documentContext.Documents.FirstOrDefault(e => e.DocumentId.Equals(documentID));
+            return documentContext.Document.FirstOrDefault(e => e.DocumentId.Equals(documentID));
         }
 
         public bool SaveChanges()

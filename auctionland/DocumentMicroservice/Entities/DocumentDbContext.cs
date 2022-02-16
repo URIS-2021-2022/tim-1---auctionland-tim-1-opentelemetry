@@ -16,8 +16,8 @@ namespace DocumentMicroservice.Entities
             this.configuration = configuration;
         }
 
-        public DbSet<Document> Documents { get; set; }
-        public DbSet<LeaseAgreement> LeaseAgreements { get; set; }
+        public DbSet<Document> Document { get; set; }
+        public DbSet<LeaseAgreement> LeaseAgreement { get; set; }
         public DbSet<ListOfDocuments> ListOfDocuments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,19 +27,19 @@ namespace DocumentMicroservice.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ListOfDocuments>().HasData(new
+            modelBuilder.Entity<ListOfDocuments>().HasData(new ListOfDocuments
             {
                 ListOfDocumentsId = Guid.Parse("9791d7f8-ee0e-4426-9bdb-2600d8aa8975"),
                 ListCreationDate = DateTime.Parse("2010-11-24T10:00:00")
             });
 
-            modelBuilder.Entity<ListOfDocuments>().HasData(new
+            modelBuilder.Entity<ListOfDocuments>().HasData(new ListOfDocuments
             {
                 ListOfDocumentsId = Guid.Parse("7297a3c3-5674-4537-9ce2-1319de481a27"),
                 ListCreationDate = DateTime.Parse("2008-12-20T10:00:00")
             });
 
-            modelBuilder.Entity<Document>().HasData(new
+            modelBuilder.Entity<Document>().HasData(new Document
             {
                 DocumentId = Guid.Parse("8b44e760-3c55-4ae4-8d1b-c4ea053672ff"),
                 DocumentSerialNumber = 1,
@@ -50,7 +50,7 @@ namespace DocumentMicroservice.Entities
                 ListOfDocumentsID = Guid.Parse("9791d7f8-ee0e-4426-9bdb-2600d8aa8975")
             });
 
-            modelBuilder.Entity<Document>().HasData(new
+            modelBuilder.Entity<Document>().HasData(new Document
             {
                 DocumentId = Guid.Parse("300f7843-4343-4520-ac1c-995d8095ea89"),
                 DocumentSerialNumber = 2,
@@ -61,8 +61,8 @@ namespace DocumentMicroservice.Entities
                 ListOfDocumentsID = Guid.Parse("7297a3c3-5674-4537-9ce2-1319de481a27")
             });
 
-            modelBuilder.Entity<LeaseAgreement>()
-                .HasData(new
+            modelBuilder.Entity<LeaseAgreement>() 
+                .HasData(new LeaseAgreement
                 {
                     LeaseAgreementID = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
                     LeaseTypeOfGuarantee = "FLease",
@@ -77,7 +77,7 @@ namespace DocumentMicroservice.Entities
                 });
 
             modelBuilder.Entity<LeaseAgreement>()
-                .HasData(new
+                .HasData(new LeaseAgreement
                 {
                     LeaseAgreementID = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     LeaseTypeOfGuarantee = "SLease",

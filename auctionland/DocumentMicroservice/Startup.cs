@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -129,7 +130,7 @@ namespace DocumentMicroservice
             });
 
             //Dodajemo DbContext koji želimo da koristimo
-            services.AddDbContext<DocumentDbContext>();
+            services.AddDbContext<DocumentDbContext>(options => options.UseSqlServer("name=ConnectionStrings:DocumentDB"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

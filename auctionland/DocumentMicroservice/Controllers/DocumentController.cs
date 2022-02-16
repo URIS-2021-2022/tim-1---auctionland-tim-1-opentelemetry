@@ -47,10 +47,10 @@ namespace DocumentMicroservice.Controllers
             //Ukoliko smo našli neke prijava vratiti status 200 i listu pronađenih prijava (DTO objekti)
             return Ok(mapper.Map<List<DocumentDto>>(documents));
         }
-        
+
+        [HttpGet("{documentID}")] //Dodatak na rutu koja je definisana na nivou kontrolera
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpGet("{documentID}")] //Dodatak na rutu koja je definisana na nivou kontrolera
         public ActionResult<DocumentDto> GetDocumentById(Guid documentID) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
             Document document = documentRepository.GetDocumentById(documentID);

@@ -18,31 +18,31 @@ namespace DocumentMicroservice.Entities
         /// <summary>
         /// serijski broj
         /// </summary>
-        [Column("int")]
+        //[Column("int")]
         public int DocumentSerialNumber { get; set; }
 
         /// <summary>
         /// naziv dokumenta
         /// </summary>
-        [Column("nvarchar(250)")]
+        //[Column("nvarchar(250)")]
         public string DocumentName { get; set; }
 
         /// <summary>
         /// datum izdavanja dokumenta
         /// </summary>
-        [Column("date")]
+        //[Column("date")]
         public DateTime DocumentDate { get; set; }
 
         /// <summary>
         /// datum podnosenja dokumenta
         /// </summary>
-        [Column("date")]
+        //[Column("date")]
         public DateTime DocumentSubmissionDate { get; set; }
 
         /// <summary>
         /// sablon dokumenta.
         /// </summary>
-        [Column("nvarchar(250)")]
+        //[Column("nvarchar(250)")]
         public string DocumentTemplate { get; set; }
 
         /// <summary>

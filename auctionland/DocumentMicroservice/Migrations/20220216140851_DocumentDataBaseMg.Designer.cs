@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DocumentMicroservice.Migrations
 {
     [DbContext(typeof(DocumentDbContext))]
-    [Migration("20220216132447_DbDocument")]
-    partial class DbDocument
+    [Migration("20220216140851_DocumentDataBaseMg")]
+    partial class DocumentDataBaseMg
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,28 +28,19 @@ namespace DocumentMicroservice.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DocumentDate")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("date");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DocumentName")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DocumentSerialNumber")
-                        .HasColumnType("int")
-                        .HasColumnName("int");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DocumentSubmissionDate")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("date");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DocumentTemplate")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ListOfDocumentsID")
                         .HasColumnType("uniqueidentifier");
@@ -58,7 +49,7 @@ namespace DocumentMicroservice.Migrations
 
                     b.HasIndex("ListOfDocumentsID");
 
-                    b.ToTable("Documents");
+                    b.ToTable("Document");
 
                     b.HasData(
                         new
@@ -90,26 +81,19 @@ namespace DocumentMicroservice.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfSigning")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DeadlineForLandRestitution")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LeaseAgreementEntryDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LeaseAgreementMaturities")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LeaseTypeOfGuarantee")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("MinisterID")
                         .HasColumnType("uniqueidentifier");
@@ -118,15 +102,14 @@ namespace DocumentMicroservice.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PlaceOfSigning")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("PublicBiddingID")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LeaseAgreementID");
 
-                    b.ToTable("LeaseAgreements");
+                    b.ToTable("LeaseAgreement");
 
                     b.HasData(
                         new

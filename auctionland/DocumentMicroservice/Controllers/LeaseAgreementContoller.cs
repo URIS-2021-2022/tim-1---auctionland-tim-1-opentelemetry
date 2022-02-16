@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocumentMicroservice.Data.Repository;
+using DocumentMicroservice.Entities;
 using DocumentMicroservice.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,103 @@ namespace DocumentMicroservice.Controllers
 
             //Ukoliko smo našli neke prijava vratiti status 200 i listu pronađenih prijava (DTO objekti)
             return Ok(mapper.Map<List<LeaseAgreementCreationDto>>(leases));
+        }
+
+        
+        [HttpGet("{leaseId}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<LeaseAgreementDto> GetLeaseById(Guid leaseId)
+        {
+            LeaseAgreement lease = agreementRepository.GetLeaseById(leaseId);
+            if (lease == null)
+            {
+                return NotFound();
+            }
+            return Ok(mapper.Map<LeaseAgreementDto>(lease));
+        }
+        
+        [HttpPost]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<LeaseAgreementConfirmationDto> CreateLease([FromBody] LeaseAgreementCreationDto leaseCreation)
+        {
+            try
+            {
+                LeaseAgreement leaseEntity = mapper.Map<LeaseAgreement>(leaseCreation);
+                LeaseAgreementConfirmation confirmation = agreementRepository.CreateLease(leaseEntity);
+                agreementRepository.SaveChanges(); //Perzistiramo promene
+
+                //Generisati identifikator novokreiranog resursa
+                string location = linkGenerator.GetPathByAction("GetLeaseById", "LeaseAgreement", new { leaseId = confirmation.LeaseAgreementID });
+
+                return CreatedAtRoute(location, mapper.Map<LeaseAgreementConfirmationDto>(confirmation)); //Druga opcija za vraćanje kreiranog resursa i lokacije
+            }
+            catch (Exception ex)
+            {
+                //TODO: Logovati ex
+                //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
+                return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
+            }
+        }
+
+        [HttpDelete("{leaseId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult DeleteLease(Guid leaseId)
+        {
+            try
+            {
+                var lease = agreementRepository.GetLeaseById(leaseId);
+                if (lease == null)
+                {
+                    return NotFound();
+                }
+                agreementRepository.DeleteLease(leaseId);
+                agreementRepository.SaveChanges();
+                // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
+                return NoContent();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
+            }
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<LeaseAgreementConfirmationDto> UpdateLease(LeaseAgreementUpdateDto updateDto)
+        {
+            try
+            {
+                //Proveriti da li uopšte postoji prijava koju pokušavamo da ažuriramo.
+                var oldLease = agreementRepository.GetLeaseById(updateDto.LeaseAgreementID);
+                if (oldLease == null)
+                {
+                    return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
+                }
+                LeaseAgreement leaseEntity = mapper.Map<LeaseAgreement>(updateDto);
+
+                mapper.Map(leaseEntity, oldLease); //Update objekta koji treba da sačuvamo u bazi                
+
+                agreementRepository.SaveChanges(); //Perzistiramo promene
+                return Ok(mapper.Map<LeaseAgreementDto>(oldLease));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
+            }
+        }
+
+        [HttpOptions]
+        public IActionResult GetExamRegistrationOptions()
+        {
+            Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            return Ok();
         }
     }
 }

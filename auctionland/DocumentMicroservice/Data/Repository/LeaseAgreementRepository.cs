@@ -34,17 +34,17 @@ namespace DocumentMicroservice.Data.Repository
         public void DeleteLease(Guid leaseID)
         {
             var lease = GetLeaseById(leaseID);
-            agreementContext.LeaseAgreements.Remove(lease);
+            agreementContext.LeaseAgreement.Remove(lease);
         }
 
         public List<LeaseAgreement> GetAllLeases()
         {
-            return agreementContext.LeaseAgreements.ToList();
+            return agreementContext.LeaseAgreement.ToList();
         }
 
         public LeaseAgreement GetLeaseById(Guid leaseID)
         {
-            return agreementContext.LeaseAgreements.FirstOrDefault(e => e.LeaseAgreementID == leaseID);
+            return agreementContext.LeaseAgreement.FirstOrDefault(e => e.LeaseAgreementID == leaseID);
         }
 
         public bool SaveChanges()
