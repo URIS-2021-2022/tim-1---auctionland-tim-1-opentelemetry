@@ -5,24 +5,39 @@ using System.Threading.Tasks;
 
 namespace AddressMicroservice.Etities
 {
+    /// <summary>
+    /// Predstavlja potvrdu adrese.
+    /// </summary>
     public class AddressConfirmation
     {
-        //id adrese
+        /// <summary>
+        /// ID adrese.
+        /// </summary>
         public Guid AddressID { get; set; }
 
-        //Naziv ulice
+        /// <summary>
+        /// Naziv ulice.
+        /// </summary>
         public string Street { get; set; }
 
-        //Broj kuce/stana
+        /// <summary>
+        /// Broj kuće ili stana.
+        /// </summary>
         public int Number { get; set; }
 
-        //Postanski broj
+        /// <summary>
+        /// Poštanski broj.
+        /// </summary>
         public string ZipCode { get; set; }
 
-        //grad
+        /// <summary>
+        /// Naziv grada.
+        /// </summary>
         public string CityName { get; set; }
 
-        //drzava
+        /// <summary>
+        /// Naziv države.
+        /// </summary>
         public string CountryName { get; set; }
 
     }

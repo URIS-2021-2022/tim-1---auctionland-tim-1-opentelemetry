@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace AddressMicroservice.Controllers
 {
+    /// <summary>
+    /// Kontroler mikroservisa adresa.
+    /// </summary>
     [ApiController]
     [Route("api/addresses")]
     [Produces("application/json", "application/xml")]
@@ -21,6 +24,12 @@ namespace AddressMicroservice.Controllers
         private readonly LinkGenerator linkGenerator; 
         private readonly IMapper mapper;
 
+        /// <summary>
+        /// Konstruktor putem kog se injektuju zavisnosti.
+        /// </summary>
+        /// <param name="addressRepository"></param>
+        /// <param name="linkGenerator"></param>
+        /// <param name="mapper"></param>
         public AddressController(IAddressRepository addressRepository, LinkGenerator linkGenerator, IMapper mapper)
         {
             this.addressRepository = addressRepository;
@@ -29,9 +38,11 @@ namespace AddressMicroservice.Controllers
         }
 
         /// <summary>
-        /// Vraca sve adrese.
+        /// Vraća sve adrese.
         /// </summary>
         /// <returns>Lista svih adresa u sistemu.</returns>
+        /// <response code="200"> Vraća listu adresa.</response>
+        /// <response code="204"> Nije pronađena ni jedna adresa.</response>
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
@@ -46,6 +57,13 @@ namespace AddressMicroservice.Controllers
             return Ok(mapper.Map<List<AddressDto>>(addresses));
         }
 
+        /// <summary>
+        /// Vraća jednu adresu sa prosleđenim ID-jem.
+        /// </summary>
+        /// <param name="addressID">ID adrese čije podatke treba pronaći.</param>
+        /// <returns></returns>
+        /// <response code="200"> Vraća adresu sa prosleđenim ID-jem.</response>
+        /// <response code="204"> Nije pronađena adresa sa prosleđenim ID-jem.</response>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{addressID}")]
@@ -59,6 +77,27 @@ namespace AddressMicroservice.Controllers
             return Ok(mapper.Map<AddressDto>(address));
         }
 
+        /// <summary>
+        /// Kreira novu adresu.
+        /// </summary>
+        /// <param name="addressCreation">Model adrese.</param>
+        /// <returns>Potvrdu o kreiranoj adresi.</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje nove adrese \
+        /// POST /api/addresses \
+        /// {     \
+        ///     "addressID": "2841defc-761e-40d8-b8a3-d3e58516dca7", \
+        ///     "street": "Isidore Sekulić", \
+        ///     "number": 25, \
+        ///     "zipCode": "21203", \
+        ///     "cityID": "4563cf92-b8d0-4574-9b40-a725f884da36" , \
+        ///     "cityName": "Veternik", \
+        ///     "countryID": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+        ///     "countryName": "Srbija" \
+        ///}
+        /// </remarks>
+        /// <response code="200">Vraća kreiranu adresu.</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom kreiranja adrese.</response>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -73,7 +112,6 @@ namespace AddressMicroservice.Controllers
 
                 string location = linkGenerator.GetPathByAction("GetAddress", "Address", new { addressID = confirmation.AddressID });
 
-                //return Created(location, mapper.Map<AddressConfirmationDto>(confirmation));
                 return CreatedAtRoute(location, mapper.Map<AddressConfirmationDto>(confirmation));
             }
             catch
@@ -82,6 +120,14 @@ namespace AddressMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Briše adresu sa prosleđenim ID-jem.
+        /// </summary>
+        /// <param name="addressID">ID adrese koju je potrebno obrisati.</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Adresa je obrisana.</response>
+        /// <response code="404">Adresa sa prosleđenim ID-jem nije pronađena.</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja adrese.</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -107,6 +153,14 @@ namespace AddressMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira adresu sa prosleđenim ID-jem.
+        /// </summary>
+        /// <param name="address">Model adrese.</param>
+        /// <returns>Potvrda ažuriranja adrese.</returns>
+        /// <response code="200">Vraća ažuriranu adresu.</response>
+        /// <response code="400">Nije pronađena adresa sa prosleđenim ID-jem.</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja adrese.</response>
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -134,6 +188,10 @@ namespace AddressMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraća dozvoljene operacije sa adresama.
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         public IActionResult GetExamRegistrationOptions()
         {

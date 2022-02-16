@@ -7,28 +7,43 @@ using System.Threading.Tasks;
 
 namespace AddressMicroservice.Models
 {
+    /// <summary>
+    /// DTO adrese.
+    /// </summary>
     public class AddressDto
     {
-        //Naziv ulice i broj 
+        /// <summary>
+        /// Naziv ulice i broj stana ili kuće.
+        /// </summary>        
         public string Address { get; set; }
 
-        //grad i postanski broj
+        /// <summary>
+        /// Naziv grada i poštanski broj.
+        /// </summary>
         public string City { get; set; }
 
         #region City
-        // id grada
+        /// <summary>
+        /// ID grada.
+        /// </summary>
         public Guid CityID { get; set; }
 
-        //naziv grada 
-        //public string CityName { get; set; }
+        /// <summary>
+        /// Naziv grada.
+        /// </summary>        
+        public string CityName { get; set; }
 
         #endregion
 
         #region Country
-        //id drzave 
+        /// <summary>
+        /// ID države.
+        /// </summary>
         public Guid CountryID { get; set; }
 
-        //naziv drzave
+        /// <summary>
+        /// Naziv države.
+        /// </summary>
         public string CountryName { get; set; }
         #endregion
     }

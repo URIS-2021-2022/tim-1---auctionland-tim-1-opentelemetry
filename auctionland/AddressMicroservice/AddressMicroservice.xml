@@ -4,17 +4,325 @@
         <name>AddressMicroservice</name>
     </assembly>
     <members>
+        <member name="T:AddressMicroservice.Controllers.AddressController">
+            <summary>
+            Kontroler mikroservisa adresa.
+            </summary>
+        </member>
+        <member name="M:AddressMicroservice.Controllers.AddressController.#ctor(AddressMicroservice.Data.IAddressRepository,Microsoft.AspNetCore.Routing.LinkGenerator,AutoMapper.IMapper)">
+            <summary>
+            Konstruktor putem kog se injektuju zavisnosti.
+            </summary>
+            <param name="addressRepository"></param>
+            <param name="linkGenerator"></param>
+            <param name="mapper"></param>
+        </member>
         <member name="M:AddressMicroservice.Controllers.AddressController.GetAllAddresses">
             <summary>
-            Vraca sve adrese.
+            Vraća sve adrese.
             </summary>
             <returns>Lista svih adresa u sistemu.</returns>
+            <response code="200"> Vraća listu adresa.</response>
+            <response code="204"> Nije pronađena ni jedna adresa.</response>
+        </member>
+        <member name="M:AddressMicroservice.Controllers.AddressController.GetAddressById(System.Guid)">
+            <summary>
+            Vraća jednu adresu sa prosleđenim ID-jem.
+            </summary>
+            <param name="addressID">ID adrese čije podatke treba pronaći.</param>
+            <returns></returns>
+            <response code="200"> Vraća adresu sa prosleđenim ID-jem.</response>
+            <response code="204"> Nije pronađena adresa sa prosleđenim ID-jem.</response>
+        </member>
+        <member name="M:AddressMicroservice.Controllers.AddressController.CreateAddress(AddressMicroservice.Models.AddressCreationDto)">
+             <summary>
+             Kreira novu adresu.
+             </summary>
+             <param name="addressCreation">Model adrese.</param>
+             <returns>Potvrdu o kreiranoj adresi.</returns>
+             <remarks>
+             Primer zahteva za kreiranje nove adrese \
+             POST /api/addresses \
+             {     \
+                 "addressID": "2841defc-761e-40d8-b8a3-d3e58516dca7", \
+                 "street": "Isidore Sekulić", \
+                 "number": 25, \
+                 "zipCode": "21203", \
+                 "cityID": "4563cf92-b8d0-4574-9b40-a725f884da36" , \
+                 "cityName": "Veternik", \
+                 "countryID": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+                 "countryName": "Srbija" \
+            }
+             </remarks>
+             <response code="200">Vraća kreiranu adresu.</response>
+             <response code="500">Došlo je do greške na serveru prilikom kreiranja adrese.</response>
+        </member>
+        <member name="M:AddressMicroservice.Controllers.AddressController.DeleteAddress(System.Guid)">
+            <summary>
+            Briše adresu sa prosleđenim ID-jem.
+            </summary>
+            <param name="addressID">ID adrese koju je potrebno obrisati.</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Adresa je obrisana.</response>
+            <response code="404">Adresa sa prosleđenim ID-jem nije pronađena.</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja adrese.</response>
+        </member>
+        <member name="M:AddressMicroservice.Controllers.AddressController.UpdateAddress(AddressMicroservice.Models.AddressUpdateDto)">
+            <summary>
+            Ažurira adresu sa prosleđenim ID-jem.
+            </summary>
+            <param name="address">Model adrese.</param>
+            <returns>Potvrda ažuriranja adrese.</returns>
+            <response code="200">Vraća ažuriranu adresu.</response>
+            <response code="400">Nije pronađena adresa sa prosleđenim ID-jem.</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja adrese.</response>
+        </member>
+        <member name="M:AddressMicroservice.Controllers.AddressController.GetExamRegistrationOptions">
+            <summary>
+            Vraća dozvoljene operacije sa adresama.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AddressMicroservice.Etities.Address">
+            <summary>
+            Predstavlja adresu.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.Address.AddressID">
+            <summary>
+            ID adrese.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.Address.Street">
+            <summary>
+            Naziv ulice.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.Address.Number">
+            <summary>
+            Broj kuće ili stana.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.Address.ZipCode">
+            <summary>
+            Poštanski broj.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.Address.CityID">
+            <summary>
+            ID grada.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.Address.CityName">
+            <summary>
+            Naziv grada.
+            </summary>        
+        </member>
+        <member name="P:AddressMicroservice.Etities.Address.CountryID">
+            <summary>
+            ID države.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.Address.CountryName">
+            <summary>
+            Naziv države.
+            </summary>
+        </member>
+        <member name="T:AddressMicroservice.Etities.AddressConfirmation">
+            <summary>
+            Predstavlja potvrdu adrese.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.AddressConfirmation.AddressID">
+            <summary>
+            ID adrese.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.AddressConfirmation.Street">
+            <summary>
+            Naziv ulice.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.AddressConfirmation.Number">
+            <summary>
+            Broj kuće ili stana.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.AddressConfirmation.ZipCode">
+            <summary>
+            Poštanski broj.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.AddressConfirmation.CityName">
+            <summary>
+            Naziv grada.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Etities.AddressConfirmation.CountryName">
+            <summary>
+            Naziv države.
+            </summary>
         </member>
         <member name="M:AddressMicroservice.Etities.AddressContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{AddressMicroservice.Etities.AddressContext})">
             <summary>
             
             </summary>
             <param name="options"></param>
+        </member>
+        <member name="T:AddressMicroservice.Models.AddressConfirmationDto">
+            <summary>
+            DTO za potvrdu adrese.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressConfirmationDto.AddressID">
+            <summary>
+            ID adrese.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressConfirmationDto.Street">
+            <summary>
+            Naziv ulice.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressConfirmationDto.Number">
+            <summary>
+            Broj kuće ili stana.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressConfirmationDto.ZipCode">
+            <summary>
+            Poštanski broj.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressConfirmationDto.CityName">
+            <summary>
+            Naziv grada.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressConfirmationDto.CountryName">
+            <summary>
+            Naziv države.
+            </summary>
+        </member>
+        <member name="T:AddressMicroservice.Models.AddressCreationDto">
+            <summary>
+            DTO za kreiranje adrese.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressCreationDto.Street">
+            <summary>
+            Naziv ulice.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressCreationDto.Number">
+            <summary>
+            Broj kuće ili stana.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressCreationDto.ZipCode">
+            <summary>
+            Poštanski broj
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressCreationDto.CityID">
+            <summary>
+            ID grada.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressCreationDto.CityName">
+            <summary>
+            Naziv grada
+            </summary>        
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressCreationDto.CountryID">
+            <summary>
+            ID države.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressCreationDto.CountryName">
+            <summary>
+            Naziv države.
+            </summary>
+        </member>
+        <member name="T:AddressMicroservice.Models.AddressDto">
+            <summary>
+            DTO adrese.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressDto.Address">
+            <summary>
+            Naziv ulice i broj stana ili kuće.
+            </summary>        
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressDto.City">
+            <summary>
+            Naziv grada i poštanski broj.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressDto.CityID">
+            <summary>
+            ID grada.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressDto.CityName">
+            <summary>
+            Naziv grada.
+            </summary>        
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressDto.CountryID">
+            <summary>
+            ID države.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressDto.CountryName">
+            <summary>
+            Naziv države.
+            </summary>
+        </member>
+        <member name="T:AddressMicroservice.Models.AddressUpdateDto">
+            <summary>
+            DTO za izmenu adrese.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressUpdateDto.AddressID">
+            <summary>
+            ID adrese.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressUpdateDto.Street">
+            <summary>
+            Naziv ulice.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressUpdateDto.Number">
+            <summary>
+            Broj kuće ili stana.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressUpdateDto.ZipCode">
+            <summary>
+            Poštanski broj.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressUpdateDto.CityID">
+            <summary>
+            ID grada.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressUpdateDto.CityName">
+            <summary>
+            Naziv grada.
+            </summary>        
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressUpdateDto.CountryID">
+            <summary>
+            ID države.
+            </summary>
+        </member>
+        <member name="P:AddressMicroservice.Models.AddressUpdateDto.CountryName">
+            <summary>
+            Naziv države.
+            </summary>
         </member>
     </members>
 </doc>

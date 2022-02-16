@@ -6,35 +6,54 @@ using System.Threading.Tasks;
 
 namespace AddressMicroservice.Models
 {
+    /// <summary>
+    /// DTO za izmenu adrese.
+    /// </summary>
     public class AddressUpdateDto
     {
-        //id adrese
+        /// <summary>
+        /// ID adrese.
+        /// </summary>
         public Guid AddressID { get; set; }
 
-        //Naziv ulice
+        /// <summary>
+        /// Naziv ulice.
+        /// </summary>
         public string Street { get; set; }
 
-        //Broj kuce/stana
+        /// <summary>
+        /// Broj kuće ili stana.
+        /// </summary>
         public int Number { get; set; }
 
-        //Postanski broj
+        /// <summary>
+        /// Poštanski broj.
+        /// </summary>
         [Required(ErrorMessage = "Obavezno je uneti postanski broj.")]
         public string ZipCode { get; set; }
 
         #region City
-        // id grada
+        /// <summary>
+        /// ID grada.
+        /// </summary>
         public Guid CityID { get; set; }
 
-        //naziv grada 
+        /// <summary>
+        /// Naziv grada.
+        /// </summary>        
         public string CityName { get; set; }
 
         #endregion
 
         #region Country
-        //id drzave 
+        /// <summary>
+        /// ID države.
+        /// </summary>
         public Guid CountryID { get; set; }
 
-        //naziv drzave
+        /// <summary>
+        /// Naziv države.
+        /// </summary>
         public string CountryName { get; set; }
         #endregion
     }

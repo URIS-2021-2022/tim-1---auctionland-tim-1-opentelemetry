@@ -77,7 +77,7 @@ namespace AddressMicroservice
                         {
                             ContentTypes = { "application/problem+json" }
                         };
-                    };
+                    }
 
                     //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                     problemDetails.Status = StatusCodes.Status400BadRequest;
@@ -107,14 +107,14 @@ namespace AddressMicroservice
                         {
                             Name = "Đorić Milica",
                             Email = "djoric.milica@yahoo.com",
-                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                            Url = new Uri($"http://www.ftn.uns.ac.rs/")
                         },
                         License = new Microsoft.OpenApi.Models.OpenApiLicense
                         {
                             Name = "FTN licence",
-                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                            Url = new Uri($"http://www.ftn.uns.ac.rs/")
                         },
-                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
+                        TermsOfService = new Uri($"http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
                     });
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
                 var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";

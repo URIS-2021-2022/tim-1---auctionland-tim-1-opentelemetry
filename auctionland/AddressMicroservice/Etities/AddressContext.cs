@@ -19,9 +19,9 @@ namespace AddressMicroservice.Etities
 
         public DbSet<Address> Addresses { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Address>()
+            modelBuilder.Entity<Address>()
                 .HasData(new
                 {
                     AddressID = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
@@ -34,7 +34,7 @@ namespace AddressMicroservice.Etities
                     CountryName = "Srbija"
                 });
 
-            builder.Entity<Address>()
+            modelBuilder.Entity<Address>()
                .HasData(new
                {
                    AddressID = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),

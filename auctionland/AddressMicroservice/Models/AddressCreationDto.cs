@@ -7,32 +7,49 @@ using System.Threading.Tasks;
 
 namespace AddressMicroservice.Models
 {
+    /// <summary>
+    /// DTO za kreiranje adrese.
+    /// </summary>
     public class AddressCreationDto
     {
-        //Naziv ulice
+        /// <summary>
+        /// Naziv ulice.
+        /// </summary>
         public string Street { get; set; }
 
-        //Broj kuce/stana
+        /// <summary>
+        /// Broj kuće ili stana.
+        /// </summary>
         public int Number { get; set; }
 
-        //Postanski broj
+        /// <summary>
+        /// Poštanski broj
+        /// </summary>
         [Required(ErrorMessage = "Obavezno je uneti postanski broj.")]
         public string ZipCode { get; set; }
 
         #region City
-        // id grada
+        /// <summary>
+        /// ID grada.
+        /// </summary>
         public Guid CityID { get; set; }
 
-        //naziv grada 
+        /// <summary>
+        /// Naziv grada
+        /// </summary>        
         public string CityName { get; set; }
 
         #endregion
 
         #region Country
-        //id drzave 
+        /// <summary>
+        /// ID države.
+        /// </summary>
         public Guid CountryID { get; set; }
 
-        //naziv drzave
+        /// <summary>
+        /// Naziv države.
+        /// </summary>
         public string CountryName { get; set; }
         #endregion
     }
