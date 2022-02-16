@@ -14,7 +14,7 @@ namespace UserMicroservice.Controllers
     [ApiController]
     [Route("api/userTypes")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    //[Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
+    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class UserTypeController : ControllerBase //Daje nam pristup korisnim poljima i metodama
     {
         private readonly IUserTypeRepository userTypeRepository;

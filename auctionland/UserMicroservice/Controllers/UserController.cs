@@ -14,7 +14,7 @@ namespace UserService.Controllers
     [ApiController]
     [Route("api/users")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    //[Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
+    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class UserController : ControllerBase //Daje nam pristup korisnim poljima i metodama
     {
         private readonly IUserRepository userRepository;

@@ -15,7 +15,7 @@ namespace PublicBiddingMicroservice.Controllers
     [ApiController]
     [Route("api/stages")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    //[Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
+    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class StageController : ControllerBase //Daje nam pristup korisnim poljima i metodama
     {
         private readonly IStageRepository stageRepository;
