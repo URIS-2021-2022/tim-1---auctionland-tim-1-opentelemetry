@@ -13,12 +13,6 @@ namespace ComplaintMicroservice.Models
 
         public string Reason { get; set; }
 
-        public string Explanation { get; set; }
-
-        public DateTime DateOfDecision { get; set; }
-
-        public string NumberOfDecision { get; set; }
-
         public string Action { get; set; }
 
         public string ComplaintTypeName { get; set; }

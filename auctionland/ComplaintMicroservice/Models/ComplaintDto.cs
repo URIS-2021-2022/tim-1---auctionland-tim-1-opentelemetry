@@ -7,8 +7,6 @@ namespace ComplaintMicroservice.Models
 {
     public class ComplaintDto
     {
-        public Guid ComplaintId { get; set; }
-
         public DateTime SubmissionDate { get; set; }
 
         public string Reason { get; set; }
@@ -21,8 +19,14 @@ namespace ComplaintMicroservice.Models
 
         public string Action { get; set; }
 
+        #region
+        public Guid ComplaintTypeId { get; set; }
         public string ComplaintTypeName { get; set; }
+        #endregion
 
+        #region
+        public Guid ComplaintStatusId { get; set; }
         public string ComplaintStatus { get; set; }
+        #endregion
     }
 }
