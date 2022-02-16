@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Entities
 {
-    public class DocumentContext : DbContext
+    public class DocumentDbContext : DbContext
     {
         private readonly IConfiguration configuration;
 
-        public DocumentContext(DbContextOptions options, IConfiguration configuration)
+        public DocumentDbContext(DbContextOptions options, IConfiguration configuration) : base(options)
         {
             this.configuration = configuration;
         }

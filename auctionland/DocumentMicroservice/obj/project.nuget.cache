@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "6eMYBoS4d0QHcCZ3bs8GiMp7aOTh7AIyFn0Jlfr8uuwMVhmJInQNmTSR2ZcBsV9zLBcr/3xUr6rx+s5A+DutUg==",
+  "dgSpecHash": "jUlOV/nh+MjZwwQ/2SaomJm0fm3jIkuI+js9B6MkZFeDOma8SvfrxBR5xUTDE5BcqDFKIH9Cu6+F6TUPfgl5kg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Zeljana\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\DocumentMicroservice\\DocumentMicroservice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Zeljana\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\Zeljana\\.nuget\\packages\\entityframework\\5.0.0\\entityframework.5.0.0.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.12\\microsoft.aspnetcore.authentication.jwtbearer.5.0.12.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
@@ -107,5 +108,16 @@
     "C:\\Users\\Zeljana\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'EntityFramework 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "EntityFramework",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
 }

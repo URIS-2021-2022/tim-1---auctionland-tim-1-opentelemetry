@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DocumentMicroservice.Data.Repository
 {
-    public class LeaseAgreementRepositrory : ILeaseAgreementRepository
+    public class LeaseAgreementRepository : ILeaseAgreementRepository
     {
-        private readonly DocumentContext agreementContext;
+        private readonly DocumentDbContext agreementContext;
         private readonly IMapper mapper;
 
-        public LeaseAgreementRepositrory(DocumentContext agreementContext, IMapper mapper)
+        public LeaseAgreementRepository(DocumentDbContext agreementContext, IMapper mapper)
         {
             this.agreementContext = agreementContext;
             this.mapper = mapper;

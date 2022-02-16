@@ -81,3 +81,4 @@ C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\DocumentMic
 C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\DocumentMicroservice\obj\Debug\net5.0\ref\DocumentMicroservice.dll
 C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\DocumentMicroservice\obj\Debug\net5.0\DocumentMicroservice.pdb
 C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\DocumentMicroservice\obj\Debug\net5.0\DocumentMicroservice.genruntimeconfig.cache
+C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\DocumentMicroservice\bin\Debug\net5.0\EntityFramework.dll

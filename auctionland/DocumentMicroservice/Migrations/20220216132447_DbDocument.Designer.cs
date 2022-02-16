@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DocumentMicroservice.Migrations
 {
-    [DbContext(typeof(DocumentContext))]
-    [Migration("20220127124655_InitalCreate")]
-    partial class InitalCreate
+    [DbContext(typeof(DocumentDbContext))]
+    [Migration("20220216132447_DbDocument")]
+    partial class DbDocument
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

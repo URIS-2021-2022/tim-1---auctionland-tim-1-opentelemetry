@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DocumentMicroservice.Migrations
 {
-    [DbContext(typeof(DocumentContext))]
-    partial class DocumentContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DocumentDbContext))]
+    partial class DocumentDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

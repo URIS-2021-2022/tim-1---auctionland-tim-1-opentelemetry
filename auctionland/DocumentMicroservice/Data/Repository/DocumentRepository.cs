@@ -9,10 +9,10 @@ namespace DocumentMicroservice.Services.Repository
 {
     public class DocumentRepository : IDocumentRepository
     {
-        private readonly DocumentContext documentContext;
+        private readonly DocumentDbContext documentContext;
         private readonly IMapper mapper;
 
-        public DocumentRepository(DocumentContext documentContext, IMapper mapper)
+        public DocumentRepository(DocumentDbContext documentContext, IMapper mapper)
         {
             this.documentContext = documentContext;
             this.mapper = mapper;
@@ -20,13 +20,6 @@ namespace DocumentMicroservice.Services.Repository
 
         public DocumentConfirmation CreateDocument(Document document)
         {
-            /*document = new Document();
-
-            document.DocumentId = Guid.NewGuid();
-
-
-            documentContext.Documents.Add(document);
-            return document;*/
             var createdEntity = documentContext.Add(document);
             return mapper.Map<DocumentConfirmation>(createdEntity.Entity);
         }

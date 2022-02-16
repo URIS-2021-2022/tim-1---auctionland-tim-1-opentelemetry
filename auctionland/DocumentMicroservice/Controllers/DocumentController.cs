@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DocumentMicroservice.Entities;
 using DocumentMicroservice.Models;
-using DocumentMicroservice.Services.Implementation;
 using DocumentMicroservice.Services.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

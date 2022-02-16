@@ -1,19 +1,16 @@
-﻿using DocumentMicroservice.Entities;
-using DocumentMicroservice.Services;
-using DocumentMicroservice.Services.Implementation;
+﻿using DocumentMicroservice.Data.Repository;
+using DocumentMicroservice.Entities;
 using DocumentMicroservice.Services.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,8 +33,6 @@ namespace DocumentMicroservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IDocumentRepository, DocumentRepository>(); //Koristimo konkretni repozitorijum
-
             services.AddControllers(setup =>
             {
                 setup.ReturnHttpNotAcceptable = true;            }
@@ -90,7 +85,9 @@ namespace DocumentMicroservice
                 };
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+            services.AddScoped<IDocumentRepository, DocumentRepository>();
+            services.AddScoped<ILeaseAgreementRepository, LeaseAgreementRepository>();
+            services.AddScoped<IListOfDocumentsRepository, ListOfDocumentsRepository>();
             //Konfigurisanje Jwt autentifikacije za projekat
             //Registrujemo Jwt autentifikacionu shemu i definisemo sve potrebne Jwt opcije
             /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -106,7 +103,7 @@ namespace DocumentMicroservice
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });*/
-            
+
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("DocumentOpenApiSpecification",
@@ -132,7 +129,7 @@ namespace DocumentMicroservice
             });
 
             //Dodajemo DbContext koji želimo da koristimo
-            services.AddDbContext<DocumentContext>();
+            services.AddDbContext<DocumentDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -142,7 +139,7 @@ namespace DocumentMicroservice
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+            /*else
             {
                 app.UseExceptionHandler(appBuilder =>
                 {
@@ -152,11 +149,14 @@ namespace DocumentMicroservice
                         await context.Response.WriteAsync("Došlo je do neočekivane greške. Molimo pokušajte kasnije.");
                     });
                 });
-            }
+            }*/
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseHttpsRedirection();
-            //app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseSwagger();
 
@@ -166,10 +166,6 @@ namespace DocumentMicroservice
                 setupAction.SwaggerEndpoint("/swagger/DocumentOpenApiSpecification/swagger.json", "Document API");
                 setupAction.RoutePrefix = ""; //Dokumentacija ce sada biti dostupna na root-u (ne mora da se pise /swagger)
             });
-
-            app.UseRouting();
-
-            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

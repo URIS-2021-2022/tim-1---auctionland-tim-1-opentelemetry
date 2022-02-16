@@ -9,10 +9,10 @@ namespace DocumentMicroservice.Data.Repository
 {
     public class ListOfDocumentsRepository : IListOfDocumentsRepository
     {
-        private readonly DocumentContext context;
+        private readonly DocumentDbContext context;
         private readonly IMapper mapper;
 
-        public ListOfDocumentsRepository(DocumentContext context, IMapper mapper)
+        public ListOfDocumentsRepository(DocumentDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
