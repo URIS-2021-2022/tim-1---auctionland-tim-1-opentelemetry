@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -27,7 +28,7 @@ namespace UserMicroservice.Data.Impelmentation
             {
                 new User
                 {
-                    UserId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    UserId = Guid.Parse("CFD7FA84-8A27-4119-B6DB-5CFC1B0C94E1"),
                     FirstName = "Petar",
                     LastName = "Petrovic",
                     Username = "petar.petrovic",

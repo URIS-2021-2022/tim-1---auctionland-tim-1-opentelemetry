@@ -3,9 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserMicroservice.Entities
 {
-    /// <summary>
-    /// Predstavlja potvrdu kreiranog korisnika.
-    /// </summary>
+
     public class UserConfirmation
     {
         public Guid UserId { get; set; }

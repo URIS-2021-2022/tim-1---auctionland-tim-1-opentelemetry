@@ -101,7 +101,7 @@ namespace PublicBiddingMicroservice
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
@@ -115,9 +115,7 @@ namespace PublicBiddingMicroservice
              */
             //services.AddSingleton<IStageRepository, StageMockRepository>(); //Koristimo mock repozitorijum
             services.AddScoped<IStageRepository, StageRepository>(); //Koristimo konkretni repozitorijum
-           // services.AddSingleton<IPublicBiddingRepository, PublicBiddingMockRepository>(); //Koristimo mock repozitorijum
             services.AddScoped<IPublicBiddingRepository, PublicBiddingRepository>(); //Koristimo konkretni repozitorijum
-            //services.AddSingleton<IAuctionRepository, AuctionMockRepository>(); //Koristimo mock repozitorijum
             services.AddScoped<IAuctionRepository, AuctionRepository>(); //Koristimo konkretni repozitorijum
             services.AddSingleton<IUserAuthRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();

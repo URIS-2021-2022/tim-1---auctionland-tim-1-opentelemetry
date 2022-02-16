@@ -126,7 +126,7 @@ namespace PublicBiddingMicroservice.Controllers
                 {
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
-                AuctionDto auctionEntity = mapper.Map<AuctionDto>(auction);
+                Auction auctionEntity = mapper.Map<Auction>(auction);
 
                 mapper.Map(auctionEntity, oldAuction); //Update objekta koji treba da sačuvamo u bazi                
 
