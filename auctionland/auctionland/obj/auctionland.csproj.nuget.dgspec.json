@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\auctionland.csproj": {}
+    "C:\\Users\\Ana Zuber\\Desktop\\faks_projekti\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\auctionland.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\auctionland.csproj": {
+    "C:\\Users\\Ana Zuber\\Desktop\\faks_projekti\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\auctionland.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\auctionland.csproj",
+        "projectUniqueName": "C:\\Users\\Ana Zuber\\Desktop\\faks_projekti\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\auctionland.csproj",
         "projectName": "auctionland",
-        "projectPath": "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\auctionland.csproj",
-        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\auctionland\\obj\\",
+        "projectPath": "C:\\Users\\Ana Zuber\\Desktop\\faks_projekti\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\auctionland.csproj",
+        "packagesPath": "C:\\Users\\Ana Zuber\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ana Zuber\\Desktop\\faks_projekti\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\auctionland\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ana Zuber\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -52,6 +49,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.12, 5.0.12]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -60,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
