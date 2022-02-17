@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentMsProject", "..\..\..\Downloads\tim-1---auctionland-tim-1-opentelemetry-IT25-2018 (2)\tim-1---auctionland-tim-1-opentelemetry-IT25-2018\auctionland\DocumentMsProject\DocumentMsProject.csproj", "{F5E43A2F-0661-4619-81B3-C0781DB57586}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5E43A2F-0661-4619-81B3-C0781DB57586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5E43A2F-0661-4619-81B3-C0781DB57586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5E43A2F-0661-4619-81B3-C0781DB57586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5E43A2F-0661-4619-81B3-C0781DB57586}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AA191B5-0ECB-412A-8B91-19555B9AD3A1}
+	EndGlobalSection
+EndGlobal
