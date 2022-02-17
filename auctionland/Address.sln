@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "auctionland", "auctionland\auctionland.csproj", "{D375914F-7B2B-499A-88C3-575A0F5ABF82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressMicroservice", "AddressMicroservice\AddressMicroservice.csproj", "{EFC69A06-09CB-4733-98A9-C46E0FEAE6BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddressMicroservice", "AddressMicroservice\AddressMicroservice.csproj", "{EFC69A06-09CB-4733-98A9-C46E0FEAE6BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

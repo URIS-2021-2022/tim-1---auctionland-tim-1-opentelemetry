@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NSIt1SiJfHV9tiXuM1/msi2DCRBzuYVsm/zmrOU//NOBAIFWnS6gRF9XGuYqfpjLHKTroO1EsvWa6dsTdkNFrg==",
+  "dgSpecHash": "2JBwI1UHNqfTROQKziremQZPiOSMWKOku5/rPWPMPx5CZVb55moUAcfog3p3eTl9jmoBxbJfbKXI4hMamEgV9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Korisnik\\Desktop\\faks\\IV\\URIS\\Mikroservisi\\Projekat\\auctionland\\AddressMicroservice\\AddressMicroservice.csproj",
+  "projectFilePath": "C:\\Users\\Korisnik\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\auctionland\\AddressMicroservice\\AddressMicroservice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Korisnik\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Korisnik\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
