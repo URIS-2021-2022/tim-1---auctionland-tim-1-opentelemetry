@@ -8,7 +8,7 @@ namespace ComplaintMicroservice.Entities
 {
     public class ComplaintContext : DbContext
     {
-        public ComplaintContext(DbContextOptions<ComplaintContext> options) : base(options) //dodaje neke dodatne opcije koje su definisane okviru startup klase
+        public ComplaintContext(DbContextOptions<ComplaintContext> options) : base(options)
         {
 
         }

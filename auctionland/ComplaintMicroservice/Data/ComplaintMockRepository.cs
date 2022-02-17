@@ -23,29 +23,29 @@ namespace ComplaintMicroservice.Data
                 new Complaint
                 {
                     ComplaintId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
-                    ComplaintStatus = "",
+                    ComplaintStatus = "Rejected",
                     ComplaintStatusId = Guid.Parse("044f3de0-a9dd-4c2e-b745-89976a1b2a36"),
-                    Action = "",
+                    Action = "Public bidding does not go to the second round",
                     DateOfDecision = DateTime.Parse("2020-11-15T09:00:00"),
-                    Explanation = "",
+                    Explanation = "Explanation",
                     NumberOfDecision = "1",
                     Reason = "Reason",
                     SubmissionDate = DateTime.Parse("2020-11-13T09:00:00"),
-                    ComplaintTypeName= "Hello",
+                    ComplaintTypeName = "Appeal against the course of the public tender",
                     ComplaintTypeId = Guid.Parse("21ad52f8-0281-4241-98b0-481566d25e4f")
                 },
                 new Complaint
                 {
-                    ComplaintId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
-                    ComplaintStatus = "",
+                     ComplaintId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                    ComplaintStatus = "Rejected",
                     ComplaintStatusId = Guid.Parse("32cd906d-8bab-457c-ade2-fbc4ba523029"),
-                    Action = "",
+                    Action = "Public bidding does not go to the second round",
                     DateOfDecision = DateTime.Parse("2020-11-15T09:00:00"),
-                    Explanation = "",
-                    NumberOfDecision = "1",
+                    Explanation = "Explanation",
+                    NumberOfDecision = "2",
                     Reason = "Reason",
                     SubmissionDate = DateTime.Parse("2020-11-13T09:00:00"),
-                    ComplaintTypeName= "Svinja",
+                    ComplaintTypeName = "Appeal against the Decision on Leasing",
                     ComplaintTypeId = Guid.Parse("9d8bab08-f442-4297-8ab5-ddfe08e335f3")
                 }
             });
