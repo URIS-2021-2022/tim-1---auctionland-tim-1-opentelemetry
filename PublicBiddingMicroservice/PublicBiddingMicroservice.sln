@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicBiddingMicroservice", "PublicBiddingMicroservice\PublicBiddingMicroservice.csproj", "{7858B0DB-2D85-4E14-A2F1-9F1E12F2D099}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7858B0DB-2D85-4E14-A2F1-9F1E12F2D099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7858B0DB-2D85-4E14-A2F1-9F1E12F2D099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7858B0DB-2D85-4E14-A2F1-9F1E12F2D099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7858B0DB-2D85-4E14-A2F1-9F1E12F2D099}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8A86E9E-6D5C-43F5-97F8-5D9DFDE7F6DC}
+	EndGlobalSection
+EndGlobal
