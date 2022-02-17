@@ -9,7 +9,6 @@ C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\PublicBiddi
 C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\PublicBiddingRegistrationMicroservice\bin\Debug\net5.0\PublicBiddingRegistrationMicroservice.pdb
 C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\PublicBiddingRegistrationMicroservice\bin\Debug\net5.0\PublicBiddingRegistrationMicroservice.Views.dll
 C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\PublicBiddingRegistrationMicroservice\bin\Debug\net5.0\PublicBiddingRegistrationMicroservice.Views.pdb
-C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\PublicBiddingRegistrationMicroservice\obj\Debug\net5.0\PublicBiddingRegistrationMicroservice.csproj.AssemblyReference.cache
 C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\PublicBiddingRegistrationMicroservice\obj\Debug\net5.0\PublicBiddingRegistrationMicroservice.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\PublicBiddingRegistrationMicroservice\obj\Debug\net5.0\PublicBiddingRegistrationMicroservice.AssemblyInfoInputs.cache
 C:\Users\Zeljana\tim-1---auctionland-tim-1-opentelemetry\auctionland\PublicBiddingRegistrationMicroservice\obj\Debug\net5.0\PublicBiddingRegistrationMicroservice.AssemblyInfo.cs
