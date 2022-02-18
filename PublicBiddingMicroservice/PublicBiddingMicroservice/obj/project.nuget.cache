@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xneQFHI1IPHtKtB/L5eT4HS61VtZz42d45zaMcUqni+iUfOEmg1LuxeDrB/9gLyeYvIzWxRoJKq0DWEUslQ/9g==",
+  "dgSpecHash": "aqcaF/kTFWJztzj2lfewd6fPgVrJPyp2s8d0euIeVNSLGcszu3anbuqOzgY5vX6HApWKCI7X9FJH6BTO1VML0g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ana Zuber\\Desktop\\PublicBiddingMicroservice\\PublicBiddingMicroservice\\PublicBiddingMicroservice.csproj",
+  "projectFilePath": "C:\\Users\\Ana Zuber\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\PublicBiddingMicroservice\\PublicBiddingMicroservice\\PublicBiddingMicroservice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ana Zuber\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Ana Zuber\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

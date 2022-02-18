@@ -30,11 +30,18 @@ namespace PublicBiddingMicroservice.Entities
 
         public int Circle { get; set; }
 
-        public string Status { get; set; }
+
+        [ForeignKey("Status")]
+        public Guid? StatusId { get; set; }
+        public Status Status { get; set; }
 
         [ForeignKey("Stage")]
         public Guid? StageId { get; set; }
         public Stage Stage { get; set; }
+
+        [ForeignKey("PublicBiddingType")]
+        public Guid? PublicBiddingTypeId { get; set; }
+        public Stage PublicBiddingType { get; set; }
 
     }
 }

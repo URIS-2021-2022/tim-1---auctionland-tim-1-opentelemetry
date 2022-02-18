@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingMicroservice.Entities
 {
-    public class PublicOpeningOfClosedBids : PublicBidding
+    public class Status
     {
+        public Guid StatusId { get; set; }
+
+        public string StatusName { get; set; }
     }
 }

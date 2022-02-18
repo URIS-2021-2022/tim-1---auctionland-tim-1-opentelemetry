@@ -117,6 +117,8 @@ namespace PublicBiddingMicroservice
             services.AddScoped<IStageRepository, StageRepository>(); //Koristimo konkretni repozitorijum
             services.AddScoped<IPublicBiddingRepository, PublicBiddingRepository>(); //Koristimo konkretni repozitorijum
             services.AddScoped<IAuctionRepository, AuctionRepository>(); //Koristimo konkretni repozitorijum
+            services.AddScoped<IStatusRepository, StatusRepository>();
+            services.AddScoped<IPublicBiddingTypeRepository, PublicBiddingTypeRepository>();
             services.AddSingleton<IUserAuthRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IAddressService, AddressService>();
