@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -17,7 +18,6 @@ namespace ComplaintMicroservice.Controllers
     [Route("api/complaint")]
     [Produces("application/json", "application/xml")]
     [Authorize]
-    //[Consumes("application/json")]
     public class ComplaintController : ControllerBase
     {
         private readonly IComplaintRepository complaintRepository;
@@ -136,10 +136,16 @@ namespace ComplaintMicroservice.Controllers
             try
             {
                 Complaint complaint = mapper.Map<Complaint>(complaintCreationDto);
-                ComplaintConfirmation confirmation = complaintRepository.CreateComplaint(complaint);
-                complaintRepository.SaveChanges();
-                string location = linkGenerator.GetPathByAction("GetComplaint", "Complaint", new { complaintId = confirmation.ComplaintId });
-                return Created(location, mapper.Map<ComplaintConfirmationDto>(confirmation));
+                if (Validate(complaint))
+                {
+                    ComplaintConfirmation confirmation = complaintRepository.CreateComplaint(complaint);
+                    complaintRepository.SaveChanges();
+                    string location = linkGenerator.GetPathByAction("GetComplaint", "Complaint", new { complaintId = confirmation.ComplaintId });
+                    return Created(location, mapper.Map<ComplaintConfirmationDto>(confirmation));
+                } else
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "Nije moguće da datum donošenja rešenja na osnovu žalbe bude pre datuma podnosenja žalbe!");
+                }
             }
             catch
             {
@@ -168,10 +174,15 @@ namespace ComplaintMicroservice.Controllers
                     return NotFound();
                 }
                 Complaint complaintEntity = mapper.Map<Complaint>(newComplaint);
-                //ComplaintConfirmation confirmation = complaintRepository.UpdateComplaint(complaintEntity);
-                mapper.Map(complaintEntity, oldComplaint);
-                complaintRepository.SaveChanges();
-                return Ok(mapper.Map<ComplaintConfirmationDto>(oldComplaint));
+                if(Validate(complaintEntity))
+                {
+                    mapper.Map(complaintEntity, oldComplaint);
+                    complaintRepository.SaveChanges();
+                    return Ok(mapper.Map<ComplaintConfirmationDto>(oldComplaint));
+                }else
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "Nije moguće da datum donošenja rešenja na osnovu žalbe bude pre datuma podnosenja žalbe!");
+                }
             }
             catch (Exception)
             {
@@ -189,6 +200,20 @@ namespace ComplaintMicroservice.Controllers
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
+        }
+
+        /// <summary>
+        /// Proveravanje validnosti unesenih podataka
+        /// </summary>
+        /// <param name="complaint"></param>
+        /// <returns></returns>
+        private static bool Validate(Complaint complaint)
+        {
+            if (complaint.DateOfDecision >= complaint.SubmissionDate)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

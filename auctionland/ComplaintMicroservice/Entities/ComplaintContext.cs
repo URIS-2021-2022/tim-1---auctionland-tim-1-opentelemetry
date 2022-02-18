@@ -24,7 +24,7 @@ namespace ComplaintMicroservice.Entities
             builder.Entity<Complaint>()
                 .HasData(new
                 {
-                    ComplaintId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    ComplaintId = Guid.Parse("630662ab-0607-4507-bdca-cff2c3a57b20"),
                     ComplaintStatus = "Rejected",
                     ComplaintStatusId = Guid.Parse("044f3de0-a9dd-4c2e-b745-89976a1b2a36"),
                     Action = "Public bidding does not go to the second round",

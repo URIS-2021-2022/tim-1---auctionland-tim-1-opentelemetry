@@ -67,20 +67,5 @@ namespace ComplaintMicroservice.Models
         /// </summary>
         public string ComplaintStatus { get; set; }
         #endregion
-
-        /// <summary>
-        /// Proveravanje validnosti unesenih podataka
-        /// </summary>
-        /// <param name="validationContext"></param>
-        /// <returns></returns>
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if(DateOfDecision < SubmissionDate)
-            {
-                yield return new ValidationResult
-                    ("Nije moguce da datum donosenja resenja na osnovu zalbe bude pre datuma podnosenja zalbe.", new[] { "ComplaintUpdateDto" });
-            }
-        }
-  
     }
 }

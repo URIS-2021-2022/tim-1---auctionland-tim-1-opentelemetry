@@ -91,6 +91,7 @@ namespace ComplaintMicroservice
             object p = services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
+                //AuthenticationMode = AuthenticationMode.Active,
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -109,23 +110,15 @@ namespace ComplaintMicroservice
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("ComplaintOpenApiSpecification",
-                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "Complaint Api",
                         Version = "1",
                          Description = "Pomoću ovog API-ja može da se vrši pregled žalbi u sistemu, kreiranje novih i modifikacija postojećih žalbi.",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact
                         {
-                            Name = "Marko Marković",
-                            Email = "marko@mail.com",
-                            Url = new Uri("http://www.ftn.uns.ac.rs/")
-                        },
-                        License = new Microsoft.OpenApi.Models.OpenApiLicense
-                        {
-                            Name = "FTN licence",
-                            Url = new Uri("http://www.ftn.uns.ac.rs/")
-                        },
-                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
+                            Name = "Milica Gašić"
+                        }
                     });
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
                 var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
@@ -133,6 +126,31 @@ namespace ComplaintMicroservice
                 //Pravimo putanju do XML fajla sa komentarima
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
                 setupAction.IncludeXmlComments(xmlCommentsPath);
+
+                setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Molim Vas unesite vaš token",
+                    Name = "Autorizacija korisnika",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+
+                setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    Array.Empty<string>()
+                    }
+                });
             });
 
             services.AddDbContextPool<ComplaintContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ComplaintDB")));
@@ -146,20 +164,18 @@ namespace ComplaintMicroservice
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
+            app.UseRouting();
+
+            app.UseAuthorization();
             app.UseSwagger(); // da se prilikom pokretanja projekta pokrene i swagger dokumentacija
 
             app.UseSwaggerUI(setupAction =>
             {
-                //Podesavamo endpoint gde Swagger UI moze da pronadje OpenAPI specifikaciju 
                 setupAction.SwaggerEndpoint("/swagger/ComplaintOpenApiSpecification/swagger.json", "Complaint API");
                 //setupAction.RoutePrefix = "";
-            });
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
+            });          
 
             app.UseEndpoints(endpoints =>
             {

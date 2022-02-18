@@ -81,6 +81,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ComplaintMicroservice.Controllers.ComplaintController.Validate(ComplaintMicroservice.Entities.Complaint)">
+            <summary>
+            Proveravanje validnosti unesenih podataka
+            </summary>
+            <param name="complaint"></param>
+            <returns></returns>
+        </member>
         <member name="M:ComplaintMicroservice.Data.ComplaintRepository.SaveChanges">
             <summary>
             Perzistira sve izmene u bazi
@@ -530,13 +537,6 @@
             <summary>
             Status žalbe
             </summary>
-        </member>
-        <member name="M:ComplaintMicroservice.Models.ComplaintUpdateDto.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
-            <summary>
-            Proveravanje validnosti unesenih podataka
-            </summary>
-            <param name="validationContext"></param>
-            <returns></returns>
         </member>
         <member name="T:ComplaintMicroservice.Models.Principal">
             <summary>
