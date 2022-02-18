@@ -15,6 +15,10 @@ namespace ComplaintMicroservice.Entities
 
         public DbSet<Complaint> Complaints { get; set; }
 
+        /// <summary>
+        /// Popunjava bazu sa inicijalnim podacima
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Complaint>()

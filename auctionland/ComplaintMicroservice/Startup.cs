@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ComplaintMicroservice.Data;
@@ -104,11 +106,34 @@ namespace ComplaintMicroservice
             services.AddScoped<IComplaintRepository, ComplaintRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
-            //services.AddHealthChecks();
-            /*  services.AddSwaggerGen(c =>
-              {
-                  c.SwaggerDoc("v1", new OpenApiInfo { Title = "ComplaintMicroservice", Version = "v1" });
-              });*/
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("ComplaintOpenApiSpecification",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Title = "Complaint Api",
+                        Version = "1",
+                         Description = "Pomoću ovog API-ja može da se vrši pregled žalbi u sistemu, kreiranje novih i modifikacija postojećih žalbi.",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                        {
+                            Name = "Marko Marković",
+                            Email = "marko@mail.com",
+                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        },
+                        License = new Microsoft.OpenApi.Models.OpenApiLicense
+                        {
+                            Name = "FTN licence",
+                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                        },
+                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
+                    });
+                //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
+                var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+
+                //Pravimo putanju do XML fajla sa komentarima
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+                setupAction.IncludeXmlComments(xmlCommentsPath);
+            });
 
             services.AddDbContextPool<ComplaintContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ComplaintDB")));
         }
@@ -119,9 +144,16 @@ namespace ComplaintMicroservice
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-               // app.UseSwagger();
-               // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ComplaintMicroservice v1"));
             }
+
+            app.UseSwagger(); // da se prilikom pokretanja projekta pokrene i swagger dokumentacija
+
+            app.UseSwaggerUI(setupAction =>
+            {
+                //Podesavamo endpoint gde Swagger UI moze da pronadje OpenAPI specifikaciju 
+                setupAction.SwaggerEndpoint("/swagger/ComplaintOpenApiSpecification/swagger.json", "Complaint API");
+                //setupAction.RoutePrefix = "";
+            });
 
             app.UseHttpsRedirection();
 

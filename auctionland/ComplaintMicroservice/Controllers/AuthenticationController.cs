@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ComplaintMicroservice.Controllers
 {
-    [Route("api/complaint")]
     [ApiController]
+    [Route("api/complaint")]
+    [Produces("application/json", "application/xml")]
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationHelper authenticationHelper;
@@ -21,11 +22,14 @@ namespace ComplaintMicroservice.Controllers
         }
 
         /// <summary>
-        /// Used for user authentication
+        /// Koristi se za autentifikaciju korisnika
         /// </summary>
-        /// <param name="principal">Model with data</param>
+        /// <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
         /// <returns></returns>
         [HttpPost("authenticate")]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Authenticate(Principal principal)
         {
             if (authenticationHelper.AuthenticatePrincipal(principal))

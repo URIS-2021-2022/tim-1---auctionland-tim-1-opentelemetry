@@ -17,7 +17,10 @@ namespace ComplaintMicroservice.Data
             FillData();
         }
 
-        private void FillData()
+        /// <summary>
+        /// Upisuje testne podatke
+        /// </summary>
+        private static void FillData()
         {
             var user1 = HashPassword("testpassword");
 
@@ -36,9 +39,12 @@ namespace ComplaintMicroservice.Data
             });
         }
 
-        /// <param name="password">User password</param>
-        /// <returns>Generated hash and salt</returns>
-        private Tuple<string, string> HashPassword(string password)
+        /// <summary>
+        /// Vrši hešovanje korisničke lozinke
+        /// </summary>
+        /// <param name="password">Lozinka koja se hešuje</param>
+        /// <returns>Generisan hash i salt</returns>
+        private static Tuple<string, string> HashPassword(string password)
         {
             var sBytes = new byte[password.Length];
             new RNGCryptoServiceProvider().GetNonZeroBytes(sBytes);
@@ -54,10 +60,10 @@ namespace ComplaintMicroservice.Data
         }
 
         /// <summary>
-        /// Checks if there is a user with forwarded credentials
+        /// Proverava da li postoji korisnik sa proslešenim korisničkim imenom i lozinkom
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="username">Korisničko ime</param>
+        /// <param name="password">Lozinka</param>
         /// <returns></returns>
         public bool UserWithCredentialsExists(string username, string password)
         {
@@ -75,11 +81,11 @@ namespace ComplaintMicroservice.Data
         }
 
         /// <summary>
-        /// Checks the validity of the forwarded password with the forwarded hash
+        /// Proverava validnost prosleđene lozinke sa prosleđenim hešom
         /// </summary>
-        /// <param name="password">User passwpod</param>
-        /// <param name="savedHash">Saved hash</param>
-        /// <param name="savedSalt">Saved salt</param>
+        /// <param name="password">Korisničko ime</param>
+        /// <param name="savedHash">Sačuvani hash</param>
+        /// <param name="savedSalt">Sačuvani salt</param>
         /// <returns></returns>
         public bool VerifyPassword(string password, string savedHash, string savedSalt)
         {

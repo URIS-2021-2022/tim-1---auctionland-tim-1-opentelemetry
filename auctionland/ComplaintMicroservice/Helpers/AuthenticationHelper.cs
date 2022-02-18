@@ -22,6 +22,11 @@ namespace ComplaintMicroservice.Helpers
             this.userRepository = userRepository;
         }
 
+        /// <summary>
+        /// Vrši autentifikaciju principala
+        /// </summary>
+        /// <param name="principal">Principal koji se autentifikuje</param>
+        /// <returns></returns>
         public bool AuthenticatePrincipal(Principal principal)
         {
             if (userRepository.UserWithCredentialsExists(principal.UserName, principal.Password))
@@ -31,6 +36,11 @@ namespace ComplaintMicroservice.Helpers
             return false;
         }
 
+        /// <summary>
+        /// Generiše novi token za autentifikovanog principala
+        /// </summary>
+        /// <param name="principal">Autentifikovani principal</param>
+        /// <returns></returns>
         public string GenerateJwt(Principal principal)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));

@@ -13,6 +13,8 @@ namespace ComplaintMicroservice.Profiles
         public ComplaintConfirmationProfile()
         {
             CreateMap<ComplaintConfirmation, ComplaintConfirmationDto>();
+            CreateMap<Complaint, ComplaintConfirmation>();
+            CreateMap<Complaint, ComplaintConfirmationDto>();
         }
     }
 }

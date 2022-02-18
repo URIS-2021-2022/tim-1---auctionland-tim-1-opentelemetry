@@ -13,7 +13,7 @@ namespace ComplaintMicroservice.Profiles
         public ComplaintProfile()
         {
             CreateMap<Complaint, ComplaintDto>();
-            CreateMap<ComplaintDto, Complaint>();
+            CreateMap<Complaint, Complaint>();
             CreateMap<ComplaintCreationDto, Complaint>();
             CreateMap<ComplaintUpdateDto, Complaint>();
         }

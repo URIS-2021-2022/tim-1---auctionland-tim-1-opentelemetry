@@ -17,6 +17,11 @@ namespace ComplaintMicroservice.Data
             this.context = context;
             this.mapper = mapper;
         }
+
+        /// <summary>
+        /// Perzistira sve izmene u bazi
+        /// </summary>
+        /// <returns></returns>
         public bool SaveChanges()
         {
             return context.SaveChanges() > 0;
@@ -24,8 +29,9 @@ namespace ComplaintMicroservice.Data
 
         public ComplaintConfirmation CreateComplaint(Complaint complaint)
         {
-            var createdEntity = context.Add(complaint);
-            return mapper.Map<ComplaintConfirmation>(createdEntity.Entity);
+            complaint.ComplaintId = Guid.NewGuid();
+            var ceatedEntity = context.Add(complaint);
+            return mapper.Map<ComplaintConfirmation>(ceatedEntity.Entity);
         }
 
         public void DeleteComplaint(Guid complaintId)
