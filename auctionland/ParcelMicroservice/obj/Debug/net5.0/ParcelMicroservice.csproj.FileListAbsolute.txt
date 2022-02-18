@@ -1,7 +1,0 @@
-D:\Sedmi_semestar\URIS\ZajednickiProjekat\auctionland\ParcelMicroservice\obj\Debug\net5.0\ParcelMicroservice.csproj.AssemblyReference.cache
-D:\Sedmi_semestar\URIS\ZajednickiProjekat\auctionland\ParcelMicroservice\obj\Debug\net5.0\ParcelMicroservice.GeneratedMSBuildEditorConfig.editorconfig
-D:\Sedmi_semestar\URIS\ZajednickiProjekat\auctionland\ParcelMicroservice\obj\Debug\net5.0\ParcelMicroservice.AssemblyInfoInputs.cache
-D:\Sedmi_semestar\URIS\ZajednickiProjekat\auctionland\ParcelMicroservice\obj\Debug\net5.0\ParcelMicroservice.AssemblyInfo.cs
-D:\Sedmi_semestar\URIS\ZajednickiProjekat\auctionland\ParcelMicroservice\obj\Debug\net5.0\ParcelMicroservice.csproj.CoreCompileInputs.cache
-D:\Sedmi_semestar\URIS\ZajednickiProjekat\auctionland\ParcelMicroservice\obj\Debug\net5.0\ParcelMicroservice.MvcApplicationPartsAssemblyInfo.cs
-D:\Sedmi_semestar\URIS\ZajednickiProjekat\auctionland\ParcelMicroservice\obj\Debug\net5.0\ParcelMicroservice.MvcApplicationPartsAssemblyInfo.cache
