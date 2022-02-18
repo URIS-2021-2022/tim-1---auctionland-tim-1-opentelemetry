@@ -10,7 +10,7 @@ using PublicBiddingMicroservice.Entities;
 namespace PublicBiddingMicroservice.Migrations
 {
     [DbContext(typeof(PublicBiddingContext))]
-    [Migration("20220201142412_InitialCreate")]
+    [Migration("20220218172307_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,6 +94,9 @@ namespace PublicBiddingMicroservice.Migrations
                     b.Property<int>("NumberOfParticipants")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("PublicBiddingTypeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("StageId")
                         .HasColumnType("uniqueidentifier");
 
@@ -103,12 +106,16 @@ namespace PublicBiddingMicroservice.Migrations
                     b.Property<double>("StartingPricePerHe")
                         .HasColumnType("float");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("StatusId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PublicBiddingId");
 
+                    b.HasIndex("PublicBiddingTypeId");
+
                     b.HasIndex("StageId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("PublicBidding");
 
@@ -124,10 +131,37 @@ namespace PublicBiddingMicroservice.Migrations
                             Exclude = true,
                             LeasePeriod = 1,
                             NumberOfParticipants = 12,
+                            PublicBiddingTypeId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             StageId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             StartTime = new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             StartingPricePerHe = 10.0,
-                            Status = "Status1"
+                            StatusId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b")
+                        });
+                });
+
+            modelBuilder.Entity("PublicBiddingMicroservice.Entities.PublicBiddingType", b =>
+                {
+                    b.Property<Guid>("PublicBiddingTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PublicBiddingTypeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PublicBiddingTypeId");
+
+                    b.ToTable("PublicBiddingType");
+
+                    b.HasData(
+                        new
+                        {
+                            PublicBiddingTypeId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                            PublicBiddingTypeName = "Javna lictacija"
+                        },
+                        new
+                        {
+                            PublicBiddingTypeId = new Guid("1f7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                            PublicBiddingTypeName = "Otvaranje zatvorenih ponuda"
                         });
                 });
 
@@ -152,6 +186,37 @@ namespace PublicBiddingMicroservice.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PublicBiddingMicroservice.Entities.Status", b =>
+                {
+                    b.Property<Guid>("StatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StatusName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StatusId");
+
+                    b.ToTable("Status");
+
+                    b.HasData(
+                        new
+                        {
+                            StatusId = new Guid("1f7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                            StatusName = "Prvi krug"
+                        },
+                        new
+                        {
+                            StatusId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                            StatusName = "Drugi krug sa starim uslovima"
+                        },
+                        new
+                        {
+                            StatusId = new Guid("1a7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                            StatusName = "Drugi krug sa novim uslovima"
+                        });
+                });
+
             modelBuilder.Entity("PublicBiddingMicroservice.Entities.Auction", b =>
                 {
                     b.HasOne("PublicBiddingMicroservice.Entities.Stage", "Stage")
@@ -163,11 +228,23 @@ namespace PublicBiddingMicroservice.Migrations
 
             modelBuilder.Entity("PublicBiddingMicroservice.Entities.PublicBidding", b =>
                 {
+                    b.HasOne("PublicBiddingMicroservice.Entities.Stage", "PublicBiddingType")
+                        .WithMany()
+                        .HasForeignKey("PublicBiddingTypeId");
+
                     b.HasOne("PublicBiddingMicroservice.Entities.Stage", "Stage")
                         .WithMany()
                         .HasForeignKey("StageId");
 
+                    b.HasOne("PublicBiddingMicroservice.Entities.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId");
+
+                    b.Navigation("PublicBiddingType");
+
                     b.Navigation("Stage");
+
+                    b.Navigation("Status");
                 });
 #pragma warning restore 612, 618
         }

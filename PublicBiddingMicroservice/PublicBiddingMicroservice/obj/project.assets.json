@@ -5719,11 +5719,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ana Zuber\\Desktop\\PublicBiddingMicroservice\\PublicBiddingMicroservice\\PublicBiddingMicroservice.csproj",
+      "projectUniqueName": "C:\\Users\\Ana Zuber\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\PublicBiddingMicroservice\\PublicBiddingMicroservice\\PublicBiddingMicroservice.csproj",
       "projectName": "PublicBiddingMicroservice",
-      "projectPath": "C:\\Users\\Ana Zuber\\Desktop\\PublicBiddingMicroservice\\PublicBiddingMicroservice\\PublicBiddingMicroservice.csproj",
+      "projectPath": "C:\\Users\\Ana Zuber\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\PublicBiddingMicroservice\\PublicBiddingMicroservice\\PublicBiddingMicroservice.csproj",
       "packagesPath": "C:\\Users\\Ana Zuber\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ana Zuber\\Desktop\\PublicBiddingMicroservice\\PublicBiddingMicroservice\\obj\\",
+      "outputPath": "C:\\Users\\Ana Zuber\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\PublicBiddingMicroservice\\PublicBiddingMicroservice\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ana Zuber\\AppData\\Roaming\\NuGet\\NuGet.Config",

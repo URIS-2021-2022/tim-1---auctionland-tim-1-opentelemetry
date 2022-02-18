@@ -16,6 +16,9 @@ namespace PublicBiddingMicroservice.Entities
         public DbSet<PublicBidding> PublicBidding { get; set; }
         public DbSet<Stage> Stage { get; set; }
         public DbSet<Auction> Auction { get; set; }
+        public DbSet<Status> Status { get;  set; }
+        public DbSet<PublicBiddingType> PublicBiddingType { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +37,41 @@ namespace PublicBiddingMicroservice.Entities
                     Date = DateTime.Parse("2020-11-15T09:00:00"),
                 });
 
+            builder.Entity<Status>()
+                .HasData(new Status
+                {
+                    StatusId = Guid.Parse("1f7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                    StatusName = "Prvi krug",
+                });
+            builder.Entity<Status>()
+               .HasData(new Status
+               {
+                   StatusId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                   StatusName = "Drugi krug sa starim uslovima",
+               });
+
+            builder.Entity<Status>()
+               .HasData(new Status
+               {
+                   StatusId = Guid.Parse("1a7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                   StatusName = "Drugi krug sa novim uslovima",
+               });
+
+
+            builder.Entity<PublicBiddingType>()
+                .HasData(new PublicBiddingType
+                {
+                    PublicBiddingTypeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                    PublicBiddingTypeName = "Javna lictacija",
+                });
+
+            builder.Entity<PublicBiddingType>()
+               .HasData(new PublicBiddingType
+               {
+                   PublicBiddingTypeId = Guid.Parse("1f7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                   PublicBiddingTypeName = "Otvaranje zatvorenih ponuda",
+               });
+
             builder.Entity<PublicBidding>()
                 .HasData(new PublicBidding
                 {
@@ -48,8 +86,9 @@ namespace PublicBiddingMicroservice.Entities
                     NumberOfParticipants = 12,
                     DepositReplenishment = 13.00,
                     Circle = 1,
-                    Status = "Status1",
+                    StatusId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     StageId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                    PublicBiddingTypeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                 });
 
             builder.Entity<Auction>()
