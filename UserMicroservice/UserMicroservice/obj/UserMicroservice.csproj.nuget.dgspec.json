@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ana Zuber\\Desktop\\UserMicroservice\\UserMicroservice\\UserMicroservice.csproj": {}
+    "C:\\Users\\Ana Zuber\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\UserMicroservice\\UserMicroservice\\UserMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ana Zuber\\Desktop\\UserMicroservice\\UserMicroservice\\UserMicroservice.csproj": {
+    "C:\\Users\\Ana Zuber\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\UserMicroservice\\UserMicroservice\\UserMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ana Zuber\\Desktop\\UserMicroservice\\UserMicroservice\\UserMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\Ana Zuber\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\UserMicroservice\\UserMicroservice\\UserMicroservice.csproj",
         "projectName": "UserMicroservice",
-        "projectPath": "C:\\Users\\Ana Zuber\\Desktop\\UserMicroservice\\UserMicroservice\\UserMicroservice.csproj",
+        "projectPath": "C:\\Users\\Ana Zuber\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\UserMicroservice\\UserMicroservice\\UserMicroservice.csproj",
         "packagesPath": "C:\\Users\\Ana Zuber\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ana Zuber\\Desktop\\UserMicroservice\\UserMicroservice\\obj\\",
+        "outputPath": "C:\\Users\\Ana Zuber\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\UserMicroservice\\UserMicroservice\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ana Zuber\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -28,29 +28,29 @@ namespace PublicBiddingMicroservice.Entities
         /// <summary>
         /// Popunjava bazu sa nekim inicijalnim etapama
         /// </summary>
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Stage>()
+            modelBuilder.Entity<Stage>()
                 .HasData(new Stage
                 {
                     StageId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     Date = DateTime.Parse("2020-11-15T09:00:00"),
                 });
 
-            builder.Entity<Status>()
+            modelBuilder.Entity<Status>()
                 .HasData(new Status
                 {
                     StatusId = Guid.Parse("1f7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     StatusName = "Prvi krug",
                 });
-            builder.Entity<Status>()
+            modelBuilder.Entity<Status>()
                .HasData(new Status
                {
                    StatusId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                    StatusName = "Drugi krug sa starim uslovima",
                });
 
-            builder.Entity<Status>()
+            modelBuilder.Entity<Status>()
                .HasData(new Status
                {
                    StatusId = Guid.Parse("1a7ea607-8ddb-493a-87fa-4bf5893e965b"),
@@ -58,21 +58,21 @@ namespace PublicBiddingMicroservice.Entities
                });
 
 
-            builder.Entity<PublicBiddingType>()
+            modelBuilder.Entity<PublicBiddingType>()
                 .HasData(new PublicBiddingType
                 {
                     PublicBiddingTypeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     PublicBiddingTypeName = "Javna lictacija",
                 });
 
-            builder.Entity<PublicBiddingType>()
+            modelBuilder.Entity<PublicBiddingType>()
                .HasData(new PublicBiddingType
                {
                    PublicBiddingTypeId = Guid.Parse("1f7ea607-8ddb-493a-87fa-4bf5893e965b"),
                    PublicBiddingTypeName = "Otvaranje zatvorenih ponuda",
                });
 
-            builder.Entity<PublicBidding>()
+            modelBuilder.Entity<PublicBidding>()
                 .HasData(new PublicBidding
                 {
                     PublicBiddingId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
@@ -91,7 +91,7 @@ namespace PublicBiddingMicroservice.Entities
                     PublicBiddingTypeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                 });
 
-            builder.Entity<Auction>()
+            modelBuilder.Entity<Auction>()
                .HasData(new Auction
                {
                    AuctionId = Guid.Parse("4c7ea607-8ddb-493a-87fa-4bf5893e965b"),

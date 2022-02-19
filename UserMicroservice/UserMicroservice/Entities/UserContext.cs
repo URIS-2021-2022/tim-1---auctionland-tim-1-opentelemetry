@@ -29,58 +29,58 @@ namespace UserMicroservice.Entities
         /// <summary>
         /// Popunjava bazu sa nekim inicijalnim podacima
         /// </summary>
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<UserType>()
+            modelBuilder.Entity<UserType>()
                 .HasData(new UserType
                 {
                     UserTypeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     UserTypeName = "Operater",
                 });
-            builder.Entity<UserType>()
+            modelBuilder.Entity<UserType>()
                .HasData(new UserType
                {
                    UserTypeId = Guid.Parse("1b7ea607-8ddb-493a-87fa-4bf5893e965b"),
                    UserTypeName = "Tehnički sekretar",
                });
-            builder.Entity<UserType>()
+            modelBuilder.Entity<UserType>()
                 .HasData(new UserType
                 {
                     UserTypeId = Guid.Parse("9b7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     UserTypeName = "Prva komisija",
                 });
-            builder.Entity<UserType>()
+            modelBuilder.Entity<UserType>()
                 .HasData(new UserType
                 {
                     UserTypeId = Guid.Parse("3c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     UserTypeName = "Superuser",
                 });
-            builder.Entity<UserType>()
+            modelBuilder.Entity<UserType>()
                 .HasData(new UserType
                 {
                     UserTypeId = Guid.Parse("9a7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     UserTypeName = "Operater Nadmetanja",
                 });
-            builder.Entity<UserType>()
+            modelBuilder.Entity<UserType>()
                 .HasData(new UserType
                 {
                     UserTypeId = Guid.Parse("7b7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     UserTypeName = "Licitant",
                 });
-            builder.Entity<UserType>()
+            modelBuilder.Entity<UserType>()
                .HasData(new UserType
                {
                    UserTypeId = Guid.Parse("5c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                    UserTypeName = "Menadžer",
                });
-           builder.Entity<UserType>()
+           modelBuilder.Entity<UserType>()
               .HasData(new UserType
               {
                   UserTypeId = Guid.Parse("3a7ea607-8ddb-493a-87fa-4bf5893e965b"),
                   UserTypeName = "Administrator",
               });
 
-            builder.Entity<User>()
+            modelBuilder.Entity<User>()
                 .HasData(new User
                 {
                     UserId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
