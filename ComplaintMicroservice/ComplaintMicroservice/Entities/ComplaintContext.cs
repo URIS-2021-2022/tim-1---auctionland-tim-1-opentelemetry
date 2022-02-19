@@ -18,10 +18,10 @@ namespace ComplaintMicroservice.Entities
         /// <summary>
         /// Popunjava bazu sa inicijalnim podacima
         /// </summary>
-        /// <param name="builder"></param>
-        protected override void OnModelCreating(ModelBuilder builder)
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Complaint>()
+            modelBuilder.Entity<Complaint>()
                 .HasData(new
                 {
                     ComplaintId = Guid.Parse("630662ab-0607-4507-bdca-cff2c3a57b20"),
@@ -37,7 +37,7 @@ namespace ComplaintMicroservice.Entities
                     ComplaintTypeId = Guid.Parse("21ad52f8-0281-4241-98b0-481566d25e4f")
                 });
 
-            builder.Entity<Complaint>()
+            modelBuilder.Entity<Complaint>()
                 .HasData(new
                 {
                     ComplaintId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),

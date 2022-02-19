@@ -48,37 +48,28 @@ namespace ComplaintMicroservice
                     ProblemDetailsFactory problemDetailsFactory = context.HttpContext.RequestServices
                         .GetRequiredService<ProblemDetailsFactory>();
 
-                    //Prosleđujemo trenutni kontekst i ModelState, ovo prevodi validacione greške iz ModelState-a u RFC format
                     ValidationProblemDetails problemDetails = problemDetailsFactory.CreateValidationProblemDetails(
                         context.HttpContext,
                         context.ModelState);
 
-                    //Ubacujemo dodatne podatke
                     problemDetails.Detail = "Pogledajte polje errors za detalje.";
                     problemDetails.Instance = context.HttpContext.Request.Path;
 
-                    //po defaultu se sve vraća kao status 400 BadRequest, to je ok kada nisu u pitanju validacione greške,
-                    //ako jesu hoćemo da koristimo status 422 UnprocessibleEntity
-                    //tražimo info koji status kod da koristimo
                     var actionExecutiongContext = context as ActionExecutingContext;
 
-                    //proveravamo da li postoji neka greška u ModelState-u, a takođe proveravamo da li su svi prosleđeni parametri dobro parsirani
-                    //ako je sve ok parsirano ali postoje greške u validaciji hoćemo da vratimo status 422
                     if ((context.ModelState.ErrorCount > 0) &&
                         (actionExecutiongContext?.ActionArguments.Count == context.ActionDescriptor.Parameters.Count))
                     {
-                        problemDetails.Type = "https://google.com"; //inače treba da stoji link ka stranici sa detaljima greške
+                        problemDetails.Type = "https://google.com";
                         problemDetails.Status = StatusCodes.Status422UnprocessableEntity;
                         problemDetails.Title = "Došlo je do greške prilikom validacije.";
 
-                        //sve vraćamo kao UnprocessibleEntity objekat
                         return new UnprocessableEntityObjectResult(problemDetails)
                         {
                             ContentTypes = { "application/problem+json" }
                         };
-                    };
+                    }
 
-                    //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                     problemDetails.Status = StatusCodes.Status400BadRequest;
                     problemDetails.Title = "Došlo je do greške prilikom parsiranja poslatog sadržaja.";
                     return new BadRequestObjectResult(problemDetails)
@@ -88,10 +79,9 @@ namespace ComplaintMicroservice
                 };
             });
 
-            object p = services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
-                //AuthenticationMode = AuthenticationMode.Active,
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -103,7 +93,7 @@ namespace ComplaintMicroservice
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
-           // services.AddSingleton<IComplaintRepository, ComplaintMockRepository>();
+
             services.AddScoped<IComplaintRepository, ComplaintRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
@@ -174,7 +164,6 @@ namespace ComplaintMicroservice
             app.UseSwaggerUI(setupAction =>
             {
                 setupAction.SwaggerEndpoint("/swagger/ComplaintOpenApiSpecification/swagger.json", "Complaint API");
-                //setupAction.RoutePrefix = "";
             });          
 
             app.UseEndpoints(endpoints =>

@@ -150,12 +150,12 @@
         </member>
         <member name="P:ComplaintMicroservice.Entities.Complaint.DateOfDecision">
             <summary>
-            Datum donošenja odluke na osnovu žalbe
+            Datum donošenja rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Entities.Complaint.NumberOfDecision">
             <summary>
-            Broj odluke
+            Broj rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Entities.Complaint.Action">
@@ -222,7 +222,7 @@
             <summary>
             Popunjava bazu sa inicijalnim podacima
             </summary>
-            <param name="builder"></param>
+            <param name="modelBuilder"></param>
         </member>
         <member name="T:ComplaintMicroservice.Entities.User">
             <summary>
@@ -300,12 +300,12 @@
         </member>
         <member name="P:ComplaintMicroservice.Models.CompaintModel.DateOfDecision">
             <summary>
-            Datum donošenja odluke o žalbi
+            Datum rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Models.CompaintModel.NumberOfDecision">
             <summary>
-            Broj odluke
+            Broj rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Models.CompaintModel.Action">
@@ -390,12 +390,12 @@
         </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintCreationDto.DateOfDecision">
             <summary>
-            Datum donošenja odluke na osnovu žalbe
+            Datum donošenja rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintCreationDto.NumberOfDecision">
             <summary>
-            Broj odluke
+            Broj rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintCreationDto.Action">
@@ -445,12 +445,12 @@
         </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintDto.DateOfDecision">
             <summary>
-            Datum donošenja odluke
+            Datum donošenja rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintDto.NumberOfDecision">
             <summary>
-            Broj odluke
+            Broj rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintDto.Action">
@@ -505,12 +505,12 @@
         </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintUpdateDto.DateOfDecision">
             <summary>
-            Datum donošenja odluke
+            Datum donošenja rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintUpdateDto.NumberOfDecision">
             <summary>
-            Broj odluke
+            Broj rešenja
             </summary>
         </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintUpdateDto.Action">

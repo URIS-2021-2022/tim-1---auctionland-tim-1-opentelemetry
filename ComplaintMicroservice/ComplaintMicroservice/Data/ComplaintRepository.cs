@@ -53,7 +53,7 @@ namespace ComplaintMicroservice.Data
 
         public void UpdateComplaint(Complaint complaint)
         {
-            
+            //Nije potrebna u ovom repozitorijumu
         }
     }
 }

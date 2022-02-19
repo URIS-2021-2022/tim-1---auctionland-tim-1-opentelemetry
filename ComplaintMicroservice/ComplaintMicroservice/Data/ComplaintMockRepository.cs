@@ -100,21 +100,6 @@ namespace ComplaintMicroservice.Data
             model.SubmissionDate = complaint.SubmissionDate;
             model.ComplaintTypeId = complaint.ComplaintTypeId;
             model.ComplaintTypeName = complaint.ComplaintTypeName;
-
-            /*return new ComplaintConfirmation
-            {
-                ComplaintId = model.ComplaintId,
-                SubmissionDate = model.SubmissionDate,
-                Action = model.Action,
-                ComplaintStatus = model.ComplaintStatus,
-                ComplaintTypeName = model.ComplaintTypeName,
-                Reason = model.Reason
-            };*/
-        }
-
-        public List<Complaint> GetComplaints()
-        {
-            throw new NotImplementedException();
         }
 
         public bool SaveChanges()
