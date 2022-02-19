@@ -46,7 +46,7 @@ namespace AddressMicroservice.Data.Implementation
 
         public void UpdateAddress(Address address)
         {
-           
+           //Implementacija nije neophodna
         }
     }
 }
