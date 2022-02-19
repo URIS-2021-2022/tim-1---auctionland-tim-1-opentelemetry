@@ -1,11 +1,10 @@
 ﻿using AddressMicroservice.Data;
 using AddressMicroservice.Data.Implementation;
 using AddressMicroservice.Etities;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AddressMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -13,15 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AddressMicroservice
 {
@@ -91,9 +84,11 @@ namespace AddressMicroservice
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            // Znaci da cim se napravi objekat ExamRegistrationController-a i inject-uje IExamRegistrationRepository, kreira se jedna instanca objekta klase ExamRegistrationRepository
+            // Znaci da cim se napravi objekat ExamRegistrationController-a i inject-uje IExamRegistrationRepository,
+            // kreira se jedna instanca objekta klase ExamRegistrationRepository
             // Kada se radi sa konkretnom bazom, umesto AddSingleton treba koristiti AddScopped
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("AddressOpenApiSpecification",

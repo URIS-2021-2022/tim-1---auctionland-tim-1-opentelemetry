@@ -9,13 +9,14 @@
             Kontroler mikroservisa adresa.
             </summary>
         </member>
-        <member name="M:AddressMicroservice.Controllers.AddressController.#ctor(AddressMicroservice.Data.IAddressRepository,Microsoft.AspNetCore.Routing.LinkGenerator,AutoMapper.IMapper)">
+        <member name="M:AddressMicroservice.Controllers.AddressController.#ctor(AddressMicroservice.Data.IAddressRepository,Microsoft.AspNetCore.Routing.LinkGenerator,AutoMapper.IMapper,AddressMicroservice.ServiceCalls.ILoggerMicroservice)">
             <summary>
             Konstruktor putem kog se injektuju zavisnosti.
             </summary>
             <param name="addressRepository"></param>
             <param name="linkGenerator"></param>
             <param name="mapper"></param>
+            <param name="loggerMicroservice"></param>
         </member>
         <member name="M:AddressMicroservice.Controllers.AddressController.GetAllAddresses">
             <summary>

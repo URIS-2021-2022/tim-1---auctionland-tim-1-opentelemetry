@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Korisnik\\source\\repos\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj": {}
+    "C:\\Users\\Korisnik\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Korisnik\\source\\repos\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj": {
+    "C:\\Users\\Korisnik\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Korisnik\\source\\repos\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\Korisnik\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj",
         "projectName": "AddressMicroservice",
-        "projectPath": "C:\\Users\\Korisnik\\source\\repos\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj",
+        "projectPath": "C:\\Users\\Korisnik\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj",
         "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Korisnik\\source\\repos\\AddressMicroservice\\AddressMicroservice\\obj\\",
+        "outputPath": "C:\\Users\\Korisnik\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AddressMicroservice\\AddressMicroservice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -74,6 +74,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
