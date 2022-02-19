@@ -8,13 +8,13 @@ namespace UserMicroservice.Data
     {
         List<User> GetUsers(string firstName = null, string lastName = null);
 
-        User GetUserById(Guid id);
+        User GetUserById(Guid userId);
 
         UserConfirmation CreateUser(User user);
 
         void UpdateUser(User user);
 
-        void DeleteUser(Guid id);
+        void DeleteUser(Guid userId);
 
         bool SaveChanges();
     }
