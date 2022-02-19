@@ -27,26 +27,26 @@ namespace PublicBiddingMicroservice.Data
             return context.Status.ToList();
         }
 
-        public Status GetStatusById(Guid stageId)
+        public Status GetStatusById(Guid statusId)
         {
-            return context.Status.FirstOrDefault (e => e.StatusId == stageId);
+            return context.Status.FirstOrDefault (e => e.StatusId == statusId);
         }
 
-        public StatusConfirmation CreateStatus(Status stage)
+        public StatusConfirmation CreateStatus(Status status)
         {
-            var createdEntity = context.Add(stage);
+            var createdEntity = context.Add(status);
             return mapper.Map<StatusConfirmation>(createdEntity.Entity);
         }                
         
-        public void UpdateStatus(Status stage)
+        public void UpdateStatus(Status status)
         {
             //Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze
             //i kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane
         }
 
-        public void DeleteStatus(Guid stageId)
+        public void DeleteStatus(Guid statusId)
         {
-            context.Status.Remove(GetStatusById(stageId));
+            context.Status.Remove(GetStatusById(statusId));
         }
     }
 }

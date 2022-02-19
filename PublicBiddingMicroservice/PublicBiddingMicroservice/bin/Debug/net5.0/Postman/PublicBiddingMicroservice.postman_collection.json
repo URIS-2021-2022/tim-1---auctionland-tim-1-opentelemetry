@@ -8,9 +8,6 @@
 		{
 			"name": "Auctions",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -31,9 +28,6 @@
 		{
 			"name": "Auction",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -63,9 +57,6 @@
 		{
 			"name": "Auction",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "PUT",
 				"header": [],
 				"body": {
@@ -116,9 +107,6 @@
 		{
 			"name": "Public Bidding",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -139,14 +127,11 @@
 		{
 			"name": "Public Bidding",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"date\": \"2020-11-15T09:00:00\",\r\n    \"startTime\": \"2020-11-15T09:00:00\",\r\n    \"endTime\": \"2020-11-15T12:00:00\",\r\n    \"startingPricePerHe\": 10,\r\n    \"exclude\": true,\r\n    \"auctionedPrice\": 139,\r\n    \"leasePeriod\": 1,\r\n    \"numberOfParticipants\": 12,\r\n    \"depositReplenishment\": 13,\r\n    \"circle\": 1,\r\n    \"status\": \"Status1\",\r\n    \"stageId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\"\r\n}",
+					"raw": "{\r\n    \"date\": \"2020-11-15T09:00:00\",\r\n    \"startTime\": \"2020-11-15T09:00:00\",\r\n    \"endTime\": \"2020-11-15T12:00:00\",\r\n    \"startingPricePerHe\": 10,\r\n    \"exclude\": true,\r\n    \"auctionedPrice\": 139,\r\n    \"leasePeriod\": 1,\r\n    \"numberOfParticipants\": 12,\r\n    \"depositReplenishment\": 13,\r\n    \"circle\": 1,\r\n    \"statusId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"stageId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"publicBiddingTypeId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -171,14 +156,11 @@
 		{
 			"name": "Public Bidding",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"publicBiddingId\": \"ef4a6384-14d7-4f72-dde5-08d9f161145a\",\r\n    \"date\": \"2020-11-15T09:00:00\",\r\n    \"startTime\": \"2020-11-15T09:00:00\",\r\n    \"endTime\": \"2020-11-15T12:00:00\",\r\n    \"startingPricePerHe\": 10,\r\n    \"exclude\": true,\r\n    \"auctionedPrice\": 139,\r\n    \"leasePeriod\": 1,\r\n    \"numberOfParticipants\": 12,\r\n    \"depositReplenishment\": 13,\r\n    \"circle\": 1,\r\n    \"status\": \"Status1\",\r\n    \"stageId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\"\r\n}",
+					"raw": "{\r\n    \"publicBiddingId\": \"ef4a6384-14d7-4f72-dde5-08d9f161145a\",\r\n    \"date\": \"2020-11-15T09:00:00\",\r\n    \"startTime\": \"2020-11-15T09:00:00\",\r\n    \"endTime\": \"2020-11-15T12:00:00\",\r\n    \"startingPricePerHe\": 10,\r\n    \"exclude\": true,\r\n    \"auctionedPrice\": 139,\r\n    \"leasePeriod\": 1,\r\n    \"numberOfParticipants\": 12,\r\n    \"depositReplenishment\": 13,\r\n    \"circle\": 1,\r\n    \"statusId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"stageId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"publicBiddingTypeId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -224,9 +206,6 @@
 		{
 			"name": "Stages",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -247,9 +226,6 @@
 		{
 			"name": "Stage",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -279,9 +255,6 @@
 		{
 			"name": "Stage",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "PUT",
 				"header": [],
 				"body": {
@@ -311,9 +284,6 @@
 		{
 			"name": "Stage",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -331,8 +301,215 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44362/api/statuses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"statuses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"publicBiddingTypesName\": \"Javna Licitacija\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44362/api/statuses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"statuses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"statusId\": \"1d7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n  \"statusName\": \"Prvi krug\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44362/api/statuses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"statuses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44362/api/statuses/30ae7faa-4b6d-41af-8c08-08d9f165768f",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"statuses",
+						"30ae7faa-4b6d-41af-8c08-08d9f165768f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Public Bidding Type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44362/api/publicBiddingTypes",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"publicBiddingTypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Public Bidding Type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"publicBiddingTypesName\": \"Javna Licitacija\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44362/api/publicBiddingTypes",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"publicBiddingTypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Public Bidding Type",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"statusId\": \"1f7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n  \"publicBiddingTypeName\": \"Javna Licitacija\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44362/api/publicBiddingTypes",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"publicBiddingTypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Public Bidding Type",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44362/api/publicBiddingTypes",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44362",
+					"path": [
+						"api",
+						"publicBiddingTypes"
+					]
+				}
+			},
+			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDUyMTY5MTgsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzgxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODEifQ.9tOaV4qx89jadjlc5ykNejsntN7JlVyHORG5WFujI7w",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
