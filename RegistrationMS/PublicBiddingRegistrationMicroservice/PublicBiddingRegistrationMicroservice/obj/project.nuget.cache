@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pkAIOzxmAWFcaWWBZ9v0p3aaGxB1vNBrOifT8SYKhJjcMI0u8JAAdjoo/rNpXx5kIet0pQGJxbk3pynT0fwgkw==",
+  "dgSpecHash": "BBCyofNQu1l0qqqmFQbbFIY5xJTRSc25gTcscZ+tgPTpZTx4B+Hl6Bhk0wrWFt6RIIvYb1I4Im/jyg/rmVq2Bg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Zeljana\\Desktop\\PublicBiddingRegistrtionMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj",
+  "projectFilePath": "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\RegistrationMS\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Zeljana\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

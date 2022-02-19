@@ -12,7 +12,9 @@ using PublicBiddingRegistrationMicroservice.Data;
 using PublicBiddingRegistrationMicroservice.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PublicBiddingRegistrationMicroservice
@@ -107,6 +109,14 @@ namespace PublicBiddingRegistrationMicroservice
                         },
                         TermsOfService = new Uri("http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
                     });
+
+                //var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+
+                //Pravimo putanju do XML fajla sa komentarima
+                var xmlCommentsPath = "C:/Users/Zeljana/Desktop/tim-1---auctionland-tim-1-opentelemetry/RegistrationMS/PublicBiddingRegistrationMicroservice/PublicBiddingRegistrationMicroservice/PublicBiddingRegistrationService.xml";
+
+                //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
+                setupAction.IncludeXmlComments(xmlCommentsPath);
             });
 
             //Dodajemo DbContext koji želimo da koristimo

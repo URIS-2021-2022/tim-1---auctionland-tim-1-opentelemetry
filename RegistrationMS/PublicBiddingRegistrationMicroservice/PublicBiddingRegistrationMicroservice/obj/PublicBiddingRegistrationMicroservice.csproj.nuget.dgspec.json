@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Zeljana\\Desktop\\PublicBiddingRegistrtionMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj": {}
+    "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\RegistrationMS\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Zeljana\\Desktop\\PublicBiddingRegistrtionMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj": {
+    "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\RegistrationMS\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Zeljana\\Desktop\\PublicBiddingRegistrtionMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\RegistrationMS\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj",
         "projectName": "PublicBiddingRegistrationMicroservice",
-        "projectPath": "C:\\Users\\Zeljana\\Desktop\\PublicBiddingRegistrtionMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj",
+        "projectPath": "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\RegistrationMS\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice.csproj",
         "packagesPath": "C:\\Users\\Zeljana\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Zeljana\\Desktop\\PublicBiddingRegistrtionMicroservice\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\obj\\",
+        "outputPath": "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\RegistrationMS\\PublicBiddingRegistrationMicroservice\\PublicBiddingRegistrationMicroservice\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Zeljana\\AppData\\Roaming\\NuGet\\NuGet.Config",
