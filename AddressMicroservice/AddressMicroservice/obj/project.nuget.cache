@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I+2QqhoEwevs0YWHF9pikURDlvb6k5WprfIRV7vMN4LhbNLDWuIeXdKyniUmUHemTLIXqq8dAXOnIiooSg4Ktg==",
+  "dgSpecHash": "QvDcRKB4hKGLUk6VqeeK6jMrc9ETG9I5/lOFIfG/hGcGFb8OmpWycf1X/6r0CIzb9rLRAZAl+0hRNwuNuedmkQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Korisnik\\source\\repos\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj",
+  "projectFilePath": "C:\\Users\\Korisnik\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AddressMicroservice\\AddressMicroservice\\AddressMicroservice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Korisnik\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Korisnik\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
@@ -40,6 +40,7 @@
     "C:\\Users\\Korisnik\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Korisnik\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Korisnik\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Korisnik\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Korisnik\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Korisnik\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\Korisnik\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",

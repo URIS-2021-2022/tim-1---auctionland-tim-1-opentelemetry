@@ -9,6 +9,7 @@ using AddressMicroservice.Etities;
 using AddressMicroservice.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using AddressMicroservice.ServiceCalls;
 
 namespace AddressMicroservice.Controllers
 {
@@ -23,6 +24,8 @@ namespace AddressMicroservice.Controllers
         private readonly IAddressRepository addressRepository;
         private readonly LinkGenerator linkGenerator; 
         private readonly IMapper mapper;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         /// <summary>
         /// Konstruktor putem kog se injektuju zavisnosti.
@@ -30,11 +33,16 @@ namespace AddressMicroservice.Controllers
         /// <param name="addressRepository"></param>
         /// <param name="linkGenerator"></param>
         /// <param name="mapper"></param>
-        public AddressController(IAddressRepository addressRepository, LinkGenerator linkGenerator, IMapper mapper)
+        /// <param name="loggerMicroservice"></param>
+        public AddressController(IAddressRepository addressRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
         {
             this.addressRepository = addressRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "ADDRESS";
+
         }
 
         /// <summary>
@@ -49,11 +57,18 @@ namespace AddressMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<AddressDto>> GetAllAddresses()
         {
+            loggerDto.HttpMethodName = "GET";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             var addresses = addressRepository.GetAllAddresses();
             if (addresses == null || addresses.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<AddressDto>>(addresses));
         }
 
@@ -69,11 +84,16 @@ namespace AddressMicroservice.Controllers
         [HttpGet("{addressID}")]
         public ActionResult<AddressDto> GetAddressById(Guid addressID)
         {
+            loggerDto.HttpMethodName = "GET";
             var address = addressRepository.GetAddressById(addressID);
             if (address == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<AddressDto>(address));
         }
 
@@ -106,16 +126,20 @@ namespace AddressMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 Address addressEntity = mapper.Map<Address>(addressCreation);
                 AddressConfirmation confirmation = addressRepository.CreateAddress(addressEntity);
                 addressRepository.SaveChanges();
 
                 string location = linkGenerator.GetPathByAction("GetAddress", "Address", new { addressID = confirmation.AddressID });
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 return CreatedAtRoute(location, mapper.Map<AddressConfirmationDto>(confirmation));
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
             }
         }
@@ -136,19 +160,26 @@ namespace AddressMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var address = addressRepository.GetAddressById(addressID);
 
                 if (address == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
 
                 addressRepository.DeleteAddress(addressID);
                 addressRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
@@ -170,9 +201,12 @@ namespace AddressMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 var oldAddress = addressRepository.GetAddressById(address.AddressID);
                 if (oldAddress == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); 
                 }
                 Address addressEntity = mapper.Map<Address>(address);
@@ -180,10 +214,14 @@ namespace AddressMicroservice.Controllers
                 mapper.Map(addressEntity, oldAddress); 
 
                 addressRepository.SaveChanges();
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<AddressDto>(oldAddress));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
