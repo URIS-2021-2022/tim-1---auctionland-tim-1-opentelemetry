@@ -1,4 +1,4 @@
-﻿using ParcelMicroservice.Models;
+﻿using ParcelMicroservice.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +8,10 @@ namespace ParcelMicroservice.Data
 {
     public interface IPartOfParcelRepository
     {
-        public List<PartOfParcelModel> GetPartOfParcels();
-        public PartOfParcelModel GetPartOfParcelById(Guid ParcelID, Guid PartOfParcelID);
-        public PartOfParcelConfirmation CreatePartOfParcel(PartOfParcelModel partOfParcel);
-        public PartOfParcelConfirmation UpdatePartOfParcel(PartOfParcelModel partOfParcel);
-        public void DeletePartOfParcel(Guid ParcelID, Guid PartOfParcelID);
+        public List<PartOfParcel> GetPartOfParcels();
+        public PartOfParcel GetPartOfParcelById(Guid PartOfParcelID);
+        public PartOfParcelConfirmation CreatePartOfParcel(PartOfParcel partOfParcel);
+        public PartOfParcelConfirmation UpdatePartOfParcel(PartOfParcel partOfParcel);
+        public void DeletePartOfParcel(Guid PartOfParcelID);
     }
 }

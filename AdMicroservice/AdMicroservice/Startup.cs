@@ -32,6 +32,9 @@ namespace AdMicroservice
     //Ovde će se sve smeštati što se mikroservisa tiče
     public class Startup
     {
+        private const string UriString = "http://www.ftn.uns.ac.rs/";
+        private const string UriString1 = "http://www.ftn.uns.ac.rs/ads";
+
         /// <summary>
         /// Kreiran konstruktor 
         /// </summary>
@@ -57,8 +60,7 @@ namespace AdMicroservice
             services.AddControllers(setup =>
             {
                 setup.ReturnHttpNotAcceptable = true;
-                //Ovde sa setup.Filters mozemo dodati response tipove za sve kontrolere
-                //setup.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status200OK));                
+                //Ovde sa setup.Filters mozemo dodati response tipove za sve kontrolere            
             }
             ).AddXmlDataContractSerializerFormatters() //Dodajemo podršku za XML tako da ukoliko klijent to traži u Accept header-u zahteva možemo da serializujemo payload u XML u odgovoru.
             .ConfigureApiBehaviorOptions(setupAction => //Deo koji se odnosi na podržavanje Problem Details for HTTP APIs
@@ -97,7 +99,7 @@ namespace AdMicroservice
                         {
                             ContentTypes = { "application/problem+json" }
                         };
-                    };
+                    }
 
                     //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                     problemDetails.Status = StatusCodes.Status400BadRequest;
@@ -150,14 +152,14 @@ namespace AdMicroservice
                         {
                             Name = "Aca",
                             Email = "aca@mail.com",
-                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                            Url = new Uri(UriString)
                         },
                         License = new Microsoft.OpenApi.Models.OpenApiLicense
                         {
                             Name = "FTN licence",
-                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                            Url = new Uri(UriString)
                         },
-                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/ads")
+                        TermsOfService = new Uri(UriString1)
                     });
 
                 setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -181,7 +183,7 @@ namespace AdMicroservice
                             Id = "Bearer"
                         }
                     },
-                    new string[] {}
+                    Array.Empty<string>()
                     }
                 });
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ParcelMicroservice.Models
 {
-    public class ParcelConfirmation
+    public class ParcelConfirmationDto
     {
         public Guid ParcelID { get; set; }
         public int SurfaceArea { get; set; }

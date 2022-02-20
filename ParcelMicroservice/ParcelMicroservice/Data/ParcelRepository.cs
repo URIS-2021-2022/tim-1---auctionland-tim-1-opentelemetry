@@ -1,4 +1,4 @@
-﻿using ParcelMicroservice.Models;
+﻿using ParcelMicroservice.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +8,16 @@ namespace ParcelMicroservice.Data
 {
     public class ParcelRepository : IParcelRepository
     {
-        public static List<ParcelModel> Parcels { get; set; } = new List<ParcelModel>();
+        public static List<Parcel> Parcels { get; set; } = new List<Parcel>();
         public ParcelRepository()
         {
             FillData();
         }
 
-        private void FillData()
+        private static void FillData()
         {
-            Parcels.AddRange(new List<ParcelModel> {
-                new ParcelModel
+            Parcels.AddRange(new List<Parcel> {
+                new Parcel
                 {
                     ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"),
                     SurfaceArea = 6000,
@@ -32,7 +32,7 @@ namespace ParcelMicroservice.Data
                     MunicipalityID = Guid.Parse("e4902805-41f9-45d7-8b4d-7c85e8f27868"),
                     NameOfTheMunicipality = "Čantavir"
                 },
-                new ParcelModel
+                new Parcel
                 {
                     ParcelID = Guid.Parse("628f7390-cb85-4b69-94bd-e3e6c424d725"),
                     SurfaceArea = 3000,
@@ -50,7 +50,7 @@ namespace ParcelMicroservice.Data
             });
         }
 
-        public List<ParcelModel> GetParcels(string NumberOfParcel)
+        public List<Parcel> GetParcels(string NumberOfParcel)
         {
             var list = (from p in Parcels
                     where string.IsNullOrEmpty(NumberOfParcel) || p.NumberOfParcel == NumberOfParcel
@@ -60,16 +60,16 @@ namespace ParcelMicroservice.Data
 
         } 
 
-        public ParcelModel GetParcelById(Guid parcelID)
+        public Parcel GetParcelById(Guid parcelID)
         {
             return Parcels.FirstOrDefault(e => e.ParcelID == parcelID);
         }
 
-        public ParcelConfirmation CreateParcel(ParcelModel parcel)
+        public ParcelConfirmation CreateParcel(Parcel parcel)
         {
             parcel.ParcelID = Guid.NewGuid(); //generise se kljuc nove parcele
             Parcels.Add(parcel); //dodaje se nova parcela u listu parcela
-            ParcelModel model = GetParcelById(parcel.ParcelID); //instancira se parcela preko metode GetParcelById
+            Parcel model = GetParcelById(parcel.ParcelID); //instancira se parcela preko metode GetParcelById
 
             return new ParcelConfirmation //vraca se model potvrde 
             {
@@ -80,9 +80,9 @@ namespace ParcelMicroservice.Data
             };
         }
 
-        public ParcelConfirmation UpdateParcel(ParcelModel parcel)
+        public ParcelConfirmation UpdateParcel(Parcel parcel)
         {
-            ParcelModel model = GetParcelById(parcel.ParcelID); //instancira se parcela preko metode GetParcelById
+            Parcel model = GetParcelById(parcel.ParcelID); //instancira se parcela preko metode GetParcelById
 
             model.ParcelID = parcel.ParcelID;
             model.SurfaceArea = parcel.SurfaceArea;

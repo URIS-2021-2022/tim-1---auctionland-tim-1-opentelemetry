@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using ParcelMicroservice.Data;
+using ParcelMicroservice.Entities;
 using ParcelMicroservice.Models;
 using System;
 using System.Collections.Generic;
@@ -12,10 +15,12 @@ namespace ParcelMicroservice.Controllers
 {
     [ApiController]
     [Route("api/parcels")]
+    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class ParcelController : ControllerBase
     {
         private readonly IParcelRepository parcelRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateExamRegistration)
+        private readonly IMapper mapper;
 
         public List<String> CultureList = new List<String> { "Njive", "Vrtovi", "Voćnjaci", "Vinogradi", "Livade", "Pašnjaci", "Šume", "Trstici-močvare", "test" };
         public List<String> ClassList = new List<String> { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "test" };
@@ -25,37 +30,39 @@ namespace ParcelMicroservice.Controllers
         public List<String> DrainageActualConditionList = new List<String> { "Površinsko odvodnjavanje", "Podzemno odvodnjavanje", "test" };
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public ParcelController(IParcelRepository parcelRepository, LinkGenerator linkGenerator)
+        public ParcelController(IParcelRepository parcelRepository, LinkGenerator linkGenerator, IMapper mapper)
         {
             this.parcelRepository = parcelRepository;
             this.linkGenerator = linkGenerator;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<ParcelModel>> GetParcels(string NumberOfParcel)
+        [HttpHead]
+        public ActionResult<List<ParcelDto>> GetParcels(string NumberOfParcel)
         {
-            List<ParcelModel> parcels = parcelRepository.GetParcels(NumberOfParcel);
+            List<Parcel> parcels = parcelRepository.GetParcels(NumberOfParcel);
             if (parcels == null || parcels.Count == 0)
             {
                 return NoContent();
             }
-            return Ok(parcels);
+            return Ok(mapper.Map<List<ParcelDto>>(parcels));
         }
 
         [HttpGet("{parcelID}")]
-        public ActionResult<ParcelModel> GetParcel(Guid parcelID)
+        public ActionResult<ParcelDto> GetParcel(Guid parcelID)
         {
-            ParcelModel model = parcelRepository.GetParcelById(parcelID);
+            Parcel model = parcelRepository.GetParcelById(parcelID);
             if (model == null)
             {
                 return NotFound();
             }
-            return Ok(model);
+            return Ok(mapper.Map<ParcelDto>(model));
         }
 
         [Consumes("application/json")]
         [HttpPost]
-        public ActionResult<ParcelConfirmation> CreateParcel([FromBody] ParcelModel model)
+        public ActionResult<ParcelConfirmationDto> CreateParcel([FromBody] ParcelCreationDto model)
         {
             try
             {
@@ -66,10 +73,12 @@ namespace ParcelMicroservice.Controllers
                     return BadRequest();
                 }
 
-                ParcelConfirmation confirmation = parcelRepository.CreateParcel(model);
+                Parcel parcelEntity = mapper.Map<Parcel>(model); 
+
+                ParcelConfirmation confirmation = parcelRepository.CreateParcel(parcelEntity);
                 // Dobar API treba da vrati lokator gde se taj resurs nalazi
                 string location = linkGenerator.GetPathByAction("GetParcels", "Parcel", new { parcelID = confirmation.ParcelID });
-                return Created(location, confirmation);
+                return Created(location, mapper.Map<ParcelConfirmationDto>(confirmation));
             }
             catch
             {
@@ -79,7 +88,7 @@ namespace ParcelMicroservice.Controllers
 
         [Consumes("application/json")]
         [HttpPut]
-        public ActionResult<ParcelConfirmation> UpdateParcel(ParcelModel model)
+        public ActionResult<ParcelConfirmationDto> UpdateParcel(ParcelUpdateDto model)
         {
             try
             {
@@ -88,9 +97,9 @@ namespace ParcelMicroservice.Controllers
                 {
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
-
-                ParcelConfirmation confirmation = parcelRepository.UpdateParcel(model);
-                return Ok(confirmation);
+                Parcel parcelEntity = mapper.Map<Parcel>(model);
+                ParcelConfirmation confirmation = parcelRepository.UpdateParcel(parcelEntity);
+                return Ok(mapper.Map<ParcelConfirmationDto>(confirmation));
             }
             catch (Exception)
             {
@@ -103,7 +112,7 @@ namespace ParcelMicroservice.Controllers
         {
             try
             {
-                ParcelModel parcelModel = parcelRepository.GetParcelById(parcelID);
+                Parcel parcelModel = parcelRepository.GetParcelById(parcelID);
                 if (parcelModel == null)
                 {
                     return NotFound();
@@ -118,7 +127,14 @@ namespace ParcelMicroservice.Controllers
             }
         }
 
-        private bool ValidateParcel(ParcelModel model)
+        [HttpOptions]
+        public IActionResult GetParcelsOptions()
+        {
+            Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            return Ok();
+        }
+
+        private bool ValidateParcel(ParcelCreationDto model)
         {
             if (CultureList.Contains(model.CultureRealStatus))
             {
