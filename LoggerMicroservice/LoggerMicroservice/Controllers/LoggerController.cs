@@ -23,8 +23,21 @@ namespace LoggerMicroservice.Controllers
         {
             logger.Date = DateTime.Now.Date.ToShortDateString();
             logger.Time = DateTime.Now.ToShortTimeString();
-            loggerManager.Info(logger.Date + " " + logger.Time + " microservice " + logger.Service + " sent " 
-                + logger.HttpMethodName.ToUpper() + " request. Response was: " +logger.Response);
+            string message = logger.Date + " " + logger.Time + " Microservice " + logger.Service + " sent "
+                + logger.HttpMethodName.ToUpper() + " request. Response was: " + logger.Response;
+            if (logger.Response.StartsWith("2"))
+            {
+                loggerManager.Info(message);
+            }
+            else if (logger.Response.StartsWith("4"))
+            {
+                loggerManager.Warn(message);
+            }
+            else
+            {
+                loggerManager.Error(message);
+            }
+            
         }
     }
 }

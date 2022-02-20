@@ -20,7 +20,7 @@ namespace AddressMicroservice.Controllers
     [ApiController]
     [Route("api/addresses")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
+    //[Authorize]
     public class AddressController : ControllerBase
     {
         private readonly IAddressRepository addressRepository;
@@ -90,7 +90,7 @@ namespace AddressMicroservice.Controllers
             var address = addressRepository.GetAddressById(addressID);
             if (address == null)
             {
-                loggerDto.Response = "204 NO CONTENT";
+                loggerDto.Response = "404 NOT FOUND";
                 loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
