@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using PublicBiddingRegistrationMicroservice.Models;
 using PublicBiddingRegistrationMicroservice.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PublicBiddingRegistrationMicroservice.Controllers
 {
     [ApiController]
     [Route("api/application")]
     [Produces("application/json", "application/xml")]
-    //[Authorize]
+    [Authorize]
     public class ApplicationController : ControllerBase
     {
         private readonly IApplicationRepository applicationRepository;
@@ -30,6 +31,12 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Vraća listu svih prijava za javno nadmetanje
+        /// </summary>
+        /// <returns>Lista prijava za javno nadmetanje</returns>
+        /// <response code="200">Vraća listu prijava za javno nadmetanje</response>
+        /// <response code="404">Nije pronađena ni jedna jedina prijava za javno nadmetanje</response>
         [HttpGet]
         [HttpHead] //Podržavamo i HTTP head zahtev koji nam vraća samo zaglavlja u odgovoru    
         [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
@@ -47,6 +54,12 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             return (mapper.Map<List<ApplicationDto>>(applications));
         }
 
+        /// <summary>
+        /// Vraća prijavu za javno nadmetanje na osnovu ID
+        /// </summary>
+        /// <param name="applicationId">ID prijave za javno nadmetanje</param>
+        /// <returns></returns>
+        /// <response code="200">Vraća traženu prijavu za javno nadmetanje</response>
         [HttpGet("{applicationId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -60,6 +73,21 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             return Ok(mapper.Map<ApplicationDto>(applicationForPublicBidding));
         }
 
+        /// <summary>
+        /// Kreira novu prijavu za javno nadmetanje.
+        /// </summary>
+        /// <param name="applicationCreation">Model prijave za javno nadmetanje</param>
+        /// <returns>Potvrdu o kreiranoj prijavi.</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje nove prijave za javno nadmetanje \
+        /// POST /api/application \
+        /// {     \
+        ///     "paymentId": "2841defc-761e-40d8-b8a3-d3e58516dca7", \
+        ///     "buyerId": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+        ///}
+        /// </remarks>
+        /// <response code="200">Vraća kreiranu prijavu za javno nadmetanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom prijave za javno nadmetanje</response>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -91,6 +119,14 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vrši brisanje jedne prijave za javno nadmetanje na osnovu ID-ja prijave.
+        /// </summary>
+        /// <param name="applicationId">ID prijave za javno nadmetanje</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Prijava za javno nadmetanje uspešno obrisana</response>
+        /// <response code="404">Nije pronađena prijava za javno nadmetanje za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja prijave za javno nadmetanje</response>
         [HttpDelete("{applicationId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -115,6 +151,14 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira jednu prijavu za javno nadmetanje.
+        /// </summary>
+        /// <param name="updateDto">Model prijave za javno nadmetanje koji se ažurira</param>
+        /// <returns>Potvrdu o modifikovanoj prijavi.</returns>
+        /// <response code="200">Vraća ažuriranu prijavu za javno nadmetanje</response>
+        /// <response code="400">Prijava za javno nadmetanje koja se ažurira nije pronađena</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja prijave za javno nadmetanje</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -142,6 +186,10 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraća opcije za rad sa prijavama za javno nadmetanje
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         public IActionResult GetExamRegistrationOptions()
         {

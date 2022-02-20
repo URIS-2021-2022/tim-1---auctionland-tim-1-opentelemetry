@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "bb6a0602-e976-4c63-88f4-b463619cf20a",
+		"name": "ApplicationForPbMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Application",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44316/api/application",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Application By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44316/api/application?applicationId=e2b4495e-d8e3-4b0f-935c-dd8fa968aed0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application"
+					],
+					"query": [
+						{
+							"key": "applicationId",
+							"value": "e2b4495e-d8e3-4b0f-935c-dd8fa968aed0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Aplication",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44316/api/application",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Application",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44316/api/application",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Application",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44316/api/application?applicationId=e2b4495e-d8e3-4b0f-935c-dd8fa968aed0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application"
+					],
+					"query": [
+						{
+							"key": "applicationId",
+							"value": "e2b4495e-d8e3-4b0f-935c-dd8fa968aed0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Payments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44316/api/application/payment",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Payment By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44316/api/application/payment?paymentId",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application",
+						"payment"
+					],
+					"query": [
+						{
+							"key": "paymentId",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Payment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44316/api/application/payment",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Payment",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44316/api/application/payment",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Payment",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44316/api/application/payment?paymentId",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44316",
+					"path": [
+						"api",
+						"application",
+						"payment"
+					],
+					"query": [
+						{
+							"key": "paymentId",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDUzOTU5NzYsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzE2IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMTYifQ.BmpYD66Xtn1N_Y77pkBHfIymVGTLKvelZxubu6j0IpY",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

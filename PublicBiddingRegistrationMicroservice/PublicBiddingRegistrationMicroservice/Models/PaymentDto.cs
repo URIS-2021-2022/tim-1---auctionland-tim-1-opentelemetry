@@ -5,18 +5,39 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingRegistrationMicroservice.Models
 {
+    /// <summary>
+    /// Prestavlja model uplate prijave za javno nadmetanje
+    /// </summary>
     public class PaymentDto
     {
+        /// <summary>
+        /// ID uplate za javno nadmetanje.
+        /// </summary>
         public Guid PaymentId { get; set; }
 
+        /// <summary>
+        /// Broj računa.
+        /// </summary>
         public int AccountNumber { get; set; }
 
+        /// <summary>
+        /// Poziv na broj.
+        /// </summary>
         public int ReferenceNumber { get; set; }
 
+        /// <summary>
+        /// Svrha uplate.
+        /// </summary>
         public string PurposeOfPayment { get; set; }
 
+        /// <summary>
+        /// Datum uplate.
+        /// </summary>
         public DateTime DateOfPayment { get; set; }
 
+        /// <summary>
+        /// ID javnog nadmetanja.
+        /// </summary>
         public Guid PublicBiddingId { get; set; }
     }
 }

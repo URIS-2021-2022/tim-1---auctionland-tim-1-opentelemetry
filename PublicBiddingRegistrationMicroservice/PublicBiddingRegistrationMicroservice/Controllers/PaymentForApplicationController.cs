@@ -16,7 +16,7 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
     [ApiController]
     [Route("api/application/payment")]
     [Produces("application/json", "application/xml")]
-    //[Authorize]
+    [Authorize]
     public class PaymentForApplicationController : ControllerBase
     {
         private readonly IPaymentRepository paymentRepository;
@@ -30,6 +30,12 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Vraća listu svih uplata za javno nadmetanje
+        /// </summary>
+        /// <returns>Lista uplata za javno nadmetanje</returns>
+        /// <response code="200">Vraća listu uplata za javno nadmetanje</response>
+        /// <response code="404">Nije pronađena ni jedna jedina uplata za javno nadmetanje</response>
         [HttpGet]
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
@@ -44,6 +50,12 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             return Ok(mapper.Map<List<PaymentDto>>(paymentsEntities));
         }
 
+        /// <summary>
+        /// Vraća uplatu za javno nadmetanje na osnovu ID
+        /// </summary>
+        /// <param name="paymentId">ID uplate za javno nadmetanje</param>
+        /// <returns></returns>
+        /// <response code="200">Vraća traženu uplatu za javno nadmetanje</response>
         [HttpGet("{paymentId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -57,6 +69,24 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             return Ok(mapper.Map<PaymentDto>(paymentModel));
         }
 
+        /// <summary>
+        /// Kreira novu uplatu za javno nadmetanje.
+        /// </summary>
+        /// <param name="paymentCreation">Model uplate za javno nadmetanje</param>
+        /// <returns>Potvrdu o kreiranoj uplati.</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje nove uplate \
+        /// POST /api/application/payment \
+        /// {     \
+        ///     "accountNumber": 158, \
+        ///     "referenceNumber": 8875, \
+        ///     "purposeOfPayment": "Svrha uplate", \
+        ///     "dateOfPayment": "2020-11-15T10:30:00" \
+        ///     "publicBiddingId": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+        ///}
+        /// </remarks>
+        /// <response code="200">Vraća kreiranu uplatu za javno nadmetanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom uplate za javno nadmetanje</response>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -79,6 +109,14 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vrši brisanje jedne uplate za javno nadmetanje na osnovu ID-ja prijave.
+        /// </summary>
+        /// <param name="paymentId">ID uplate za javno nadmetanje</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Uplata za javno nadmetanje uspešno obrisana</response>
+        /// <response code="404">Nije pronađena uplata za javno nadmetanje za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja uplate za javno nadmetanje</response>
         [HttpDelete("{paymentId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -103,6 +141,14 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira jednu uplatu za javno nadmetanje.
+        /// </summary>
+        /// <param name="paymentUpdateDto">Model uplate za javno nadmetanje koji se ažurira</param>
+        /// <returns>Potvrdu o modifikovanoj uplati.</returns>
+        /// <response code="200">Vraća ažuriranu uplatu za javno nadmetanje</response>
+        /// <response code="400">Uplata za javno nadmetanje koja se ažurira nije pronađena</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja uplate za javno nadmetanje</response>
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -130,6 +176,10 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraća opcije za rad sa prijavama ispita
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         public IActionResult GetExamRegistrationOptions()
         {
