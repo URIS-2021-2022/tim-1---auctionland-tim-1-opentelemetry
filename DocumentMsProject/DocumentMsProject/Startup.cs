@@ -1,5 +1,7 @@
 ﻿using DocumentMsProject.Data;
 using DocumentMsProject.Entities;
+using DocumentMsProject.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,9 +13,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DocumentMsProject
@@ -82,10 +88,26 @@ namespace DocumentMsProject
                 };
             });
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IListOfDocumentsRepository, ListOfDocumentsRepository>();
             services.AddScoped<ILeaseAgreementRepository, LeaseAgreementRepository>();
+            services.AddSingleton<IUserRepository, UserMockRepository>();
+            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             //services.AddRazorPages();
             services.AddSwaggerGen(setupAction =>
             {
@@ -109,6 +131,14 @@ namespace DocumentMsProject
                         },
                         TermsOfService = new Uri("http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
                     });
+                //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
+                var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+
+                //Pravimo putanju do XML fajla sa komentarima
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+
+                //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
+                setupAction.IncludeXmlComments(xmlCommentsPath);
             });
 
             //Dodajemo DbContext koji želimo da koristimo
@@ -122,6 +152,19 @@ namespace DocumentMsProject
             {
                 app.UseDeveloperExceptionPage();
             }
+            else //Ukoliko se nalazimo u Production modu postavljamo default poruku za greške koje nastaju na servisu
+            {
+                app.UseExceptionHandler(appBuilder =>
+                {
+                    appBuilder.Run(async context =>
+                    {
+                        context.Response.StatusCode = 500;
+                        await context.Response.WriteAsync("Došlo je do neočekivane greške. Molimo pokušajte kasnije.");
+                    });
+                });
+            }
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
 

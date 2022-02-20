@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DocumentMsProject</name>
+    </assembly>
+    <members>
+        <member name="M:DocumentMsProject.Controllers.AuthenticationController.Authenticate(DocumentMsProject.Models.Principal)">
+            <summary>
+            Sluzi za autentifikaciju korisnika
+            </summary>
+            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
+            <returns></returns>
+        </member>
+        <member name="M:DocumentMsProject.Data.UserMockRepository.FillData">
+            <summary>
+            Metoda koja upisuje testne podatke
+            </summary>
+        </member>
+        <member name="M:DocumentMsProject.Data.UserMockRepository.UserWithCredentialsExists(System.String,System.String)">
+            <summary>
+            Proverava da li postoji korisnik sa prosleđenim kredencijalima
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DocumentMsProject.Data.UserMockRepository.HashPassword(System.String)">
+            <summary>
+            Vrši hash-ovanje korisničke lozinke
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <returns>Generisan hash i salt</returns>
+        </member>
+        <member name="M:DocumentMsProject.Data.UserMockRepository.VerifyPassword(System.String,System.String,System.String)">
+            <summary>
+            Proverava validnost prosleđene lozinke sa prosleđenim hash-om
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <param name="savedHash">Sačuvan hash</param>
+            <param name="savedSalt">Sačuvan salt</param>
+            <returns></returns>
+        </member>
+        <member name="P:DocumentMsProject.Entities.Document.DocumentSerialNumber">
+            <summary>
+            serijski broj
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.Document.DocumentName">
+            <summary>
+            naziv dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.Document.DocumentDate">
+            <summary>
+            datum izdavanja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.Document.DocumentSubmissionDate">
+            <summary>
+            datum podnosenja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.Document.DocumentTemplate">
+            <summary>
+            sablon dokumenta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.Document.ListOfDocumentsID">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.ListOfDocuments.ListOfDocumentsId">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.User.Id">
+            <summary>
+            Id korisnika
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.User.FirstName">
+            <summary>
+            Ime korisnika
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.User.LastName">
+            <summary>
+            Prezime korisnika
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.User.UserName">
+            <summary>
+            Korisničko ime
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.User.Email">
+            <summary>
+            Email korisnika
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.User.Password">
+            <summary>
+            Hash-ovana šifra korisnika
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.User.Salt">
+            <summary>
+            Salt
+            </summary>
+        </member>
+        <member name="M:DocumentMsProject.Helpers.AuthenticationHelper.AuthenticatePrincipal(DocumentMsProject.Models.Principal)">
+            <summary>
+            Vrši autentifikaciju principala
+            </summary>
+            <param name="principal">Principal za autentifikaciju</param>
+            <returns></returns>
+        </member>
+        <member name="M:DocumentMsProject.Helpers.AuthenticationHelper.GenerateJwt(DocumentMsProject.Models.Principal)">
+            <summary>
+            Generiše novi token za autentifikovanog principala
+            </summary>
+            <param name="principal">Autentifikovani principal</param>
+            <returns></returns>
+        </member>
+        <member name="T:DocumentMsProject.Models.Principal">
+            <summary>
+            Predstavlja model za autentifikaciju
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.Principal.Username">
+            <summary>
+            Korisničko ime
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.Principal.Password">
+            <summary>
+            Korisničko lozinka
+            </summary>
+        </member>
+    </members>
+</doc>

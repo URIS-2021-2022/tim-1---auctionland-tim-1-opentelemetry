@@ -2,6 +2,7 @@
 using DocumentMsProject.Data;
 using DocumentMsProject.Entities;
 using DocumentMsProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -15,7 +16,7 @@ namespace DocumentMsProject.Controllers
     [ApiController]
     [Route("api/document/listOfDocuments")]
     [Produces("application/json", "application/xml")]
-    //[Authorize]
+    [Authorize]
     public class ListOfDocumentsController : ControllerBase
     {
         private readonly IListOfDocumentsRepository documentsRepository;
