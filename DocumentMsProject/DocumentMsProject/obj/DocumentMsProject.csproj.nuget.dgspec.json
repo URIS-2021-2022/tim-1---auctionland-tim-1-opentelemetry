@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Zeljana\\Desktop\\DocumentMS\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj": {}
+    "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Zeljana\\Desktop\\DocumentMS\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj": {
+    "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Zeljana\\Desktop\\DocumentMS\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj",
+        "projectUniqueName": "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj",
         "projectName": "DocumentMsProject",
-        "projectPath": "C:\\Users\\Zeljana\\Desktop\\DocumentMS\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj",
+        "projectPath": "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj",
         "packagesPath": "C:\\Users\\Zeljana\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Zeljana\\Desktop\\DocumentMS\\DocumentMsProject\\DocumentMsProject\\obj\\",
+        "outputPath": "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\DocumentMsProject\\DocumentMsProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Zeljana\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,6 +47,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.12, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

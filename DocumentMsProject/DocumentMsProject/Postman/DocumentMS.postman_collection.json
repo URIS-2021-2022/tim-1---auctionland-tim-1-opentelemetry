@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "b0aa4039-51d4-4d06-84ef-61f1bc68a241",
+		"name": "DocumentMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Documents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/document",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/document?documentId=f15c80a4-f7d5-49f0-f4c1-08d9f22a4c62",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document"
+					],
+					"query": [
+						{
+							"key": "documentId",
+							"value": "f15c80a4-f7d5-49f0-f4c1-08d9f22a4c62"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Document",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"documentSerialNumber\": 0,\r\n  \"documentName\": \"string\",\r\n  \"documentDate\": \"2022-02-20T22:28:04.168Z\",\r\n  \"documentSubmissionDate\": \"2022-02-20T22:28:04.168Z\",\r\n  \"listOfDocumentsID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44312/api/document",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Document",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"documentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"documentSerialNumber\": 0,\r\n  \"documentName\": \"string\",\r\n  \"documentDate\": \"2022-02-20T22:28:32.784Z\",\r\n  \"documentSubmissionDate\": \"2022-02-20T22:28:32.784Z\",\r\n  \"listOfDocumentsID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44312/api/document",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Document",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/document?documentId=3fa85f64-5717-4562-b3fc-2c963f66afa6",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document"
+					],
+					"query": [
+						{
+							"key": "documentId",
+							"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Lease Agreements",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/document/leaseAgreement",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"leaseAgreement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Lease Agreement By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/document/leaseAgreement?leaseId=abc5133e-0c77-45ef-14f8-08d9f22a2030",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"leaseAgreement"
+					],
+					"query": [
+						{
+							"key": "leaseId",
+							"value": "abc5133e-0c77-45ef-14f8-08d9f22a2030"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Lease Agreement",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"leaseTypeOfGuarantee\": \"string\",\r\n  \"leaseAgreementMaturities\": \"2022-02-20T22:30:30.324Z\",\r\n  \"leaseAgreementEntryDate\": \"2022-02-20T22:30:30.324Z\",\r\n  \"ministerID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"publicBiddingID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"personID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"deadlineForLandRestitution\": \"2022-02-20T22:30:30.324Z\",\r\n  \"placeOfSigning\": \"string\",\r\n  \"dateOfSigning\": \"2022-02-20T22:30:30.324Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44312/api/document/leaseAgreement",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"leaseAgreement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Lease Agreement",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"leaseAgreementID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"leaseTypeOfGuarantee\": \"string\",\r\n  \"leaseAgreementMaturities\": \"2022-02-20T22:30:00.430Z\",\r\n  \"leaseAgreementEntryDate\": \"2022-02-20T22:30:00.430Z\",\r\n  \"ministerID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"publicBiddingID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"personID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"deadlineForLandRestitution\": \"2022-02-20T22:30:00.430Z\",\r\n  \"placeOfSigning\": \"string\",\r\n  \"dateOfSigning\": \"2022-02-20T22:30:00.430Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44312/api/document/leaseAgreement",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"leaseAgreement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Lease Agreement",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/document/leaseAgreement?leaseId=abc5133e-0c77-45ef-14f8-08d9f22a2030",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"leaseAgreement"
+					],
+					"query": [
+						{
+							"key": "leaseId",
+							"value": "abc5133e-0c77-45ef-14f8-08d9f22a2030"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All List Of Documents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/document/listOfDocuments",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"listOfDocuments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List Of Documents By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/document/listOfDocuments?listId=213da77c-ca8d-41f4-1bc1-08d9f22b2d45",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"listOfDocuments"
+					],
+					"query": [
+						{
+							"key": "listId",
+							"value": "213da77c-ca8d-41f4-1bc1-08d9f22b2d45"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create List Of Documents",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"listCreationDate\": \"2022-02-20T22:31:54.509Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44312/api/document/listOfDocuments",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"listOfDocuments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update List Of Documents",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"listOfDocumentsId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"listCreationDate\": \"2022-02-20T22:32:17.699Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44312/api/document/listOfDocuments",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"listOfDocuments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete List Of Documents",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44312/api/document/listOfDocuments?listId=213da77c-ca8d-41f4-1bc1-08d9f22b2d45",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44312",
+					"path": [
+						"api",
+						"document",
+						"listOfDocuments"
+					],
+					"query": [
+						{
+							"key": "listId",
+							"value": "213da77c-ca8d-41f4-1bc1-08d9f22b2d45"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU0MDMxNzEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzEyIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMTIifQ.73BeqNJUKBTq8kC4cF6lXxga5IonNEIRo3NnkdMUSvM",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
