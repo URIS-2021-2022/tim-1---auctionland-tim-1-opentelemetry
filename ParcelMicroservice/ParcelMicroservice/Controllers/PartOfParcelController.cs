@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using ParcelMicroservice.Data;
+using ParcelMicroservice.Entities;
 using ParcelMicroservice.Models;
 using System;
 using System.Collections.Generic;
@@ -11,50 +14,56 @@ using System.Threading.Tasks;
 namespace ParcelMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/partofparcels")]
+    [Route("api/parcels/partofparcels")]
+    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class PartOfParcelController : ControllerBase
     {
         private readonly IPartOfParcelRepository partOfParcelRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateExamRegistration)
+        private readonly IMapper mapper;
 
-        public PartOfParcelController(IPartOfParcelRepository partOfParcelRepository, LinkGenerator linkGenerator)
+        public PartOfParcelController(IPartOfParcelRepository partOfParcelRepository, LinkGenerator linkGenerator, IMapper mapper)
         {
             this.partOfParcelRepository = partOfParcelRepository;
             this.linkGenerator = linkGenerator;
+            this.mapper = mapper;
         }
 
+        [HttpHead]
         [HttpGet]
-        public ActionResult<List<PartOfParcelModel>> GetPartOfParcels()
+        public ActionResult<List<PartOfParcel>> GetPartOfParcels()
         {
-            List<PartOfParcelModel> partOfParcels = partOfParcelRepository.GetPartOfParcels();
+            List<PartOfParcel> partOfParcels = partOfParcelRepository.GetPartOfParcels();
             if (partOfParcels == null || partOfParcels.Count == 0)
             {
                 return NoContent();
             }
-            return Ok(partOfParcels);
+            return Ok(mapper.Map<List<PartOfParcelDto>>(partOfParcels));
         }
 
-        [HttpGet("{parcelID, partOfParcelID}")]
-        public ActionResult<PartOfParcelModel> GetPartOfParcel(Guid parcelID, Guid partOfParcelID)
+        [HttpGet("{partOfParcelID}")]
+        public ActionResult<PartOfParcel> GetPartOfParcel(Guid partOfParcelID)
         {
-            PartOfParcelModel model = partOfParcelRepository.GetPartOfParcelById(parcelID, partOfParcelID);
+            PartOfParcel model = partOfParcelRepository.GetPartOfParcelById(partOfParcelID);
             if (model == null)
             {
                 return NotFound();
             }
-            return Ok(model);
+            return Ok(mapper.Map<PartOfParcelDto>(model));
         }
 
         [Consumes("application/json")]
         [HttpPost]
-        public ActionResult<PartOfParcelConfirmation> CreatePartOfParcel([FromBody] PartOfParcelModel model)
+        public ActionResult<PartOfParcelConfirmationDto> CreatePartOfParcel([FromBody] PartOfParcelCreationDto model)
         {
             try
             {
-                PartOfParcelConfirmation confirmation = partOfParcelRepository.CreatePartOfParcel(model);
+                PartOfParcel partOfParcelEntity = mapper.Map<PartOfParcel>(model);
+
+                PartOfParcelConfirmation confirmation = partOfParcelRepository.CreatePartOfParcel(partOfParcelEntity);
                 // Dobar API treba da vrati lokator gde se taj resurs nalazi
-                string location = linkGenerator.GetPathByAction("GetPartOfParcels", "PartOfParcel", new { parcelID = confirmation.ParcelID, partOfParcelID = confirmation.PartOfParcelID});//dodato
-                return Created(location, confirmation);
+                string location = linkGenerator.GetPathByAction("GetPartOfParcels", "PartOfParcel", new { partOfParcelID = confirmation.PartOfParcelID});//dodato
+                return Created(location, mapper.Map<PartOfParcelConfirmationDto>(confirmation));
             }
             catch
             {
@@ -64,18 +73,20 @@ namespace ParcelMicroservice.Controllers
 
         [Consumes("application/json")]
         [HttpPut]
-        public ActionResult<PartOfParcelConfirmation> UpdatePartOfParcel(PartOfParcelModel model)
+        public ActionResult<PartOfParcelConfirmationDto> UpdatePartOfParcel(PartOfParcelUpdateDto model)
         {
             try
             {
                 //Proveriti da li uopšte postoji prijava koju pokušavamo da ažuriramo.
-                if (partOfParcelRepository.GetPartOfParcelById(model.ParcelID, model.PartOfParcelID) == null)
+                if (partOfParcelRepository.GetPartOfParcelById(model.PartOfParcelID) == null)
                 {
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
 
-                PartOfParcelConfirmation confirmation = partOfParcelRepository.UpdatePartOfParcel(model);
-                return Ok(confirmation);
+                PartOfParcel partOfParcelEntity = mapper.Map<PartOfParcel>(model);
+
+                PartOfParcelConfirmation confirmation = partOfParcelRepository.UpdatePartOfParcel(partOfParcelEntity);
+                return Ok(mapper.Map<PartOfParcelConfirmationDto>(confirmation));
             }
             catch (Exception)
             {
@@ -83,17 +94,17 @@ namespace ParcelMicroservice.Controllers
             }
         }
 
-        [HttpDelete("{parcelID, partOfParcelID}")]
-        public IActionResult DeletePartOfParcel(Guid parcelID, Guid partOfParcelID)
+        [HttpDelete("{partOfParcelID}")]
+        public IActionResult DeletePartOfParcel(Guid partOfParcelID)
         {
             try
             {
-                PartOfParcelModel model = partOfParcelRepository.GetPartOfParcelById(parcelID, partOfParcelID);
+                PartOfParcel model = partOfParcelRepository.GetPartOfParcelById(partOfParcelID);
                 if (model == null)
                 {
                     return NotFound();
                 }
-                partOfParcelRepository.DeletePartOfParcel(parcelID, partOfParcelID);
+                partOfParcelRepository.DeletePartOfParcel(partOfParcelID);
                 // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
                 return NoContent();
             }
@@ -101,6 +112,13 @@ namespace ParcelMicroservice.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
+        }
+
+        [HttpOptions]
+        public IActionResult GetPartOfParcelsOptions()
+        {
+            Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            return Ok();
         }
 
 

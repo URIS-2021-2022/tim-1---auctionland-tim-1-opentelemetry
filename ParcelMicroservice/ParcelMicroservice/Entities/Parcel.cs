@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ParcelMicroservice.Models
+namespace ParcelMicroservice.Entities
 {
-    public class ParcelModel
+    public class Parcel
     {
         public Guid ParcelID { get; set; }
         public int SurfaceArea { get; set; }

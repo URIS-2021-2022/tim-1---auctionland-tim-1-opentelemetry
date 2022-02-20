@@ -30,10 +30,10 @@ namespace AdMicroservice.Entities
         /// <summary>
         /// Kreiranje i inicijalno punjenje modela 
         /// </summary>
-        /// <param name="builder"></param>
-        protected override void OnModelCreating(ModelBuilder builder)
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Ad>()
+            modelBuilder.Entity<Ad>()
                 .HasData(new
                 {
                     AdID = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
@@ -44,7 +44,7 @@ namespace AdMicroservice.Entities
                     DateOfIssue = DateTime.Parse("2020-11-15T09:00:00")
                 });
 
-            builder.Entity<Ad>()
+            modelBuilder.Entity<Ad>()
                 .HasData(new
                 {
                     AdID = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),

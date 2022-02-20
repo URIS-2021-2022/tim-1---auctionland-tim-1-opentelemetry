@@ -1,4 +1,4 @@
-﻿using ParcelMicroservice.Models;
+﻿using ParcelMicroservice.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ namespace ParcelMicroservice.Data
 {
     public class PartOfParcelRepository : IPartOfParcelRepository
     {
-        public static List<PartOfParcelModel> PartOfParcels { get; set; } = new List<PartOfParcelModel>();
+        public static List<PartOfParcel> PartOfParcels { get; set; } = new List<PartOfParcel>();
         public PartOfParcelRepository()
         {
             FillData();
@@ -16,18 +16,18 @@ namespace ParcelMicroservice.Data
 
         private void FillData()
         {
-            PartOfParcels.AddRange(new List<PartOfParcelModel> {
-                new PartOfParcelModel
+            PartOfParcels.AddRange(new List<PartOfParcel> {
+                new PartOfParcel
                 {
-                    ParcelID = Guid.Parse("a910ad63-b699-4c1a-84df-ea918f1dc82a"),
+                    ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"),
                     PartOfParcelID = Guid.Parse("67c31d49-b189-4de5-a6e2-b9b5557047a9"),
                     SurfaceAreaPOP = 1000,
                     ClassID = Guid.Parse("61847780-396a-42a7-8e04-941e0d4eddf9"),
                     ClassLandLabel = "I"
                 },
-                new PartOfParcelModel
+                new PartOfParcel
                 {
-                    ParcelID = Guid.Parse("a910ad63-b699-4c1a-84df-ea918f1dc82a"),
+                    ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"),
                     PartOfParcelID = Guid.Parse("17321524-7822-4daa-8134-a2ec4bed98e0"),
                     SurfaceAreaPOP = 500,
                     ClassID = Guid.Parse("89e2bdc2-7153-463a-8c9f-37bfec240431"),
@@ -36,25 +36,26 @@ namespace ParcelMicroservice.Data
             });
         }
 
-        public List<PartOfParcelModel> GetPartOfParcels()
+        public List<PartOfParcel> GetPartOfParcels()
         {
             var list = (from p in PartOfParcels
                         select p);
-            var bar = list.GroupBy(x => x.ParcelID).Select(x => x.First()).ToList();
+            var bar = list.GroupBy(x => x.PartOfParcelID).Select(x => x.First()).ToList();
             return bar;
 
         }
 
-        public PartOfParcelModel GetPartOfParcelById(Guid parcelID, Guid partOfParcelID)
+        public PartOfParcel GetPartOfParcelById(Guid partOfParcelID)
         {
-            return PartOfParcels.FirstOrDefault(e => e.ParcelID == parcelID && e.PartOfParcelID == partOfParcelID);
+            return PartOfParcels.FirstOrDefault(e => e.PartOfParcelID == partOfParcelID);
         }
 
-        public PartOfParcelConfirmation CreatePartOfParcel(PartOfParcelModel partOfParcel)
+        public PartOfParcelConfirmation CreatePartOfParcel(PartOfParcel partOfParcel)
         {
-            partOfParcel.ParcelID = Guid.NewGuid(); //generise se kljuc nove parcele
+            partOfParcel.PartOfParcelID = Guid.NewGuid(); //generise se kljuc novog dela parcele
+            partOfParcel.ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"); //testiranje 
             PartOfParcels.Add(partOfParcel); //dodaje se nova parcela u listu parcela
-            PartOfParcelModel model = GetPartOfParcelById(partOfParcel.ParcelID, partOfParcel.PartOfParcelID); //instancira se parcela preko metode GetParcelById
+            PartOfParcel model = GetPartOfParcelById(partOfParcel.PartOfParcelID); //instancira se parcela preko metode GetParcelById
 
             return new PartOfParcelConfirmation //vraca se model potvrde 
             {
@@ -65,11 +66,11 @@ namespace ParcelMicroservice.Data
             };
         }
 
-        public PartOfParcelConfirmation UpdatePartOfParcel(PartOfParcelModel partOfParcel)
+        public PartOfParcelConfirmation UpdatePartOfParcel(PartOfParcel partOfParcel)
         {
-            PartOfParcelModel model = GetPartOfParcelById(partOfParcel.ParcelID, partOfParcel.PartOfParcelID); //instancira se parcela preko metode GetParcelById
+            PartOfParcel model = GetPartOfParcelById(partOfParcel.PartOfParcelID); //instancira se parcela preko metode GetParcelById
 
-            model.ParcelID = partOfParcel.ParcelID;
+            model.ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f");
             model.PartOfParcelID = partOfParcel.PartOfParcelID;
             model.SurfaceAreaPOP = partOfParcel.SurfaceAreaPOP;
             model.ClassID = partOfParcel.ClassID;
@@ -84,9 +85,9 @@ namespace ParcelMicroservice.Data
             };
         }
 
-        public void DeletePartOfParcel(Guid parcelID, Guid partOfParcelID)
+        public void DeletePartOfParcel(Guid partOfParcelID)
         {
-            PartOfParcels.Remove(PartOfParcels.FirstOrDefault(e => e.ParcelID == parcelID && e.PartOfParcelID == partOfParcelID));
+            PartOfParcels.Remove(PartOfParcels.FirstOrDefault(e => e.PartOfParcelID == partOfParcelID));
         }
     }
 }
