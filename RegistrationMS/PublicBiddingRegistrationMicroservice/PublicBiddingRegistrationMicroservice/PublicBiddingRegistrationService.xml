@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<doc>
+  <assembly>
+    <name>PublicBiddingRegistrationService</name>
+  </assembly>
+  <members>
+    <member name="M:PublicBiddingRegistrationMicroservice.Controllers.ApplicationController.GetApplications()">
+      <summary>
+        Vraća sve prijave za javno nadmetanje.
+      </summary>
+      <returns>Lista prijava za javno nadmetanje</returns>
+      <response code="200">Vraća listu prijava</response>
+      <response code="404">Nije pronađena ni jedna jedina prijava za javno nadmetanje</response>
+    </member>
+    <member name="M:PublicBiddingRegistrationMicroservice.Controllers.ApplicationController.GetApplicationById(System.Guid)">
+      <summary>
+        Vraća jednu prijavu za javno nadmetanje na osnovu ID-ja prijave.
+      </summary>
+      <param name="applicationId">ID prijave javnog nadmetanja</param>
+      <returns></returns>
+      <response code="200">Vraća traženu prijavu za javno nadmetanje</response>
+    </member>
+    <member name="M:PublicBiddingRegistrationMicroservice.Controllers.ApplicationController.CreateApplication(PublicBiddingRegistrationMicroservice.Models.ApplicationCreationDto)">
+      <summary>
+        Kreira novu prijavu za javno nadmetanje.
+      </summary>
+      <param name="applicationCreation">Model prijave</param>
+      <returns>Potvrdu o kreiranoj prijavi.</returns>
+      <remarks>
+        Primer zahteva za kreiranje nove prijave ispita \
+        POST /api/ExamRegistration \
+        {     \
+        "paymentId": "2841defc-761e-40d8-b8a3-d3e58516dca7", \
+        "buyerId": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+        }
+      </remarks>
+      <response code="200">Vraća kreiranu prijavu za javno nadmetanje</response>
+      <response code="500">Došlo je do greške na serveru prilikom prijave javnog nadmetanja</response>
+    </member>
+    <member name="M:PublicBiddingRegistrationMicroservice.Controllers.ApplicationController.UpdateExamRegistration(PublicBiddingRegistrationMicroservice.Models.ApplicationUpdateDto)">
+      <summary>
+        Ažurira jednu prijavu za javno nadmetanje.
+      </summary>
+      <param name="updateDto">Model prijave za javno nadmetanje koja je izmenjena.</param>
+      <returns>Potvrdu o modifikovanoj prijavi.</returns>
+      <response code="200">Vraća ažuriranu prijavu za javno nadmetanje</response>
+      <response code="400">Prijava za javno nadmetanje koja se ažurira nije pronađena</response>
+      <response code="500">Došlo je do greške na serveru prilikom ažuriranja prijave za javno nadmetanje</response>
+    </member>
+    <member name="M:PublicBiddingRegistrationMicroservice.Controllers.ApplicationController.DeleteExamRegistration(System.Guid)">
+      <summary>
+        Vrši brisanje jedne prijave za javno nadmetanje na osnovu ID-ja prijave.
+      </summary>
+      <param name="applicationId">ID prijave za javno nadmetanje</param>
+      <returns>Status 204 (NoContent)</returns>
+      <response code="204">Prijava za javno nadmetanje uspešno obrisana</response>
+      <response code="404">Nije pronađena prijava za javno nadmetanje za brisanje</response>
+      <response code="500">Došlo je do greške na serveru prilikom brisanja prijave za javno nadmetanje</response>
+    </member>
+    <member name="M:PublicBiddingRegistrationMicroservice.Controllers.ApplicationController.GetExamRegistrationOptions">
+      <summary>
+        Vraća opcije za rad sa prijavama za javno nadmetanje
+      </summary>
+      <returns></returns>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Data.ApplicationMockRepository">
+      <summary>
+        Mock repozitorijum koji glumi perzistenciju prijave za javno nadmetanje sistema
+      </summary>
+    </member>
+    <member name="M:PublicBiddingRegistrationMicroservice.Data.ApplicationMockRepository.FillData">
+      <summary>
+        Metoda koja upisuje testne podatke
+      </summary>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Entities.ApplicationForPublicBidding">
+      <summary>
+        Predstavlja prijavu za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.ApplicationForPublicBidding.ApplicationId">
+      <summary>
+        ID prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.ApplicationForPublicBidding.PaymentId">
+      <summary>
+        ID uplate prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.ApplicationForPublicBidding.BuyerId">
+      <summary>
+        ID kupca koji ucestvuje na javnom nadmetanju.
+      </summary>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Entities.ApplicationConfirmation">
+      <summary>
+        Predstavlja potvrdu prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.ApplicationConfirmation.ApplicationId">
+      <summary>
+        ID prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.ApplicationConfirmation.PaymentId">
+      <summary>
+        ID uplate prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.ApplicationConfirmation.BuyerId">
+      <summary>
+        ID kupca koji ucestvuje na javnom nadmetanju.
+      </summary>
+    </member>
+    <member name="M:PublicBiddingRegistrationMicroservice.Entities.ApplicationContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+      <summary>
+        Popunjava bazu sa zadatim inicijalnim podacima
+      </summary>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication">
+      <summary>
+        Predstavlja model uplate za prijavu za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.PaymentId">
+      <summary>
+        Id uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.AccountNumber">
+      <summary>
+        Broj racuna za uplatu
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.ReferenceNumber">
+      <summary>
+        Pozivni broj
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.PurposeOfPayment">
+      <summary>
+        Svrha uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.DateOfPayment">
+      <summary>
+        Datum uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.PublicBiddingId">
+      <summary>
+        Javno nadmetanje za koje se vrsi uplata
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentConfirmation">
+      <summary>
+        Predstavlja potvrdu prijave za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.PaymentId">
+      <summary>
+        Id uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.AccountNumber">
+      <summary>
+        Broj racuna za uplatu
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.ReferenceNumber">
+      <summary>
+        Pozivni broj
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.PurposeOfPayment">
+      <summary>
+        Svrha uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.DateOfPayment">
+      <summary>
+        Datum uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Entities.PaymentForApplication.PublicBiddingId">
+      <summary>
+        Javno nadmetanje za koje se vrsi uplata
+      </summary>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Models.ApplicationDto">
+      <summary>
+        Prestavlja model prijave za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationDto.ApplicationId">
+      <summary>
+        ID prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationDto.PaymentId">
+      <summary>
+        ID uplate prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationDto.BuyerId">
+      <summary>
+        ID kupca koji ucestvuje na javnom nadmetanju.
+      </summary>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Models.ApplicationConformationDto">
+      <summary>
+        DTO za potvrdu prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationConformationDto.ApplicationId">
+      <summary>
+        ID prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationConformationDto.PaymentId">
+      <summary>
+        ID uplate prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationConformationDto.BuyerId">
+      <summary>
+        ID kupca koji ucestvuje na javnom nadmetanju.
+      </summary>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Models.ApplicationCreationDto">
+      <summary>
+        Model za kreiranje prijave za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationCreationDto.PaymentId">
+      <summary>
+        ID uplate prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationCreationDto.BuyerId">
+      <summary>
+        ID kupca koji ucestvuje na javnom nadmetanju.
+      </summary>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Models.ApplicationUpdateDto">
+      <summary>
+        DTO za azuriranje prijave za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationUpdateDto.ApplicationId">
+      <summary>
+        ID prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationUpdateDto.PaymentId">
+      <summary>
+        ID uplate prijave za javno nadmetanje.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.ApplicationUpdateDto.BuyerId">
+      <summary>
+        ID kupca koji ucestvuje na javnom nadmetanju.
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentDto">
+      <summary>
+        Model uplate za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentDto.PaymentId">
+      <summary>
+        Id uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentDto.AccountNumber">
+      <summary>
+        Broj racuna za uplatu
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentDto.ReferenceNumber">
+      <summary>
+        Pozivni broj
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentDto.PurposeOfPayment">
+      <summary>
+        Svrha uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentDto.DateOfPayment">
+      <summary>
+        Datum uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentDto.PublicBiddingId">
+      <summary>
+        Javno nadmetanje za koje se vrsi uplata
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentConfirmationDto">
+      <summary>
+        Model potvrde uplate za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentConfirmationDto.PaymentId">
+      <summary>
+        Id uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentConfirmationDto.AccountNumber">
+      <summary>
+        Broj racuna za uplatu
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentConfirmationDto.ReferenceNumber">
+      <summary>
+        Pozivni broj
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentConfirmationDto.PurposeOfPayment">
+      <summary>
+        Svrha uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentConfirmationDto.DateOfPayment">
+      <summary>
+        Datum uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentConfirmationDto.PublicBiddingId">
+      <summary>
+        Javno nadmetanje za koje se vrsi uplata
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentCreationDto">
+      <summary>
+        Model kreiranja uplate za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentCreationDto.AccountNumber">
+      <summary>
+        Broj racuna za uplatu
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentCreationDto.ReferenceNumber">
+      <summary>
+        Pozivni broj
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentCreationDto.PurposeOfPayment">
+      <summary>
+        Svrha uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentCreationDto.DateOfPayment">
+      <summary>
+        Datum uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentCreationDto.PublicBiddingId">
+      <summary>
+        Javno nadmetanje za koje se vrsi uplata
+      </summary>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Models.PaymentUpdateDto">
+      <summary>
+        Model za ažuriranje prijave za javno nadmetanje
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentUpdateDto.PaymentId">
+      <summary>
+        Id uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentUpdateDto.AccountNumber">
+      <summary>
+        Broj racuna za uplatu
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentUpdateDto.ReferenceNumber">
+      <summary>
+        Pozivni broj
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentUpdateDto.PurposeOfPayment">
+      <summary>
+        Svrha uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentUpdateDto.DateOfPayment">
+      <summary>
+        Datum uplate
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.PaymentUpdateDto.PublicBiddingId">
+      <summary>
+        Javno nadmetanje za koje se vrsi uplata
+      </summary>
+    </member>
+    <member name="T:PublicBiddingRegistrationMicroservice.Models.Principal">
+      <summary>
+        Predstavlja model za autentifikaciju
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.Principal.Username">
+      <summary>
+        Korisničko ime
+      </summary>
+    </member>
+    <member name="P:PublicBiddingRegistrationMicroservice.Models.Principal.Password">
+      <summary>
+        Korisnička lozinka
+      </summary>
+    </member>
+  </members>
+</doc>
