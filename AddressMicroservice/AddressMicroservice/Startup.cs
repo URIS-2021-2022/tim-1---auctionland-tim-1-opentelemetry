@@ -1,7 +1,9 @@
 ﻿using AddressMicroservice.Data;
 using AddressMicroservice.Data.Implementation;
 using AddressMicroservice.Etities;
+using AddressMicroservice.Helpers;
 using AddressMicroservice.ServiceCalls;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,9 +14,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace AddressMicroservice
 {
@@ -84,10 +89,26 @@ namespace AddressMicroservice
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
+
             // Znaci da cim se napravi objekat ExamRegistrationController-a i inject-uje IExamRegistrationRepository,
             // kreira se jedna instanca objekta klase ExamRegistrationRepository
             // Kada se radi sa konkretnom bazom, umesto AddSingleton treba koristiti AddScopped
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthentication, Authentication>();
             services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddSwaggerGen(setupAction =>
             {
@@ -111,6 +132,31 @@ namespace AddressMicroservice
                         },
                         TermsOfService = new Uri($"http://www.ftn.uns.ac.rs/examRegistrationTermsOfService")
                     });
+
+                setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Unesite token",
+                    Name = "Autorizacija korisnika",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+
+                setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] {}
+                    }
+                });
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
                 var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
 

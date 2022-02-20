@@ -10,6 +10,7 @@ using AddressMicroservice.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using AddressMicroservice.ServiceCalls;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AddressMicroservice.Controllers
 {
@@ -19,6 +20,7 @@ namespace AddressMicroservice.Controllers
     [ApiController]
     [Route("api/addresses")]
     [Produces("application/json", "application/xml")]
+    [Authorize]
     public class AddressController : ControllerBase
     {
         private readonly IAddressRepository addressRepository;
