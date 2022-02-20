@@ -251,3 +251,4 @@ C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\AddressMicrose
 C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\AddressMicroservice\AddressMicroservice\obj\Debug\net5.0\ref\AddressMicroservice.dll
 C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\AddressMicroservice\AddressMicroservice\obj\Debug\net5.0\AddressMicroservice.pdb
 C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\AddressMicroservice\AddressMicroservice\obj\Debug\net5.0\AddressMicroservice.genruntimeconfig.cache
+C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\AddressMicroservice\AddressMicroservice\bin\Debug\net5.0\Postman\AddressMicroservice.postman_collection.json

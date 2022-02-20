@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "6619ddbf-2240-4b7d-98f1-d3119b6e8742",
+		"name": "AddressMicroservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllAddresses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44348/api/addresses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44348",
+					"path": [
+						"api",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAddressById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44348/api/addresses/017606c4-c50b-43e3-cd7d-08d9f47f2ed1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44348",
+					"path": [
+						"api",
+						"addresses",
+						"017606c4-c50b-43e3-cd7d-08d9f47f2ed1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostAddress",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"street\": \"Isidore Sekulic\",\r\n  \"number\": 20,\r\n  \"zipCode\": \"21203\",\r\n  \"cityID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"cityName\": \"Veternik\",\r\n  \"countryID\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"countryName\": \"Srbija\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44348/api/addresses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44348",
+					"path": [
+						"api",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAddress",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44348/api/addresses/6586e68e-5935-43e3-cd7f-08d9f47f2ed1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44348",
+					"path": [
+						"api",
+						"addresses",
+						"6586e68e-5935-43e3-cd7f-08d9f47f2ed1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutAddress",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"AddressID\": \"017606c4-c50b-43e3-cd7d-08d9f47f2ed1\",\r\n        \"Street\": \"Izmenjeno\",\r\n        \"Number\":89,\r\n        \"ZipCode\":\"21203\",\r\n        \"CityID\": \"044f3de0-a9dd-4c2e-b745-89976a1b2a36\",\r\n        \"CityName\":\"Veternik\",\r\n        \"CountryID\": \"21ad52f8-0281-4241-98b0-481566d25e4f\",\r\n        \"CountryName\": \"Srbija\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44348/api/addresses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44348",
+					"path": [
+						"api",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDUzNzQwMTksImlzcyI6IlVSSVMudW5zLmFjLnJzIiwiYXVkIjoiVVJJUy51bnMuYWMucnMifQ.XHVe3JN0fEu3Lx8mQrAilbZAlkSL2MeakP8xbHWjaQ0",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
