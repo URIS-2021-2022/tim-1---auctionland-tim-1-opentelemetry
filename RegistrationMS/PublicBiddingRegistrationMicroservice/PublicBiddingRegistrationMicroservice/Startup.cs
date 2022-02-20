@@ -113,10 +113,10 @@ namespace PublicBiddingRegistrationMicroservice
                 //var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
 
                 //Pravimo putanju do XML fajla sa komentarima
-                var xmlCommentsPath = "C:/Users/Zeljana/Desktop/tim-1---auctionland-tim-1-opentelemetry/RegistrationMS/PublicBiddingRegistrationMicroservice/PublicBiddingRegistrationMicroservice/PublicBiddingRegistrationService.xml";
+                //var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
                 //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
-                setupAction.IncludeXmlComments(xmlCommentsPath);
+                //setupAction.IncludeXmlComments(xmlCommentsPath);
             });
 
             //Dodajemo DbContext koji želimo da koristimo
