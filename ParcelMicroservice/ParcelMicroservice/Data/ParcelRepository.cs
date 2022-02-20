@@ -106,14 +106,9 @@ namespace ParcelMicroservice.Data
             };
         }
 
-        public string DeleteParcel(Guid parcelID)
+        public void DeleteParcel(Guid parcelID)
         {
-            if (Parcels.Remove(Parcels.FirstOrDefault(e => e.ParcelID == parcelID)))
-            {
-                return "Parcela je uspešno obrisana!";
-            }
-
-            return "Unesite validnu šifru parcele...";
+            Parcels.Remove(Parcels.FirstOrDefault(e => e.ParcelID == parcelID));
         }
     }
 }

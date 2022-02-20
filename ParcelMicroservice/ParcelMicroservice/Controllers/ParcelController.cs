@@ -17,12 +17,12 @@ namespace ParcelMicroservice.Controllers
         private readonly IParcelRepository parcelRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateExamRegistration)
 
-        public List<String> CultureList = new List<String> { "Njive", "Vrtovi", "Voćnjaci", "Vinogradi", "Livade", "Pašnjaci", "Šume", "Trstici-močvare" };
-        public List<String> ClassList = new List<String> { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" };
-        public List<String> WorkabilityList = new List<String> { "Obradivo", "Ostalo" };
-        public List<String> ProtectedZoneList = new List<String> { "1", "2", "3", "4" };
-        public List<String> FormOfOwnershipList = new List<String> { "Privatna svojina", "Državna svojina RS", "Državna svojina", "Društvena svojina", "Zadružna svojina", "Mešovita svojina", "Drugi oblici" };
-        public List<String> DrainageActualConditionList = new List<String> { "Površinsko odvodnjavanje", "Podzemno odvodnjavanje" };
+        public List<String> CultureList = new List<String> { "Njive", "Vrtovi", "Voćnjaci", "Vinogradi", "Livade", "Pašnjaci", "Šume", "Trstici-močvare", "test" };
+        public List<String> ClassList = new List<String> { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "test" };
+        public List<String> WorkabilityList = new List<String> { "Obradivo", "Ostalo", "test" };
+        public List<String> ProtectedZoneList = new List<String> { "1", "2", "3", "4", "test" };
+        public List<String> FormOfOwnershipList = new List<String> { "Privatna svojina", "Državna svojina RS", "Državna svojina", "Društvena svojina", "Zadružna svojina", "Mešovita svojina", "Drugi oblici", "test" };
+        public List<String> DrainageActualConditionList = new List<String> { "Površinsko odvodnjavanje", "Podzemno odvodnjavanje", "test" };
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
         public ParcelController(IParcelRepository parcelRepository, LinkGenerator linkGenerator)
@@ -53,6 +53,8 @@ namespace ParcelMicroservice.Controllers
             return Ok(model);
         }
 
+        [Consumes("application/json")]
+        [HttpPost]
         public ActionResult<ParcelConfirmation> CreateParcel([FromBody] ParcelModel model)
         {
             try
@@ -61,7 +63,7 @@ namespace ParcelMicroservice.Controllers
 
                 if (!modelValid)
                 {
-                    return BadRequest("Parcela nema odgovarajuće vrednosti atributa... Molimo Vas da pokušate da izmenite vrednosti!");
+                    return BadRequest();
                 }
 
                 ParcelConfirmation confirmation = parcelRepository.CreateParcel(model);
@@ -75,8 +77,9 @@ namespace ParcelMicroservice.Controllers
             }
         }
 
+        [Consumes("application/json")]
         [HttpPut]
-        public ActionResult<ParcelConfirmation> UpdateParcel([FromBody] ParcelModel model)
+        public ActionResult<ParcelConfirmation> UpdateParcel(ParcelModel model)
         {
             try
             {
