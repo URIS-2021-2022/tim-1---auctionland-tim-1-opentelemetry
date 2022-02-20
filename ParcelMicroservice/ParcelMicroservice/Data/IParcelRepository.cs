@@ -12,6 +12,6 @@ namespace ParcelMicroservice.Data
         public ParcelModel GetParcelById(Guid parcelID);
         public ParcelConfirmation CreateParcel(ParcelModel parcel);
         public ParcelConfirmation UpdateParcel(ParcelModel parcel);
-        public string DeleteParcel(Guid parcelID);
+        public void DeleteParcel(Guid parcelID);
     }
 }

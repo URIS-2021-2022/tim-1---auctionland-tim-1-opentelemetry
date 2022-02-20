@@ -7,6 +7,7 @@ namespace ParcelMicroservice.Models
 {
     public class PartOfParcelModel
     {
+   
         public Guid ParcelID { get; set; }
         public Guid PartOfParcelID { get; set; }
         public int SurfaceAreaPOP { get; set; }
