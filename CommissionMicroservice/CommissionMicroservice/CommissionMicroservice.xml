@@ -1,0 +1,447 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CommissionMicroservice</name>
+    </assembly>
+    <members>
+        <member name="M:CommissionMicroservice.Controllers.AuthenticationController.Authenticate(CommissionMicroservice.Models.Principal)">
+            <summary>
+            Sluzi za autentifikaciju korisnika
+            </summary>
+            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
+            <returns></returns>
+        </member>
+        <member name="T:CommissionMicroservice.Controllers.CommissionController">
+            <summary>
+            Kontroler komisije sa CRUD 
+            </summary>
+        </member>
+        <member name="M:CommissionMicroservice.Controllers.CommissionController.GetCommissions(System.String)">
+            <summary>
+            Vraca sve komisije po zadatom predsedniku 
+            </summary>
+            <param name="presidentId">Predsednik komisije</param>
+            <returns>Lista komisija</returns>
+            <response code="200">Vraća listu komisija</response>
+            <response code="404">Nije pronađena ni jedna komisija</response>
+        </member>
+        <member name="M:CommissionMicroservice.Controllers.CommissionController.GetCommissionById(System.Guid)">
+            <summary>
+            Vraca jednu komisiju sa prosledjenim ID-jem
+            </summary>
+            <param name="commissionId">ID komisije</param>
+            <returns>Vraca jednu komisiju</returns>
+            <response code="200">Vraća komisiju sa prosledjenim ID-jem</response>
+            <response code="404">Nije pronađena ni jedna komisija sa tim ID-jem</response>
+        </member>
+        <member name="M:CommissionMicroservice.Controllers.CommissionController.CreateCommission(CommissionMicroservice.Models.CommissionCreationDto)">
+            <summary>
+            Kreira novu komisiju
+            </summary>
+            <param name="commissionDto">Model komisije</param>
+            <returns>Potvrda o kreiranoj komisiji</returns>
+            <response code="201">Komisija je uspešno kreirana</response>
+            <response code="500">Došlo je do greške na serveru prilikom kreiranja komisije</response>
+        </member>
+        <member name="M:CommissionMicroservice.Controllers.CommissionController.DeleteCommission(System.Guid)">
+            <summary>
+            Brisanje komisije sa prosledjenim ID-jem
+            </summary>
+            <param name="commissionID">ID komisije</param>
+            <returns></returns>
+            <response code="404">Nije pronađena komisija</response>
+            <response code="204">Komisija sa prosleđenim id-jem je obrisana</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja komisije</response>
+        </member>
+        <member name="M:CommissionMicroservice.Controllers.CommissionController.UpdateCommission(CommissionMicroservice.Models.CommissionUpdateDto)">
+            <summary>
+            Modifikacija postojece komisije
+            </summary>
+            <param name="commissionDto">Model komisije</param>
+            <returns>Potvrda o modifikovanoj komisiji</returns>
+            <response code="200">Vraća ažuriranu komisiju</response>
+            <response code="404">Komisija koju je potrebno ažurirati nije pronađena</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja komisije</response>
+        </member>
+        <member name="M:CommissionMicroservice.Controllers.CommissionController.GetCommissionOptions">
+            <summary>
+            Vraca opcije za rad sa komisijama u sistemu
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CommissionMicroservice.Controllers.CommissionController.Validate(CommissionMicroservice.Models.CommissionCreationDto)">
+            <summary>
+            Proveravanje validnosti unesenih podataka
+            </summary>
+            <param name="commissionDto">Model komisije</param>
+            <returns></returns>
+        </member>
+        <member name="T:CommissionMicroservice.Controllers.MemberController">
+            <summary>
+            Kontroler clana komisije sa CRUD
+            </summary>
+        </member>
+        <member name="M:CommissionMicroservice.Controllers.MemberController.GetMemberOptions">
+            <summary>
+            Vraca opcije za rad sa clanovima komisije u sistemu
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CommissionMicroservice.Controllers.MemberController.ValidateMember(CommissionMicroservice.Models.MemberCreationDto)">
+            <summary>
+            Proveravanje validnosti unesenih podataka
+            </summary>
+            <param name="member"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CommissionMicroservice.Data.UserMockRepository.FillData">
+            <summary>
+            Metoda koja upisuje testne podatke
+            </summary>
+        </member>
+        <member name="M:CommissionMicroservice.Data.UserMockRepository.UserWithCredentialsExists(System.String,System.String)">
+            <summary>
+            Proverava da li postoji korisnik sa prosleđenim kredencijalima
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CommissionMicroservice.Data.UserMockRepository.HashPassword(System.String)">
+            <summary>
+            Vrši hash-ovanje korisničke lozinke
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <returns>Generisan hash i salt</returns>
+        </member>
+        <member name="M:CommissionMicroservice.Data.UserMockRepository.VerifyPassword(System.String,System.String,System.String)">
+            <summary>
+            Proverava validnost prosleđene lozinke sa prosleđenim hash-om
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <param name="savedHash">Sačuvan hash</param>
+            <param name="savedSalt">Sačuvan salt</param>
+            <returns></returns>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.Commission.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.Commission.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.Commission.MembersOfCommission">
+            <summary>
+            Clanovi komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.CommissionConfirmation.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.CommissionConfirmation.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.CommissionConfirmation.MembersOfCommission">
+            <summary>
+            Clanovi komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.Member.MemberID">
+            <summary>
+            ID clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.Member.FirstName">
+            <summary>
+            Ime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.Member.LastName">
+            <summary>
+            Prezime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.Member.Role">
+            <summary>
+            Funkcija clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.Member.CommissionID">
+            <summary>
+            Identifikator komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.MemberConfirmation.MemberID">
+            <summary>
+            ID clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.MemberConfirmation.FirstName">
+            <summary>
+            Ime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.MemberConfirmation.LastName">
+            <summary>
+            Prezime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.MemberConfirmation.Role">
+            <summary>
+            Funkcija clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.MemberConfirmation.CommissionID">
+            <summary>
+            Identifikator komisije
+            </summary>
+        </member>
+        <member name="T:CommissionMicroservice.Models.CommissionConfirmationDto">
+            <summary>
+            DTO za potvrdu komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionConfirmationDto.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionConfirmationDto.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionConfirmationDto.President">
+            <summary>
+            Predsednik komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionConfirmationDto.MembersOfCommission">
+            <summary>
+            Clanovi komisije
+            </summary>
+        </member>
+        <member name="T:CommissionMicroservice.Models.CommissionCreationDto">
+            <summary>
+            DTO za kreiranje komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionCreationDto.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionCreationDto.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionCreationDto.President">
+            <summary>
+            Predsednik komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionCreationDto.MembersOfCommission">
+            <summary>
+            Clanovi komisije
+            </summary>
+        </member>
+        <member name="T:CommissionMicroservice.Models.CommissionDto">
+            <summary>
+            DTO za komisiju
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionDto.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionDto.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionDto.President">
+            <summary>
+            Predsednik komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionDto.MembersOfCommission">
+            <summary>
+            Clanovi komisije
+            </summary>
+        </member>
+        <member name="T:CommissionMicroservice.Models.CommissionUpdateDto">
+            <summary>
+            DTO za ažuriranje komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionUpdateDto.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionUpdateDto.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionUpdateDto.President">
+            <summary>
+            Predsednik komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionUpdateDto.MembersOfCommission">
+            <summary>
+            Clanovi komisije
+            </summary>
+        </member>
+        <member name="T:CommissionMicroservice.Models.MemberConfirmationDto">
+            <summary>
+            DTO za potvrdu clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberConfirmationDto.MemberID">
+            <summary>
+            ID clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberConfirmationDto.FirstName">
+            <summary>
+            Ime clana komsije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberConfirmationDto.LastName">
+            <summary>
+            Prezime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberConfirmationDto.Role">
+            <summary>
+            Funkcija clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberConfirmationDto.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberConfirmationDto.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="T:CommissionMicroservice.Models.MemberCreationDto">
+            <summary>
+            DTO za kreiranje člana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberCreationDto.MemberID">
+            <summary>
+            ID clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberCreationDto.FirstName">
+            <summary>
+            Ime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberCreationDto.LastName">
+            <summary>
+            Prezime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberCreationDto.Role">
+            <summary>
+            Funkcija clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberCreationDto.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberCreationDto.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="T:CommissionMicroservice.Models.MemberDto">
+            <sumary>
+            DTO za clana komisije
+            </sumary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberDto.MemberID">
+            <summary>
+            ID clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberDto.FirstName">
+            <summary>
+            Ime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberDto.LastName">
+            <summary>
+            Prezime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberDto.Role">
+            <summary>
+            Funkcija clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberDto.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberDto.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="T:CommissionMicroservice.Models.MemberUpdateDto">
+            <summary>
+            DTO za ažuriranje člana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberUpdateDto.MemberID">
+            <summary>
+            ID clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberUpdateDto.FirstName">
+            <summary>
+            Ime clana komsije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberUpdateDto.LastName">
+            <summary>
+            Prezime clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberUpdateDto.Role">
+            <summary>
+            Funkcija clana komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberUpdateDto.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.MemberUpdateDto.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -37,7 +37,7 @@ namespace CommissionMicroservice.Data
 
         public List<Commission> GetCommissions(string presidentID = null)
         {
-            return context.Commissions.Where(e => presidentID == null || e.President.MemberID == Guid.Parse(presidentID)).ToList();
+            return context.Commissions.Where(e => (presidentID == null || e.President.MemberID == Guid.Parse(presidentID))).ToList();
         }
 
         public void UpdateCommission(Commission commission)

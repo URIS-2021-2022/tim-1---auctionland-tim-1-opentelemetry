@@ -9,13 +9,36 @@ namespace CommissionMicroservice.Entities
 {
     public class Member
     {
+        /// <summary>
+        /// ID clana komisije
+        /// </summary>
         [Key]
+        [Required]
         public Guid MemberID { get; set; }
+
+        /// <summary>
+        /// Ime clana komisije
+        /// </summary>
+        [Required]
         public string FirstName { get; set; }
+
+        /// <summary>
+        /// Prezime clana komisije
+        /// </summary>
+        [Required]
         public string LastName { get; set; }
+
+        /// <summary>
+        /// Funkcija clana komisije
+        /// </summary>
+        [Required]
         public string Role { get; set; }
 
-        [ForeignKey("Commission")]
-        public Commission CommissionID { get; set; }
+        /// <summary>
+        /// Identifikator komisije
+        /// </summary>
+        [ForeignKey("CommissionID")]
+        public Guid CommissionID { get; set; }
+        public string NameCommission { get; set; }
     }
 }

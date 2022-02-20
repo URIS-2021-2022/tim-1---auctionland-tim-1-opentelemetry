@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,6 +38,8 @@ namespace CommissionMicroservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CommissionContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CommissionDB")));
+
             services.AddControllers(setup =>
                setup.ReturnHttpNotAcceptable = true
            ).AddXmlDataContractSerializerFormatters() //Dodajemo podršku za XML tako da ukoliko klijent to traži u Accept header-u zahteva možemo da serializujemo payload u XML u odgovoru.
@@ -106,27 +109,28 @@ namespace CommissionMicroservice
                 };
             });
 
-            services.AddSingleton<IMemberRepository, MemberRepository>();
-            services.AddSingleton<ICommissionRepository, CommissionRepository>();
+            services.AddScoped<ICommissionRepository, CommissionRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
-            //services.AddScoped<IMemberRepository, MemberRepository>();
-            //services.AddScoped<ICommissionRepository, CommissionRepository>();
+
+            services.AddHttpContextAccessor();
+
+            //services.AddControllers().AddNewtonsoftJson(options =>
+            //options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("CommissionOpenApiSpecification",
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
-                        Title = "Commission Exam Registration API",
+                        Title = "Commission API",
                         Version = "1",
-                        //Često treba da dodamo neke dodatne informacije
                         Description = "Pomoću ovog API-ja može da se vrši dodavanje komisije, modifikacija ili brisanje komisija.",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact
                         {
-                            Name = "Marko Marković",
-                            Email = "marko@mail.com",
-                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                            Name = "Anđela Todorić",
+                            Email = "andjelatodoric@gmail.com"
                         },
                         License = new Microsoft.OpenApi.Models.OpenApiLicense
                         {
@@ -144,9 +148,33 @@ namespace CommissionMicroservice
 
                 //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
                 setupAction.IncludeXmlComments(xmlCommentsPath);
+
+                setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Molim Vas unesite vaš token",
+                    Name = "Autorizacija korisnika",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+
+                setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    Array.Empty<string>()
+                    }
+                });
             });
 
-            //services.AddDbContext<CommissionContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -155,8 +183,6 @@ namespace CommissionMicroservice
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CommissionMicroservice v1"));
             }
             else //Ukoliko se nalazimo u Production modu postavljamo default poruku za greške koje nastaju na servisu
             {
@@ -181,7 +207,7 @@ namespace CommissionMicroservice
             app.UseSwaggerUI(setupAction =>
             {
                 //Podesavamo endpoint gde Swagger UI moze da pronadje OpenAPI specifikaciju
-                setupAction.SwaggerEndpoint("/swagger/CommissionOpenApiSpecification/swagger.json", "Commission Exam Registration API");
+                setupAction.SwaggerEndpoint("/swagger/CommissionOpenApiSpecification/swagger.json", "Commission API");
                 setupAction.RoutePrefix = ""; //Dokumentacija ce sada biti dostupna na root-u (ne mora da se pise /swagger)
             });
 

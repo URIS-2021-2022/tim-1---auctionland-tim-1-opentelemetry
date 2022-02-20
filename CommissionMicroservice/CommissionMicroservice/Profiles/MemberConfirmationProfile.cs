@@ -12,7 +12,9 @@ namespace CommissionMicroservice.Profiles
     {
         public MemberConfirmationProfile()
         {
-            CreateMap<MemberConfirmation, MemberConfirmationDto>();
+            CreateMap<MemberConfirmation, MemberConfirmationDto>().ForMember(
+                dest => dest.FirstName,
+                opt => opt.MapFrom(src => $"{ src.FirstName} { src.LastName }")); ;
             CreateMap<Member, MemberConfirmation>();
         }
     }

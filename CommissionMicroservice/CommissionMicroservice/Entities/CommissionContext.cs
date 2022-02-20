@@ -21,7 +21,7 @@ namespace CommissionMicroservice.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(configuration.GetConnectionString("CommissionDB"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("CommissionDB"));
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -30,10 +30,16 @@ namespace CommissionMicroservice.Entities
             {
                 b.HasData(new
                 {
-                    CommissionID = Guid.Parse("8a411c13-a195-48f7-8dbd-67596c3974c0")
+                    CommissionID = Guid.Parse("8a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    NameCommission = "Prva komisija"
+                },
+                new
+                {
+                    CommissionID = Guid.Parse("8a211c13-a195-48f7-8dbd-67596c3974c0"),
+                    NameCommission = "Druga komisija"
                 });
 
-                b.OwnsOne(e => e.President).HasData(new
+                /*b.OwnsOne(e => e.President).HasData(new
                 {
                     CommissionID = Guid.Parse("8a411c13-a195-48f7-8dbd-67596c3974c0"),
                     MemberID = Guid.Parse("2a411c13-a196-48f7-88bd-67596c3974c3"),
@@ -58,8 +64,37 @@ namespace CommissionMicroservice.Entities
                     FirstName = "Jovan",
                     LastName = "Jovanovic",
                     Role = "Clan"
-                });
+                });*/
             });
+
+            builder.Entity<Member>().HasData(
+                new
+                { 
+                    MemberID = Guid.Parse("2a411c13-a196-48f7-88bd-67596c3974c3"),
+                    FirstName = "Marko",
+                    LastName = "Markovic",
+                    Role = "Predsednik",
+                    CommissionID = Guid.Parse("8a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    NameCommission = "Prva komisija"
+                },
+                new
+                {
+                    MemberID = Guid.Parse("3a411c13-a196-48f7-88bd-67596c3974c2"),
+                    FirstName = "Petar",
+                    LastName = "Petrovic",
+                    Role = "Clan",
+                    CommissionID = Guid.Parse("8a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    NameCommission = "Prva komisija"
+                },
+                new
+                {
+                    MemberID = Guid.Parse("4a411c13-a196-48f7-88bd-67596c3974c4"),
+                    FirstName = "Jovan",
+                    LastName = "Jovanovic",
+                    Role = "Clan",
+                    CommissionID = Guid.Parse("8a411c13-a195-48f7-8dbd-67596c3974c0"),
+                    NameCommission = "Prva komisija"
+                });
         }
     }
 }

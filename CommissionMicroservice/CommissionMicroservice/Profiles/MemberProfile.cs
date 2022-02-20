@@ -13,7 +13,7 @@ namespace CommissionMicroservice.Profiles
         public MemberProfile()
         {
             CreateMap<Member, MemberDto>();
-            CreateMap<MemberCreationDto, Member>();
+            CreateMap<MemberCreationDto, Member>().ForAllMembers(opt => opt.Condition(src => src != null));
             CreateMap<MemberUpdateDto, Member>();
             CreateMap<Member, Member>();
         }

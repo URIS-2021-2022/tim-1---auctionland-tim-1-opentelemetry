@@ -35,11 +35,10 @@ namespace CommissionMicroservice.Data
             return context.Members.FirstOrDefault(e => e.MemberID == memberID);
         }
 
-        public List<Member> GetMembers(string firstName = null, string lastName = null, string role = null, Commission commission = null)
+        public List<Member> GetMembers(string firstName = null, string lastName = null)
         {
             return context.Members.Where(m => (firstName == null || m.FirstName == firstName &&
-                                               lastName == null || m.LastName == lastName &&
-                                               role == null || m.Role == role)).ToList();
+                                               lastName == null || m.LastName == lastName)).ToList();
         }
 
         public void UpdateMember(Member member)

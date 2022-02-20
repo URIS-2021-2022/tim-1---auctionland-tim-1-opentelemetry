@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace CommissionMicroservice.Controllers
 {
+    /// <summary>
+    /// Kontroler komisije sa CRUD 
+    /// </summary>
     [ApiController]
     [Route("api/commissions")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
@@ -30,10 +33,18 @@ namespace CommissionMicroservice.Controllers
             this.linkGenerator = linkGenerator;
         }
 
+        /// <summary>
+        /// Vraca sve komisije po zadatom predsedniku 
+        /// </summary>
+        /// <param name="presidentId">Predsednik komisije</param>
+        /// <returns>Lista komisija</returns>
+        /// <response code="200">Vraća listu komisija</response>
+        /// <response code="404">Nije pronađena ni jedna komisija</response>
         [HttpHead]
         [HttpGet]
-        //[ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<CommissionDto>> GetCommissions(string presidentId)
         {
             List<Commission> commissions = commissionRepository.GetCommissions(presidentId);
@@ -44,18 +55,37 @@ namespace CommissionMicroservice.Controllers
             return Ok(mapper.Map<List<CommissionDto>>(commissions));
         }
 
+        /// <summary>
+        /// Vraca jednu komisiju sa prosledjenim ID-jem
+        /// </summary>
+        /// <param name="commissionId">ID komisije</param>
+        /// <returns>Vraca jednu komisiju</returns>
+        /// <response code="200">Vraća komisiju sa prosledjenim ID-jem</response>
+        /// <response code="404">Nije pronađena ni jedna komisija sa tim ID-jem</response>
         [HttpGet("{commissionID}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<CommissionDto>> GetCommissionById(Guid commissionId)
         {
             Commission commission = commissionRepository.GetCommissionById(commissionId);
             if (commission == null)
             {
-                return NoContent();
+                return NotFound();
             }
             return Ok(mapper.Map<CommissionDto>(commission));
         }
 
+        /// <summary>
+        /// Kreira novu komisiju
+        /// </summary>
+        /// <param name="commissionDto">Model komisije</param>
+        /// <returns>Potvrda o kreiranoj komisiji</returns>
+        /// <response code="201">Komisija je uspešno kreirana</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom kreiranja komisije</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<CommissionConfirmationDto> CreateCommission([FromBody] CommissionCreationDto commissionDto)
         {
             try
@@ -73,7 +103,18 @@ namespace CommissionMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Brisanje komisije sa prosledjenim ID-jem
+        /// </summary>
+        /// <param name="commissionID">ID komisije</param>
+        /// <returns></returns>
+        /// <response code="404">Nije pronađena komisija</response>
+        /// <response code="204">Komisija sa prosleđenim id-jem je obrisana</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja komisije</response>
         [HttpDelete("{commissionID}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteCommission(Guid commissionID)
         {
             try
@@ -84,6 +125,7 @@ namespace CommissionMicroservice.Controllers
                     return NotFound();
                 }
                 commissionRepository.DeleteCommission(commissionID);
+                commissionRepository.SaveChanges();
                 return NoContent();
             }
             catch
@@ -92,7 +134,18 @@ namespace CommissionMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Modifikacija postojece komisije
+        /// </summary>
+        /// <param name="commissionDto">Model komisije</param>
+        /// <returns>Potvrda o modifikovanoj komisiji</returns>
+        /// <response code="200">Vraća ažuriranu komisiju</response>
+        /// <response code="404">Komisija koju je potrebno ažurirati nije pronađena</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja komisije</response>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<CommissionConfirmationDto> UpdateCommission([FromBody] CommissionUpdateDto commissionDto)
         {
             try
@@ -104,7 +157,7 @@ namespace CommissionMicroservice.Controllers
                 }
                 Commission commission = mapper.Map<Commission>(commissionDto);
                 mapper.Map(commission, oldCommission);
-                return Ok(mapper.Map<CommissionDto>(oldCommission));
+                return Ok(mapper.Map<CommissionConfirmationDto>(oldCommission));
             }
             catch
             {
@@ -112,14 +165,24 @@ namespace CommissionMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraca opcije za rad sa komisijama u sistemu
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
+        [AllowAnonymous]
         public IActionResult GetCommissionOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
         }
 
-        public bool Validate(CommissionCreationDto commissionDto)
+        /// <summary>
+        /// Proveravanje validnosti unesenih podataka
+        /// </summary>
+        /// <param name="commissionDto">Model komisije</param>
+        /// <returns></returns>
+        private static bool Validate(CommissionCreationDto commissionDto)
         {
             if(commissionDto.President == null)
             {

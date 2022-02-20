@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace CommissionMicroservice.Controllers
 {
+    /// <summary>
+    /// Kontroler clana komisije sa CRUD
+    /// </summary>
     [ApiController]
     [Route("api/members")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
@@ -29,11 +32,24 @@ namespace CommissionMicroservice.Controllers
             this.linkGenerator = linkGenerator;
         }
 
+        /// <summary>
+        /// Vraca clanove komisije po zadatom imenu i prezimenu
+        /// </summary>
+        /// <param name="firstName">Ime clana komisije</param>
+        /// <param name="lastName">Prezime clana komisije</param>
+        /// <returns></returns>
+        /// <response code="200">Vraća listu clanova komisije</response>
+        /// <response code="204">Nema podataka</response>
+        /// <response code="404">Nije pronađen ni jedan clan</response>
         [HttpGet]
         [HttpHead]
-        public ActionResult<List<MemberDto>> GetMembers(string firstName, string lastName, string role, Commission commissionID)
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<List<MemberDto>> GetMembers(string firstName, string lastName)
         {
-            List<Member> members = memberRepository.GetMembers(firstName, lastName, role, commissionID);
+            List<Member> members = memberRepository.GetMembers(firstName, lastName);
             if (members.Count == 0 || members == null)
             {
                 return NoContent();
@@ -41,7 +57,19 @@ namespace CommissionMicroservice.Controllers
             return Ok(mapper.Map<List<MemberDto>>(members));
         }
 
+        /// <summary>
+        /// Vraca jednog clana sa proslednjenim ID-jem
+        /// </summary>
+        /// <param name="memberID">ID clana komisije</param>
+        /// <returns>Vraca jednog clana</returns>
+        /// <response code="200">Vraća clana komisije sa prosledjenim ID-jem</response>
+        /// <response code="404">Nije pronađen ni jedan clan komisije sa tim ID-jem</response>
+        /// <response code="500">Serverska greska</response>
         [HttpGet("{memberID}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<MemberDto> GetMemberById(Guid memberID)
         {
             Member member = memberRepository.GetMemberById(memberID);
@@ -52,7 +80,16 @@ namespace CommissionMicroservice.Controllers
             return Ok(mapper.Map<MemberDto>(member));
         }
 
+        /// <summary>
+        /// Kreira novog clana komisije
+        /// </summary>
+        /// <param name="memberDto">Model clana komisije</param>
+        /// <returns>Potvrda o kreiranom clanu komisije</returns>
+        /// <response code="201">Clan komisije je uspešno kreiran</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom kreiranja clana komisije</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<MemberConfirmationDto> CreateMember([FromBody] MemberCreationDto memberDto)
         {
             try
@@ -75,7 +112,18 @@ namespace CommissionMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Brisanje clana komisije sa proslednjenim ID-jem
+        /// </summary>
+        /// <param name="memberID">ID clana komisije</param>
+        /// <returns></returns>
+        /// <response code="404">Nije pronađen clan komisije</response>
+        /// <response code="204">Clan komisije sa prosleđenim id-jem je obrisan</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja clana komisije</response>
         [HttpDelete("{memberID}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteMember(Guid memberID)
         {
             try
@@ -94,7 +142,18 @@ namespace CommissionMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Modifikacija clana komisije
+        /// </summary>
+        /// <param name="memberDto">Model clana komisije</param>
+        /// <returns>Potvrda o modifikovanom clanu komisije</returns>
+        /// <response code="200">Vraća ažuriranog clana komisije</response>
+        /// <response code="404">Clan komisije kog je potrebno ažurirati nije pronađen</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja clana komisije</response>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<MemberUpdateDto> UpdateMember([FromBody] MemberUpdateDto memberDto)
         {
             try
@@ -114,13 +173,23 @@ namespace CommissionMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraca opcije za rad sa clanovima komisije u sistemu
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
+        [AllowAnonymous]
         public IActionResult GetMemberOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
         }
 
+        /// <summary>
+        /// Proveravanje validnosti unesenih podataka
+        /// </summary>
+        /// <param name="member">Model clana komisije</param>
+        /// <returns></returns>
         private bool ValidateMember(MemberCreationDto member)
         {
             if (member.FirstName != null & member.LastName != null && member.Role != null && member.CommissionID != null)
