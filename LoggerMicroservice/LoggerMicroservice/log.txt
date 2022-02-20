@@ -1,1 +1,0 @@
-INFO 19-Feb-22 * 12:12 microservice ADDRESS sent GET request. Response was: 200 OK
