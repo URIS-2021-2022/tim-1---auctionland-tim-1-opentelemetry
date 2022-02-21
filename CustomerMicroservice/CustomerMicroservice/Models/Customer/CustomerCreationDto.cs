@@ -4,29 +4,35 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CustomerMicroservice.Entities
+namespace CustomerMicroservice.Models
 {
-    public class Customer
+    /// <summary>
+    /// DTO za kreiranje kupca
+    /// </summary>
+    public class CustomerCreationDto
     {
         /// <summary>
         /// ID kupca
         /// </summary>
-        [Key]
+        [Required]
         public Guid CustomerID { get; set; }
 
         /// <summary>
         /// Prioritet 
         /// </summary>
+        [Required(ErrorMessage = "Mora se uneti prioritet")]
         public string Priority { get; set; }
 
         /// <summary>
         /// Ostvarena povrsina
         /// </summary>
+        [Required(ErrorMessage = "Potrebno je uneti ostvarenu povrsinu kupca")]
         public string RealizedArea { get; set; }
 
         /// <summary>
         /// Da li kupac ima zabranu
         /// </summary>
+        [Required(ErrorMessage = "Unesite da li kupac ima zabranu")]
         public bool HasABan { get; set; }
 
         /// <summary>
@@ -48,5 +54,10 @@ namespace CustomerMicroservice.Entities
         /// Adresa kupca
         /// </summary>
         public Guid AddressID { get; set; }
+
+        /// <summary>
+        /// Dokumenati kupca
+        /// </summary>
+        public Guid DocumentsID { get; set; }
     }
 }
