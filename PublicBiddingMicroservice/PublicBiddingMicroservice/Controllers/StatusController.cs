@@ -21,13 +21,18 @@ namespace PublicBiddingMicroservice.Controllers
         private readonly IStatusRepository statusRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateStatus)
         private readonly IMapper mapper;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public StatusController(IStatusRepository statusRepository, LinkGenerator linkGenerator, IMapper mapper, IAddressService addressService)
+        public StatusController(IStatusRepository statusRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
         {
             this.statusRepository = statusRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "ADDRESS";
         }
 
         /// <summary>
@@ -42,14 +47,20 @@ namespace PublicBiddingMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<StatusDto>> GetStatuss()
         {
+            loggerDto.HttpMethodName = "GET";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             var statuss = statusRepository.GetStatuss();
 
             //Ukoliko nismo pronašli ni jednan status vratiti status 204 (NoContent)
             if (statuss == null || statuss.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
-
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             //Ukoliko smo našli neke statuse vratiti status 200 i listu pronađenih statusa (DTO objekti)
             return Ok(mapper.Map<List<StatusDto>>(statuss));
         }
@@ -66,12 +77,17 @@ namespace PublicBiddingMicroservice.Controllers
         [HttpGet("{statusId}")] //Dodatak na rutu koja je definisana na nivou kontrolera
         public ActionResult<StatusDto> GetStatus(Guid statusId) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
+            loggerDto.HttpMethodName = "GET";
             var status = statusRepository.GetStatusById(statusId);
 
             if (status == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<StatusDto>(status));
         }
 
@@ -88,19 +104,23 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 Status statusEntity = mapper.Map<Status>(status);
                 StatusConfirmation confirmation = statusRepository.CreateStatus(statusEntity);
                 statusRepository.SaveChanges(); //Perzistiramo promene
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetStatus", "Status", new { statusId = confirmation.StatusId });
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (statusa).
                 return Created(location, mapper.Map<StatusConfirmationDto>(confirmation));
                 //return CreatedAtRoute(); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
             catch (Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 Console.WriteLine(ex);
                 //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
@@ -124,10 +144,13 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 //Proveriti da li uopšte postoji status koji pokušavamo da ažuriramo.
                 var oldStatus = statusRepository.GetStatusById(status.StatusId);
                 if (oldStatus == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 Status statusEntity = mapper.Map<Status>(status);
@@ -135,10 +158,14 @@ namespace PublicBiddingMicroservice.Controllers
                 mapper.Map(statusEntity, oldStatus); //Update objekta koji treba da sačuvamo u bazi                
 
                 statusRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<StatusDto>(oldStatus));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -159,19 +186,26 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var status = statusRepository.GetStatusById(statusId);
 
                 if (status == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
 
                 statusRepository.DeleteStatus(statusId);
                 statusRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }

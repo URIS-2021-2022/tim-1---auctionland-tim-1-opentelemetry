@@ -36,7 +36,7 @@ namespace PublicBiddingMicroservice.Controllers
             this.loggerMicroservice = loggerMicroservice;
             loggerDto = new LoggerDto
             {
-                Service = "Public Bidding"
+                Service = "PublicBidding"
             };
         }
 

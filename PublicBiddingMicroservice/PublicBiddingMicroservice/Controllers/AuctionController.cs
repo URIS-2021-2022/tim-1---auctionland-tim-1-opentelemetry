@@ -8,6 +8,7 @@ using AutoMapper;
 using PublicBiddingMicroservice.Models;
 using PublicBiddingMicroservice.Entities;
 using PublicBiddingMicroservice.Data;
+using PublicBiddingMicroservice.ServiceCalls;
 
 namespace PublicBiddingMicroservice.Controllers
 {
@@ -20,13 +21,18 @@ namespace PublicBiddingMicroservice.Controllers
         private readonly IAuctionRepository auctionRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateAuction)
         private readonly IMapper mapper;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public AuctionController(IAuctionRepository auctionRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public AuctionController(IAuctionRepository auctionRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
         {
             this.auctionRepository = auctionRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "Auction";
         }
 
         /// <summary>
@@ -41,14 +47,20 @@ namespace PublicBiddingMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<AuctionDto>> GetAuctions()
         {
+            loggerDto.HttpMethodName = "get";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             var auctions = auctionRepository.GetAuctions();
 
             //Ukoliko nismo pronašli ni jednu licitaciju vratiti status 204 (NoContent)
             if (auctions == null || auctions.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto); 
                 return NoContent();
             }
-
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             //Ukoliko smo našli neke licitacije vratiti status 200 i listu pronađenih licitacija (DTO objekti)
             return Ok(mapper.Map<List<AuctionDto>>(auctions));
         }
@@ -65,12 +77,17 @@ namespace PublicBiddingMicroservice.Controllers
         [HttpGet("{auctionId}")] //Dodatak na rutu koja je definisana na nivou kontrolera
         public ActionResult<AuctionDto> GetAuction(Guid auctionId) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
+            loggerDto.HttpMethodName = "GET";
             var auction = auctionRepository.GetAuctionById(auctionId);
 
             if (auction == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<AuctionDto>(auction));
         }
 
@@ -87,19 +104,23 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 Auction auctionEntity = mapper.Map<Auction>(auction);
                 AuctionConfirmation confirmation = auctionRepository.CreateAuction(auctionEntity);
                 auctionRepository.SaveChanges(); //Perzistiramo promene
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetAuction", "Auction", new { auctionId = confirmation.AuctionId });
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (licitacije) i samom licitacijom.
                 return Created(location, mapper.Map<AuctionConfirmationDto>(confirmation));
                 //return CreatedAtRoute(); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
             catch (Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 Console.WriteLine(ex);
                 //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
@@ -123,10 +144,13 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 //Proveriti da li uopšte postoji licitacija koju pokušavamo da ažuriramo.
                 var oldAuction = auctionRepository.GetAuctionById(auction.AuctionId);
                 if (oldAuction == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 Auction auctionEntity = mapper.Map<Auction>(auction);
@@ -134,10 +158,14 @@ namespace PublicBiddingMicroservice.Controllers
                 mapper.Map(auctionEntity, oldAuction); //Update objekta koji treba da sačuvamo u bazi                
 
                 auctionRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<AuctionDto>(oldAuction));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -158,19 +186,25 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var auction = auctionRepository.GetAuctionById(auctionId);
 
                 if (auction == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
-
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 auctionRepository.DeleteAuction(auctionId);
                 auctionRepository.SaveChanges();
                 return NoContent();
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }

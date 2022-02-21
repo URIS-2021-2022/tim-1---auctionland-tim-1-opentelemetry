@@ -21,13 +21,18 @@ namespace PublicBiddingMicroservice.Controllers
         private readonly IStageRepository stageRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateStage)
         private readonly IMapper mapper;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public StageController(IStageRepository stageRepository, LinkGenerator linkGenerator, IMapper mapper, IAddressService addressService)
+        public StageController(IStageRepository stageRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
         {
             this.stageRepository = stageRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "ADDRESS";
         }
 
         /// <summary>
@@ -42,14 +47,21 @@ namespace PublicBiddingMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<StageDto>> GetStages()
         {
+            loggerDto.HttpMethodName = "GET";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             var stages = stageRepository.GetStages();
 
             //Ukoliko nismo pronašli ni jednu etapu vratiti status 204 (NoContent)
             if (stages == null || stages.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
+                return NoContent();
                 return NoContent();
             }
-
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             //Ukoliko smo našli neke etape vratiti status 200 i listu pronađenih etapa (DTO objekti)
             return Ok(mapper.Map<List<StageDto>>(stages));
         }
@@ -66,12 +78,17 @@ namespace PublicBiddingMicroservice.Controllers
         [HttpGet("{stageId}")] //Dodatak na rutu koja je definisana na nivou kontrolera
         public ActionResult<StageDto> GetStage(Guid stageId) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
+            loggerDto.HttpMethodName = "GET";
             var stage = stageRepository.GetStageById(stageId);
 
             if (stage == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<StageDto>(stage));
         }
 
@@ -88,19 +105,23 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 Stage stageEntity = mapper.Map<Stage>(stage);
                 StageConfirmation confirmation = stageRepository.CreateStage(stageEntity);
                 stageRepository.SaveChanges(); //Perzistiramo promene
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetStage", "Stage", new { stageId = confirmation.StageId });
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (etape).
                 return Created(location, mapper.Map<StageConfirmationDto>(confirmation));
                 //return CreatedAtRoute(); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
             catch (Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 Console.WriteLine(ex);
                 //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
@@ -124,10 +145,13 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 //Proveriti da li uopšte postoji etapa koju pokušavamo da ažuriramo.
                 var oldStage = stageRepository.GetStageById(stage.StageId);
                 if (oldStage == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 Stage stageEntity = mapper.Map<Stage>(stage);
@@ -135,10 +159,14 @@ namespace PublicBiddingMicroservice.Controllers
                 mapper.Map(stageEntity, oldStage); //Update objekta koji treba da sačuvamo u bazi                
 
                 stageRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<StageDto>(oldStage));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -159,19 +187,26 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var stage = stageRepository.GetStageById(stageId);
 
                 if (stage == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
 
                 stageRepository.DeleteStage(stageId);
                 stageRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
