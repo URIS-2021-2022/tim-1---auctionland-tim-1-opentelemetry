@@ -19,6 +19,7 @@ namespace UserMicroservice.Pages
 
         public void OnGet()
         {
+            // Do nothing.
         }
     }
 }

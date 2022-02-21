@@ -40,7 +40,7 @@ namespace PublicBiddingMicroservice
             {
                 setup.ReturnHttpNotAcceptable = true;
                 //Ovde sa setup.Filters mozemo dodati response tipove za sve kontrolere
-                //setup.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status200OK));                
+                setup.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status200OK));                
             }
             ).AddXmlDataContractSerializerFormatters() //Dodajemo podršku za XML tako da ukoliko klijent to traži u Accept header-u zahteva možemo da serializujemo payload u XML u odgovoru.
             .ConfigureApiBehaviorOptions(setupAction => //Deo koji se odnosi na podržavanje Problem Details for HTTP APIs
