@@ -32,7 +32,7 @@ namespace PublicBiddingMicroservice.Controllers
             this.mapper = mapper;
             this.loggerMicroservice = loggerMicroservice;
             loggerDto = new LoggerDto();
-            loggerDto.Service = "ADDRESS";
+            loggerDto.Service = "Status";
         }
 
         /// <summary>
