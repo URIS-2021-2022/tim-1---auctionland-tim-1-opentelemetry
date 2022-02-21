@@ -14,19 +14,22 @@
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.AuctionController.GetAuction(System.Guid)">
             <summary>
-            Vraća jednu etapu na osnovu ID-ja licitacije.
+            Vraća jednu licitaciju na osnovu ID-ja licitacije.
             </summary>
             <param name="auctionId">ID licitacije</param>
             <returns></returns>
             <response code="200">Vraća traženu licitaciju</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.AuctionController.CreateAuction(PublicBiddingMicroservice.Models.AuctionCreationDto)">
+            <summary>
+            Kreira jednu licitaciju.
+            </summary>
             <response code="200">Vraća kreiranu licitaciju</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranje licitacije</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.AuctionController.UpdateAuction(PublicBiddingMicroservice.Models.AuctionUpdateDto)">
             <summary>
-            Ažurira jednu prijavu ispita.
+            Ažurira jednu licitaciju.
             </summary>
             <param name="auction">Model prijave licitacije koji se ažurira</param>
             <returns>Potvrdu o modifikovanoj licitaciji.</returns>
@@ -34,10 +37,19 @@
             <response code="400">Licitacija koja se ažurira nije pronađena</response>
             <response code="500">Došlo je do greške na serveru prilikom ažuriranja licitacije</response>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:PublicBiddingMicroservice.Controllers.AuctionController.DeleteAuction(System.Guid)" -->
+        <member name="M:PublicBiddingMicroservice.Controllers.AuctionController.DeleteAuction(System.Guid)">
+            <summary>
+            Vrši brisanje jedne licitacije na osnovu ID-ja prijave.
+            </summary>
+            <param name="auctionId">ID licitacije </param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Licitacija uspešno obrisana</response>
+            <response code="404">Nije pronađena licitacija za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja licitacija</response>
+        </member>
         <member name="M:PublicBiddingMicroservice.Controllers.AuctionController.GetAuctionOptions">
             <summary>
-            Vraća opcije za rad sa licitacijama
+            Vraća opcije za rad sa licitacijama.
             </summary>
             <returns></returns>
         </member>
@@ -50,7 +62,7 @@
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.PublicBiddingController.GetPublicBiddings(System.Int32)">
             <summary>
-            Vraća sve prijave ispita za zadate filtere.
+            Vraća sva javna nadmetanja za zadate filtere.
             </summary>
             <param name="numberOfParticipants">Broj ucesnika</param>
             <returns>Lista javnih nademtanja</returns>
@@ -66,12 +78,15 @@
             <response code="200">Vraća traženo javno nadmetanje</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.PublicBiddingController.CreatePublicBidding(PublicBiddingMicroservice.Models.PublicBiddingCreationDto)">
+            <summary>
+            Kreira jedno javno nadmetanje.
+            </summary>
             <response code="200">Vraća kreirano javno nadmetanje</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranja javnog nadmetanja</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.PublicBiddingController.UpdatePublicBidding(PublicBiddingMicroservice.Models.PublicBiddingUpdateDto)">
             <summary>
-            Ažurira jednu prijavu ispita.
+            Ažurira jedno javno nadmetanje.
             </summary>
             <param name="publicBidding">Model javnog nadmetanja koji se ažurira</param>
             <returns>Potvrdu o modifikovanom javnom nadmetanju.</returns>
@@ -91,7 +106,7 @@
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.PublicBiddingController.GetPublicBiddingOptions">
             <summary>
-            Vraća opcije za rad sa prijavama ispita
+            Vraća opcije za rad sa javnim nadmetanjima.
             </summary>
             <returns></returns>
         </member>
@@ -112,12 +127,15 @@
             <response code="200">Vraća traženi tip javnog nadmetanja</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.PublicBiddingTypeController.CreatePublicBiddingType(PublicBiddingMicroservice.Models.PublicBiddingTypeCreationDto)">
+            <summary>
+            Kreira jedan tip javnog nadmetanja.
+            </summary>
             <response code="200">Vraća kreirani tip javnog nadmetanja</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranja tipa javnog nadmetanja</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.PublicBiddingTypeController.UpdatePublicBiddingType(PublicBiddingMicroservice.Models.PublicBiddingTypeUpdateDto)">
             <summary>
-            Ažurira jednu prijavu ispita.
+            Ažurira jedan tip javnog nadmetanja.
             </summary>
             <param name="publicBiddingType">Model prijave tipa javnog nadmetanja koji se ažurira</param>
             <returns>Potvrdu o modifikovanom tipu javnog nadmetanja.</returns>
@@ -125,10 +143,19 @@
             <response code="400">Tip javnog nadmetanja koji se ažurira nije pronađen</response>
             <response code="500">Došlo je do greške na serveru prilikom ažuriranja tipa javnog nadmetanja</response>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:PublicBiddingMicroservice.Controllers.PublicBiddingTypeController.DeletePublicBiddingType(System.Guid)" -->
+        <member name="M:PublicBiddingMicroservice.Controllers.PublicBiddingTypeController.DeletePublicBiddingType(System.Guid)">
+            <summary>
+            Vrši brisanje jednog tipa javnog nadmetanja na osnovu ID-ja tipa.
+            </summary>
+            <param name="publicBiddingTypeId">ID tipa javnog nadmetanja</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Tip javnog nadmetanja je uspešno obrisan</response>
+            <response code="404">Nije pronađen tip javnog nadmetanja za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja tipa javnog nadmetanja</response>
+        </member>
         <member name="M:PublicBiddingMicroservice.Controllers.PublicBiddingTypeController.GetPublicBiddingTypeOptions">
             <summary>
-            Vraća opcije za rad sa tipovima javnog nadmetanja
+            Vraća opcije za rad sa tipovima javnog nadmetanja.
             </summary>
             <returns></returns>
         </member>
@@ -149,12 +176,15 @@
             <response code="200">Vraća traženu etapu</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.StageController.CreateStage(PublicBiddingMicroservice.Models.StageCreationDto)">
+            <summary>
+            Kreira jednu etapu.
+            </summary>
             <response code="200">Vraća kreiranu etapu</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranje etape</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.StageController.UpdateStage(PublicBiddingMicroservice.Models.StageUpdateDto)">
             <summary>
-            Ažurira jednu prijavu ispita.
+            Ažurira jednu etapu.
             </summary>
             <param name="stage">Model prijave etape koji se ažurira</param>
             <returns>Potvrdu o modifikovanoj etapi.</returns>
@@ -162,10 +192,19 @@
             <response code="400">Etapa koja se ažurira nije pronađena</response>
             <response code="500">Došlo je do greške na serveru prilikom ažuriranja etape</response>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:PublicBiddingMicroservice.Controllers.StageController.DeleteStage(System.Guid)" -->
+        <member name="M:PublicBiddingMicroservice.Controllers.StageController.DeleteStage(System.Guid)">
+            <summary>
+            Vrši brisanje jedne etape na osnovu ID-ja etape.
+            </summary>
+            <param name="stageId">ID etape</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Etapa uspešno obrisana</response>
+            <response code="404">Nije pronađena etapa za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja etape</response>
+        </member>
         <member name="M:PublicBiddingMicroservice.Controllers.StageController.GetStageOptions">
             <summary>
-            Vraća opcije za rad sa etapama
+            Vraća opcije za rad sa etapama.
             </summary>
             <returns></returns>
         </member>
@@ -186,12 +225,15 @@
             <response code="200">Vraća traženi status</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.StatusController.CreateStatus(PublicBiddingMicroservice.Models.StatusCreationDto)">
+            <summary>
+            Kreira jedan status.
+            </summary>
             <response code="200">Vraća kreirani status</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranje statusa</response>
         </member>
         <member name="M:PublicBiddingMicroservice.Controllers.StatusController.UpdateStatus(PublicBiddingMicroservice.Models.StatusUpdateDto)">
             <summary>
-            Ažurira jednu prijavu ispita.
+            Ažurira jedan status.
             </summary>
             <param name="status">Model prijave statusa koji se ažurira</param>
             <returns>Potvrdu o modifikovanom statusu.</returns>
@@ -199,10 +241,19 @@
             <response code="400">Status koja se ažurira nije pronađena</response>
             <response code="500">Došlo je do greške na serveru prilikom ažuriranja statusa</response>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:PublicBiddingMicroservice.Controllers.StatusController.DeleteStatus(System.Guid)" -->
+        <member name="M:PublicBiddingMicroservice.Controllers.StatusController.DeleteStatus(System.Guid)">
+            <summary>
+            Vrši brisanje jednog statusa na osnovu ID-ja statusa.
+            </summary>
+            <param name="statusId">ID statusa</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Status uspešno obrisan</response>
+            <response code="404">Nije pronađen statusa za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja statusa</response>
+        </member>
         <member name="M:PublicBiddingMicroservice.Controllers.StatusController.GetStatusOptions">
             <summary>
-            Vraća opcije za rad sa statusima
+            Vraća opcije za rad sa statusima.
             </summary>
             <returns></returns>
         </member>

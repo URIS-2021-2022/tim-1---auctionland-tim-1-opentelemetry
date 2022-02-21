@@ -134,8 +134,8 @@ namespace PublicBiddingMicroservice
                         Description = "Pomoću ovog API-ja može da se vrši kreiranje javnog nadmetanja kao i pregled i izmjena javnog nadmetanja",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact
                         {
-                            Name = "Marko Marković",
-                            Email = "marko@mail.com",
+                            Name = "Ana Zuber",
+                            Email = "ana@mail.com",
                             Url = new Uri("http://www.ftn.uns.ac.rs/")
                         },
                         License = new Microsoft.OpenApi.Models.OpenApiLicense

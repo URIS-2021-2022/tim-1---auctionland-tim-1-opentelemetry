@@ -75,6 +75,9 @@ namespace PublicBiddingMicroservice.Controllers
             return Ok(mapper.Map<StatusDto>(status));
         }
 
+        /// <summary>
+        /// Kreira jedan status.
+        /// </summary>
         /// <response code="200">Vraća kreirani status</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranje statusa</response>
         [HttpPost]
@@ -105,7 +108,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Ažurira jednu prijavu ispita.
+        /// Ažurira jedan status.
         /// </summary>
         /// <param name="status">Model prijave statusa koji se ažurira</param>
         /// <returns>Potvrdu o modifikovanom statusu.</returns>
@@ -141,7 +144,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Vrši brisanje jedne statusa na osnovu ID-ja statusa.
+        /// Vrši brisanje jednog statusa na osnovu ID-ja statusa.
         /// </summary>
         /// <param name="statusId">ID statusa</param>
         /// <returns>Status 204 (NoContent)</returns>
@@ -174,7 +177,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
         
         /// <summary>
-        /// Vraća opcije za rad sa statusima
+        /// Vraća opcije za rad sa statusima.
         /// </summary>
         /// <returns></returns>
         [HttpOptions]
