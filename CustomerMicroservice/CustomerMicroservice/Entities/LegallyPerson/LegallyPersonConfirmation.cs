@@ -6,47 +6,51 @@ using System.Threading.Tasks;
 
 namespace CustomerMicroservice.Entities
 {
-    public class PhysicalPerson : Customer
+    public class LegallyPersonConfirmation : CustomerConfirmation
     {
         /// <summary>
-        /// ID fizickog lica
+        /// ID pravnog lica
         /// </summary>
         [Key]
-        public Guid PhysicalPersonID { get; set; }
+        public Guid LegallyPersonID { get; set; }
 
         /// <summary>
-        /// JMBG fizickog lica
+        /// Maticni broj pravnog lica
         /// </summary>
-        public string JMBG { get; set; }
+        [Required]
+        public string IdentificationNumber { get; set; }
 
         /// <summary>
-        /// Ime fizickog lica
+        /// Naziv pravnog lica lica
         /// </summary>
-        public string FirstName { get; set; }
+        [Required]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Prezime fizickog lica
+        /// Faks pravnog lica
         /// </summary>
-        public string LastName { get; set; }
+        [Required]
+        public string Fax { get; set; }
 
         /// <summary>
-        /// Broj telefona 1 fizickog lica
+        /// Broj telefona 1 pravnog lica
         /// </summary>
         public string PhoneNumber1 { get; set; }
 
         /// <summary>
-        /// Broj telefona 2 fizickog lica
+        /// Broj telefona 2 pravnog lica
         /// </summary>
         public string PhoneNumber2 { get; set; }
 
         /// <summary>
-        /// Email fizickog lica 
+        /// Email pravnog lica 
         /// </summary>
         public string Email { get; set; }
 
         /// <summary>
-        /// Broj racuna fizickog lica
+        /// Broj racuna pravnog lica
         /// </summary>
+        [Required]
         public string AccountNumber { get; set; }
     }
 }
