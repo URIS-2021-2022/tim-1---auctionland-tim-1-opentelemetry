@@ -143,7 +143,7 @@ namespace PublicBiddingMicroservice.Controllers
         /// <summary>
         /// Vrši brisanje jedne etape na osnovu ID-ja etape.
         /// </summary>
-        /// <param name="stageId">ID etape/param>
+        /// <param name="stageId">ID etape</param>
         /// <returns>Status 204 (NoContent)</returns>
         /// <response code="204">Etapa uspešno obrisana</response>
         /// <response code="404">Nije pronađena etapa za brisanje</response>

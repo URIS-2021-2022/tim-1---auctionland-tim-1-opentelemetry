@@ -143,7 +143,7 @@ namespace PublicBiddingMicroservice.Controllers
         /// <summary>
         /// Vrši brisanje jedne statusa na osnovu ID-ja statusa.
         /// </summary>
-        /// <param name="statusId">ID statusa/param>
+        /// <param name="statusId">ID statusa</param>
         /// <returns>Status 204 (NoContent)</returns>
         /// <response code="204">Status uspešno obrisan</response>
         /// <response code="404">Nije pronađen statusa za brisanje</response>

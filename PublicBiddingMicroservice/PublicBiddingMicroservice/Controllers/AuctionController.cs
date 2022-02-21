@@ -142,7 +142,7 @@ namespace PublicBiddingMicroservice.Controllers
         /// <summary>
         /// Vrši brisanje jedne etape na osnovu ID-ja prijave.
         /// </summary>
-        /// <param name="auctionId">ID licitacije/param>
+        /// <param name="auctionId">ID licitacije </param>
         /// <returns>Status 204 (NoContent)</returns>
         /// <response code="204">Licitacija uspešno obrisana</response>
         /// <response code="404">Nije pronađena licitacija za brisanje</response>

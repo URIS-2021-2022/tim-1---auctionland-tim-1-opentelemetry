@@ -250,3 +250,4 @@ C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\PublicBidding
 C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\PublicBiddingMicroservice\PublicBiddingMicroservice\obj\Debug\net5.0\PublicBiddingMicroservice.Views.pdb
 C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\PublicBiddingMicroservice\PublicBiddingMicroservice\obj\Debug\net5.0\PublicBiddingMicroservice.genruntimeconfig.cache
 C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\PublicBiddingMicroservice\PublicBiddingMicroservice\obj\Debug\net5.0\PublicBiddingMicroservice.csproj.CopyComplete
+C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\PublicBiddingMicroservice\PublicBiddingMicroservice\bin\Debug\net5.0\PublicBiddingMicroservice.xml
