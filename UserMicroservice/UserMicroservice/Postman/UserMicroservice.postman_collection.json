@@ -42,6 +42,43 @@
 			"response": []
 		},
 		{
+			"name": "Users By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44381/api/users/75134947-a2ee-4464-e3ca-08d9f1697c4c",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44381",
+					"path": [
+						"api",
+						"users",
+						"75134947-a2ee-4464-e3ca-08d9f1697c4c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "User",
 			"request": {
 				"method": "POST",
@@ -83,7 +120,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"userId\": \"5845b7fc-d462-453f-14b8-08d9f16822c4\",\r\n  \"firstName\": \"Marko\",\r\n  \"lastName\": \"Maric\",\r\n  \"userName\": \"Mare\",\r\n  \"email\": \"string@gmail.com\",\r\n  \"password\": \"mar123\",\r\n  \"userType\": null\r\n}",
+					"raw": "{\r\n    \"userId\": \"75134947-a2ee-4464-e3ca-08d9f1697c4c\",\r\n    \"firstName\": \"Marko\",\r\n    \"lastName\": \"Markovic\",\r\n    \"username\": \"Mare\",\r\n    \"email\": \"string@gmail.com\",\r\n    \"password\": \"mar123\",\r\n    \"salt\": null,\r\n    \"userTypeId\": null,\r\n    \"userType\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -127,7 +164,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://localhost:44381/api/users/5845b7fc-d462-453f-14b8-08d9f16822c4",
+					"raw": "https://localhost:44381/api/users/02433f82-3d86-4119-0701-08d9f53b80f7",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -136,7 +173,7 @@
 					"path": [
 						"api",
 						"users",
-						"5845b7fc-d462-453f-14b8-08d9f16822c4"
+						"02433f82-3d86-4119-0701-08d9f53b80f7"
 					]
 				}
 			},
@@ -173,6 +210,43 @@
 					"path": [
 						"api",
 						"userTypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Types By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44381/api/userTypes/1c7ea607-8ddb-493a-87fa-4bf5893e965b",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44381",
+					"path": [
+						"api",
+						"userTypes",
+						"1c7ea607-8ddb-493a-87fa-4bf5893e965b"
 					]
 				}
 			},
@@ -220,7 +294,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userTypeId\": \"236f0e9f-19a2-4eca-4c34-08d9f164118e\",\r\n    \"userTypeName\": \"Tehnički sekretarica\"\r\n}",
+					"raw": "{\r\n    \"userTypeId\": \"d23414e2-ac0f-4b1f-1021-08d9f16840c2\",\r\n    \"userTypeName\": \"Tehnički sekretarica\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -264,7 +338,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://localhost:44381/api/userTypes/236f0e9f-19a2-4eca-4c34-08d9f164118e",
+					"raw": "https://localhost:44381/api/userTypes/01a4744e-b065-4024-c291-08d9f53b9e57",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -273,7 +347,7 @@
 					"path": [
 						"api",
 						"userTypes",
-						"236f0e9f-19a2-4eca-4c34-08d9f164118e"
+						"01a4744e-b065-4024-c291-08d9f53b9e57"
 					]
 				}
 			},
@@ -285,7 +359,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDUwNDM0NjcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzgxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODEifQ.JWr2vCK_K-MYyEOy_94ty5gn1lItrN9flZ0Axm7PyU8",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU0NTY3MjMsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzYyIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjIifQ.mncyRgBwhcGWsQ42stbDEndCpDxLVKXnrb4voaKWEy4",
 				"type": "string"
 			}
 		]
