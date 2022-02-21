@@ -19,6 +19,7 @@ using PublicBiddingMicroservice.Data.Impelmentation;
 using Microsoft.EntityFrameworkCore;
 using PublicBiddingMicroservice.ServiceCalls;
 using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 namespace PublicBiddingMicroservice
 {
@@ -146,8 +147,33 @@ namespace PublicBiddingMicroservice
                         TermsOfService = new Uri("http://www.ftn.uns.ac.rs/publicBiddingTermsOfService")
                     });
 
+                setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Unesite token",
+                    Name = "Autorizacija korisnika",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+
+                setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    Array.Empty<string>()
+                    }
+                });
+
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
-                  var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+                var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
 
                 //Pravimo putanju do XML fajla sa komentarima
                   var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);

@@ -9,7 +9,7 @@ namespace UserMicroservice.Models
     /// <summary>
     /// Model za ažuriranje korisnika
     /// </summary>
-    public class UserUpdateDto : IValidatableObject
+    public class UserUpdateDto
     {
         public Guid UserId { get; set; }
 
@@ -29,11 +29,6 @@ namespace UserMicroservice.Models
         [ForeignKey("UserType")]
         public Guid? UserTypeId { get; set; }
         public UserType UserType { get; set; }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            throw new NotImplementedException();
-        }
        
     }
 }
