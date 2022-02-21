@@ -18,6 +18,7 @@ using UserMicroservice.Data;
 using UserMicroservice.Data.Impelmentation;
 using UserMicroservice.Entities;
 using UserMicroservice.Helpers;
+using UserMicroservice.ServiceCalls;
 
 namespace UserMicroservice
 {
@@ -117,6 +118,7 @@ namespace UserMicroservice
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IUserRepository, UserRepository>();//Koristimo konkretni repozitorijum       
             services.AddScoped<IUserTypeRepository, UserTypeRepository>();
+            services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("UserOpenApiSpecification",

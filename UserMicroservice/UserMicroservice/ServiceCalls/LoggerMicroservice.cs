@@ -20,20 +20,22 @@ namespace UserMicroservice.ServiceCalls
 
         public bool CreateLog(LoggerDto loggerDto)
         {
-            using HttpClient client = new();
-            var x = configuration["Services:LoggerMicroservice"];
-            Uri url = new($"{ configuration["Services:LoggerMicroservice"] }api/logger");
-
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(loggerDto));
-            content.Headers.ContentType.MediaType = "application/json";
-
-            HttpResponseMessage response = client.PostAsync(url, content).Result;
-            if (!response.IsSuccessStatusCode)
+            using (HttpClient client = new HttpClient())
             {
-                return false;
-            }
-            return true;
-        }
+                var x = configuration["Services:LoggerMicroservice"];
+                Uri url = new Uri($"{ configuration["Services:LoggerMicroservice"] }api/logger");
 
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(loggerDto));
+                content.Headers.ContentType.MediaType = "application/json";
+
+                HttpResponseMessage response = client.PostAsync(url, content).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    return false;
+                }
+                return true;
+            }
+
+        }
     }
 }
