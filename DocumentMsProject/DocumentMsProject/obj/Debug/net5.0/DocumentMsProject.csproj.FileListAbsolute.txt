@@ -165,3 +165,4 @@ C:\Users\Zeljana\Desktop\tim-1---auctionland-tim-1-opentelemetry\DocumentMsProje
 C:\Users\Zeljana\Desktop\tim-1---auctionland-tim-1-opentelemetry\DocumentMsProject\DocumentMsProject\obj\Debug\net5.0\ref\DocumentMsProject.dll
 C:\Users\Zeljana\Desktop\tim-1---auctionland-tim-1-opentelemetry\DocumentMsProject\DocumentMsProject\obj\Debug\net5.0\DocumentMsProject.pdb
 C:\Users\Zeljana\Desktop\tim-1---auctionland-tim-1-opentelemetry\DocumentMsProject\DocumentMsProject\obj\Debug\net5.0\DocumentMsProject.genruntimeconfig.cache
+C:\Users\Zeljana\Desktop\tim-1---auctionland-tim-1-opentelemetry\DocumentMsProject\DocumentMsProject\bin\Debug\net5.0\Postman\DocumentMS.postman_collection.json

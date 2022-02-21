@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DocumentMsProject.Entities
 {
+    /// <summary>
+    /// Predstavlja listu dokumenata.
+    /// </summary>
     public class ListOfDocuments
     {
         /// <summary>
@@ -14,6 +17,9 @@ namespace DocumentMsProject.Entities
         [Key]
         public Guid ListOfDocumentsId { get; set; }
 
+        /// <summary>
+        /// Datum kreiranja liste dokumenata
+        /// </summary>
         public DateTime ListCreationDate { get; set; }
     }
 }
