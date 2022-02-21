@@ -536,5 +536,10 @@
             Korisničko lozinka
             </summary>
         </member>
+        <member name="T:PublicBiddingRegistrationMicroservice.Models.PublicBiddingDto">
+            <summary>
+            DTO za javno nadmetanje.
+            </summary>
+        </member>
     </members>
 </doc>
