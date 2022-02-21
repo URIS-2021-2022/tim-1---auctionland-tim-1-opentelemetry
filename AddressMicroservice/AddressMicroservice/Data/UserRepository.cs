@@ -63,7 +63,7 @@ namespace AddressMicroservice.Data
         /// </summary>
         /// <param name="password">Korisnička lozinka</param>
         /// <returns>Generisan hash i salt</returns>
-        private Tuple<string, string> HashPassword(string password)
+        private static Tuple<string, string> HashPassword(string password)
         {
             var sBytes = new byte[password.Length];
             new RNGCryptoServiceProvider().GetNonZeroBytes(sBytes);

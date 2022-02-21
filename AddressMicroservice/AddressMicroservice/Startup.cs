@@ -154,7 +154,7 @@ namespace AddressMicroservice
                             Id = "Bearer"
                         }
                     },
-                    new string[] {}
+                    Array.Empty<string>()
                     }
                 });
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
@@ -196,6 +196,7 @@ namespace AddressMicroservice
 
             // Trenutno ce to ukazivati da se koristi anonimna autentifikacija, ali je to kasnija podloga za definisanje nase
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseSwagger();
 
