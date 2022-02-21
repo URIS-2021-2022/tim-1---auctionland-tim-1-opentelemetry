@@ -38,7 +38,7 @@ namespace UserMicroservice
             {
                 setup.ReturnHttpNotAcceptable = true;
                 //Ovde sa setup.Filters mozemo dodati response tipove za sve kontrolere
-                //setup.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status200OK));                
+                setup.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status200OK));                
             }
             ).AddXmlDataContractSerializerFormatters() //Dodajemo podršku za XML tako da ukoliko klijent to traži u Accept header-u zahteva možemo da serializujemo payload u XML u odgovoru.
             .ConfigureApiBehaviorOptions(setupAction => //Deo koji se odnosi na podržavanje Problem Details for HTTP APIs
@@ -78,7 +78,7 @@ namespace UserMicroservice
                             ContentTypes = { "application/problem+json" }
                         };
                     };
-
+                    
                     //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                     problemDetails.Status = StatusCodes.Status400BadRequest;
                     problemDetails.Title = "Došlo je do greške prilikom parsiranja poslatog sadržaja.";
