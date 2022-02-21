@@ -24,9 +24,9 @@ namespace CommissionMicroservice.Entities
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("CommissionDB"));
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Commission>(b =>
+            modelBuilder.Entity<Commission>(b =>
             {
                 b.HasData(new
                 {
@@ -67,7 +67,7 @@ namespace CommissionMicroservice.Entities
                 });*/
             });
 
-            builder.Entity<Member>().HasData(
+            modelBuilder.Entity<Member>().HasData(
                 new
                 { 
                     MemberID = Guid.Parse("2a411c13-a196-48f7-88bd-67596c3974c3"),

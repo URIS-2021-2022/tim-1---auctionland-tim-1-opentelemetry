@@ -79,7 +79,7 @@ namespace CommissionMicroservice
                        {
                            ContentTypes = { "application/problem+json" }
                        };
-                   };
+                   }
 
                    //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                    problemDetails.Status = StatusCodes.Status400BadRequest;
@@ -116,9 +116,6 @@ namespace CommissionMicroservice
 
             services.AddHttpContextAccessor();
 
-            //services.AddControllers().AddNewtonsoftJson(options =>
-            //options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("CommissionOpenApiSpecification",
@@ -136,8 +133,7 @@ namespace CommissionMicroservice
                         {
                             Name = "FTN licence",
                             Url = new Uri("http://www.ftn.uns.ac.rs/")
-                        },
-                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/commissionTermsOfService")
+                        }
                     });
 
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)

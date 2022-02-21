@@ -48,7 +48,7 @@ namespace CommissionMicroservice.Controllers
         public ActionResult<List<CommissionDto>> GetCommissions(string presidentId)
         {
             List<Commission> commissions = commissionRepository.GetCommissions(presidentId);
-            if(commissions.Count == 0 || commissions == null)
+            if(commissions.Count == 0)
             {
                 return NoContent();
             }
@@ -90,7 +90,7 @@ namespace CommissionMicroservice.Controllers
         {
             try
             {
-                bool validate = Validate(commissionDto);
+                //bool validate = Validate(commissionDto);
                 commissionDto.CommissionID = Guid.NewGuid();
                 Commission commission = mapper.Map<Commission>(commissionDto);
                 CommissionConfirmation confirmation = commissionRepository.CreateCommission(commission);
