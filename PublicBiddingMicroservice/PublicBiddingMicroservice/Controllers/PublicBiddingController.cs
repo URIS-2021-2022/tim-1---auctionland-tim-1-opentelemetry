@@ -34,7 +34,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Vraća sve prijave ispita za zadate filtere.
+        /// Vraća sva javna nadmetanja za zadate filtere.
         /// </summary>
         /// <param name="numberOfParticipants">Broj ucesnika</param>
         /// <returns>Lista javnih nademtanja</returns>
@@ -79,6 +79,10 @@ namespace PublicBiddingMicroservice.Controllers
             return Ok(mapper.Map<PublicBiddingDto>(bidding));
         }
 
+
+        /// <summary>
+        /// Kreira jedno javno nadmetanje.
+        /// </summary>
         /// <response code="200">Vraća kreirano javno nadmetanje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja javnog nadmetanja</response>
         [HttpPost]
@@ -120,7 +124,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Ažurira jednu prijavu ispita.
+        /// Ažurira jedno javno nadmetanje.
         /// </summary>
         /// <param name="publicBidding">Model javnog nadmetanja koji se ažurira</param>
         /// <returns>Potvrdu o modifikovanom javnom nadmetanju.</returns>
@@ -189,7 +193,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
         
         /// <summary>
-        /// Vraća opcije za rad sa prijavama ispita
+        /// Vraća opcije za rad sa javnim nadmetanjima.
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

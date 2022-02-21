@@ -7,7 +7,7 @@ using UserMicroservice.Entities;
 namespace UserMicroservice.Models
 {
     /// <summary>
-    /// Model za ažuriranje prijave ispita
+    /// Model za ažuriranje korisnika
     /// </summary>
     public class UserUpdateDto : IValidatableObject
     {

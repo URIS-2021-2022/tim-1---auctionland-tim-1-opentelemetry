@@ -74,6 +74,9 @@ namespace UserMicroservice.Controllers
             return Ok(mapper.Map<UserTypeDto>(userType));
         }
 
+        /// <summary>
+        /// Krerira jedan tip korisnika.
+        /// </summary>
         /// <response code="200">Vraća kreiran Tip Korisnika</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja tip korisnika</response>
         [HttpPost]
@@ -104,7 +107,7 @@ namespace UserMicroservice.Controllers
         }
 
         /// <summary>
-        /// Ažurira jednu prijavu ispita.
+        /// Ažurira jedan tip korisnika.
         /// </summary>
         /// <param name="userType">Model tipa korisnika koji se ažurira</param>
         /// <returns>Potvrdu o modifikovanom tipu korisnika.</returns>
@@ -173,7 +176,7 @@ namespace UserMicroservice.Controllers
         }
         
         /// <summary>
-        /// Vraća opcije za rad sa tipovima korisnika
+        /// Vraća opcije za rad sa tipovima korisnika.
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

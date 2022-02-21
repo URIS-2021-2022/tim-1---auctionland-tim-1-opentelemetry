@@ -28,10 +28,10 @@ namespace PublicBiddingMicroservice.Data.Impelmentation
                 new User
                 {
                     UserId = Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0"),
-                    FirstName = "Petar",
-                    LastName = "Petrovic",
-                    Username = "petar.petrovic",
-                    Email = "petar.petrovic@testmail.com",
+                    FirstName = "Ana",
+                    LastName = "Zuber",
+                    Username = "ana.zuber",
+                    Email = "ana.zuber@testmail.com",
                     Password = user1.Item1,
                     Salt = user1.Item2
                 }

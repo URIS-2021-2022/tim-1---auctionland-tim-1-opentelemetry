@@ -8,7 +8,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PublicBiddingMicroservice.Models
 {
-    public class PublicBiddingDto
+    /// <summary>
+    /// Model za azuriranje javnog nadmetanja.
+    /// </summary>
+    public class PublicBiddingUpdateDto
     {
         public Guid PublicBiddingId { get; set; }
         public DateTime Date { get; set; }

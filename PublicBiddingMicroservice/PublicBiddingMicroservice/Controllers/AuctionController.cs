@@ -54,7 +54,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Vraća jednu etapu na osnovu ID-ja licitacije.
+        /// Vraća jednu licitaciju na osnovu ID-ja licitacije.
         /// </summary>
         /// <param name="auctionId">ID licitacije</param>
         /// <returns></returns>
@@ -74,6 +74,9 @@ namespace PublicBiddingMicroservice.Controllers
             return Ok(mapper.Map<AuctionDto>(auction));
         }
 
+        /// <summary>
+        /// Kreira jednu licitaciju.
+        /// </summary>
         /// <response code="200">Vraća kreiranu licitaciju</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranje licitacije</response>
         [HttpPost]
@@ -104,7 +107,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Ažurira jednu prijavu ispita.
+        /// Ažurira jednu licitaciju.
         /// </summary>
         /// <param name="auction">Model prijave licitacije koji se ažurira</param>
         /// <returns>Potvrdu o modifikovanoj licitaciji.</returns>
@@ -140,7 +143,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Vrši brisanje jedne etape na osnovu ID-ja prijave.
+        /// Vrši brisanje jedne licitacije na osnovu ID-ja prijave.
         /// </summary>
         /// <param name="auctionId">ID licitacije </param>
         /// <returns>Status 204 (NoContent)</returns>
@@ -173,7 +176,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Vraća opcije za rad sa licitacijama
+        /// Vraća opcije za rad sa licitacijama.
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

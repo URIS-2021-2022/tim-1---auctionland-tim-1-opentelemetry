@@ -75,6 +75,10 @@ namespace PublicBiddingMicroservice.Controllers
             return Ok(mapper.Map<PublicBiddingTypeDto>(publicBiddingType));
         }
 
+
+        /// <summary>
+        /// Kreira jedan tip javnog nadmetanja.
+        /// </summary>
         /// <response code="200">Vraća kreirani tip javnog nadmetanja</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja tipa javnog nadmetanja</response>
         [HttpPost]
@@ -105,7 +109,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Ažurira jednu prijavu ispita.
+        /// Ažurira jedan tip javnog nadmetanja.
         /// </summary>
         /// <param name="publicBiddingType">Model prijave tipa javnog nadmetanja koji se ažurira</param>
         /// <returns>Potvrdu o modifikovanom tipu javnog nadmetanja.</returns>
@@ -174,7 +178,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
         
         /// <summary>
-        /// Vraća opcije za rad sa tipovima javnog nadmetanja
+        /// Vraća opcije za rad sa tipovima javnog nadmetanja.
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

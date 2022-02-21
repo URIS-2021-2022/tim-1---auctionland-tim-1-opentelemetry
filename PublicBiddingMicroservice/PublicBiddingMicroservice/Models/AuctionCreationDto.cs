@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingMicroservice.Models
 {
+    /// <summary>
+    /// Model za kreiranje licitacije.
+    /// </summary>
     public class AuctionCreationDto
     {
         public Guid AuctionId { get; set; }

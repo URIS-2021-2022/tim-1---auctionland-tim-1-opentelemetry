@@ -28,12 +28,15 @@
             <response code="200">Vraća traženog tipa korisnika</response>
         </member>
         <member name="M:UserMicroservice.Controllers.UserTypeController.CreateUserType(UserMicroservice.Models.UserTypeCreationDto)">
+            <summary>
+            Krerira jedan tip korisnika.
+            </summary>
             <response code="200">Vraća kreiran Tip Korisnika</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranja tip korisnika</response>
         </member>
         <member name="M:UserMicroservice.Controllers.UserTypeController.UpdateUserType(UserMicroservice.Models.UserTypeUpdateDto)">
             <summary>
-            Ažurira jednu prijavu ispita.
+            Ažurira jedan tip korisnika.
             </summary>
             <param name="userType">Model tipa korisnika koji se ažurira</param>
             <returns>Potvrdu o modifikovanom tipu korisnika.</returns>
@@ -41,10 +44,19 @@
             <response code="400">Tip korisnika koji se ažurira nije pronađen</response>
             <response code="500">Došlo je do greške na serveru prilikom ažuriranja tipa korisnika</response>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:UserMicroservice.Controllers.UserTypeController.DeleteUserType(System.Guid)" -->
+        <member name="M:UserMicroservice.Controllers.UserTypeController.DeleteUserType(System.Guid)">
+            <summary>
+            Vrši brisanje jednog tipa korisnika na osnovu ID-ja tipa korisnika.
+            </summary>
+            <param name="userTypeId">ID tipa korisnika</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">tip korisnika uspešno obrisan</response>
+            <response code="404">Nije pronađen tip korisnika za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja tipa korisnika</response>
+        </member>
         <member name="M:UserMicroservice.Controllers.UserTypeController.GetUserTypeOptions">
             <summary>
-            Vraća opcije za rad sa tipovima korisnika
+            Vraća opcije za rad sa tipovima korisnika.
             </summary>
             <returns></returns>
         </member>
@@ -121,14 +133,34 @@
             DTO za korisnika
             </summary>
         </member>
+        <member name="T:UserMicroservice.Models.UserTypeConfirmationDto">
+            <summary>
+            Model za potvrdu tipa korisnika
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserTypeCreationDto">
+            <summary>
+            Model za kreiranje tipa korisnika
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserTypeDto">
+            <summary>
+            DTO za korisnika
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserTypeUpdateDto">
+            <summary>
+            Model za ažuriranje tipa korisnika
+            </summary>
+        </member>
         <member name="T:UserMicroservice.Models.UserUpdateDto">
             <summary>
-            Model za ažuriranje prijave ispita
+            Model za ažuriranje korisnika
             </summary>
         </member>
         <member name="M:UserService.Controllers.UserController.GetUsers(System.String,System.String)">
             <summary>
-            Vraća sve prijave ispita za zadate filtere.
+            Vraća sve korisnike za zadate filtere.
             </summary>
             <param name="firstName">ime korisnika</param>
             <param name="lastName">prezime korisnika</param>
@@ -145,6 +177,9 @@
             <response code="200">Vraća traženu korisnika</response>
         </member>
         <member name="M:UserService.Controllers.UserController.CreateUser(UserMicroservice.Models.UserCreationDto)">
+            <summary>
+            Kreira jednog korisnika.
+            </summary>
             <response code="200">Vraća kreiranog korisnika</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranja korisnika</response>
         </member>
@@ -170,7 +205,7 @@
         </member>
         <member name="M:UserService.Controllers.UserController.GetUserOptions">
             <summary>
-            Vraća opcije za rad sa kreiranjem korisnika
+            Vraća opcije za rad sa kreiranjem korisnika.
             </summary>
             <returns></returns>
         </member>

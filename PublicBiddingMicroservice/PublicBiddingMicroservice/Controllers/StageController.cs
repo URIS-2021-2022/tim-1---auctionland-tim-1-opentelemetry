@@ -75,6 +75,9 @@ namespace PublicBiddingMicroservice.Controllers
             return Ok(mapper.Map<StageDto>(stage));
         }
 
+        /// <summary>
+        /// Kreira jednu etapu.
+        /// </summary>
         /// <response code="200">Vraća kreiranu etapu</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranje etape</response>
         [HttpPost]
@@ -105,7 +108,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
 
         /// <summary>
-        /// Ažurira jednu prijavu ispita.
+        /// Ažurira jednu etapu.
         /// </summary>
         /// <param name="stage">Model prijave etape koji se ažurira</param>
         /// <returns>Potvrdu o modifikovanoj etapi.</returns>
@@ -174,7 +177,7 @@ namespace PublicBiddingMicroservice.Controllers
         }
         
         /// <summary>
-        /// Vraća opcije za rad sa etapama
+        /// Vraća opcije za rad sa etapama.
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

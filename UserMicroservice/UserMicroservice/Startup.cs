@@ -127,8 +127,8 @@ namespace UserMicroservice
                         Description = "Pomoću ovog API-ja može da se vrši kreiranje korisnika izmjena korisnika kao i brisanje i pregled svih korisnika.",
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact
                         {
-                            Name = "Marko Marković",
-                            Email = "marko@mail.com",
+                            Name = "Ana Zuber",
+                            Email = "ana@mail.com",
                             Url = new Uri("http://www.ftn.uns.ac.rs/")
                         },
                         License = new Microsoft.OpenApi.Models.OpenApiLicense
