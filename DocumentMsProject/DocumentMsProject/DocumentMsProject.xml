@@ -57,7 +57,7 @@
             <response code="400">Dokument za javno nadmetanje koji se ažurira nije pronađen</response>
             <response code="500">Došlo je do greške na serveru prilikom ažuriranja dokumenta za javno nadmetanje</response>
         </member>
-        <member name="M:DocumentMsProject.Controllers.DocumentController.DeleteExamRegistration(System.Guid)">
+        <member name="M:DocumentMsProject.Controllers.DocumentController.DeleteDocument(System.Guid)">
             <summary>
             Vrši brisanje jednog dokumenta na osnovu ID-ja dokumenta.
             </summary>
