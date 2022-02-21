@@ -340,21 +340,6 @@
             Korisnička lozinka
             </summary>
         </member>
-        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto">
-            <summary>
-            DTO za javno nadmetanje.
-            </summary>
-        </member>
-        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingCreationDto">
-            <summary>
-            Model za krerianje javnog nadmetanja.
-            </summary>
-        </member>
-        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingDto">
-            <summary>
-            DTO za javno nadmetanje.
-            </summary>
-        </member>
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingTypeConfirmationDto">
             <summary>
             DTO za tip javnog nadmetanja.
@@ -373,6 +358,21 @@
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingTypeUpdateDto">
             <summary>
             Model za krerianje tipa javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto">
+            <summary>
+            DTO za javno nadmetanje.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingCreationDto">
+            <summary>
+            Model za krerianje javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingDto">
+            <summary>
+            DTO za javno nadmetanje.
             </summary>
         </member>
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto">
