@@ -21,13 +21,18 @@ namespace PublicBiddingMicroservice.Controllers
         private readonly IPublicBiddingTypeRepository publicBiddingTypeRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreatePublicBiddingType)
         private readonly IMapper mapper;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public PublicBiddingTypeController(IPublicBiddingTypeRepository publicBiddingTypeRepository, LinkGenerator linkGenerator, IMapper mapper, IAddressService addressService)
+        public PublicBiddingTypeController(IPublicBiddingTypeRepository publicBiddingTypeRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
         {
             this.publicBiddingTypeRepository = publicBiddingTypeRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "PublicBiddingType";
         }
 
         /// <summary>
@@ -42,14 +47,20 @@ namespace PublicBiddingMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<PublicBiddingTypeDto>> GetPublicBiddingTypes()
         {
+            loggerDto.HttpMethodName = "GET";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             var publicBiddingTypes = publicBiddingTypeRepository.GetPublicBiddingTypes();
 
             //Ukoliko nismo pronašli ni jedan tip javnog nadmetanja vratiti status 204 (NoContent)
             if (publicBiddingTypes == null || publicBiddingTypes.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
-
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             //Ukoliko smo našli neki tip javnog nadmetanja vratiti status 200 i listu pronađenih tipova javnog nadmetanja (DTO objekti)
             return Ok(mapper.Map<List<PublicBiddingTypeDto>>(publicBiddingTypes));
         }
@@ -66,12 +77,17 @@ namespace PublicBiddingMicroservice.Controllers
         [HttpGet("{publicBiddingTypeId}")] //Dodatak na rutu koja je definisana na nivou kontrolera
         public ActionResult<PublicBiddingTypeDto> GetPublicBiddingType(Guid publicBiddingTypeId) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
+            loggerDto.HttpMethodName = "GET";
             var publicBiddingType = publicBiddingTypeRepository.GetPublicBiddingTypeById(publicBiddingTypeId);
 
             if (publicBiddingType == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<PublicBiddingTypeDto>(publicBiddingType));
         }
 
@@ -89,19 +105,23 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 PublicBiddingType publicBiddingTypeEntity = mapper.Map<PublicBiddingType>(publicBiddingType);
                 PublicBiddingTypeConfirmation confirmation = publicBiddingTypeRepository.CreatePublicBiddingType(publicBiddingTypeEntity);
                 publicBiddingTypeRepository.SaveChanges(); //Perzistiramo promene
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetPublicBiddingType", "PublicBiddingType", new { publicBiddingTypeId = confirmation.PublicBiddingTypeId });
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (tipa javnog nadmetanja).
                 return Created(location, mapper.Map<PublicBiddingTypeConfirmationDto>(confirmation));
                 //return CreatedAtRoute(); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
             catch (Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 Console.WriteLine(ex);
                 //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
@@ -125,10 +145,13 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 //Proveriti da li uopšte postoji tip javnog nadmetanja koju pokušavamo da ažuriramo.
                 var oldPublicBiddingType = publicBiddingTypeRepository.GetPublicBiddingTypeById(publicBiddingType.PublicBiddingTypeId);
                 if (oldPublicBiddingType == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 PublicBiddingType publicBiddingTypeEntity = mapper.Map<PublicBiddingType>(publicBiddingType);
@@ -136,10 +159,14 @@ namespace PublicBiddingMicroservice.Controllers
                 mapper.Map(publicBiddingTypeEntity, oldPublicBiddingType); //Update objekta koji treba da sačuvamo u bazi                
 
                 publicBiddingTypeRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<PublicBiddingTypeDto>(oldPublicBiddingType));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -160,19 +187,26 @@ namespace PublicBiddingMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var publicBiddingType = publicBiddingTypeRepository.GetPublicBiddingTypeById(publicBiddingTypeId);
 
                 if (publicBiddingType == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
 
                 publicBiddingTypeRepository.DeletePublicBiddingType(publicBiddingTypeId);
                 publicBiddingTypeRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
