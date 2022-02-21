@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace UserMicroservice.Models
 {
+    /// <summary>
+    /// Model za potvrdu tipa korisnika
+    /// </summary>
     public class UserTypeConfirmationDto 
     {
         public Guid UserTypeId { get; set; }

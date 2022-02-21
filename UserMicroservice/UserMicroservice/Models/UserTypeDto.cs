@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace UserMicroservice.Models
 {
+    /// <summary>
+    /// DTO za korisnika
+    /// </summary>
     public class UserTypeDto
     {
         public Guid UserTypeId { get; set; }

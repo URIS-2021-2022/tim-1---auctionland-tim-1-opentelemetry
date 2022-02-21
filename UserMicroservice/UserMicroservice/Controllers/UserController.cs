@@ -30,7 +30,7 @@ namespace UserService.Controllers
         }
 
         /// <summary>
-        /// Vraća sve prijave ispita za zadate filtere.
+        /// Vraća sve korisnike za zadate filtere.
         /// </summary>
         /// <param name="firstName">ime korisnika</param>
         /// <param name="lastName">prezime korisnika</param>
@@ -76,6 +76,9 @@ namespace UserService.Controllers
             return Ok(mapper.Map<UserDto>(user));
         }
 
+        /// <summary>
+        /// Kreira jednog korisnika.
+        /// </summary>
         /// <response code="200">Vraća kreiranog korisnika</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja korisnika</response>
         [HttpPost]
@@ -176,7 +179,7 @@ namespace UserService.Controllers
         }
         
         /// <summary>
-        /// Vraća opcije za rad sa kreiranjem korisnika
+        /// Vraća opcije za rad sa kreiranjem korisnika.
         /// </summary>
         /// <returns></returns>
         [HttpOptions]

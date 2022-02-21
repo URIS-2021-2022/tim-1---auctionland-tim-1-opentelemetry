@@ -29,10 +29,10 @@ namespace UserMicroservice.Data.Impelmentation
                 new User
                 {
                     UserId = Guid.Parse("CFD7FA84-8A27-4119-B6DB-5CFC1B0C94E1"),
-                    FirstName = "Petar",
-                    LastName = "Petrovic",
-                    Username = "petar.petrovic",
-                    Email = "petar.petrovic@testmail.com",
+                    FirstName = "Ana",
+                    LastName = "Zuber",
+                    Username = "ana.zuber",
+                    Email = "ana.zuber@testmail.com",
                     Password = user1.Item1,
                     Salt = user1.Item2
                 }
