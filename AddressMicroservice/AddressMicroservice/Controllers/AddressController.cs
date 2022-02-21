@@ -60,18 +60,16 @@ namespace AddressMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<AddressDto>> GetAllAddresses()
         {
-            //loggerDto.HttpMethodName = "GET";
-            //loggerDto.Date = " ";
-            //loggerDto.Time = " ";
+            loggerDto.HttpMethodName = "GET";
             var addresses = addressRepository.GetAllAddresses();
             if (addresses == null || addresses.Count == 0)
             {
-                //loggerDto.Response = "204 NO CONTENT";
-                //loggerMicroservice.CreateLog(loggerDto);
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
-           // loggerDto.Response = "200 OK";
-            //loggerMicroservice.CreateLog(loggerDto);
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<AddressDto>>(addresses));
         }
 
