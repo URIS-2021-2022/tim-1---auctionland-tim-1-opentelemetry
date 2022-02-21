@@ -49,11 +49,11 @@ namespace CustomerMicroservice.Models
         /// <summary>
         /// Adresa kupca
         /// </summary>
-        public Guid AddressID { get; set; }
+        //public Guid AddressID { get; set; }
 
         /// <summary>
         /// Dokumenati kupca
         /// </summary>
-        public Guid DocumentsID { get; set; }
+        //public Guid DocumentsID { get; set; }
     }
 }

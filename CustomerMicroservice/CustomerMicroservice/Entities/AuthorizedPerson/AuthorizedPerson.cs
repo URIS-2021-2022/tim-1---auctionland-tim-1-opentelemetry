@@ -40,6 +40,6 @@ namespace CustomerMicroservice.Entities
         /// <summary>
         /// Adresa ovlascenog lica
         /// </summary>
-        public Guid AddressID { get; set; }
+        //public Guid AddressID { get; set; }
     }
 }
