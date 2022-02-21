@@ -118,21 +118,6 @@
             Korisnička lozinka
             </summary>
         </member>
-        <member name="T:UserMicroservice.Models.UserConfirmationDto">
-            <summary>
-            DTO za korisnika
-            </summary>
-        </member>
-        <member name="T:UserMicroservice.Models.UserCreationDto">
-            <summary>
-            Model za kreiranje korisnika
-            </summary>
-        </member>
-        <member name="T:UserMicroservice.Models.UserDto">
-            <summary>
-            DTO za korisnika
-            </summary>
-        </member>
         <member name="T:UserMicroservice.Models.UserTypeConfirmationDto">
             <summary>
             Model za potvrdu tipa korisnika
@@ -151,6 +136,21 @@
         <member name="T:UserMicroservice.Models.UserTypeUpdateDto">
             <summary>
             Model za ažuriranje tipa korisnika
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserConfirmationDto">
+            <summary>
+            DTO za korisnika
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserCreationDto">
+            <summary>
+            Model za kreiranje korisnika
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserDto">
+            <summary>
+            DTO za korisnika
             </summary>
         </member>
         <member name="T:UserMicroservice.Models.UserUpdateDto">
