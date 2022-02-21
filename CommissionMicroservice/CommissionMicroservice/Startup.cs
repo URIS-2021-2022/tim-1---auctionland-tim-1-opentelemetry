@@ -1,6 +1,7 @@
 ﻿using CommissionMicroservice.Data;
 using CommissionMicroservice.Entities;
 using CommissionMicroservice.Helpers;
+using CommissionMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -113,6 +114,7 @@ namespace CommissionMicroservice
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddHttpContextAccessor();
 
