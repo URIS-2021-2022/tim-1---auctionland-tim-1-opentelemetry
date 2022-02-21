@@ -108,7 +108,7 @@ namespace PublicBiddingRegistrationMicroservice
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IPublicBiddingService, PublicBiddingService>();
-            //services.AddRazorPages();
+            
             services.AddHttpContextAccessor();
 
             services.AddSwaggerGen(setupAction =>

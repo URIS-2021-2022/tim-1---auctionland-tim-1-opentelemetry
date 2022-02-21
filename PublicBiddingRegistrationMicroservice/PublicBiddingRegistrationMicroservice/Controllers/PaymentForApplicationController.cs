@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using PublicBiddingRegistrationMicroservice.Data;
 using PublicBiddingRegistrationMicroservice.Models;
 using PublicBiddingRegistrationMicroservice.Entities;
+using PublicBiddingRegistrationMicroservice.ServiceCalls;
 
 namespace PublicBiddingRegistrationMicroservice.Controllers
 {
@@ -22,12 +23,14 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         private readonly IPaymentRepository paymentRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateExamRegistration)
         private readonly IMapper mapper;
+        private readonly IPublicBiddingService publicBiddingService;
 
-        public PaymentForApplicationController(IPaymentRepository paymentRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public PaymentForApplicationController(IPaymentRepository paymentRepository, LinkGenerator linkGenerator, IMapper mapper, IPublicBiddingService publicBiddingService)
         {
             this.paymentRepository = paymentRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.publicBiddingService = publicBiddingService;
         }
 
         /// <summary>
@@ -101,6 +104,19 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
 
                 // Dobar API treba da vrati lokator gde se taj resurs nalazi
                 string location = linkGenerator.GetPathByAction("GetPaymentById", "PaymentForApplication", new { paymentId = confirmation.PaymentId });
+
+                var publicBiddingInfo = mapper.Map<PublicBiddingDto>(paymentEntity);
+
+                publicBiddingInfo.PublicBiddingId = confirmation.PublicBiddingId;
+                bool createdPublicBidding = publicBiddingService.GetPublicBidding(publicBiddingInfo);
+
+                //Ukoliko iz nekog razloga ne uspemo da naplatimo prijavu ispita ista se briše
+                if (!createdPublicBidding)
+                {
+                    paymentRepository.DeletePayment(confirmation.PaymentId);
+                    //throw new AddressException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
+                }
+
                 return Created(location, mapper.Map<PaymentConfirmationDto>(confirmation));
             }
             catch
