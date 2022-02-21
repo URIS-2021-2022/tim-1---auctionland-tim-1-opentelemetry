@@ -11,7 +11,6 @@ namespace CustomerMicroservice.Entities
         /// <summary>
         /// ID fizickog lica
         /// </summary>
-        [Key]
         public Guid PhysicalPersonID { get; set; }
 
         /// <summary>

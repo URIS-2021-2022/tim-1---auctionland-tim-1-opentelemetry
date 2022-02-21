@@ -38,6 +38,6 @@ namespace CustomerMicroservice.Models.AuthorizedPerson
         /// <summary>
         /// Adresa ovlascenog lica
         /// </summary>
-        public Guid AddressID { get; set; }
+        //public Guid AddressID { get; set; }
     }
 }
