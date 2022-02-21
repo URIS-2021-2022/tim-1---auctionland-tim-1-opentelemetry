@@ -98,7 +98,7 @@ namespace AddressMicroservice
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
@@ -189,14 +189,16 @@ namespace AddressMicroservice
                 });
             }
 
+            app.UseAuthentication();
+
             app.UseHttpsRedirection();
 
             // Omogucava definisanje ruta za pristup svakom API-u
             app.UseRouting();
 
             // Trenutno ce to ukazivati da se koristi anonimna autentifikacija, ali je to kasnija podloga za definisanje nase
+            
             app.UseAuthorization();
-            app.UseAuthentication();
 
             app.UseSwagger();
 
