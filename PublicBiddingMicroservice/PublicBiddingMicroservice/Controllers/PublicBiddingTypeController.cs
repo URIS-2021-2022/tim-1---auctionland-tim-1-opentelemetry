@@ -143,7 +143,7 @@ namespace PublicBiddingMicroservice.Controllers
         /// <summary>
         /// Vrši brisanje jednog tipa javnog nadmetanja na osnovu ID-ja tipa.
         /// </summary>
-        /// <param name="publicBiddingTypeId">ID tipa javnog nadmetanja/param>
+        /// <param name="publicBiddingTypeId">ID tipa javnog nadmetanja</param>
         /// <returns>Status 204 (NoContent)</returns>
         /// <response code="204">Tip javnog nadmetanja je uspešno obrisan</response>
         /// <response code="404">Nije pronađen tip javnog nadmetanja za brisanje</response>
