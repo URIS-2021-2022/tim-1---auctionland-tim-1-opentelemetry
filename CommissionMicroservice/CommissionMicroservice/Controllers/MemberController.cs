@@ -50,7 +50,7 @@ namespace CommissionMicroservice.Controllers
         public ActionResult<List<MemberDto>> GetMembers(string firstName, string lastName)
         {
             List<Member> members = memberRepository.GetMembers(firstName, lastName);
-            if (members.Count == 0 || members == null)
+            if (members.Count == 0)
             {
                 return NoContent();
             }
@@ -190,9 +190,9 @@ namespace CommissionMicroservice.Controllers
         /// </summary>
         /// <param name="member">Model clana komisije</param>
         /// <returns></returns>
-        private bool ValidateMember(MemberCreationDto member)
+        private static bool ValidateMember(MemberCreationDto member)
         {
-            if (member.FirstName != null & member.LastName != null && member.Role != null && member.CommissionID != null)
+            if (member.FirstName != null && member.LastName != null && member.Role != null && member.CommissionID != null)
             {
                 return true;
             }

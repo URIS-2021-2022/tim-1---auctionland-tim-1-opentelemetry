@@ -2,6 +2,8 @@
 using CommissionMicroservice.Data;
 using CommissionMicroservice.Entities;
 using CommissionMicroservice.Models;
+using CommissionMicroservice.Models.Exceptions;
+using CommissionMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,12 +27,14 @@ namespace CommissionMicroservice.Controllers
         private readonly ICommissionRepository commissionRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
+        private readonly IUserService userService;
 
-        public CommissionController(ICommissionRepository commissionRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public CommissionController(ICommissionRepository commissionRepository, IMapper mapper, LinkGenerator linkGenerator, IUserService userService)
         {
             this.commissionRepository = commissionRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
+            this.userService = userService;
         }
 
         /// <summary>
@@ -48,7 +52,7 @@ namespace CommissionMicroservice.Controllers
         public ActionResult<List<CommissionDto>> GetCommissions(string presidentId)
         {
             List<Commission> commissions = commissionRepository.GetCommissions(presidentId);
-            if(commissions.Count == 0 || commissions == null)
+            if(commissions.Count == 0)
             {
                 return NoContent();
             }
@@ -88,13 +92,27 @@ namespace CommissionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<CommissionConfirmationDto> CreateCommission([FromBody] CommissionCreationDto commissionDto)
         {
+            // komunikacija
             try
             {
-                bool validate = Validate(commissionDto);
+                //bool validate = Validate(commissionDto);
                 commissionDto.CommissionID = Guid.NewGuid();
                 Commission commission = mapper.Map<Commission>(commissionDto);
                 CommissionConfirmation confirmation = commissionRepository.CreateCommission(commission);
+                commissionRepository.SaveChanges();
+
                 string location = linkGenerator.GetPathByAction("GetCommissionById", "Commission", new { commissionID = confirmation.CommissionID });
+                /*
+                var userInfo = mapper.Map<UserDto>(commissionDto);
+                userInfo.CommissionId = confirmation.CommissionID;
+                bool createdUser = userService.GetUserOfCommission(userInfo);
+                //Ukoliko iz nekog razloga ne uspe, komisija se briše
+                if (!createdUser)
+                {
+                    commissionRepository.DeleteCommission(confirmation.CommissionID);
+                    throw new UserException("Neuspešno kreiranje komisije. Postoji problem sa korisnikom. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
+                }*/
+
                 return Created(location, mapper.Map<CommissionConfirmationDto>(confirmation));
             } 
             catch

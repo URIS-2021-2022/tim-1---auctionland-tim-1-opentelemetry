@@ -1,6 +1,7 @@
 ﻿using CommissionMicroservice.Data;
 using CommissionMicroservice.Entities;
 using CommissionMicroservice.Helpers;
+using CommissionMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -79,7 +80,7 @@ namespace CommissionMicroservice
                        {
                            ContentTypes = { "application/problem+json" }
                        };
-                   };
+                   }
 
                    //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                    problemDetails.Status = StatusCodes.Status400BadRequest;
@@ -113,11 +114,9 @@ namespace CommissionMicroservice
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddHttpContextAccessor();
-
-            //services.AddControllers().AddNewtonsoftJson(options =>
-            //options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddSwaggerGen(setupAction =>
             {
@@ -136,8 +135,7 @@ namespace CommissionMicroservice
                         {
                             Name = "FTN licence",
                             Url = new Uri("http://www.ftn.uns.ac.rs/")
-                        },
-                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/commissionTermsOfService")
+                        }
                     });
 
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
