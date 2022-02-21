@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\AdMicroservice\\AdMicroservice\\AdMicroservice.csproj": {}
+    "C:\\Users\\PC\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AdMicroservice\\AdMicroservice\\AdMicroservice.csproj": {}
   },
   "projects": {
-    "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\AdMicroservice\\AdMicroservice\\AdMicroservice.csproj": {
+    "C:\\Users\\PC\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AdMicroservice\\AdMicroservice\\AdMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\AdMicroservice\\AdMicroservice\\AdMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AdMicroservice\\AdMicroservice\\AdMicroservice.csproj",
         "projectName": "AdMicroservice",
-        "projectPath": "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\AdMicroservice\\AdMicroservice\\AdMicroservice.csproj",
-        "packagesPath": "C:\\Users\\Aleksandar\\.nuget\\packages\\",
-        "outputPath": "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\AdMicroservice\\AdMicroservice\\obj\\",
+        "projectPath": "C:\\Users\\PC\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AdMicroservice\\AdMicroservice\\AdMicroservice.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\AdMicroservice\\AdMicroservice\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Aleksandar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -1,0 +1,32 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/complaint",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44365
+                }
+            ],
+            "UpstreamPathTemplate": "/complaint",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/complaint/{complaintId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44365
+                }
+            ],
+            "UpstreamPathTemplate": "/complaint/{complaintId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        }
+    ],
+    "GlobalConfiguration": {
+
+        "BaseUrl": "https://localhost:5021"
+    }                      
+}
