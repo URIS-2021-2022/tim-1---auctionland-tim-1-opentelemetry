@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingMicroservice.Models
 {
+    /// <summary>
+    /// Model za azuriranje statusa.
+    /// </summary>
     public class StatusUpdateDto
     {
         public Guid StatusId { get; set; }

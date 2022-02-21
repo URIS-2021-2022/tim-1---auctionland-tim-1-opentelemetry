@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingMicroservice.Models
 {
+    /// <summary>
+    /// DTO za etapu.
+    /// </summary>
     public class StageConfirmationDto 
     {
         public Guid StageId { get; set; }

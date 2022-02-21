@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingMicroservice.Models
 {
+    /// <summary>
+    /// Model za krerianje tipa javnog nadmetanja.
+    /// </summary>
     public class PublicBiddingTypeUpdateDto
     {
         public Guid PublicBiddingTypeId { get; set; }

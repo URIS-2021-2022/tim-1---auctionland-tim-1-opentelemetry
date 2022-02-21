@@ -310,6 +310,26 @@
             <param name="principal">Autentifikovani principal</param>
             <returns></returns>
         </member>
+        <member name="T:PublicBiddingMicroservice.Models.AuctionConfirmationDto">
+            <summary>
+            DTO za licitaciju.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.AuctionCreationDto">
+            <summary>
+            Model za kreiranje licitacije.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.AuctionDto">
+            <summary>
+            DTO za licitaciju.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.AuctionUpdateDto">
+            <summary>
+            Model za azuriranje licitacije.
+            </summary>
+        </member>
         <member name="P:PublicBiddingMicroservice.Models.Principal.Username">
             <summary>
             Korisničko ime
@@ -318,6 +338,86 @@
         <member name="P:PublicBiddingMicroservice.Models.Principal.Password">
             <summary>
             Korisnička lozinka
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto">
+            <summary>
+            DTO za javno nadmetanje.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingCreationDto">
+            <summary>
+            Model za krerianje javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingDto">
+            <summary>
+            DTO za javno nadmetanje.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingTypeConfirmationDto">
+            <summary>
+            DTO za tip javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingTypeCreationDto">
+            <summary>
+            Model za krerianje tipa javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingTypeDto">
+            <summary>
+            DTO za tip javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingTypeUpdateDto">
+            <summary>
+            Model za krerianje tipa javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto">
+            <summary>
+            Model za azuriranje javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.StageConfirmationDto">
+            <summary>
+            DTO za etapu.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.StageCreationDto">
+            <summary>
+            Model za kreiranje etape.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.StageDto">
+            <summary>
+            DTO za etapu.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.StageUpdateDto">
+            <summary>
+            Model za azuriranje etape.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.StatusConfirmationDto">
+            <summary>
+            DTO za status.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.StatusCreationDto">
+            <summary>
+            Model za kreiranje statusa.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.StatusDto">
+            <summary>
+            DTO za status.
+            </summary>
+        </member>
+        <member name="T:PublicBiddingMicroservice.Models.StatusUpdateDto">
+            <summary>
+            Model za azuriranje statusa.
             </summary>
         </member>
     </members>
