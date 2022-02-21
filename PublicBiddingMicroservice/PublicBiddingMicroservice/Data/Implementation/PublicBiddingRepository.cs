@@ -27,26 +27,26 @@ namespace PublicBiddingMicroservice.Data
             return context.PublicBidding.Where(e => (numberOfParticipants == 0 || e.NumberOfParticipants == numberOfParticipants)).ToList();
         }
 
-        public PublicBidding GetPublicBiddingById(Guid stageId)
+        public PublicBidding GetPublicBiddingById(Guid publicBiddingId)
         {
-            return context.PublicBidding.FirstOrDefault(e => e.PublicBiddingId == stageId);
+            return context.PublicBidding.FirstOrDefault(e => e.PublicBiddingId == publicBiddingId);
         }
 
-        public PublicBiddingConfirmation CreatePublicBidding(PublicBidding stage)
+        public PublicBiddingConfirmation CreatePublicBidding(PublicBidding publicBidding)
         {
-            var createdEntity = context.Add(stage);
+            var createdEntity = context.Add(publicBidding);
             return mapper.Map<PublicBiddingConfirmation>(createdEntity.Entity);
         }
 
-        public void UpdatePublicBidding(PublicBidding stage)
+        public void UpdatePublicBidding(PublicBidding publicBidding)
         {
             //Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze
             //i kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane
         }
 
-        public void DeletePublicBidding(Guid stageId)
+        public void DeletePublicBidding(Guid publicBiddingId)
         {
-            context.PublicBidding.Remove(GetPublicBiddingById(stageId));
+            context.PublicBidding.Remove(GetPublicBiddingById(publicBiddingId));
         }
     }
 }

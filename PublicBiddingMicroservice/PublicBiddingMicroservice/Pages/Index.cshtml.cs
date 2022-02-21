@@ -19,7 +19,7 @@ namespace PublicBiddingMicroservice.Pages
 
         public void OnGet()
         {
-
+            // Do nothing.
         }
     }
 }
