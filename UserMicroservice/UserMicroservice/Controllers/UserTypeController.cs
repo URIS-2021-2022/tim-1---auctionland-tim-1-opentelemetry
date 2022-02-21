@@ -8,6 +8,7 @@ using AutoMapper;
 using UserMicroservice.Data;
 using UserMicroservice.Models;
 using UserMicroservice.Entities;
+using UserMicroservice.ServiceCalls;
 
 namespace UserMicroservice.Controllers
 {
@@ -20,13 +21,18 @@ namespace UserMicroservice.Controllers
         private readonly IUserTypeRepository userTypeRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateUserType)
         private readonly IMapper mapper;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public UserTypeController(IUserTypeRepository userTypeRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public UserTypeController(IUserTypeRepository userTypeRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
         {
             this.userTypeRepository = userTypeRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "UserType";
         }
 
         /// <summary>
@@ -41,14 +47,20 @@ namespace UserMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<UserTypeDto>> GetUserTypes()
         {
+            loggerDto.HttpMethodName = "GET";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             var userTypes = userTypeRepository.GetUserTypes();
 
             //Ukoliko nismo pronašli ni jednuog tipa korisnika vratiti status 204 (NoContent)
             if (userTypes == null || userTypes.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
-
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             //Ukoliko smo našli neke tipove korisnika vratiti status 200 i listu pronađenih tipova korisnika (DTO objekti)
             return Ok(mapper.Map<List<UserTypeDto>>(userTypes));
         }
@@ -65,12 +77,17 @@ namespace UserMicroservice.Controllers
         [HttpGet("{userTypeId}")] //Dodatak na rutu koja je definisana na nivou kontrolera
         public ActionResult<UserTypeDto> GetUserType(Guid userTypeId) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
+            loggerDto.HttpMethodName = "GET";
             var userType = userTypeRepository.GetUserTypeById(userTypeId);
 
             if (userType == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<UserTypeDto>(userType));
         }
 
@@ -87,19 +104,23 @@ namespace UserMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 UserType userTypeEntity = mapper.Map<UserType>(userType);
                 UserTypeConfirmation confirmation = userTypeRepository.CreateUserType(userTypeEntity);
                 userTypeRepository.SaveChanges(); //Perzistiramo promene
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetUserType", "UserType", new { userTypeId = confirmation.UserTypeId });
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (tipa korisnika).
                 return Created(location, mapper.Map<UserTypeConfirmationDto>(confirmation));
                 //return CreatedAtRoute(); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
             catch (Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 Console.WriteLine(ex);
                 //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
@@ -123,10 +144,13 @@ namespace UserMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 //Proveriti da li uopšte postoji tip korisnika koji pokušavamo da ažuriramo.
                 var oldUserType = userTypeRepository.GetUserTypeById(userType.UserTypeId);
                 if (oldUserType == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 UserType userTypeEntity = mapper.Map<UserType>(userType);
@@ -134,10 +158,14 @@ namespace UserMicroservice.Controllers
                 mapper.Map(userTypeEntity, oldUserType); //Update objekta koji treba da sačuvamo u bazi                
 
                 userTypeRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<UserTypeDto>(oldUserType));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -158,19 +186,26 @@ namespace UserMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var userType = userTypeRepository.GetUserTypeById(userTypeId);
 
                 if (userType == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
 
                 userTypeRepository.DeleteUserType(userTypeId);
                 userTypeRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
