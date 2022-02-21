@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UserMicroservice</name>
+    </assembly>
+    <members>
+        <member name="M:UserMicroservice.Controllers.AuthenticationController.Authenticate(UserMicroservice.Models.Principal)">
+            <summary>
+            Sluzi za autentifikaciju korisnika
+            </summary>
+            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
+            <returns></returns>
+        </member>
+        <member name="M:UserMicroservice.Controllers.UserTypeController.GetUserTypes">
+            <summary>
+            Vraća sve tipove korisnika.
+            </summary>
+            <returns>Lista tipova korisnika</returns>
+            <response code="200">Vraća listu tipova korisnika</response>
+            <response code="404">Nije pronađena ni jedan jedini tip korisnika</response>
+        </member>
+        <member name="M:UserMicroservice.Controllers.UserTypeController.GetUserType(System.Guid)">
+            <summary>
+            Vraća jednog tipa korisnika na osnovu ID-ja tipova korisnika.
+            </summary>
+            <param name="userTypeId">ID tip korisnika</param>
+            <returns></returns>
+            <response code="200">Vraća traženog tipa korisnika</response>
+        </member>
+        <member name="M:UserMicroservice.Controllers.UserTypeController.CreateUserType(UserMicroservice.Models.UserTypeCreationDto)">
+            <response code="200">Vraća kreiran Tip Korisnika</response>
+            <response code="500">Došlo je do greške na serveru prilikom kreiranja tip korisnika</response>
+        </member>
+        <member name="M:UserMicroservice.Controllers.UserTypeController.UpdateUserType(UserMicroservice.Models.UserTypeUpdateDto)">
+            <summary>
+            Ažurira jednu prijavu ispita.
+            </summary>
+            <param name="userType">Model tipa korisnika koji se ažurira</param>
+            <returns>Potvrdu o modifikovanom tipu korisnika.</returns>
+            <response code="200">Vraća ažuriranog tipa korisnika</response>
+            <response code="400">Tip korisnika koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja tipa korisnika</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:UserMicroservice.Controllers.UserTypeController.DeleteUserType(System.Guid)" -->
+        <member name="M:UserMicroservice.Controllers.UserTypeController.GetUserTypeOptions">
+            <summary>
+            Vraća opcije za rad sa tipovima korisnika
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UserMicroservice.Data.Impelmentation.UserMockRepository.FillData">
+            <summary>
+            Metoda koja upisuje testne podatke
+            </summary>
+        </member>
+        <member name="M:UserMicroservice.Data.Impelmentation.UserMockRepository.UserWithCredentialsExists(System.String,System.String)">
+            <summary>
+            Proverava da li postoji korisnik sa prosleđenim kredencijalima
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UserMicroservice.Data.Impelmentation.UserMockRepository.HashPassword(System.String)">
+            <summary>
+            Vrši hash-ovanje korisničke lozinke
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <returns>Generisan hash i salt</returns>
+        </member>
+        <member name="M:UserMicroservice.Data.Impelmentation.UserMockRepository.VerifyPassword(System.String,System.String,System.String)">
+            <summary>
+            Proverava validnost prosleđene lozinke sa prosleđenim hash-om
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <param name="savedHash">Sačuvan hash</param>
+            <param name="savedSalt">Sačuvan salt</param>
+            <returns></returns>
+        </member>
+        <member name="M:UserMicroservice.Entities.UserContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Popunjava bazu sa nekim inicijalnim podacima
+            </summary>
+        </member>
+        <member name="M:UserMicroservice.Helpers.AuthenticationHelper.AuthenticatePrincipal(UserMicroservice.Models.Principal)">
+            <summary>
+            Vrši autentifikaciju principala
+            </summary>
+            <param name="principal">Principal za autentifikaciju</param>
+            <returns></returns>
+        </member>
+        <member name="M:UserMicroservice.Helpers.AuthenticationHelper.GenerateJwt(UserMicroservice.Models.Principal)">
+            <summary>
+            Generiše novi token za autentifikovanog principala
+            </summary>
+            <param name="principal">Autentifikovani principal</param>
+            <returns></returns>
+        </member>
+        <member name="P:UserMicroservice.Models.Principal.Username">
+            <summary>
+            Korisničko ime
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.Principal.Password">
+            <summary>
+            Korisnička lozinka
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserConfirmationDto">
+            <summary>
+            DTO za korisnika
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserCreationDto">
+            <summary>
+            Model za kreiranje korisnika
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserDto">
+            <summary>
+            DTO za korisnika
+            </summary>
+        </member>
+        <member name="T:UserMicroservice.Models.UserUpdateDto">
+            <summary>
+            Model za ažuriranje prijave ispita
+            </summary>
+        </member>
+        <member name="M:UserService.Controllers.UserController.GetUsers(System.String,System.String)">
+            <summary>
+            Vraća sve prijave ispita za zadate filtere.
+            </summary>
+            <param name="firstName">ime korisnika</param>
+            <param name="lastName">prezime korisnika</param>
+            <returns>Lista korisnika</returns>
+            <response code="200">Vraća listu korisnika</response>
+            <response code="404">Nije pronađena ni jedan jedini korisnik</response>
+        </member>
+        <member name="M:UserService.Controllers.UserController.GetUser(System.Guid)">
+            <summary>
+            Vraća jednog korisnika na osnovu ID-ja korisnika.
+            </summary>
+            <param name="userId">ID korisnika</param>
+            <returns></returns>
+            <response code="200">Vraća traženu korisnika</response>
+        </member>
+        <member name="M:UserService.Controllers.UserController.CreateUser(UserMicroservice.Models.UserCreationDto)">
+            <response code="200">Vraća kreiranog korisnika</response>
+            <response code="500">Došlo je do greške na serveru prilikom kreiranja korisnika</response>
+        </member>
+        <member name="M:UserService.Controllers.UserController.UpdateUser(UserMicroservice.Models.UserUpdateDto)">
+            <summary>
+            Ažurira jednog korisnika.
+            </summary>
+            <param name="user">Model korisnika koji se ažurira</param>
+            <returns>Potvrdu o modifikovanom korisniku.</returns>
+            <response code="200">Vraća ažuriranog korisnika</response>
+            <response code="400">Korisnik koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja korisnika</response>
+        </member>
+        <member name="M:UserService.Controllers.UserController.DeleteUser(System.Guid)">
+            <summary>
+            Vrši brisanje jedne korisnika na osnovu ID-ja korisnika.
+            </summary>
+            <param name="userId">ID korisnika</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Korisnik uspešno obrisan</response>
+            <response code="404">Nije pronađen korisnik za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja korisnika</response>
+        </member>
+        <member name="M:UserService.Controllers.UserController.GetUserOptions">
+            <summary>
+            Vraća opcije za rad sa kreiranjem korisnika
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

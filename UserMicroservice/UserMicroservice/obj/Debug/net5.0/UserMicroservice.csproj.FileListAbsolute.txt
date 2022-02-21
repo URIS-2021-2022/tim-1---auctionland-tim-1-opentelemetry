@@ -250,3 +250,4 @@ C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\UserMicroserv
 C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\UserMicroservice\UserMicroservice\obj\Debug\net5.0\ref\UserMicroservice.dll
 C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\UserMicroservice\UserMicroservice\obj\Debug\net5.0\UserMicroservice.pdb
 C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\UserMicroservice\UserMicroservice\obj\Debug\net5.0\UserMicroservice.genruntimeconfig.cache
+C:\Users\Ana Zuber\Desktop\tim-1---auctionland-tim-1-opentelemetry\UserMicroservice\UserMicroservice\bin\Debug\net5.0\UserMicroservice.xml

@@ -142,7 +142,7 @@ namespace UserMicroservice.Controllers
         /// <summary>
         /// Vrši brisanje jednog tipa korisnika na osnovu ID-ja tipa korisnika.
         /// </summary>
-        /// <param name="userTypeId">ID tipa korisnika/param>
+        /// <param name="userTypeId">ID tipa korisnika</param>
         /// <returns>Status 204 (NoContent)</returns>
         /// <response code="204">tip korisnika uspešno obrisan</response>
         /// <response code="404">Nije pronađen tip korisnika za brisanje</response>
