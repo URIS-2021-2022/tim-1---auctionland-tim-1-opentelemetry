@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace DocumentMsProject.Entities
 {
+    /// <summary>
+    /// Predstavlja dokument u vezi sa javnim nadmetanjem
+    /// </summary>
     public class Document
     {
+        /// <summary>
+        /// ID dokumenta.
+        /// </summary>
         [Key]
         public Guid DocumentId { get; set; }
 

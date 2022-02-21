@@ -11,6 +11,191 @@
             <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
             <returns></returns>
         </member>
+        <member name="M:DocumentMsProject.Controllers.DocumentController.GetAllDocuments">
+            <summary>
+            Vraća listu svih dokumenata u vezi sa javnim nadmetanjem
+            </summary>
+            <returns>Lista dokumenata u vezi sa javnim nadmetanjem</returns>
+            <response code="200">Vraća listu dokumenata</response>
+            <response code="404">Nije pronađen ni jedan jedini dokument</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.DocumentController.GetDocumentById(System.Guid)">
+            <summary>
+            Vraća dokument u vezi sa javnim nadmetanjem na osnovu ID
+            </summary>
+            <param name="documentID">ID dokumenta</param>
+            <returns></returns>
+            <response code="200">Vraća traženi dokument javnog nadmetanja</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.DocumentController.CreateDocument(DocumentMsProject.Models.DocumentCreationDto)">
+             <summary>
+             Kreira novi dokument.
+             </summary>
+             <param name="documentDto">Model dokumenta</param>
+             <returns>Potvrdu o kreiranom dokumentu.</returns>
+             <remarks>
+             Primer zahteva za kreiranje novog dokumenta \
+             POST /api/document \
+             {     \
+                 "documentSerialNumber": 0, \
+                 "documentName": "naziv", \
+                 "documentDate": ""2012-11-15T10:30:00" \", \
+                 "documentSubmissionDate": ""2020-11-15T10:30:00" \", \
+                 "listOfDocumentsID": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+            }
+             </remarks>
+             <response code="200">Vraća kreirani dokument</response>
+             <response code="500">Došlo je do greške na serveru prilikom kreiranja dokumenta</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.DocumentController.UpdateExamRegistration(DocumentMsProject.Models.DocumentUpdateDto)">
+            <summary>
+            Ažurira jedan dokument.
+            </summary>
+            <param name="documentDto">Model dokumenta za javno nadmetanje koji se ažurira</param>
+            <returns>Potvrdu o modifikovanom dokumetu.</returns>
+            <response code="200">Vraća ažurirani dokument</response>
+            <response code="400">Dokument za javno nadmetanje koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja dokumenta za javno nadmetanje</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.DocumentController.DeleteExamRegistration(System.Guid)">
+            <summary>
+            Vrši brisanje jednog dokumenta na osnovu ID-ja dokumenta.
+            </summary>
+            <param name="documentID">ID dokumenta</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Dokument uspešno obrisan</response>
+            <response code="404">Nije pronađen dokument za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja dokumenta</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.DocumentController.GetDocumentOptions">
+            <summary>
+            Vraća opcije za rad sa dokumentima
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.LeaseAgreementController.GetAllLeases">
+            <summary>
+            Vraća listu svih ugovora o zakupu u vezi sa javnim nadmetanjem
+            </summary>
+            <returns>Lista ugovora o zakupu u vezi sa javnim nadmetanjem</returns>
+            <response code="200">Vraća listu ugovora</response>
+            <response code="404">Nije pronađen ni jedan jedini ugovor</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.LeaseAgreementController.GetLeaseById(System.Guid)">
+            <summary>
+            Vraća ugovor o zakupu u vezi sa javnim nadmetanjem na osnovu ID
+            </summary>
+            <param name="leaseId">ID ugovora</param>
+            <returns></returns>
+            <response code="200">Vraća traženi ugovor</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.LeaseAgreementController.CreateLease(DocumentMsProject.Models.LeaseAgreementCreationDto)">
+             <summary>
+             Kreira novi ugovor o zakupu.
+             </summary>
+             <param name="leaseCreation">Model ugovora o zakupu</param>
+             <returns>Potvrdu o kreiranom ugovoru.</returns>
+             <remarks>
+             Primer zahteva za kreiranje novog dokumenta \
+             POST /api/document/leaseAgreement \
+             {     \
+                 "leaseTypeOfGuarantee": "tip garanta", \
+                 "leaseAgreementMaturities": ""2012-11-15T10:30:00" \", \
+                 "leaseAgreementEntryDate": ""2020-11-15T10:30:00" \", \
+                 "ministerID": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+                 "publicBiddingID": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+                 "personID": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+                 "deadlineForLandRestitution": ""2012-11-15T10:30:00" \", \
+                 "placeOfSigning": ""mesto" \", \
+                 "dateOfSigning": ""2012-11-15T10:30:00" \", \
+            }
+             </remarks>
+             <response code="200">Vraća kreirani dokument</response>
+             <response code="500">Došlo je do greške na serveru prilikom kreiranja dokumenta</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.LeaseAgreementController.DeleteLease(System.Guid)">
+            <summary>
+            Vrši brisanje jednog ugovora o zakupu na osnovu ID-ja ugovora.
+            </summary>
+            <param name="leaseId">ID ugovora</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Ugovor o zakupu uspešno obrisan</response>
+            <response code="404">Nije pronađen ugovor o zakupu za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja ugovora o zakupu</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.LeaseAgreementController.UpdateLease(DocumentMsProject.Models.LeaseAgreementUpdateDto)">
+            <summary>
+            Ažurira jedan ugovor o zakupu.
+            </summary>
+            <param name="updateDto">Model ugovora o zakupu koji se ažurira</param>
+            <returns>Potvrdu o modifikovanom ugovoru.</returns>
+            <response code="200">Vraća ažurirani ugovor o zakupu</response>
+            <response code="400">Ugovor o zakupu koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja ugovora o zakupu</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.LeaseAgreementController.GetLeaseAgreementOptions">
+            <summary>
+            Vraća opcije za rad sa ugovorom o zakupu
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.ListOfDocumentsController.GetAllList">
+            <summary>
+            Vraća listu svih lista dokumenata u vezi sa javnim nadmetanjem
+            </summary>
+            <returns>Lista listi dokumenata u vezi sa javnim nadmetanjem</returns>
+            <response code="200">Vraća listu lista dokumenata</response>
+            <response code="404">Nije pronađena ni jedna jedina lista dokumenata</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.ListOfDocumentsController.GetListOfDocumentsById(System.Guid)">
+            <summary>
+            Vraća listu dokument u vezi sa javnim nadmetanjem na osnovu ID
+            </summary>
+            <param name="listId">ID liste dokumenata</param>
+            <returns></returns>
+            <response code="200">Vraća traženu listu dokumenata javnog nadmetanja</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.ListOfDocumentsController.CreateListOfDocuments(DocumentMsProject.Models.ListOfDocumentsCreationDto)">
+             <summary>
+             Kreira novu listu dokumenata.
+             </summary>
+             <param name="listCreation">Model liste dokumenata</param>
+             <returns>Potvrdu o kreiranoj listi dokumenata.</returns>
+             <remarks>
+             Primer zahteva za kreiranje novog dokumenta \
+             POST /api/document/listOfDocuments \
+                 "listCreationDate": ""2020-11-15T10:30:00" \" \
+            }
+             </remarks>
+             <response code="200">Vraća kreiranu listu dokumenata</response>
+             <response code="500">Došlo je do greške na serveru prilikom kreiranja liste dokumenata</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.ListOfDocumentsController.DeleteListOfDocuments(System.Guid)">
+            <summary>
+            Vrši brisanje jedne lisete dokumenata na osnovu ID-ja liste dokumenata.
+            </summary>
+            <param name="listId">ID liste dokumenata</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Lista dokumenata uspešno obrisana</response>
+            <response code="404">Nije pronađena lista dokumenata za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja liste dokumenta</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.ListOfDocumentsController.UpdateListOfDocuments(DocumentMsProject.Models.ListOfDocumentsUpdateDto)">
+            <summary>
+            Ažurira jednu listu dokumenata.
+            </summary>
+            <param name="updateDto">Model liste dokumenta koja se ažurira</param>
+            <returns>Potvrdu o modifikovanoj listi dokumenata.</returns>
+            <response code="200">Vraća ažuriranu listu dokumenata</response>
+            <response code="400">Lista dokumenata koja se ažurira nije pronađena</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja liste dokumenta za javno nadmetanje</response>
+        </member>
+        <member name="M:DocumentMsProject.Controllers.ListOfDocumentsController.GetListOfDocumentsOptions">
+            <summary>
+            Vraća opcije za rad sa listama dokumenata
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:DocumentMsProject.Data.UserMockRepository.FillData">
             <summary>
             Metoda koja upisuje testne podatke
@@ -39,6 +224,16 @@
             <param name="savedHash">Sačuvan hash</param>
             <param name="savedSalt">Sačuvan salt</param>
             <returns></returns>
+        </member>
+        <member name="T:DocumentMsProject.Entities.Document">
+            <summary>
+            Predstavlja dokument u vezi sa javnim nadmetanjem
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.Document.DocumentId">
+            <summary>
+            ID dokumenta.
+            </summary>
         </member>
         <member name="P:DocumentMsProject.Entities.Document.DocumentSerialNumber">
             <summary>
@@ -70,9 +265,179 @@
             ID liste dokumenata
             </summary>
         </member>
+        <member name="T:DocumentMsProject.Entities.DocumentConfirmation">
+            <summary>
+            Predstavlja potvrdu dokumenta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.DocumentConfirmation.DocumentId">
+            <summary>
+            ID dokumenta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.DocumentConfirmation.DocumentSerialNumber">
+            <summary>
+            serijski broj
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.DocumentConfirmation.DocumentName">
+            <summary>
+            naziv dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.DocumentConfirmation.DocumentDate">
+            <summary>
+            datum izdavanja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.DocumentConfirmation.DocumentSubmissionDate">
+            <summary>
+            datum podnosenja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.DocumentConfirmation.ListOfDocumentsID">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Entities.LeaseAgreement">
+            <summary>
+            Predstavlja listu dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.LeaseAgreementID">
+            <summary>
+            ID ugovora o zakupu.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.LeaseTypeOfGuarantee">
+            <summary>
+            Tip garancije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.LeaseAgreementMaturities">
+            <summary>
+            Rokovi dospeća.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.LeaseAgreementEntryDate">
+            <summary>
+            Datum zavođenja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.MinisterID">
+            <summary>
+            ID ministra komisije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.PublicBiddingID">
+            <summary>
+            ID javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.PersonID">
+            <summary>
+            ID lica.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.DeadlineForLandRestitution">
+            <summary>
+            Rok za vraćanje zemljišta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.PlaceOfSigning">
+            <summary>
+            Mesto potpisivanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreement.DateOfSigning">
+            <summary>
+            Datum potpisivanja.
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Entities.LeaseAgreementConfirmation">
+            <summary>
+            Predstavlja potvrdu ugovora o zakupu.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.LeaseAgreementID">
+            <summary>
+            ID ugovora o zakupu.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.LeaseTypeOfGuarantee">
+            <summary>
+            Tip garancije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.LeaseAgreementMaturities">
+            <summary>
+            Rokovi dospeća.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.LeaseAgreementEntryDate">
+            <summary>
+            Datum zavođenja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.MinisterID">
+            <summary>
+            ID ministra komisije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.PublicBiddingID">
+            <summary>
+            ID javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.PersonID">
+            <summary>
+            ID lica.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.DeadlineForLandRestitution">
+            <summary>
+            Rok za vraćanje zemljišta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.PlaceOfSigning">
+            <summary>
+            Mesto potpisivanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.LeaseAgreementConfirmation.DateOfSigning">
+            <summary>
+            Datum potpisivanja.
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Entities.ListOfDocuments">
+            <summary>
+            Predstavlja listu dokumenata.
+            </summary>
+        </member>
         <member name="P:DocumentMsProject.Entities.ListOfDocuments.ListOfDocumentsId">
             <summary>
             ID liste dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.ListOfDocuments.ListCreationDate">
+            <summary>
+            Datum kreiranja liste dokumenata
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Entities.ListOfDocumentsConfirmation">
+            <summary>
+            Predstavlja potvrdu liste dokumenata.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.ListOfDocumentsConfirmation.ListOfDocumentsId">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Entities.ListOfDocumentsConfirmation.ListCreationDate">
+            <summary>
+            Datum kreiranja liste dokumenata
             </summary>
         </member>
         <member name="P:DocumentMsProject.Entities.User.Id">
@@ -123,6 +488,411 @@
             </summary>
             <param name="principal">Autentifikovani principal</param>
             <returns></returns>
+        </member>
+        <member name="T:DocumentMsProject.Models.DocumentConfirmationDto">
+            <summary>
+            Model za potvrdu dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentConfirmationDto.DocumentId">
+            <summary>
+            ID dokumenta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentConfirmationDto.DocumentSerialNumber">
+            <summary>
+            serijski broj
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentConfirmationDto.DocumentName">
+            <summary>
+            naziv dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentConfirmationDto.DocumentDate">
+            <summary>
+            datum izdavanja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentConfirmationDto.DocumentSubmissionDate">
+            <summary>
+            datum podnosenja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentConfirmationDto.ListOfDocumentsID">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.DocumentCreationDto">
+            <summary>
+            Model za kreiranje dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentCreationDto.DocumentSerialNumber">
+            <summary>
+            serijski broj
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentCreationDto.DocumentName">
+            <summary>
+            naziv dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentCreationDto.DocumentDate">
+            <summary>
+            datum izdavanja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentCreationDto.DocumentSubmissionDate">
+            <summary>
+            datum podnosenja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentCreationDto.ListOfDocumentsID">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.DocumentDto">
+            <summary>
+            DTO dokument
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentDto.DocumentId">
+            <summary>
+            ID dokumenta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentDto.DocumentSerialNumber">
+            <summary>
+            serijski broj
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentDto.DocumentName">
+            <summary>
+            naziv dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentDto.DocumentDate">
+            <summary>
+            datum izdavanja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentDto.DocumentSubmissionDate">
+            <summary>
+            datum podnosenja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentDto.ListOfDocumentsID">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.DocumentUpdateDto">
+            <summary>
+            Model za ažuriranje dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentUpdateDto.DocumentId">
+            <summary>
+            ID dokumenta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentUpdateDto.DocumentSerialNumber">
+            <summary>
+            serijski broj
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentUpdateDto.DocumentName">
+            <summary>
+            naziv dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentUpdateDto.DocumentDate">
+            <summary>
+            datum izdavanja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentUpdateDto.DocumentSubmissionDate">
+            <summary>
+            datum podnosenja dokumenta
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.DocumentUpdateDto.ListOfDocumentsID">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.LeaseAgreementConfirmationDto">
+            <summary>
+            Model za potvrdu ugovora o zakupu
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.LeaseAgreementID">
+            <summary>
+            ID ugovora o zakupu.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.LeaseTypeOfGuarantee">
+            <summary>
+            Tip garancije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.LeaseAgreementMaturities">
+            <summary>
+            Rokovi dospeća.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.LeaseAgreementEntryDate">
+            <summary>
+            Datum zavođenja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.MinisterID">
+            <summary>
+            ID ministra komisije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.PublicBiddingID">
+            <summary>
+            ID javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.PersonID">
+            <summary>
+            ID lica.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.DeadlineForLandRestitution">
+            <summary>
+            Rok za vraćanje zemljišta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.PlaceOfSigning">
+            <summary>
+            Mesto potpisivanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementConfirmationDto.DateOfSigning">
+            <summary>
+            Datum potpisivanja.
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.LeaseAgreementCreationDto">
+            <summary>
+            Model za kreiranje ugovora o zakupu
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementCreationDto.LeaseTypeOfGuarantee">
+            <summary>
+            Tip garancije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementCreationDto.LeaseAgreementMaturities">
+            <summary>
+            Rokovi dospeća.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementCreationDto.LeaseAgreementEntryDate">
+            <summary>
+            Datum zavođenja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementCreationDto.MinisterID">
+            <summary>
+            ID ministra komisije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementCreationDto.PublicBiddingID">
+            <summary>
+            ID javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementCreationDto.PersonID">
+            <summary>
+            ID lica.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementCreationDto.DeadlineForLandRestitution">
+            <summary>
+            Rok za vraćanje zemljišta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementCreationDto.PlaceOfSigning">
+            <summary>
+            Mesto potpisivanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementCreationDto.DateOfSigning">
+            <summary>
+            Datum potpisivanja.
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.LeaseAgreementDto">
+            <summary>
+            DTO ugovora o zakupu
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.LeaseAgreementID">
+            <summary>
+            ID ugovora o zakupu.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.LeaseTypeOfGuarantee">
+            <summary>
+            Tip garancije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.LeaseAgreementMaturities">
+            <summary>
+            Rokovi dospeća.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.LeaseAgreementEntryDate">
+            <summary>
+            Datum zavođenja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.MinisterID">
+            <summary>
+            ID ministra komisije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.PublicBiddingID">
+            <summary>
+            ID javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.PersonID">
+            <summary>
+            ID lica.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.DeadlineForLandRestitution">
+            <summary>
+            Rok za vraćanje zemljišta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.PlaceOfSigning">
+            <summary>
+            Mesto potpisivanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementDto.DateOfSigning">
+            <summary>
+            Datum potpisivanja.
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.LeaseAgreementUpdateDto">
+            <summary>
+            Model za ažuriranje ugovora o zakupu
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.LeaseAgreementID">
+            <summary>
+            ID ugovora o zakupu.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.LeaseTypeOfGuarantee">
+            <summary>
+            Tip garancije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.LeaseAgreementMaturities">
+            <summary>
+            Rokovi dospeća.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.LeaseAgreementEntryDate">
+            <summary>
+            Datum zavođenja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.MinisterID">
+            <summary>
+            ID ministra komisije.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.PublicBiddingID">
+            <summary>
+            ID javnog nadmetanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.PersonID">
+            <summary>
+            ID lica.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.DeadlineForLandRestitution">
+            <summary>
+            Rok za vraćanje zemljišta.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.PlaceOfSigning">
+            <summary>
+            Mesto potpisivanja.
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.LeaseAgreementUpdateDto.DateOfSigning">
+            <summary>
+            Datum potpisivanja.
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.ListOfDocumentsConfirmationDto">
+            <summary>
+            Model za potvrdu liste dokumnata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.ListOfDocumentsConfirmationDto.ListOfDocumentsId">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.ListOfDocumentsConfirmationDto.ListCreationDate">
+            <summary>
+            Datum kreiranja liste dokumenata
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.ListOfDocumentsCreationDto">
+            <summary>
+            Model za kreiranje liste dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.ListOfDocumentsCreationDto.ListCreationDate">
+            <summary>
+            Datum kreiranja liste dokumenata
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.ListOfDocumentsDto">
+            <summary>
+            DTO liste dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.ListOfDocumentsDto.ListOfDocumentsId">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.ListOfDocumentsDto.ListCreationDate">
+            <summary>
+            Datum kreiranja liste dokumenata
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.ListOfDocumentsUpdateDto">
+            <summary>
+            Model za ažuriranje liste dokumnata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.ListOfDocumentsUpdateDto.ListOfDocumentsId">
+            <summary>
+            ID liste dokumenata
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.ListOfDocumentsUpdateDto.ListCreationDate">
+            <summary>
+            Datum kreiranja liste dokumenata
+            </summary>
         </member>
         <member name="T:DocumentMsProject.Models.Principal">
             <summary>

@@ -30,6 +30,12 @@ namespace DocumentMsProject.Controllers
             this.linkGenerator = linkGenerator;
         }
 
+        /// <summary>
+        /// Vraća listu svih lista dokumenata u vezi sa javnim nadmetanjem
+        /// </summary>
+        /// <returns>Lista listi dokumenata u vezi sa javnim nadmetanjem</returns>
+        /// <response code="200">Vraća listu lista dokumenata</response>
+        /// <response code="404">Nije pronađena ni jedna jedina lista dokumenata</response>
         [HttpGet]
         [HttpHead] //Podržavamo i HTTP head zahtev koji nam vraća samo zaglavlja u odgovoru    
         [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
@@ -45,6 +51,12 @@ namespace DocumentMsProject.Controllers
             return Ok(mapper.Map<List<ListOfDocumentsDto>>(lists));
         }
 
+        /// <summary>
+        /// Vraća listu dokument u vezi sa javnim nadmetanjem na osnovu ID
+        /// </summary>
+        /// <param name="listId">ID liste dokumenata</param>
+        /// <returns></returns>
+        /// <response code="200">Vraća traženu listu dokumenata javnog nadmetanja</response>
         [HttpGet("{listId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -58,6 +70,19 @@ namespace DocumentMsProject.Controllers
             return Ok(mapper.Map<ListOfDocumentsDto>(listOfDocuments));
         }
 
+        /// <summary>
+        /// Kreira novu listu dokumenata.
+        /// </summary>
+        /// <param name="listCreation">Model liste dokumenata</param>
+        /// <returns>Potvrdu o kreiranoj listi dokumenata.</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje novog dokumenta \
+        /// POST /api/document/listOfDocuments \
+        ///     "listCreationDate": ""2020-11-15T10:30:00" \" \
+        ///}
+        /// </remarks>
+        /// <response code="200">Vraća kreiranu listu dokumenata</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom kreiranja liste dokumenata</response>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -85,6 +110,14 @@ namespace DocumentMsProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Vrši brisanje jedne lisete dokumenata na osnovu ID-ja liste dokumenata.
+        /// </summary>
+        /// <param name="listId">ID liste dokumenata</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Lista dokumenata uspešno obrisana</response>
+        /// <response code="404">Nije pronađena lista dokumenata za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja liste dokumenta</response>
         [HttpDelete("{listId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -109,6 +142,14 @@ namespace DocumentMsProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira jednu listu dokumenata.
+        /// </summary>
+        /// <param name="updateDto">Model liste dokumenta koja se ažurira</param>
+        /// <returns>Potvrdu o modifikovanoj listi dokumenata.</returns>
+        /// <response code="200">Vraća ažuriranu listu dokumenata</response>
+        /// <response code="400">Lista dokumenata koja se ažurira nije pronađena</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja liste dokumenta za javno nadmetanje</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -136,8 +177,12 @@ namespace DocumentMsProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraća opcije za rad sa listama dokumenata
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
-        public IActionResult GetExamRegistrationOptions()
+        public IActionResult GetListOfDocumentsOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();

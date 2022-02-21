@@ -30,6 +30,12 @@ namespace DocumentMsProject.Controllers
             this.linkGenerator = linkGenerator;
         }
 
+        /// <summary>
+        /// Vraća listu svih dokumenata u vezi sa javnim nadmetanjem
+        /// </summary>
+        /// <returns>Lista dokumenata u vezi sa javnim nadmetanjem</returns>
+        /// <response code="200">Vraća listu dokumenata</response>
+        /// <response code="404">Nije pronađen ni jedan jedini dokument</response>
         [HttpGet]
         [HttpHead] //Podržavamo i HTTP head zahtev koji nam vraća samo zaglavlja u odgovoru    
         [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
@@ -48,6 +54,12 @@ namespace DocumentMsProject.Controllers
             return Ok(mapper.Map<List<DocumentDto>>(documents));
         }
 
+        /// <summary>
+        /// Vraća dokument u vezi sa javnim nadmetanjem na osnovu ID
+        /// </summary>
+        /// <param name="documentID">ID dokumenta</param>
+        /// <returns></returns>
+        /// <response code="200">Vraća traženi dokument javnog nadmetanja</response>
         [HttpGet("{documentID}")] //Dodatak na rutu koja je definisana na nivou kontrolera
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -62,6 +74,24 @@ namespace DocumentMsProject.Controllers
             return Ok(mapper.Map<DocumentDto>(document));
         }
 
+        /// <summary>
+        /// Kreira novi dokument.
+        /// </summary>
+        /// <param name="documentDto">Model dokumenta</param>
+        /// <returns>Potvrdu o kreiranom dokumentu.</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje novog dokumenta \
+        /// POST /api/document \
+        /// {     \
+        ///     "documentSerialNumber": 0, \
+        ///     "documentName": "naziv", \
+        ///     "documentDate": ""2012-11-15T10:30:00" \", \
+        ///     "documentSubmissionDate": ""2020-11-15T10:30:00" \", \
+        ///     "listOfDocumentsID": "4563cf92-b8d0-4574-9b40-a725f884da36", \
+        ///}
+        /// </remarks>
+        /// <response code="200">Vraća kreirani dokument</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom kreiranja dokumenta</response>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -88,6 +118,14 @@ namespace DocumentMsProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira jedan dokument.
+        /// </summary>
+        /// <param name="documentDto">Model dokumenta za javno nadmetanje koji se ažurira</param>
+        /// <returns>Potvrdu o modifikovanom dokumetu.</returns>
+        /// <response code="200">Vraća ažurirani dokument</response>
+        /// <response code="400">Dokument za javno nadmetanje koji se ažurira nije pronađen</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja dokumenta za javno nadmetanje</response>
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -115,6 +153,14 @@ namespace DocumentMsProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Vrši brisanje jednog dokumenta na osnovu ID-ja dokumenta.
+        /// </summary>
+        /// <param name="documentID">ID dokumenta</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Dokument uspešno obrisan</response>
+        /// <response code="404">Nije pronađen dokument za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja dokumenta</response>
         [HttpDelete("{documentID}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -138,6 +184,17 @@ namespace DocumentMsProject.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
+        }
+
+        /// <summary>
+        /// Vraća opcije za rad sa dokumentima
+        /// </summary>
+        /// <returns></returns>
+        [HttpOptions]
+        public IActionResult GetDocumentOptions()
+        {
+            Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
+            return Ok();
         }
     }
 }
