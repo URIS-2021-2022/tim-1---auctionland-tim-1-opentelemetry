@@ -52,6 +52,5 @@ namespace DocumentMsProject.Entities
         #region ListOfDocuments
         public Guid ListOfDocumentsID { get; set; }
         #endregion
-        //public ListOfDocuments ListOfDocuments { get; set; }
     }
 }

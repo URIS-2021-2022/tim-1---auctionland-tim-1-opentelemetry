@@ -1,6 +1,7 @@
 ﻿using DocumentMsProject.Data;
 using DocumentMsProject.Entities;
 using DocumentMsProject.Helpers;
+using DocumentMsProject.ServiceCalls;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -76,8 +77,7 @@ namespace DocumentMsProject
                         {
                             ContentTypes = { "application/problem+json" }
                         };
-                    };
-
+                    }
                     //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                     problemDetails.Status = StatusCodes.Status400BadRequest;
                     problemDetails.Title = "Došlo je do greške prilikom parsiranja poslatog sadržaja.";
@@ -108,7 +108,7 @@ namespace DocumentMsProject
             services.AddScoped<ILeaseAgreementRepository, LeaseAgreementRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
-            //services.AddRazorPages();
+            services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("DocumentProjectOpenApiSpecification",

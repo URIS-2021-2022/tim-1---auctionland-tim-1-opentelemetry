@@ -98,9 +98,7 @@ namespace DocumentMsProject.Controllers
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetListOfDocumentsById", "ListOfDocuments", new { listId = confirmation.ListOfDocumentsId });
 
-                return Ok();
-                //return CreatedAtRoute(location, mapper.Map<ListOfDocumentsConfirmationDto>(confirmation)); //Druga opcija za vraćanje kreiranog resursa i lokacije
-                //return CreatedAtRoute(routeName: "GetListOfDocumentsById", routeValues: new { listId = confirmation.ListOfDocumentsId });
+                return Created(location, mapper.Map<ListOfDocumentsConfirmationDto>(confirmation)); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
             catch (Exception ex)
             {

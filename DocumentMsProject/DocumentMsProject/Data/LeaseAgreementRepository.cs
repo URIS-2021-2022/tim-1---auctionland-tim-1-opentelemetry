@@ -46,7 +46,7 @@ namespace DocumentMsProject.Data
 
         public void UpdateLeaseAgreement(LeaseAgreement leaseAgreement)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
