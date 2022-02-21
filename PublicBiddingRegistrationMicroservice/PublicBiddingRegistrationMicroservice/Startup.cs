@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using PublicBiddingRegistrationMicroservice.Data;
 using PublicBiddingRegistrationMicroservice.Entities;
 using PublicBiddingRegistrationMicroservice.Helpers;
+using PublicBiddingRegistrationMicroservice.ServiceCalls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -106,7 +107,10 @@ namespace PublicBiddingRegistrationMicroservice
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
+            services.AddScoped<IPublicBiddingService, PublicBiddingService>();
             //services.AddRazorPages();
+            services.AddHttpContextAccessor();
+
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("ApplicationOpenApiSpecification",
