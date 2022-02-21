@@ -46,7 +46,7 @@ namespace DocumentMsProject.Data
 
         public void UpdateListOfDocuments(ListOfDocuments listOfDocuments)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

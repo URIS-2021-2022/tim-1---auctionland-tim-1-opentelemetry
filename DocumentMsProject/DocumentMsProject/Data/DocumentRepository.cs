@@ -46,7 +46,7 @@ namespace DocumentMsProject.Data
 
         public void UpdateDocument(Document document)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

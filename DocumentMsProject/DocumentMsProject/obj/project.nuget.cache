@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FKS6/lUSj//1Zd+evTrLB2HK6jTG82fe34gR4fG1+1fYxmPoHoX694dnfo18TJqEAS1zWIj8ztwk1zOSC7uAuA==",
+  "dgSpecHash": "xyKeRYdP2E8rm29Vkfkgw6Bgm05OZLDVyhOs9Y/e6w8HsW/RF/oKHD8JV2wVmkS1w9etLTjxF0hlbcSp/tcDew==",
   "success": true,
   "projectFilePath": "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "C:\\Users\\Zeljana\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Zeljana\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",

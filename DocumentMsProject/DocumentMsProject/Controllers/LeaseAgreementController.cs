@@ -110,8 +110,7 @@ namespace DocumentMsProject.Controllers
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetLeaseById", "LeaseAgreement", new { leaseId = confirmation.LeaseAgreementID });
 
-                //return Ok();
-                return CreatedAtRoute(location, mapper.Map<LeaseAgreementConfirmationDto>(confirmation)); //Druga opcija za vraćanje kreiranog resursa i lokacije
+                return Created(location, mapper.Map<LeaseAgreementConfirmationDto>(confirmation)); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
             catch (Exception ex)
             {

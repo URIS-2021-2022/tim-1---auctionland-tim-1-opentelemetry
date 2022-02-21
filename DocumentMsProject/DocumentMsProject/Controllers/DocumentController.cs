@@ -2,6 +2,7 @@
 using DocumentMsProject.Data;
 using DocumentMsProject.Entities;
 using DocumentMsProject.Models;
+using DocumentMsProject.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +23,17 @@ namespace DocumentMsProject.Controllers
         private readonly IDocumentRepository documentRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
-        public DocumentController(IDocumentRepository documentRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public DocumentController(IDocumentRepository documentRepository, IMapper mapper, LinkGenerator linkGenerator, ILoggerMicroservice loggerMicroservice)
         {
             this.documentRepository = documentRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "ADDRESS";
         }
 
         /// <summary>
@@ -42,14 +48,19 @@ namespace DocumentMsProject.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<DocumentCreationDto>> GetAllDocuments()
         {
+            loggerDto.HttpMethodName = "GET";
             var documents = documentRepository.GetAllDocuments();
 
             //Ukoliko nismo pronašli ni jednu prijavu vratiti status 204 (NoContent)
             if (documents == null || documents.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
 
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             //Ukoliko smo našli neke prijava vratiti status 200 i listu pronađenih prijava (DTO objekti)
             return Ok(mapper.Map<List<DocumentDto>>(documents));
         }
@@ -65,12 +76,18 @@ namespace DocumentMsProject.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<DocumentDto> GetDocumentById(Guid documentID) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
+            loggerDto.HttpMethodName = "GET";
             Document document = documentRepository.GetDocumentById(documentID);
 
             if (document == null)
             {
+                loggerDto.Response = "404 NOT FOUND";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<DocumentDto>(document));
         }
 
@@ -100,6 +117,7 @@ namespace DocumentMsProject.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 Document documentEntity = mapper.Map<Document>(documentDto);
                 DocumentConfirmation confirmation = documentRepository.CreateDocument(documentEntity);
                 documentRepository.SaveChanges(); //Perzistiramo promene
@@ -107,13 +125,14 @@ namespace DocumentMsProject.Controllers
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetDocumentById", "Document", new { documentID = confirmation.DocumentId });
 
-                return Ok();
-                //return CreatedAtRoute(location, mapper.Map<DocumentConfirmationDto>(confirmation));
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
+                return Created(location, mapper.Map<DocumentConfirmationDto>(confirmation));
             }
-            catch (Exception ex)
+            catch
             {
-                //TODO: Logovati ex
-                //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
             }
         }
@@ -135,9 +154,12 @@ namespace DocumentMsProject.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 var oldDocument = documentRepository.GetDocumentById(documentDto.DocumentId);
                 if (oldDocument == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 Document documentEntity = mapper.Map<Document>(documentDto);
@@ -145,10 +167,14 @@ namespace DocumentMsProject.Controllers
                 mapper.Map(documentEntity, oldDocument); //Update objekta koji treba da sačuvamo u bazi                
 
                 documentRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<DocumentDto>(oldDocument));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -165,14 +191,17 @@ namespace DocumentMsProject.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeleteExamRegistration(Guid documentID)
+        public IActionResult DeleteDocument(Guid documentID)
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var document = documentRepository.GetDocumentById(documentID);
 
                 if (document == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
 
@@ -182,6 +211,8 @@ namespace DocumentMsProject.Controllers
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete error");
             }
         }
