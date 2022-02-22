@@ -10,8 +10,15 @@ namespace PublicBiddingMicroservice.Models
     /// </summary>
     public class StageUpdateDto 
     {
+        /// <summary>
+        /// Id etape
+        /// </summary> 
         public Guid StageId { get; set; }
 
+        /// <summary>
+        /// Naziv etape
+        /// </summary> 
         public DateTime Date { get; set; }
+
     }
 }

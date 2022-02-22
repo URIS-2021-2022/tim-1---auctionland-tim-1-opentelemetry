@@ -94,6 +94,13 @@ namespace PublicBiddingMicroservice.Controllers
         /// <summary>
         /// Kreira jedan status.
         /// </summary>
+        /// <remarks>
+        /// Primer zahteva za kreiranje statusa \
+        /// POST /api/statuses \
+        /// {
+        ///  "statusName": "Prvi krug"
+        /// }
+        /// </remarks>
         /// <response code="200">Vraća kreirani status</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranje statusa</response>
         [HttpPost]

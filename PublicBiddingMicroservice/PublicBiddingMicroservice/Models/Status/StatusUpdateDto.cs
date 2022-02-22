@@ -10,8 +10,14 @@ namespace PublicBiddingMicroservice.Models
     /// </summary>
     public class StatusUpdateDto
     {
+        /// <summary>
+        /// Id statusa
+        /// </summary>  
         public Guid StatusId { get; set; }
 
+        /// <summary>
+        /// Naziv statusa
+        /// </summary>  
         public string StatusName { get; set; }
     }
 }

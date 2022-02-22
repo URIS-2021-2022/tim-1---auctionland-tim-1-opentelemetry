@@ -95,6 +95,13 @@ namespace PublicBiddingMicroservice.Controllers
         /// <summary>
         /// Kreira jedan tip javnog nadmetanja.
         /// </summary>
+        /// <remarks>
+        /// Primer zahteva za kreiranje novog tipa javnog nadmetanja \
+        /// POST /api/publicBiddingTypes \
+        /// {
+        /// "publicBiddingTypesName": "Javna Licitacija"
+        /// }
+        /// </remarks>
         /// <response code="200">Vraća kreirani tip javnog nadmetanja</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja tipa javnog nadmetanja</response>
         [HttpPost]

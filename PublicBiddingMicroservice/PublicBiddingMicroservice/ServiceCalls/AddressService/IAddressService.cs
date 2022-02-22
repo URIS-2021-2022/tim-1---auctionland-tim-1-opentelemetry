@@ -8,6 +8,6 @@ namespace PublicBiddingMicroservice.ServiceCalls
 {
     public interface IAddressService
     {
-        public bool GetAddressById(Guid addressID);
+        Task<AddressDto> GetAddress(Guid addressId);
     }
 }
