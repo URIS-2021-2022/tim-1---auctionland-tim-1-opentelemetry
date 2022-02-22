@@ -58,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n    \"paymentId\": \"044f3de0-a9dd-4c2e-b745-89976a1b2a36\",\r\n    \"buyerId\": \"21ad52f8-0281-4241-98b0-481566d25e4f\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -87,7 +87,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n    \"applicationId\": \"6a411c13-a195-48f7-8dbd-67596c3974c0\",\r\n    \"paymentId\": \"044f3de0-a9dd-4c2e-b745-89976a1b2a36\",\r\n    \"buyerId\": \"21ad52f8-0281-4241-98b0-481566d25e4f\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -190,7 +190,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n  \"accountNumber\": 586,\r\n  \"referenceNumber\": 145,\r\n  \"purposeOfPayment\": \"svrhana\",\r\n  \"dateOfPayment\": \"2022-02-21T22:02:02.808Z\",\r\n  \"publicBiddingId\": \"dddf1239-8893-458d-4ce0-08d9f30ee42b\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -220,7 +220,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n    \"paymentId\": \"dad8d634-486f-42c0-87f4-96c07d75add9\",\r\n    \"accountNumber\": 588,\r\n    \"referenceNumber\": 145,\r\n    \"purposeOfPayment\": \"svrhana\",\r\n    \"dateOfPayment\": \"2022-02-21T22:02:02.808Z\",\r\n    \"publicBiddingId\": \"dddf1239-8893-458d-4ce0-08d9f30ee42b\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -249,7 +249,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44316/api/application/payment?paymentId",
+					"raw": "https://localhost:44316/api/application/payment?paymentId=dad8d634-486f-42c0-87f4-96c07d75add9",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -263,8 +263,36 @@
 					"query": [
 						{
 							"key": "paymentId",
-							"value": null
+							"value": "dad8d634-486f-42c0-87f4-96c07d75add9"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ana.zuber\",\r\n    \"password\": \"testpassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/authenticate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"authenticate"
 					]
 				}
 			},
@@ -276,7 +304,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDUzOTU5NzYsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzE2IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMTYifQ.BmpYD66Xtn1N_Y77pkBHfIymVGTLKvelZxubu6j0IpY",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU1NzgzNzcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzYyIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjIifQ.nV_4Jzawj9T0tZIUSfnoXWaDPyKlWhRdvYYXbSVy8uU",
 				"type": "string"
 			}
 		]

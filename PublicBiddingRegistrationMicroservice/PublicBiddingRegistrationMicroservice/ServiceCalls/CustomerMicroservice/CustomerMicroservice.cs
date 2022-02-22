@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingRegistrationMicroservice.ServiceCalls.CustomerMicroservice
 {
-    public class CustomerMicroservice
+    public class CustomerMicroservice : ICustomerMicroservice
     {
         private readonly IConfiguration configuration;
 

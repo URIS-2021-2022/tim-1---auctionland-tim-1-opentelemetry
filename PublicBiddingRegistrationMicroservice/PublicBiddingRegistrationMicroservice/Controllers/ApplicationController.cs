@@ -18,7 +18,6 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
     [ApiController]
     [Route("api/application")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
     public class ApplicationController : ControllerBase
     {
         private readonly IApplicationRepository applicationRepository;

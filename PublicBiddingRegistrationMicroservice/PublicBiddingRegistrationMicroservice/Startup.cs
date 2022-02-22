@@ -13,8 +13,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PublicBiddingRegistrationMicroservice.Data;
 using PublicBiddingRegistrationMicroservice.Entities;
-using PublicBiddingRegistrationMicroservice.Helpers;
 using PublicBiddingRegistrationMicroservice.ServiceCalls;
+using PublicBiddingRegistrationMicroservice.ServiceCalls.CustomerMicroservice;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -107,8 +107,8 @@ namespace PublicBiddingRegistrationMicroservice
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
-            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IPublicBiddingService, PublicBiddingService>();
+            services.AddScoped<ICustomerMicroservice, CustomerMicroservice>();
             services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
 
             services.AddHttpContextAccessor();
