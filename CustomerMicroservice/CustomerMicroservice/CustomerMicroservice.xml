@@ -1,0 +1,1350 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CustomerMicroservice</name>
+    </assembly>
+    <members>
+        <member name="M:CustomerMicroservice.Controllers.AuthenticationController.Authenticate(CustomerMicroservice.Models.Principal)">
+            <summary>
+            Sluzi za autentifikaciju korisnika
+            </summary>
+            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
+            <returns></returns>
+        </member>
+        <member name="T:CustomerMicroservice.Controllers.AuthorizedPersonController">
+            <summary>
+            Kontroler za ovlasceno lice
+            </summary>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonController.GetAuthorizedPeople">
+            <summary>
+            Vraca sva ovlascena lica 
+            </summary>
+            <returns>Lista ovlascenih lica</returns>
+            <response code="200">Vraća listu ovlascenih lica</response>
+            <response code="404">Nije pronađeno ni jedno ovlasceno lice</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonController.GetAuthorizedPersonById(System.Guid)">
+            <summary>
+            Vraca jedno ovlasceno lice sa prosledjenim ID-jem
+            </summary>
+            <param name="authorizedPersonId">ID ovlascenog lica</param>
+            <returns>Vraca jedno ovlasceno lice</returns>
+            <response code="200">Vraća ovlasceno lice sa prosledjenim ID-jem</response>
+            <response code="404">Nije pronađeno ni jedno ovlasceno lice sa tim ID-jem</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonController.CreateAuthorizedPerson(CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto)">
+            <summary>
+            Kreira novo ovlasceno lice
+            </summary>
+            <param name="authorizedPersonDto">Model ovlascenog lica</param>
+            <returns>Potvrda o kreiranom ovlascenom licu</returns>
+            <response code="201">Ovlasceno lice je uspešno kreirano</response>
+            <response code="500">Došlo je do greške na serveru prilikom kreiranja ovlascenog lica</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonController.DeleteAuthorizedPerson(System.Guid)">
+            <summary>
+            Brisanje ovlascenog lica sa prosledjenim ID-jem
+            </summary>
+            <param name="authorizedPersonID">ID ovlascenog lica</param>
+            <returns></returns>
+            <response code="404">Nije pronađeno ovlasceno lice</response>
+            <response code="204">Ovlasceno lice sa prosleđenim id-jem je obrisano</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja ovlascenog lica</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonController.UpdateAuthorizedPerson(CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto)">
+            <summary>
+            Modifikacija postojeceg ovlascenog lica
+            </summary>
+            <param name="customerDto">Model ovlascenog lica</param>
+            <returns>Potvrda o modifikovanom ovlascenom licu</returns>
+            <response code="200">Vraća ažurirano ovlasceno lice</response>
+            <response code="404">Ovlasceno lice koje je potrebno ažurirati nije pronađeno</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja ovlascenog lica</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonController.GetAuthorizedPersonOptions">
+            <summary>
+            Vraca opcije za rad sa kupcima u sistemu
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CustomerMicroservice.Controllers.AuthorizedPersonCustomerController">
+            <summary>
+            Kontroler za ovlasceno lice kupca
+            </summary>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonCustomerController.GetAuthorizedPersonCustomers">
+            <summary>
+            Vraca sva ovlascena lica kupca
+            </summary>
+            <returns>Lista ovlascenih lica kupaca</returns>
+            <response code="200">Vraća listu ovlascenih lica kupaca</response>
+            <response code="404">Nije pronađen ni jedno ovlasceno lice kupca</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonCustomerController.GetAuthorizedPersonCustomerById(System.Guid)">
+            <summary>
+            Vraca jedno ovlasceno lice kupca sa prosledjenim ID-jem
+            </summary>
+            <param name="authorizedPersonCustomerId">ID ovlascenog lica kupca</param>
+            <returns>Vraca jednog kupca</returns>
+            <response code="200">Vraća kupca sa prosledjenim ID-jem</response>
+            <response code="404">Nije pronađen ni jedan kupac sa tim ID-jem</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonCustomerController.CreateAuthorizedPersonCustomer(CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerCreationDto)">
+            <summary>
+            Kreira novo ovlasceno lice kupca
+            </summary>
+            <param name="authorizedPersonCustomerDto">Model ovlascenog lica kupca</param>
+            <returns>Potvrda o kreiranom kupcu</returns>
+            <response code="201">Kupac je uspešno kreiran</response>
+            <response code="500">Došlo je do greške na serveru prilikom kreiranja kupca</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonCustomerController.DeleteAuthorizedPersonCustomer(System.Guid)">
+            <summary>
+            Brisanje ovlascenog lica kupca sa prosledjenim ID-jem
+            </summary>
+            <param name="authorizedPersonCustomerID">ID ovlascenog lica kupca</param>
+            <returns></returns>
+            <response code="404">Nije pronađen kupac</response>
+            <response code="204">Kupac sa prosleđenim id-jem je obrisan</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja kupca</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonCustomerController.UpdateAuthorizedPersonCustomer(CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerUpdateDto)">
+            <summary>
+            Modifikacija postojeceg ovlascenog lica kupca
+            </summary>
+            <param name="authorizedPersonCustomerDto">Model ovlascenog lica kupca</param>
+            <returns>Potvrda o modifikovanom kupcu</returns>
+            <response code="200">Vraća ažuriranog kupca</response>
+            <response code="404">Kupac kojeg je potrebno ažurirati nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja kupca</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.AuthorizedPersonCustomerController.GetAuthorizedPersonCustomerOptions">
+            <summary>
+            Vraca opcije za rad sa ovlascenim licima kupaca u sistemu
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CustomerMicroservice.Controllers.CustomerController">
+            <summary>
+            Kontroler za kupca sa CRUD
+            </summary>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.CustomerController.GetCustomers">
+            <summary>
+            Vraca sve kupce
+            </summary>
+            <returns>Lista kupaca</returns>
+            <response code="200">Vraća listu kupaca</response>
+            <response code="404">Nije pronađen ni jedan kupac</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.CustomerController.GetCustomerById(System.Guid)">
+            <summary>
+            Vraca jednog kupca sa prosledjenim ID-jem
+            </summary>
+            <param name="customerId">ID kupca</param>
+            <returns>Vraca jednog kupca</returns>
+            <response code="200">Vraća kupca sa prosledjenim ID-jem</response>
+            <response code="404">Nije pronađen ni jedan kupac sa tim ID-jem</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.CustomerController.CreateCustomer(CustomerMicroservice.Models.CustomerCreationDto)">
+            <summary>
+            Kreira novog kupca
+            </summary>
+            <param name="customerDto">Model kupca</param>
+            <returns>Potvrda o kreiranom kupcu</returns>
+            <response code="201">Kupac je uspešno kreiran</response>
+            <response code="500">Došlo je do greške na serveru prilikom kreiranja kupca</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.CustomerController.DeleteCustomer(System.Guid)">
+            <summary>
+            Brisanje kupca sa prosledjenim ID-jem
+            </summary>
+            <param name="customerID">ID kupca</param>
+            <returns></returns>
+            <response code="404">Nije pronađen kupac</response>
+            <response code="204">Kupac sa prosleđenim id-jem je obrisan</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja kupca</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.CustomerController.UpdateCustomer(CustomerMicroservice.Models.CustomerUpdateDto)">
+            <summary>
+            Modifikacija postojeceg kupca
+            </summary>
+            <param name="customerDto">Model kupca</param>
+            <returns>Potvrda o modifikovanom kupcu</returns>
+            <response code="200">Vraća ažuriranog kupca</response>
+            <response code="404">Kupac kojeg je potrebno ažurirati nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja kupca</response>
+        </member>
+        <member name="M:CustomerMicroservice.Controllers.CustomerController.GetCustomerOptions">
+            <summary>
+            Vraca opcije za rad sa kupcima u sistemu
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CustomerMicroservice.Data.UserMockRepository.FillData">
+            <summary>
+            Metoda koja upisuje testne podatke
+            </summary>
+        </member>
+        <member name="M:CustomerMicroservice.Data.UserMockRepository.UserWithCredentialsExists(System.String,System.String)">
+            <summary>
+            Proverava da li postoji korisnik sa prosleđenim kredencijalima
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomerMicroservice.Data.UserMockRepository.HashPassword(System.String)">
+            <summary>
+            Vrši hash-ovanje korisničke lozinke
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <returns>Generisan hash i salt</returns>
+        </member>
+        <member name="M:CustomerMicroservice.Data.UserMockRepository.VerifyPassword(System.String,System.String,System.String)">
+            <summary>
+            Proverava validnost prosleđene lozinke sa prosleđenim hash-om
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <param name="savedHash">Sačuvan hash</param>
+            <param name="savedSalt">Sačuvan salt</param>
+            <returns></returns>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPerson.AuthorizedPersonID">
+            <summary>
+            ID ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPerson.FirstName">
+            <summary>
+            Ime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPerson.LastName">
+            <summary>
+            Prezime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPerson.NumberPersonalDocument">
+            <summary>
+            Broj licnog dokumenta (jmbg ili broj pasosa)
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPerson.BoardTable">
+            <summary>
+            Broj table
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPerson.AddressId">
+            <summary>
+            Adresa ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonConfirmation.AuthorizedPersonID">
+            <summary>
+            ID ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonConfirmation.FirstName">
+            <summary>
+            Ime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonConfirmation.LastName">
+            <summary>
+            Prezime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonConfirmation.NumberPersonalDocument">
+            <summary>
+            Broj licnog dokumenta (jmbg ili broj pasosa)
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonConfirmation.BoardTable">
+            <summary>
+            Broj table
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonConfirmation.AddressId">
+            <summary>
+            Adresa ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonCustomer.AuthorizedPersonCustomerID">
+            <summary>
+            ID ovlascenog lica kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonCustomer.AuthorizedPersonID">
+            <summary>
+            Strani kljuc ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonCustomer.CustomerID">
+            <summary>
+            Strani kljuc kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonCustomerConfirmation.AuthorizedPersonCustomerID">
+            <summary>
+            ID ovlascenog lica kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonCustomerConfirmation.AuthorizedPersonID">
+            <summary>
+            Strani kljuc ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonCustomerConfirmation.CustomerID">
+            <summary>
+            Strani kljuc kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.CustomerID">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.IsPhysicalPerson">
+            <summary>
+            Da li je kupac fizicko lice, ako nije onda je pravno
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.Priority">
+            <summary>
+            Prioritet 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.RealizedArea">
+            <summary>
+            Ostvarena povrsina
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.HasABan">
+            <summary>
+            Da li kupac ima zabranu
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.StartDateBan">
+            <summary>
+            Datum pocetka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.DurationBan">
+            <summary>
+            Duzina trajanja zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.EndDateBan">
+            <summary>
+            Datum prestanka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.AddressId">
+            <summary>
+            Adresa kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.DocumentID">
+            <summary>
+            Dokumenti kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.CustomerID">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.IsPhysicalPerson">
+            <summary>
+            Da li je kupac fizicko lice, ako nije onda je pravno
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.Priority">
+            <summary>
+            Prioritet 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.RealizedArea">
+            <summary>
+            Ostvarena povrsina
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.HasABan">
+            <summary>
+            Da li kupac ima zabranu
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.StartDateBan">
+            <summary>
+            Datum pocetka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.DurationBan">
+            <summary>
+            Duzina trajanja zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.EndDateBan">
+            <summary>
+            Datum prestanka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.AddressId">
+            <summary>
+            Adresa kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.DocumentID">
+            <summary>
+            Dokumenti kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPerson.IdentificationNumber">
+            <summary>
+            Maticni broj pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPerson.Name">
+            <summary>
+            Naziv pravnog lica lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPerson.Fax">
+            <summary>
+            Faks pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPerson.PhoneNumber1">
+            <summary>
+            Broj telefona 1 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPerson.PhoneNumber2">
+            <summary>
+            Broj telefona 2 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPerson.Email">
+            <summary>
+            Email pravnog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPerson.AccountNumber">
+            <summary>
+            Broj racuna pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPersonConfirmation.IdentificationNumber">
+            <summary>
+            Maticni broj pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPersonConfirmation.Name">
+            <summary>
+            Naziv pravnog lica lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPersonConfirmation.Fax">
+            <summary>
+            Faks pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPersonConfirmation.PhoneNumber1">
+            <summary>
+            Broj telefona 1 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPersonConfirmation.PhoneNumber2">
+            <summary>
+            Broj telefona 2 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPersonConfirmation.Email">
+            <summary>
+            Email pravnog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.LegallyPersonConfirmation.AccountNumber">
+            <summary>
+            Broj racuna pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPerson.JMBG">
+            <summary>
+            JMBG fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPerson.FirstName">
+            <summary>
+            Ime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPerson.LastName">
+            <summary>
+            Prezime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPerson.PhoneNumber1">
+            <summary>
+            Broj telefona 1 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPerson.PhoneNumber2">
+            <summary>
+            Broj telefona 2 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPerson.Email">
+            <summary>
+            Email fizickog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPerson.AccountNumber">
+            <summary>
+            Broj racuna fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPersonConfirmation.JMBG">
+            <summary>
+            JMBG fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPersonConfirmation.FirstName">
+            <summary>
+            Ime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPersonConfirmation.LastName">
+            <summary>
+            Prezime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPersonConfirmation.PhoneNumber1">
+            <summary>
+            Broj telefona 1 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPersonConfirmation.PhoneNumber2">
+            <summary>
+            Broj telefona 2 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPersonConfirmation.Email">
+            <summary>
+            Email fizickog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.PhysicalPersonConfirmation.AccountNumber">
+            <summary>
+            Broj racuna fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.User.Id">
+            <summary>
+            ID korisnika 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.User.FirstName">
+            <summary>
+            Ime korisnika
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.User.LastName">
+            <summary>
+            Prezime korisnika
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.User.Username">
+            <summary>
+            Korisnicko ime korisnika
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.User.Email">
+            <summary>
+            Mejl korisnika
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.User.Password">
+            <summary>
+            Lozinka korisnika
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.User.Salt">
+            <summary>
+            Salt 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AddressDto.AddressId">
+            <summary>
+            ID adrese
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerConfirmationDto">
+            <summary>
+            DTO za potvrdjivanje ovlascenog lica kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerConfirmationDto.AuthorizedPersonCustomerID">
+            <summary>
+            ID ovlascenog lica kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerConfirmationDto.AuthorizedPersonID">
+            <summary>
+            Strani kljuc ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerConfirmationDto.CustomerID">
+            <summary>
+            Strani kljuc kupca
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerCreationDto">
+            <summary>
+            DTO za kreiranje ovlascenog lica kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerCreationDto.AuthorizedPersonCustomerID">
+            <summary>
+            ID ovlascenog lica kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerCreationDto.AuthorizedPersonID">
+            <summary>
+            Strani kljuc ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerCreationDto.CustomerID">
+            <summary>
+            Strani kljuc kupca
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerDto">
+            <summary>
+            DTO za ovlasceno lice kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerDto.AuthorizedPersonCustomerID">
+            <summary>
+            ID ovlascenog lica kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerDto.AuthorizedPersonID">
+            <summary>
+            Strani kljuc ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerDto.CustomerID">
+            <summary>
+            Strani kljuc kupca
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerUpdateDto">
+            <summary>
+            DTO za modifikaciju ovlascenog lica kupca 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerUpdateDto.AuthorizedPersonCustomerID">
+            <summary>
+            ID ovlascenog lica kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerUpdateDto.AuthorizedPersonID">
+            <summary>
+            Strani kljuc ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerUpdateDto.CustomerID">
+            <summary>
+            Strani kljuc kupca
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonConfirmationDto">
+            <summary>
+            DTO za potvrdjivanje ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonConfirmationDto.AuthorizedPersonID">
+            <summary>
+            ID ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonConfirmationDto.FirstName">
+            <summary>
+            Ime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonConfirmationDto.LastName">
+            <summary>
+            Prezime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonConfirmationDto.NumberPersonalDocument">
+            <summary>
+            Broj licnog dokumenta (jmbg ili broj pasosa)
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonConfirmationDto.BoardTable">
+            <summary>
+            Broj table
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonConfirmationDto.AddressId">
+            <summary>
+            Adresa ovlascenog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto">
+            <summary>
+            DTO za kreiranje ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto.AuthorizedPersonID">
+            <summary>
+            ID ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto.FirstName">
+            <summary>
+            Ime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto.LastName">
+            <summary>
+            Prezime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto.NumberPersonalDocument">
+            <summary>
+            Broj licnog dokumenta (jmbg ili broj pasosa)
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto.BoardTable">
+            <summary>
+            Broj table
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto.AddressId">
+            <summary>
+            Adresa ovlascenog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonDto">
+            <summary>
+            DTO za ovlasceno lice
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonDto.AuthorizedPersonID">
+            <summary>
+            ID ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonDto.FirstName">
+            <summary>
+            Ime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonDto.LastName">
+            <summary>
+            Prezime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonDto.NumberPersonalDocument">
+            <summary>
+            Broj licnog dokumenta (jmbg ili broj pasosa)
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonDto.BoardTable">
+            <summary>
+            Broj table
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonDto.AddressId">
+            <summary>
+            Adresa ovlascenog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto">
+            <summary>
+            DTO za modifikaciju ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto.AuthorizedPersonID">
+            <summary>
+            ID ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto.FirstName">
+            <summary>
+            Ime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto.LastName">
+            <summary>
+            Prezime ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto.NumberPersonalDocument">
+            <summary>
+            Broj licnog dokumenta (jmbg ili broj pasosa)
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto.BoardTable">
+            <summary>
+            Broj table
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto.AddressId">
+            <summary>
+            Adresa ovlascenog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.CustomerConfirmationDto">
+            <summary>
+            DTO za potvrdjivanje kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.CustomerID">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.IsPhysicalPerson">
+            <summary>
+            Da li je kupac fizicko lice, ako nije onda je pravno
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.Priority">
+            <summary>
+            Prioritet 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.RealizedArea">
+            <summary>
+            Ostvarena povrsina
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.HasABan">
+            <summary>
+            Da li kupac ima zabranu
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.StartDateBan">
+            <summary>
+            Datum pocetka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.DurationBan">
+            <summary>
+            Duzina trajanja zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.EndDateBan">
+            <summary>
+            Datum prestanka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.AddressId">
+            <summary>
+            Adresa kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.DocumentID">
+            <summary>
+            Dokumenti kupca
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.CustomerCreationDto">
+            <summary>
+            DTO za kreiranje kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.CustomerID">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.IsPhysicalPerson">
+            <summary>
+            Da li je kupac fizicko lice, ako nije onda je pravno
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.Priority">
+            <summary>
+            Prioritet 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.RealizedArea">
+            <summary>
+            Ostvarena povrsina
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.HasABan">
+            <summary>
+            Da li kupac ima zabranu
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.StartDateBan">
+            <summary>
+            Datum pocetka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.DurationBan">
+            <summary>
+            Duzina trajanja zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.EndDateBan">
+            <summary>
+            Datum prestanka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.AddressId">
+            <summary>
+            Adresa kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.DocumentID">
+            <summary>
+            Dokumenati kupca
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.CustomerDto">
+            <summary>
+            DTO za kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.CustomerID">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.IsPhysicalPerson">
+            <summary>
+            Da li je kupac fizicko lice, ako nije onda je pravno
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.Priority">
+            <summary>
+            Prioritet 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.RealizedArea">
+            <summary>
+            Ostvarena povrsina
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.HasABan">
+            <summary>
+            Da li kupac ima zabranu
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.StartDateBan">
+            <summary>
+            Datum pocetka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.DurationBan">
+            <summary>
+            Duzina trajanja zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.EndDateBan">
+            <summary>
+            Datum prestanka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.AddressId">
+            <summary>
+            Adresa kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.DocumentID">
+            <summary>
+            Dokumenti kupca
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.CustomerUpdateDto">
+            <summary>
+            DTO za modifikaciju kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.CustomerID">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.IsPhysicalPerson">
+            <summary>
+            Da li je kupac fizicko lice, ako nije onda je pravno
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.Priority">
+            <summary>
+            Prioritet 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.RealizedArea">
+            <summary>
+            Ostvarena povrsina
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.HasABan">
+            <summary>
+            Da li kupac ima zabranu
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.StartDateBan">
+            <summary>
+            Datum pocetka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.DurationBan">
+            <summary>
+            Duzina trajanja zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.EndDateBan">
+            <summary>
+            Datum prestanka zabrane
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.AddressId">
+            <summary>
+            Adresa kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.DocumentID">
+            <summary>
+            Dokumenti kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.DocumentDto.DocumentID">
+            <summary>
+            ID dokumenta
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.LegallyPerson.LegallyPersonConfirmationDto">
+            <summary>
+            DTO za potvrdjivanje pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonConfirmationDto.IdentificationNumber">
+            <summary>
+            Maticni broj pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonConfirmationDto.Name">
+            <summary>
+            Naziv pravnog lica lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonConfirmationDto.Fax">
+            <summary>
+            Faks pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonConfirmationDto.PhoneNumber1">
+            <summary>
+            Broj telefona 1 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonConfirmationDto.PhoneNumber2">
+            <summary>
+            Broj telefona 2 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonConfirmationDto.Email">
+            <summary>
+            Email pravnog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonConfirmationDto.AccountNumber">
+            <summary>
+            Broj racuna pravnog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.LegallyPerson.LegallyPersonCreationDto">
+            <summary>
+            DTO za kreiranje pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonCreationDto.IdentificationNumber">
+            <summary>
+            Maticni broj pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonCreationDto.Name">
+            <summary>
+            Naziv pravnog lica lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonCreationDto.Fax">
+            <summary>
+            Faks pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonCreationDto.PhoneNumber1">
+            <summary>
+            Broj telefona 1 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonCreationDto.PhoneNumber2">
+            <summary>
+            Broj telefona 2 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonCreationDto.Email">
+            <summary>
+            Email pravnog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonCreationDto.AccountNumber">
+            <summary>
+            Broj racuna pravnog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.LegallyPerson.LegallyPersonDto">
+            <summary>
+            DTO za pravno lice
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonDto.IdentificationNumber">
+            <summary>
+            Maticni broj pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonDto.Name">
+            <summary>
+            Naziv pravnog lica lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonDto.Fax">
+            <summary>
+            Faks pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonDto.PhoneNumber1">
+            <summary>
+            Broj telefona 1 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonDto.PhoneNumber2">
+            <summary>
+            Broj telefona 2 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonDto.Email">
+            <summary>
+            Email pravnog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonDto.AccountNumber">
+            <summary>
+            Broj racuna pravnog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.LegallyPerson.LegallyPersonUpdateDto">
+            <summary>
+            DTO za modifikaciju pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonUpdateDto.IdentificationNumber">
+            <summary>
+            Maticni broj pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonUpdateDto.Name">
+            <summary>
+            Naziv pravnog lica lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonUpdateDto.Fax">
+            <summary>
+            Faks pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonUpdateDto.PhoneNumber1">
+            <summary>
+            Broj telefona 1 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonUpdateDto.PhoneNumber2">
+            <summary>
+            Broj telefona 2 pravnog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonUpdateDto.Email">
+            <summary>
+            Email pravnog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.LegallyPerson.LegallyPersonUpdateDto.AccountNumber">
+            <summary>
+            Broj racuna pravnog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonConfirmationDto">
+            <summary>
+            DTO za potvrdjivanje fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonConfirmationDto.JMBG">
+            <summary>
+            JMBG fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonConfirmationDto.FirstName">
+            <summary>
+            Ime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonConfirmationDto.LastName">
+            <summary>
+            Prezime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonConfirmationDto.PhoneNumber1">
+            <summary>
+            Broj telefona 1 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonConfirmationDto.PhoneNumber2">
+            <summary>
+            Broj telefona 2 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonConfirmationDto.Email">
+            <summary>
+            Email fizickog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonConfirmationDto.AccountNumber">
+            <summary>
+            Broj racuna fizickog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonCreationDto">
+            <summary>
+            DTO za kreiranje fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonCreationDto.JMBG">
+            <summary>
+            JMBG fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonCreationDto.FirstName">
+            <summary>
+            Ime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonCreationDto.LastName">
+            <summary>
+            Prezime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonCreationDto.PhoneNumber1">
+            <summary>
+            Broj telefona 1 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonCreationDto.PhoneNumber2">
+            <summary>
+            Broj telefona 2 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonCreationDto.Email">
+            <summary>
+            Email fizickog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonCreationDto.AccountNumber">
+            <summary>
+            Broj racuna fizickog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonDto">
+            <summary>
+            DTO za fizicko lice
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonDto.JMBG">
+            <summary>
+            JMBG fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonDto.FirstName">
+            <summary>
+            Ime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonDto.LastName">
+            <summary>
+            Prezime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonDto.PhoneNumber1">
+            <summary>
+            Broj telefona 1 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonDto.PhoneNumber2">
+            <summary>
+            Broj telefona 2 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonDto.Email">
+            <summary>
+            Email fizickog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonDto.AccountNumber">
+            <summary>
+            Broj racuna fizickog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonUpdateDto">
+            <summary>
+            DTO za modifikaciju fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonUpdateDto.JMBG">
+            <summary>
+            JMBG fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonUpdateDto.FirstName">
+            <summary>
+            Ime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonUpdateDto.LastName">
+            <summary>
+            Prezime fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonUpdateDto.PhoneNumber1">
+            <summary>
+            Broj telefona 1 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonUpdateDto.PhoneNumber2">
+            <summary>
+            Broj telefona 2 fizickog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonUpdateDto.Email">
+            <summary>
+            Email fizickog lica 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonUpdateDto.AccountNumber">
+            <summary>
+            Broj racuna fizickog lica
+            </summary>
+        </member>
+    </members>
+</doc>
