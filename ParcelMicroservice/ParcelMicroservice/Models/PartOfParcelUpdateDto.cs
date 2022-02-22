@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParcelMicroservice.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,5 +24,6 @@ namespace ParcelMicroservice.Models
         public string ClassLandLabel { get; set; }
 
         #endregion
+
     }
 }

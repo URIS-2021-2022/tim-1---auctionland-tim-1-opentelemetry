@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using AddressMicroservice.ServiceCalls;
+using AutoMapper;
+using LoggerMicroservice.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +17,15 @@ namespace ParcelMicroservice.Controllers
 {
     [ApiController]
     [Route("api/parcels")]
-    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
+    [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
+    //[Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class ParcelController : ControllerBase
     {
         private readonly IParcelRepository parcelRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateExamRegistration)
         private readonly IMapper mapper;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         public List<String> CultureList = new List<String> { "Njive", "Vrtovi", "Voćnjaci", "Vinogradi", "Livade", "Pašnjaci", "Šume", "Trstici-močvare", "test" };
         public List<String> ClassList = new List<String> { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "test" };
@@ -30,33 +35,48 @@ namespace ParcelMicroservice.Controllers
         public List<String> DrainageActualConditionList = new List<String> { "Površinsko odvodnjavanje", "Podzemno odvodnjavanje", "test" };
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public ParcelController(IParcelRepository parcelRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public ParcelController(IParcelRepository parcelRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
         {
             this.parcelRepository = parcelRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "ADDRESS";
         }
 
         [HttpGet]
         [HttpHead]
         public ActionResult<List<ParcelDto>> GetParcels(string NumberOfParcel)
         {
+            loggerDto.HttpMethodName = "GET";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             List<Parcel> parcels = parcelRepository.GetParcels(NumberOfParcel);
             if (parcels == null || parcels.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<ParcelDto>>(parcels));
         }
 
         [HttpGet("{parcelID}")]
         public ActionResult<ParcelDto> GetParcel(Guid parcelID)
         {
+            loggerDto.HttpMethodName = "GET";
             Parcel model = parcelRepository.GetParcelById(parcelID);
             if (model == null)
             {
+                loggerDto.Response = "404 NOT FOUND";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<ParcelDto>(model));
         }
 
@@ -66,6 +86,7 @@ namespace ParcelMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 bool modelValid = ValidateParcel(model);
 
                 if (!modelValid)
@@ -78,10 +99,15 @@ namespace ParcelMicroservice.Controllers
                 ParcelConfirmation confirmation = parcelRepository.CreateParcel(parcelEntity);
                 // Dobar API treba da vrati lokator gde se taj resurs nalazi
                 string location = linkGenerator.GetPathByAction("GetParcels", "Parcel", new { parcelID = confirmation.ParcelID });
+                parcelRepository.SaveChanges();
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Created(location, mapper.Map<ParcelConfirmationDto>(confirmation));
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error");
             }
         }
@@ -92,17 +118,29 @@ namespace ParcelMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
+                var oldparcelEntity = parcelRepository.GetParcelById(model.ParcelID);
                 //Proveriti da li uopšte postoji prijava koju pokušavamo da ažuriramo.
-                if (parcelRepository.GetParcelById(model.ParcelID) == null)
+                if (oldparcelEntity == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
+
                 Parcel parcelEntity = mapper.Map<Parcel>(model);
-                ParcelConfirmation confirmation = parcelRepository.UpdateParcel(parcelEntity);
-                return Ok(mapper.Map<ParcelConfirmationDto>(confirmation));
+
+                mapper.Map(parcelEntity, oldparcelEntity); //Update objekta koji treba da sačuvamo u bazi                
+
+                parcelRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
+                return Ok(mapper.Map<ParcelConfirmationDto>(oldparcelEntity));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -112,17 +150,25 @@ namespace ParcelMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 Parcel parcelModel = parcelRepository.GetParcelById(parcelID);
                 if (parcelModel == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 parcelRepository.DeleteParcel(parcelID);
+                parcelRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
                 return NoContent();
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }

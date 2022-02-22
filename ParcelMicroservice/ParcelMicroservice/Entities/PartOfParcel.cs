@@ -16,5 +16,7 @@ namespace ParcelMicroservice.Entities
         public string ClassLandLabel { get; set; }
 
         #endregion
+
+        public Parcel Parcel { get; set; }
     }
 }

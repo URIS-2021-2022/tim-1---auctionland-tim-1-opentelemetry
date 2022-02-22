@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,10 +14,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ParcelMicroservice.Data;
+using ParcelMicroservice.Entities;
 using ParcelMicroservice.Helpers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -105,11 +109,44 @@ namespace ParcelMicroservice
             });
 
 
-            services.AddSingleton<IParcelRepository, ParcelRepository>();
-            services.AddSingleton<IPartOfParcelRepository, PartOfParcelRepository>();
+            //services.AddSingleton<IParcelRepository, ParcelMockRepository>();
+            services.AddScoped<IParcelRepository, ParcelRepository>(); //Koristimo konkretni repozitorijum
+            //services.AddSingleton<IPartOfParcelRepository, PartOfParcelMockRepository>();
+            services.AddScoped<IPartOfParcelRepository, PartOfParcelRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
-            services.AddScoped<IUserRepository, UserMockRepository>();
+            services.AddSingleton<IUserRepository, UserMockRepository>();
+            services.AddSwaggerGen(setupAction =>
+            {
+            setupAction.SwaggerDoc("ParcelOpenApiSpecification", new Microsoft.OpenApi.Models.OpenApiInfo()
+            {
+                   Title = "Parcel API",
+                   Version = "1.0",
+                   Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                   {
+                       Name = "Aleksandar Milunović",
+                       Email = "unknown@mail.com"
+                   },
+                   Description = "Pomoću ovog API-ja može da se vrši kreiranje parcele, modifikacija parcele kao i pregled kreiranih parcela i njenih delova.",
+                   License = new Microsoft.OpenApi.Models.OpenApiLicense
+                    {
+                        Name = "Student licence"
+                    },
+                   TermsOfService = new Uri("http://www.ftn.uns.ac.rs/parcels")
+            });
 
+                //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
+                var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
+
+                //Pravimo putanju do XML fajla sa komentarima
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+
+                //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
+                setupAction.IncludeXmlComments(xmlCommentsPath);
+
+            });
+
+            //services.AddDbContextPool<ParcelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ParcelDB")));
+            services.AddDbContext<ParcelContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -128,6 +165,14 @@ namespace ParcelMicroservice
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(setupAction =>
+            {
+                //Podesavamo endpoint gde Swagger UI moze da pronadje OpenAPI specifikaciju
+                setupAction.SwaggerEndpoint("/swagger/ParcelOpenApiSpecification/swagger.json", "Parcel API");
+            });
 
             app.UseEndpoints(endpoints =>
             {

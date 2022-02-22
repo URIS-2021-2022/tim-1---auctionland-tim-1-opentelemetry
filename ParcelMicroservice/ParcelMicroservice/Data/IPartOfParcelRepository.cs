@@ -11,7 +11,8 @@ namespace ParcelMicroservice.Data
         public List<PartOfParcel> GetPartOfParcels();
         public PartOfParcel GetPartOfParcelById(Guid PartOfParcelID);
         public PartOfParcelConfirmation CreatePartOfParcel(PartOfParcel partOfParcel);
-        public PartOfParcelConfirmation UpdatePartOfParcel(PartOfParcel partOfParcel);
+        public void UpdatePartOfParcel(PartOfParcel partOfParcel);
         public void DeletePartOfParcel(Guid PartOfParcelID);
+        public bool SaveChanges();
     }
 }

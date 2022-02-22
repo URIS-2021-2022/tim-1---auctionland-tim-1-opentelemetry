@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParcelMicroservice.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace ParcelMicroservice.Models
 {
     public class PartOfParcelCreationDto
     {
+        public Guid ParcelID { get; set; }
         public int SurfaceAreaPOP { get; set; }
 
         #region Land Class

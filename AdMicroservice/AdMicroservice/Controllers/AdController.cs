@@ -19,7 +19,7 @@ namespace AdMicroservice.Controllers
     [ApiController]
     [Route("api/ads")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
+    //[Authorize]
     public class AdController : ControllerBase
     {
         private readonly IAdRepository adRepository;
