@@ -20,7 +20,6 @@ namespace CustomerMicroservice.Controllers
     [ApiController]
     [Route("api/customers")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly IPhysicalPersonRepository physicalPersonRepository;
