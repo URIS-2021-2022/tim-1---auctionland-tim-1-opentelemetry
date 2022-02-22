@@ -1,6 +1,5 @@
 ﻿using CustomerMicroservice.Data;
 using CustomerMicroservice.Entities;
-using CustomerMicroservice.Helpers;
 using CustomerMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -115,10 +114,9 @@ namespace CustomerMicroservice
             services.AddScoped<ILegallyPersonRepository, LegallyPersonRepository>();
             services.AddScoped<IAuthorizedPersonRepository, AuthorizedPersonRepository>();
             services.AddScoped<IAuthorizedPersonCustomerRepository, AuthorizedPersonCustomerRepository>();
-            services.AddSingleton<IUserRepository, UserMockRepository>();
-            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<IPublicBiddingMicroservice, PublicBiddingMicroservice>();
             services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
 
             services.AddHttpContextAccessor();
@@ -154,30 +152,6 @@ namespace CustomerMicroservice
                 //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
                 setupAction.IncludeXmlComments(xmlCommentsPath);
 
-                setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Molim Vas unesite vaš token",
-                    Name = "Autorizacija korisnika",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Scheme = "bearer"
-                });
-
-                setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                    }
-                });
             });
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerMicroservice.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -43,5 +44,17 @@ namespace CustomerMicroservice.Entities
         /// </summary>
         [ForeignKey("Address")]
         public Guid AddressId { get; set; }
+
+        /// <summary>
+        /// Javno nadmetanje ovlascenog lica
+        /// </summary>
+        [ForeignKey("PublicBidding")]
+        public Guid PublicBiddingID { get; set; }
+
+        [NotMapped]
+        public PublicBiddingDto PublicBidding { get; set; }
+
+        [NotMapped]
+        public AddressDto Address { get; set; }
     }
 }

@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace CustomerMicroservice.ServiceCalls
 {
-    public class AddressService : IAddressService
+    public class PublicBiddingMicroservice : IPublicBiddingMicroservice
     {
         private readonly IConfiguration configuration;
 
-        public AddressService(IConfiguration configuration)
+        public PublicBiddingMicroservice(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
 
-        public async Task<AddressDto> GetAddress(Guid addressId)
+        public async Task<PublicBiddingDto> GetPublicBiddings(Guid publicBiddingId)
         {
             try
             {
                 using var httpClient = new HttpClient();
-                Uri url = new Uri($"{ configuration["Services:AddressService"] }api/addresses/" + addressId);
+                Uri url = new Uri($"{ configuration["Services:PublicBiddingMicroservice"] }api/publicBiddings/" + publicBiddingId);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
                 var response = await httpClient.SendAsync(request);
@@ -34,7 +34,7 @@ namespace CustomerMicroservice.ServiceCalls
                     {
                         return default;
                     }
-                    return JsonConvert.DeserializeObject<AddressDto>(content);
+                    return JsonConvert.DeserializeObject<PublicBiddingDto>(content);
                 }
                 return default;
             }

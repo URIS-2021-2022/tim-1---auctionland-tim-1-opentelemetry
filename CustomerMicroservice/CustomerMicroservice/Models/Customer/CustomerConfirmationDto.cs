@@ -62,5 +62,21 @@ namespace CustomerMicroservice.Models
         /// </summary>
         [ForeignKey("Document")]
         public Guid DocumentID { get; set; }
+
+        /// <summary>
+        /// Javno nadmetanje kupca
+        /// </summary>
+        [ForeignKey("PublicBidding")]
+        public Guid PublicBiddingID { get; set; }
+
+        [NotMapped]
+        public PublicBiddingDto PublicBidding { get; set; }
+
+        [NotMapped]
+        public DocumentDto Document { get; set; }
+
+        [NotMapped]
+        public AddressDto Address { get; set; }
+
     }
 }

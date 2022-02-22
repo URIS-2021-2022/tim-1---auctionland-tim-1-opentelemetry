@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CustomerMicroservice.ServiceCalls
 {
-    public interface IAddressService
+    public interface IPublicBiddingMicroservice
     {
-        public Task<AddressDto> GetAddress(Guid addressId);
+        public Task<PublicBiddingDto> GetPublicBiddings(Guid publicBiddingID);
     }
 }

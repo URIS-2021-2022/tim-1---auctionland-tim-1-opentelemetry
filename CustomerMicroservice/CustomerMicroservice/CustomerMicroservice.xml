@@ -56,7 +56,7 @@
             <summary>
             Modifikacija postojeceg ovlascenog lica
             </summary>
-            <param name="customerDto">Model ovlascenog lica</param>
+            <param name="authorizedPersonDto">Model ovlascenog lica</param>
             <returns>Potvrda o modifikovanom ovlascenom licu</returns>
             <response code="200">Vraća ažurirano ovlasceno lice</response>
             <response code="404">Ovlasceno lice koje je potrebno ažurirati nije pronađeno</response>
@@ -170,7 +170,7 @@
             <summary>
             Modifikacija postojeceg kupca
             </summary>
-            <param name="customerDto">Model kupca</param>
+            <param name="customer">Model kupca</param>
             <returns>Potvrda o modifikovanom kupcu</returns>
             <response code="200">Vraća ažuriranog kupca</response>
             <response code="404">Kupac kojeg je potrebno ažurirati nije pronađen</response>
@@ -241,6 +241,11 @@
             Adresa ovlascenog lica
             </summary>
         </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPerson.PublicBiddingID">
+            <summary>
+            Javno nadmetanje ovlascenog lica
+            </summary>
+        </member>
         <member name="P:CustomerMicroservice.Entities.AuthorizedPersonConfirmation.AuthorizedPersonID">
             <summary>
             ID ovlascenog lica
@@ -269,6 +274,11 @@
         <member name="P:CustomerMicroservice.Entities.AuthorizedPersonConfirmation.AddressId">
             <summary>
             Adresa ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.AuthorizedPersonConfirmation.PublicBiddingID">
+            <summary>
+            Javno nadmetanje ovlascenog lica
             </summary>
         </member>
         <member name="P:CustomerMicroservice.Entities.AuthorizedPersonCustomer.AuthorizedPersonCustomerID">
@@ -351,6 +361,11 @@
             Dokumenti kupca
             </summary>
         </member>
+        <member name="P:CustomerMicroservice.Entities.Customer.PublicBiddingID">
+            <summary>
+            Javno nadmetanje kupca
+            </summary>
+        </member>
         <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.CustomerID">
             <summary>
             ID kupca
@@ -399,6 +414,11 @@
         <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.DocumentID">
             <summary>
             Dokumenti kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Entities.CustomerConfirmation.PublicBiddingID">
+            <summary>
+            Javno nadmetanje kupca
             </summary>
         </member>
         <member name="P:CustomerMicroservice.Entities.LegallyPerson.IdentificationNumber">
@@ -576,9 +596,34 @@
             Salt 
             </summary>
         </member>
-        <member name="P:CustomerMicroservice.Models.AddressDto.AddressId">
+        <member name="P:CustomerMicroservice.Models.AddressDto.Address">
             <summary>
-            ID adrese
+            Naziv ulice i broj stana ili kuće.
+            </summary>        
+        </member>
+        <member name="P:CustomerMicroservice.Models.AddressDto.City">
+            <summary>
+            Naziv grada i poštanski broj.
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AddressDto.CityID">
+            <summary>
+            ID grada.
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AddressDto.CityName">
+            <summary>
+            Naziv grada.
+            </summary>        
+        </member>
+        <member name="P:CustomerMicroservice.Models.AddressDto.CountryID">
+            <summary>
+            ID države.
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AddressDto.CountryName">
+            <summary>
+            Naziv države.
             </summary>
         </member>
         <member name="T:CustomerMicroservice.Models.AuthorizedPersonCustomer.AuthorizedPersonCustomerConfirmationDto">
@@ -696,6 +741,11 @@
             Adresa ovlascenog lica
             </summary>
         </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonConfirmationDto.PublicBiddingID">
+            <summary>
+            Javno nadmetanje ovlascenog lica
+            </summary>
+        </member>
         <member name="T:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto">
             <summary>
             DTO za kreiranje ovlascenog lica
@@ -729,6 +779,11 @@
         <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto.AddressId">
             <summary>
             Adresa ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonCreationDto.PublicBiddingID">
+            <summary>
+            Javno nadmetanje ovlascenog lica
             </summary>
         </member>
         <member name="T:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonDto">
@@ -766,6 +821,11 @@
             Adresa ovlascenog lica
             </summary>
         </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonDto.PublicBiddingID">
+            <summary>
+            Javno nadmetanje ovlascenog lica
+            </summary>
+        </member>
         <member name="T:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto">
             <summary>
             DTO za modifikaciju ovlascenog lica
@@ -799,6 +859,11 @@
         <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto.AddressId">
             <summary>
             Adresa ovlascenog lica
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.AuthorizedPerson.AuthorizedPersonUpdateDto.PublicBiddingID">
+            <summary>
+            Javno nadmetanje ovlascenog lica
             </summary>
         </member>
         <member name="T:CustomerMicroservice.Models.CustomerConfirmationDto">
@@ -856,6 +921,11 @@
             Dokumenti kupca
             </summary>
         </member>
+        <member name="P:CustomerMicroservice.Models.CustomerConfirmationDto.PublicBiddingID">
+            <summary>
+            Javno nadmetanje kupca
+            </summary>
+        </member>
         <member name="T:CustomerMicroservice.Models.CustomerCreationDto">
             <summary>
             DTO za kreiranje kupca
@@ -909,6 +979,11 @@
         <member name="P:CustomerMicroservice.Models.CustomerCreationDto.DocumentID">
             <summary>
             Dokumenati kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerCreationDto.PublicBiddingID">
+            <summary>
+            Javno nadmetanje kupca
             </summary>
         </member>
         <member name="T:CustomerMicroservice.Models.CustomerDto">
@@ -966,6 +1041,11 @@
             Dokumenti kupca
             </summary>
         </member>
+        <member name="P:CustomerMicroservice.Models.CustomerDto.PublicBiddingID">
+            <summary>
+            Javno nadmetanje kupca
+            </summary>
+        </member>
         <member name="T:CustomerMicroservice.Models.CustomerUpdateDto">
             <summary>
             DTO za modifikaciju kupca
@@ -1019,6 +1099,11 @@
         <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.DocumentID">
             <summary>
             Dokumenti kupca
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.CustomerUpdateDto.PublicBiddingID">
+            <summary>
+            Javno nadmetanje kupca
             </summary>
         </member>
         <member name="P:CustomerMicroservice.Models.DocumentDto.DocumentID">
@@ -1344,6 +1429,16 @@
         <member name="P:CustomerMicroservice.Models.PhysicalPerson.PhysicalPersonUpdateDto.AccountNumber">
             <summary>
             Broj racuna fizickog lica
+            </summary>
+        </member>
+        <member name="T:CustomerMicroservice.Models.PublicBiddingDto">
+            <summary>
+            DTO za javno nadmetanje 
+            </summary>
+        </member>
+        <member name="P:CustomerMicroservice.Models.PublicBiddingDto.PublicBiddingID">
+            <summary>
+            ID za javno nadmetanje
             </summary>
         </member>
     </members>
