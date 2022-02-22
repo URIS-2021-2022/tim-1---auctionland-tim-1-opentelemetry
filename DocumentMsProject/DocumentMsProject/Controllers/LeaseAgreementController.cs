@@ -2,6 +2,7 @@
 using DocumentMsProject.Data;
 using DocumentMsProject.Entities;
 using DocumentMsProject.Models;
+using DocumentMsProject.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +23,17 @@ namespace DocumentMsProject.Controllers
         private readonly ILeaseAgreementRepository agreementRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
-        public LeaseAgreementController(ILeaseAgreementRepository agreementRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public LeaseAgreementController(ILeaseAgreementRepository agreementRepository, IMapper mapper, LinkGenerator linkGenerator, ILoggerMicroservice loggerMicroservice)
         {
             this.agreementRepository = agreementRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "LEASE AGREEMENT";
         }
 
         /// <summary>
@@ -42,14 +48,19 @@ namespace DocumentMsProject.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<LeaseAgreementCreationDto>> GetAllLeases()
         {
+            loggerDto.HttpMethodName = "GET";
             var leases = agreementRepository.GetAllLeases();
 
             //Ukoliko nismo pronašli ni jednu prijavu vratiti status 204 (NoContent)
             if (leases == null || leases.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
 
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             //Ukoliko smo našli neke prijava vratiti status 200 i listu pronađenih prijava (DTO objekti)
             return Ok(mapper.Map<List<LeaseAgreementDto>>(leases));
         }
@@ -65,11 +76,18 @@ namespace DocumentMsProject.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<LeaseAgreementDto> GetLeaseById(Guid leaseId)
         {
+            loggerDto.HttpMethodName = "GET";
             LeaseAgreement lease = agreementRepository.GetLeaseById(leaseId);
+
             if (lease == null)
             {
+                loggerDto.Response = "404 NOT FOUND";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<LeaseAgreementDto>(lease));
         }
 
@@ -103,6 +121,7 @@ namespace DocumentMsProject.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 LeaseAgreement leaseEntity = mapper.Map<LeaseAgreement>(leaseCreation);
                 LeaseAgreementConfirmation confirmation = agreementRepository.CreateLeaseAgreement(leaseEntity);
                 agreementRepository.SaveChanges(); //Perzistiramo promene
@@ -110,11 +129,14 @@ namespace DocumentMsProject.Controllers
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetLeaseById", "LeaseAgreement", new { leaseId = confirmation.LeaseAgreementID });
 
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Created(location, mapper.Map<LeaseAgreementConfirmationDto>(confirmation)); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
-            catch (Exception ex)
+            catch
             {
-                //TODO: Logovati ex
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
             }
@@ -136,18 +158,25 @@ namespace DocumentMsProject.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var lease = agreementRepository.GetLeaseById(leaseId);
                 if (lease == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 agreementRepository.DeleteLease(leaseId);
                 agreementRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
                 return NoContent();
             }
-            catch
+            catch(Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }
@@ -168,10 +197,13 @@ namespace DocumentMsProject.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 //Proveriti da li uopšte postoji prijava koju pokušavamo da ažuriramo.
                 var oldLease = agreementRepository.GetLeaseById(updateDto.LeaseAgreementID);
                 if (oldLease == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 LeaseAgreement leaseEntity = mapper.Map<LeaseAgreement>(updateDto);
@@ -179,10 +211,14 @@ namespace DocumentMsProject.Controllers
                 mapper.Map(leaseEntity, oldLease); //Update objekta koji treba da sačuvamo u bazi                
 
                 agreementRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<LeaseAgreementDto>(oldLease));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
