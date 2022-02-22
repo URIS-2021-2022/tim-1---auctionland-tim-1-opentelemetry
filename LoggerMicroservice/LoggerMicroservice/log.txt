@@ -1,5 +1,6 @@
-INFO 20-Feb-22 18:04 Microservice ADDRESS sent GET request. Response was: 200 OK
-INFO 20-Feb-22 18:05 Microservice ADDRESS sent GET request. Response was: 204 NO CONTENT
-WARN 20-Feb-22 18:13 Microservice ADDRESS sent GET request. Response was: 404 NOT FOUND
-WARN 20-Feb-22 18:13 Microservice ADDRESS sent DELETE request. Response was: 404 NOT FOUND
-WARN 20-Feb-22 18:13 Microservice ADDRESS sent DELETE request. Response was: 404 NOT FOUND
+
+INFO Tuesday, 22 February 2022 09:44 PM Microservice ADDRESS sent GET request. Response was: 200 OK
+INFO Tuesday, 22 February 2022 11:13 PM Microservice ADDRESS sent GET request. Response was: 200 OK
+INFO Tuesday, 22 February 2022 11:15 PM Microservice ADDRESS sent GET request. Response was: 200 OK
+INFO Tuesday, 22 February 2022 11:15 PM Microservice ADDRESS sent GET request. Response was: 200 OK
+INFO Tuesday, 22 February 2022 11:15 PM Microservice ADDRESS sent GET request. Response was: 204 NO CONTENT

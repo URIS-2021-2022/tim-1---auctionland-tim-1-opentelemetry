@@ -21,10 +21,10 @@ namespace LoggerMicroservice.Controllers
         [HttpPost]
         public void CreateLog([FromBody] Entities.Logger logger)
         {
-            logger.Date = DateTime.Now.Date.ToShortDateString();
-            logger.Time = DateTime.Now.ToShortTimeString();
-            string message = logger.Date + " " + logger.Time + " Microservice " + logger.Service + " sent "
-                + logger.HttpMethodName.ToUpper() + " request. Response was: " + logger.Response;
+            logger.Date = DateTime.Now.ToString("dddd, dd MMMM yyyy");
+            logger.Time = DateTime.Now.ToString("hh:mm tt");
+            string message = logger.Date + " " + logger.Time + " Microservice " + logger.Service.ToUpper() + " sent "
+                + logger.HttpMethodName.ToUpper() + " request. Response was: " + logger.Response.ToUpper();
             if (logger.Response.StartsWith("2"))
             {
                 loggerManager.Info(message);
