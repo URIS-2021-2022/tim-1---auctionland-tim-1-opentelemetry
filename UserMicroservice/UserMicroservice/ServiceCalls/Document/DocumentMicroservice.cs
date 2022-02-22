@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using UserMicroservice.Models;
 
 namespace UserMicroservice.ServiceCalls.Document
 {
@@ -17,21 +18,30 @@ namespace UserMicroservice.ServiceCalls.Document
             this.configuration = configuration;
         }
 
-        public bool GetDocumentById(Guid documentId)
+        public async Task<DocumentDto> GetDocument(Guid documentId)
         {
-            using HttpClient client = new();
-            var x = configuration["Services:DocumentMicrosevice"];
-            Uri url = new($"{ configuration["Services:AddressService"] }api/addresses");
-
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(documentId));
-            content.Headers.ContentType.MediaType = "application/json";
-
-            HttpResponseMessage response = client.PostAsync(url, content).Result;
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                using var httpClient = new HttpClient();
+                Uri url = new Uri($"{ configuration["Services:DocumentMicroService"] }api/documents/" + documentId);
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Add("Accept", "application/json");
+                var response = await httpClient.SendAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    if (string.IsNullOrEmpty(content))
+                    {
+                        return default;
+                    }
+                    return JsonConvert.DeserializeObject<DocumentDto>(content);
+                }
+                return default;
             }
-            return false;
+            catch
+            {
+                return default;
+            }
         }
     }
 }

@@ -94,6 +94,13 @@ namespace UserMicroservice.Controllers
         /// <summary>
         /// Krerira jedan tip korisnika.
         /// </summary>
+        ///remarks>
+        /// Primer zahteva za kreiranje novog tipa javnog nadmetanja \
+        /// POST /api/userTypes \
+        /// {
+        /// "userTypeName": "Tehnički sekretar"
+        /// }
+        /// </remarks>
         /// <response code="200">Vraća kreiran Tip Korisnika</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja tip korisnika</response>
         [HttpPost]

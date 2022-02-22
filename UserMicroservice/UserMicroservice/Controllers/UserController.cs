@@ -57,7 +57,7 @@ namespace UserService.Controllers
             loggerDto.HttpMethodName = "GET";
             loggerDto.Date = " ";
             loggerDto.Time = " ";
-            var users = userRepository.GetUsers(firstName, lastName);
+            List<User> users = userRepository.GetUsers(firstName, lastName);
 
             //Ukoliko nismo pronašli ni jednog korisnika vratiti status 204 (NoContent)
             if (users == null || users.Count == 0)
@@ -66,6 +66,13 @@ namespace UserService.Controllers
                 loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+
+            foreach (User u in users)
+            {
+                DocumentDto document = documentmicroservice.GetDocument(u.DocumentId).Result;
+                u.Document = document;
+            }
+
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
             //Ukoliko smo našli neke korisnike vratiti status 200 i listu pronađenih korisnika (DTO objekti)
@@ -85,7 +92,7 @@ namespace UserService.Controllers
         public ActionResult<UserDto> GetUser(Guid userId) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
             loggerDto.HttpMethodName = "GET";
-            var user = userRepository.GetUserById(userId);
+            User user = userRepository.GetUserById(userId);
 
             if (user == null)
             {
@@ -93,6 +100,10 @@ namespace UserService.Controllers
                 loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+
+            DocumentDto document = documentmicroservice.GetDocument(user.DocumentId).Result;
+            user.Document = document;
+
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<UserDto>(user));
@@ -101,6 +112,19 @@ namespace UserService.Controllers
         /// <summary>
         /// Kreira jednog korisnika.
         /// </summary>
+        ///  <remarks>
+        /// Primer zahteva za kreiranje novog javnog nadmetanja \
+        /// POST /api/users \
+        /// {
+        /// "firstName": "Marko",
+        /// "lastName": "Markovic",
+        /// "userName": "Mare",
+        /// "email": "marko@gmail.com",
+        /// "password": "mar123",
+        /// "userTypeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+        /// "documentId": "8b44e760-3c55-4ae4-8d1b-c4ea053672ff"
+        /// }
+        /// </remarks>
         /// <response code="200">Vraća kreiranog korisnika</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja korisnika</response>
         [HttpPost]
@@ -118,17 +142,6 @@ namespace UserService.Controllers
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetUser", "User", new { userId = confirmation.UserId });
-
-                var documentInfo = mapper.Map<DocumentDto>(user);
-                documentInfo.DocumentId = confirmation.DocumentId;
-                bool isDocument = documentmicroservice.GetDocumentById(documentInfo.DocumentId);
-
-                if (!isDocument)
-                {
-                    userRepository.DeleteUser(confirmation.UserId);
-                    //throw new DocumentException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
-                }
-
 
                 loggerDto.Response = "201 CREATED";
                 loggerMicroservice.CreateLog(loggerDto);
