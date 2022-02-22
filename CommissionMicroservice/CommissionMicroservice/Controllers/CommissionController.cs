@@ -28,13 +28,19 @@ namespace CommissionMicroservice.Controllers
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
         private readonly IUserService userService;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
-        public CommissionController(ICommissionRepository commissionRepository, IMapper mapper, LinkGenerator linkGenerator, IUserService userService)
+        public CommissionController(ICommissionRepository commissionRepository, IMapper mapper, LinkGenerator linkGenerator, 
+                                        IUserService userService, ILoggerMicroservice loggerMicroservice)
         {
             this.commissionRepository = commissionRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
             this.userService = userService;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "Commission";
         }
 
         /// <summary>
@@ -51,11 +57,18 @@ namespace CommissionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<CommissionDto>> GetCommissions(string presidentId)
         {
+            loggerDto.HttpMethodName = "get";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             List<Commission> commissions = commissionRepository.GetCommissions(presidentId);
             if(commissions.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<CommissionDto>>(commissions));
         }
 
@@ -72,11 +85,16 @@ namespace CommissionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<CommissionDto>> GetCommissionById(Guid commissionId)
         {
+            loggerDto.HttpMethodName = "GET";
             Commission commission = commissionRepository.GetCommissionById(commissionId);
             if (commission == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<CommissionDto>(commission));
         }
 
@@ -88,6 +106,7 @@ namespace CommissionMicroservice.Controllers
         /// <response code="201">Komisija je uspešno kreirana</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja komisije</response>
         [HttpPost]
+        [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<CommissionConfirmationDto> CreateCommission([FromBody] CommissionCreationDto commissionDto)
@@ -95,6 +114,7 @@ namespace CommissionMicroservice.Controllers
             // komunikacija
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 commissionDto.CommissionID = Guid.NewGuid();
                 Commission commission = mapper.Map<Commission>(commissionDto);
                 CommissionConfirmation confirmation = commissionRepository.CreateCommission(commission);
@@ -111,11 +131,15 @@ namespace CommissionMicroservice.Controllers
                     commissionRepository.DeleteCommission(confirmation.CommissionID);
                     throw new UserException("Neuspešno kreiranje komisije. Postoji problem sa korisnikom. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
                 }
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Created(location, mapper.Map<CommissionConfirmationDto>(confirmation));
             } 
-            catch
+            catch(Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
+                Console.WriteLine(ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error");
             }
         }
@@ -136,17 +160,24 @@ namespace CommissionMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 Commission commission = commissionRepository.GetCommissionById(commissionID);
                 if(commission == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 commissionRepository.DeleteCommission(commissionID);
                 commissionRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }
@@ -160,6 +191,7 @@ namespace CommissionMicroservice.Controllers
         /// <response code="404">Komisija koju je potrebno ažurirati nije pronađena</response>
         /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja komisije</response>
         [HttpPut]
+        [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -167,17 +199,24 @@ namespace CommissionMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 var oldCommission = commissionRepository.GetCommissionById(commissionDto.CommissionID);
                 if(oldCommission == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 Commission commission = mapper.Map<Commission>(commissionDto);
                 mapper.Map(commission, oldCommission);
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<CommissionConfirmationDto>(oldCommission));
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update Error");
             }
         }

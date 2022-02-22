@@ -115,6 +115,7 @@ namespace CommissionMicroservice
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
 
             services.AddHttpContextAccessor();
 
