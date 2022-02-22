@@ -489,6 +489,96 @@
             <param name="principal">Autentifikovani principal</param>
             <returns></returns>
         </member>
+        <member name="T:DocumentMsProject.Models.CommissionDto">
+            <summary>
+            DTO za clana komisije
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CommissionDto.MemberID">
+            <summary>
+            ID clana komisije
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CommissionDto.FirstName">
+            <summary>
+            Ime clana komisije
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CommissionDto.LastName">
+            <summary>
+            Prezime clana komisije
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CommissionDto.Role">
+            <summary>
+            Funkcija clana komisije
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CommissionDto.CommissionID">
+            <summary>
+            ID komisije
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CommissionDto.NameCommission">
+            <summary>
+            Naziv komisije
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.CustomerDto">
+            <summary>
+            DTO za kupca
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.CustomerID">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.IsPhysicalPerson">
+            <summary>
+            Da li je kupac fizicko lice, ako nije onda je pravno
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.Priority">
+            <summary>
+            Prioritet 
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.RealizedArea">
+            <summary>
+            Ostvarena povrsina
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.HasABan">
+            <summary>
+            Da li kupac ima zabranu
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.StartDateBan">
+            <summary>
+            Datum pocetka zabrane
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.DurationBan">
+            <summary>
+            Duzina trajanja zabrane
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.EndDateBan">
+            <summary>
+            Datum prestanka zabrane
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.AddressId">
+            <summary>
+            Adresa kupca
+            </summary>
+        </member>
+        <member name="P:DocumentMsProject.Models.CustomerDto.DocumentID">
+            <summary>
+            Dokumenti kupca
+            </summary>
+        </member>
         <member name="T:DocumentMsProject.Models.DocumentConfirmationDto">
             <summary>
             Model za potvrdu dokumenta
@@ -907,6 +997,11 @@
         <member name="P:DocumentMsProject.Models.Principal.Password">
             <summary>
             Korisničko lozinka
+            </summary>
+        </member>
+        <member name="T:DocumentMsProject.Models.PublicBiddingDto">
+            <summary>
+            DTO za javno nadmetanje
             </summary>
         </member>
     </members>

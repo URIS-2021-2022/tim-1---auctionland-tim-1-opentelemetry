@@ -23,10 +23,10 @@ namespace DocumentMsProject.Controllers
         private readonly IListOfDocumentsRepository documentsRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
-        private readonly IPublicBiddingMicroservice loggerMicroservice;
+        private readonly ILoggerMicroservice loggerMicroservice;
         private readonly LoggerDto loggerDto;
 
-        public ListOfDocumentsController(IListOfDocumentsRepository documentsRepository, IMapper mapper, LinkGenerator linkGenerator, IPublicBiddingMicroservice loggerMicroservice)
+        public ListOfDocumentsController(IListOfDocumentsRepository documentsRepository, IMapper mapper, LinkGenerator linkGenerator, ILoggerMicroservice loggerMicroservice)
         {
             this.documentsRepository = documentsRepository;
             this.mapper = mapper;

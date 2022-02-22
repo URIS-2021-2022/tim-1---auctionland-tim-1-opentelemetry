@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DocumentMsProject.ServiceCalls
 {
-    public interface IPublicBiddingMicroservice
+    public interface ILoggerMicroservice
     {
         public bool CreateLog(LoggerDto loggerDto);
     }
