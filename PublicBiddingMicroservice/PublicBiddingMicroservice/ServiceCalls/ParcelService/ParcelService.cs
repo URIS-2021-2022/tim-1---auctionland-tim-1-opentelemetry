@@ -1,27 +1,29 @@
 ﻿using Microsoft.Extensions.Configuration;
-using PublicBiddingMicroservice.Models;
-using System;
-using System.Net.Http;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
-namespace PublicBiddingMicroservice.ServiceCalls
+namespace PublicBiddingMicroservice.ServiceCalls.ParcelService
 {
-    public class AddressService : IAddressService
+    public class ParcelService : IParcelService
     {
         private readonly IConfiguration configuration;
 
-        public AddressService(IConfiguration configuration)
+        public ParcelService(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
 
-        public bool GetAddressById(Guid addressID)
+        public bool GetParcelById(Guid parcelId)
         {
             using HttpClient client = new();
-            var x = configuration["Services:AddressService"];
+            var x = configuration["Services:ParcelService"];
             Uri url = new($"{ configuration["Services:AddressService"] }api/addresses");
 
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(addressID));
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(parcelId));
             content.Headers.ContentType.MediaType = "application/json";
 
             HttpResponseMessage response = client.PostAsync(url, content).Result;

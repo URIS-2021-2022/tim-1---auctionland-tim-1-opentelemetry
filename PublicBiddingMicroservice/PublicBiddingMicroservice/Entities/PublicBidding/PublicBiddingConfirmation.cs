@@ -42,5 +42,8 @@ namespace PublicBiddingMicroservice.Entities
         public Guid? PublicBiddingTypeId { get; set; }
         public Stage PublicBiddingType { get; set; }
 
+        [ForeignKey("Address")]
+        public Guid AddressId { get; set; }
+
     }
 }

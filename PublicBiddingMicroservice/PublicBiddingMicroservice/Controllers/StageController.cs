@@ -58,7 +58,6 @@ namespace PublicBiddingMicroservice.Controllers
                 loggerDto.Response = "204 NO CONTENT";
                 loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
-                return NoContent();
             }
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);

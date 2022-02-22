@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingMicroservice.ServiceCalls
 {
-    public interface IAddressService
+    public interface IParcelService
     {
-        public bool GetAddressById(Guid addressID);
+        public bool GetParcelById(Guid parcelId);
     }
 }
