@@ -22,7 +22,6 @@ namespace DocumentMsProject.ServiceCalls
         {
             using (HttpClient client = new HttpClient())
             {
-                var x = configuration["Services:LoggerMicroservice"];
                 Uri url = new Uri($"{ configuration["Services:LoggerMicroservice"] }api/logger");
 
                 HttpContent content = new StringContent(JsonConvert.SerializeObject(loggerDto));
