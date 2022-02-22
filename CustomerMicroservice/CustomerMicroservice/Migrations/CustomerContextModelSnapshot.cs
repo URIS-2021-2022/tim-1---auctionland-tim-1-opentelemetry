@@ -25,6 +25,9 @@ namespace CustomerMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("BoardTable")
                         .HasColumnType("nvarchar(max)");
 
@@ -45,6 +48,7 @@ namespace CustomerMicroservice.Migrations
                         new
                         {
                             AuthorizedPersonID = new Guid("4a151b19-a287-47f7-61bd-4a596c397461"),
+                            AddressId = new Guid("2a151b12-a287-47f2-61bd-4a596c397461"),
                             BoardTable = "1",
                             FirstName = "Nikola",
                             LastName = "Nikolic",
@@ -53,6 +57,7 @@ namespace CustomerMicroservice.Migrations
                         new
                         {
                             AuthorizedPersonID = new Guid("4b151b29-a287-47f7-61bd-2a596c397431"),
+                            AddressId = new Guid("3a151b32-a287-47f3-61bd-4a596c397463"),
                             BoardTable = "2",
                             FirstName = "Nemanja",
                             LastName = "Nenadovic",
@@ -93,6 +98,12 @@ namespace CustomerMicroservice.Migrations
 
                     b.Property<string>("AccountNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DocumentID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("DurationBan")
                         .HasColumnType("int");
@@ -142,6 +153,8 @@ namespace CustomerMicroservice.Migrations
                         {
                             CustomerID = new Guid("4a411c13-a196-48f7-88bd-67596c3974c4"),
                             AccountNumber = "3204568885231",
+                            AddressId = new Guid("5b411c15-a196-48f7-88bd-67596c3974c5"),
+                            DocumentID = new Guid("6a411c13-6196-48f7-88bd-57596c3974b6"),
                             DurationBan = 1,
                             Email = "context@info.com",
                             EndDateBan = new DateTime(2021, 11, 13, 9, 0, 0, 0, DateTimeKind.Unspecified),
@@ -166,6 +179,12 @@ namespace CustomerMicroservice.Migrations
 
                     b.Property<string>("AccountNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DocumentID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("DurationBan")
                         .HasColumnType("int");
@@ -215,6 +234,8 @@ namespace CustomerMicroservice.Migrations
                         {
                             CustomerID = new Guid("2a411c13-a196-48f7-88bd-67596c3974c3"),
                             AccountNumber = "36105666854456",
+                            AddressId = new Guid("1b411c11-a196-48f7-88bd-67596c3974c1"),
+                            DocumentID = new Guid("3a411c13-a196-48f7-88bd-57596c3974b3"),
                             DurationBan = 3,
                             Email = "marko@gmail.com",
                             EndDateBan = new DateTime(2021, 10, 13, 9, 0, 0, 0, DateTimeKind.Unspecified),

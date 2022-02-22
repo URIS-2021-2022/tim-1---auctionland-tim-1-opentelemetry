@@ -29,10 +29,12 @@ namespace CustomerMicroservice.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IAddressService addressService;
         private readonly IDocumentService documentService;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         public CustomerController(IPhysicalPersonRepository physicalPersonRepository, ILegallyPersonRepository legallyPersonRepository,
-                                    IMapper mapper, LinkGenerator linkGenerator, IAddressService addressService, 
-                                    IDocumentService documentService)
+                                    IMapper mapper, LinkGenerator linkGenerator, IAddressService addressService,
+                                    IDocumentService documentService, ILoggerMicroservice loggerMicroservice)
         {
             this.physicalPersonRepository = physicalPersonRepository;
             this.legallyPersonRepository = legallyPersonRepository;
@@ -40,6 +42,9 @@ namespace CustomerMicroservice.Controllers
             this.linkGenerator = linkGenerator;
             this.addressService = addressService;
             this.documentService = documentService;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "Customer";
         }
 
         /// <summary>
@@ -55,6 +60,9 @@ namespace CustomerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<CustomerDto>> GetCustomers()
         {
+            loggerDto.HttpMethodName = "GET";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             List<PhysicalPerson> physicalPeople = physicalPersonRepository.GetPhysicalPeople();
             List<LegallyPerson> legallyPeople = legallyPersonRepository.GetLegallyPeople();
 
@@ -64,8 +72,12 @@ namespace CustomerMicroservice.Controllers
             customers.AddRange(customersLegally);
             if (customers == null || customers.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<CustomerDto>>(customers));
         }
 
@@ -79,9 +91,10 @@ namespace CustomerMicroservice.Controllers
         [HttpGet("{customerID}")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<CustomerDto>> GetCustomerById(Guid customerId)
         {
+            loggerDto.HttpMethodName = "GET";
             Customer customer;
             customer = (Customer)physicalPersonRepository.GetPhysicalPersonById(customerId);
 
@@ -92,8 +105,12 @@ namespace CustomerMicroservice.Controllers
 
             if (customer == null)
             {
-                return NotFound();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
+                return NoContent();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<CustomerDto>(customer));
         }
 
@@ -113,6 +130,7 @@ namespace CustomerMicroservice.Controllers
             // komunikacija
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 customerDto.CustomerID = Guid.NewGuid();
                 Customer customer = mapper.Map<Customer>(customerDto);
                 CustomerConfirmation confirmation;
@@ -131,11 +149,15 @@ namespace CustomerMicroservice.Controllers
                 }
 
                 string location = linkGenerator.GetPathByAction("GetCustomerById", "Customer", new { customerID = confirmation.CustomerID });
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Created(location, mapper.Map<CustomerConfirmationDto>(confirmation));
             }
-            catch
+            catch(Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
+                Console.WriteLine(ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error");
             }
         }
@@ -158,9 +180,12 @@ namespace CustomerMicroservice.Controllers
 
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 customer = legallyPersonRepository.GetLegallyPersonById(customerID);
                 if (customer == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
 
@@ -175,10 +200,14 @@ namespace CustomerMicroservice.Controllers
                     legallyPersonRepository.SaveChanges();
                 }
 
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }
@@ -200,7 +229,8 @@ namespace CustomerMicroservice.Controllers
         {
             try
             {
-                if(customer.IsPhysicalPerson == true)
+                loggerDto.HttpMethodName = "PUT";
+                if (customer.IsPhysicalPerson == true)
                 {
                     var oldCustomerPhy = physicalPersonRepository.GetPhysicalPersonById(customer.CustomerID);
                     oldCustomerPhy.CustomerID = customer.CustomerID;
@@ -216,6 +246,8 @@ namespace CustomerMicroservice.Controllers
 
                     if (oldCustomerPhy == null)
                     {
+                        loggerDto.Response = "404 NOT FOUND";
+                        loggerMicroservice.CreateLog(loggerDto);
                         return NotFound();
                     }
 
@@ -224,6 +256,8 @@ namespace CustomerMicroservice.Controllers
                     PhysicalPerson physicalPerson = (PhysicalPerson)customerEnt;
                     mapper.Map(physicalPerson, oldCustomerPhy);
                     physicalPersonRepository.SaveChanges();
+                    loggerDto.Response = "200 OK";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return Ok(mapper.Map<CustomerConfirmationDto>(oldCustomerPhy));
                 }
                 else
@@ -242,6 +276,8 @@ namespace CustomerMicroservice.Controllers
 
                     if (oldCustomerLeg == null)
                     {
+                        loggerDto.Response = "404 NOT FOUND";
+                        loggerMicroservice.CreateLog(loggerDto);
                         return NotFound();
                     }
 
@@ -250,12 +286,16 @@ namespace CustomerMicroservice.Controllers
                     LegallyPerson legallyPerson = (LegallyPerson)customerEnt;
                     mapper.Map(legallyPerson, oldCustomerLeg);
                     legallyPersonRepository.SaveChanges();
+                    loggerDto.Response = "200 OK";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return Ok(mapper.Map<CustomerConfirmationDto>(oldCustomerLeg));
                 }
                 
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update Error");
             }
         }

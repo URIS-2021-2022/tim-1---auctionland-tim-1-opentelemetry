@@ -119,6 +119,7 @@ namespace CustomerMicroservice
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
 
             services.AddHttpContextAccessor();
 
