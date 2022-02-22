@@ -8,13 +8,13 @@ namespace PublicBiddingMicroservice.Data
     {
         List<PublicBidding> GetPublicBiddings(int numberOfParticipants = 0);
 
-        PublicBidding GetPublicBiddingById(Guid biddingId);
+        PublicBidding GetPublicBiddingById(Guid publicBiddingId);
 
         PublicBiddingConfirmation CreatePublicBidding(PublicBidding publicBidding);
 
         void UpdatePublicBidding(PublicBidding publicBidding);
 
-        void DeletePublicBidding(Guid biddingId);
+        void DeletePublicBidding(Guid publicBiddingId);
 
         bool SaveChanges();
     }
