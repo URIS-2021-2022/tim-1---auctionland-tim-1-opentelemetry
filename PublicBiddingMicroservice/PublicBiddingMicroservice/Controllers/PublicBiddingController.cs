@@ -9,14 +9,12 @@ using PublicBiddingMicroservice.Data;
 using PublicBiddingMicroservice.Models;
 using PublicBiddingMicroservice.Entities;
 using PublicBiddingMicroservice.ServiceCalls;
-using PublicBiddingMicroservice.Models.Exceptions;
 
 namespace PublicBiddingMicroservice.Controllers
 {
     [ApiController]
     [Route("api/publicBiddings")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class PublicBiddingController : ControllerBase //Daje nam pristup korisnim poljima i metodama
     {
         private readonly IPublicBiddingRepository publicBiddingRepository;
@@ -163,10 +161,6 @@ namespace PublicBiddingMicroservice.Controllers
 
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (javnog nadmetanja) i samim javnim nadmetanjem.
                 return Created(location, mapper.Map<PublicBiddingConfirmationDto>(confirmation));
-            }
-            catch (AddressException ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
             catch (Exception ex)
             {

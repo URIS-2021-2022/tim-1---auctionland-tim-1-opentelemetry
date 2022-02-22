@@ -14,8 +14,6 @@ using PublicBiddingMicroservice.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using PublicBiddingMicroservice.Helpers;
-using PublicBiddingMicroservice.Data.Impelmentation;
 using Microsoft.EntityFrameworkCore;
 using PublicBiddingMicroservice.ServiceCalls;
 using System.Reflection;
@@ -121,8 +119,6 @@ namespace PublicBiddingMicroservice
             services.AddScoped<IAuctionRepository, AuctionRepository>(); //Koristimo konkretni repozitorijum
             services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddScoped<IPublicBiddingTypeRepository, PublicBiddingTypeRepository>();
-            services.AddSingleton<IUserAuthRepository, UserMockRepository>();
-            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IParcelService, ParcelService>();
             services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
