@@ -8,6 +8,6 @@ namespace PublicBiddingRegistrationMicroservice.ServiceCalls
 {
     public interface IPublicBiddingService
     {
-        Task<PublicBiddingDto> GetPublicBiddingByIdAsync(Guid? publicBiddingId);
+        Task<PublicBiddingDto> GetPublicBiddingById(Guid? publicBiddingId);
     }
 }
