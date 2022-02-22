@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using ComplaintMicroservice.Data;
 using ComplaintMicroservice.Entities;
@@ -18,7 +15,6 @@ namespace ComplaintMicroservice.Controllers
     [ApiController]
     [Route("api/complaint")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
     public class ComplaintController : ControllerBase
     {
         private readonly IComplaintRepository complaintRepository;
@@ -26,8 +22,10 @@ namespace ComplaintMicroservice.Controllers
         private readonly IMapper mapper;
         private readonly ILoggerService loggerMicroservice;
         private readonly LoggerDto loggerDto;
+        private readonly IPublicBiddingService publicBiddingService;
 
-        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService loggerMicroservice)
+
+        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService loggerMicroservice, IPublicBiddingService publicBiddingService)
         {
             this.complaintRepository = complaintRepository;
             this.linkGenerator = linkGenerator;
@@ -37,6 +35,7 @@ namespace ComplaintMicroservice.Controllers
             {
                 Service = "COMPLAINT"
             };
+            this.publicBiddingService = publicBiddingService;
         }
 
         /// <summary>
@@ -82,6 +81,8 @@ namespace ComplaintMicroservice.Controllers
         {
             loggerDto.HttpMethodName = "GET";
             Complaint model = complaintRepository.GetComplaintById(complaintId);
+            PublicBiddingDto pb = publicBiddingService.GetPublicBiddingById(Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0")).Result;
+  
             if (model == null)
             {
                 loggerDto.Response = "204 NO CONTENT";
@@ -90,7 +91,13 @@ namespace ComplaintMicroservice.Controllers
             }
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
-            return Ok(mapper.Map<ComplaintDto>(model));
+
+            ComplaintDto complaintWithPB = mapper.Map<ComplaintDto>(model);
+            if (pb != null)
+            {
+                complaintWithPB.PublicBidding = pb;
+            }
+            return Ok(complaintWithPB);
         }
 
         /// <summary>

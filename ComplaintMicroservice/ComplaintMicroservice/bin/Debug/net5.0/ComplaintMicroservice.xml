@@ -4,13 +4,6 @@
         <name>ComplaintMicroservice</name>
     </assembly>
     <members>
-        <member name="M:ComplaintMicroservice.Controllers.AuthenticationController.Authenticate(ComplaintMicroservice.Models.Principal)">
-            <summary>
-            Koristi se za autentifikaciju korisnika
-            </summary>
-            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
-            <returns></returns>
-        </member>
         <member name="M:ComplaintMicroservice.Controllers.ComplaintController.GetComplaints(System.String,System.String)">
             <summary>
             Vraća sve žalbe po zadatom tipu ili statusu žalbe
@@ -92,35 +85,6 @@
             <summary>
             Perzistira sve izmene u bazi
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ComplaintMicroservice.Data.UserMockRepository.FillData">
-            <summary>
-            Upisuje testne podatke
-            </summary>
-        </member>
-        <member name="M:ComplaintMicroservice.Data.UserMockRepository.HashPassword(System.String)">
-            <summary>
-            Vrši hešovanje korisničke lozinke
-            </summary>
-            <param name="password">Lozinka koja se hešuje</param>
-            <returns>Generisan hash i salt</returns>
-        </member>
-        <member name="M:ComplaintMicroservice.Data.UserMockRepository.UserWithCredentialsExists(System.String,System.String)">
-            <summary>
-            Proverava da li postoji korisnik sa proslešenim korisničkim imenom i lozinkom
-            </summary>
-            <param name="username">Korisničko ime</param>
-            <param name="password">Lozinka</param>
-            <returns></returns>
-        </member>
-        <member name="M:ComplaintMicroservice.Data.UserMockRepository.VerifyPassword(System.String,System.String,System.String)">
-            <summary>
-            Proverava validnost prosleđene lozinke sa prosleđenim hešom
-            </summary>
-            <param name="password">Korisničko ime</param>
-            <param name="savedHash">Sačuvani hash</param>
-            <param name="savedSalt">Sačuvani salt</param>
             <returns></returns>
         </member>
         <member name="T:ComplaintMicroservice.Entities.Complaint">
@@ -223,60 +187,6 @@
             Popunjava bazu sa inicijalnim podacima
             </summary>
             <param name="modelBuilder"></param>
-        </member>
-        <member name="T:ComplaintMicroservice.Entities.User">
-            <summary>
-            Model korisnika
-            </summary>
-        </member>
-        <member name="P:ComplaintMicroservice.Entities.User.Id">
-            <summary>
-            Id korisnika
-            </summary>
-        </member>
-        <member name="P:ComplaintMicroservice.Entities.User.FirstName">
-            <summary>
-            Ime korisnika
-            </summary>
-        </member>
-        <member name="P:ComplaintMicroservice.Entities.User.LastName">
-            <summary>
-            Prezime korisnika
-            </summary>
-        </member>
-        <member name="P:ComplaintMicroservice.Entities.User.UserName">
-            <summary>
-            Korisničko ime
-            </summary>
-        </member>
-        <member name="P:ComplaintMicroservice.Entities.User.Email">
-            <summary>
-            Email korisnika
-            </summary>
-        </member>
-        <member name="P:ComplaintMicroservice.Entities.User.Password">
-            <summary>
-            Korisnička lozinka (hešovana)
-            </summary>
-        </member>
-        <member name="P:ComplaintMicroservice.Entities.User.Salt">
-            <summary>
-            Privatni ključ
-            </summary>
-        </member>
-        <member name="M:ComplaintMicroservice.Helpers.AuthenticationHelper.AuthenticatePrincipal(ComplaintMicroservice.Models.Principal)">
-            <summary>
-            Vrši autentifikaciju principala
-            </summary>
-            <param name="principal">Principal koji se autentifikuje</param>
-            <returns></returns>
-        </member>
-        <member name="M:ComplaintMicroservice.Helpers.AuthenticationHelper.GenerateJwt(ComplaintMicroservice.Models.Principal)">
-            <summary>
-            Generiše novi token za autentifikovanog principala
-            </summary>
-            <param name="principal">Autentifikovani principal</param>
-            <returns></returns>
         </member>
         <member name="P:ComplaintMicroservice.Models.CompaintModel.ComplaintId">
             <summary>
@@ -536,21 +446,6 @@
         <member name="P:ComplaintMicroservice.Models.ComplaintUpdateDto.ComplaintStatus">
             <summary>
             Status žalbe
-            </summary>
-        </member>
-        <member name="T:ComplaintMicroservice.Models.Principal">
-            <summary>
-            Model za autentifikaciju
-            </summary>
-        </member>
-        <member name="P:ComplaintMicroservice.Models.Principal.UserName">
-            <summary>
-            Korisnicko ime
-            </summary>
-        </member>
-        <member name="P:ComplaintMicroservice.Models.Principal.Password">
-            <summary>
-            Korisnička lozinka
             </summary>
         </member>
     </members>
