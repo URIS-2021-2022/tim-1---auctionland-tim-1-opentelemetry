@@ -22,7 +22,7 @@ namespace CommissionMicroservice.ServiceCalls
         {
             using (HttpClient client = new HttpClient())
             {
-                var x = configuration["Services:UserService"];
+                //var x = configuration["Services:UserService"];
                 Uri url = new Uri($"{ configuration["Services:UserService"] }api/users");
 
                 HttpContent content = new StringContent(JsonConvert.SerializeObject(userDto));

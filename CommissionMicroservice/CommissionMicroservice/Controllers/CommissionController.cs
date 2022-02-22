@@ -95,14 +95,13 @@ namespace CommissionMicroservice.Controllers
             // komunikacija
             try
             {
-                //bool validate = Validate(commissionDto);
                 commissionDto.CommissionID = Guid.NewGuid();
                 Commission commission = mapper.Map<Commission>(commissionDto);
                 CommissionConfirmation confirmation = commissionRepository.CreateCommission(commission);
                 commissionRepository.SaveChanges();
 
                 string location = linkGenerator.GetPathByAction("GetCommissionById", "Commission", new { commissionID = confirmation.CommissionID });
-                /*
+                
                 var userInfo = mapper.Map<UserDto>(commissionDto);
                 userInfo.CommissionId = confirmation.CommissionID;
                 bool createdUser = userService.GetUserOfCommission(userInfo);
@@ -111,7 +110,7 @@ namespace CommissionMicroservice.Controllers
                 {
                     commissionRepository.DeleteCommission(confirmation.CommissionID);
                     throw new UserException("Neuspešno kreiranje komisije. Postoji problem sa korisnikom. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
-                }*/
+                }
 
                 return Created(location, mapper.Map<CommissionConfirmationDto>(confirmation));
             } 

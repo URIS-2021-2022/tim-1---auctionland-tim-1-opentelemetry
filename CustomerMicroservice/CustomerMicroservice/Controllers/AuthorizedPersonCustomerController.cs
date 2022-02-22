@@ -19,7 +19,7 @@ namespace CustomerMicroservice.Controllers
     [ApiController]
     [Route("api/authorizedPersonCustomers")]
     [Produces("application/json", "application/xml")] 
-    //[Authorize]
+    [Authorize]
     public class AuthorizedPersonCustomerController : ControllerBase
     {
         private readonly IAuthorizedPersonCustomerRepository authorizedPersonCustomerRepository;
@@ -83,6 +83,7 @@ namespace CustomerMicroservice.Controllers
         /// <response code="201">Kupac je uspešno kreiran</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja kupca</response>
         [HttpPost]
+        [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<AuthorizedPersonCustomerConfirmationDto> CreateAuthorizedPersonCustomer([FromBody] AuthorizedPersonCustomerCreationDto authorizedPersonCustomerDto)
@@ -145,6 +146,7 @@ namespace CustomerMicroservice.Controllers
         /// <response code="404">Kupac kojeg je potrebno ažurirati nije pronađen</response>
         /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja kupca</response>
         [HttpPut]
+        [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

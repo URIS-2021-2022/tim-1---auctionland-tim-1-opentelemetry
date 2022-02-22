@@ -14,8 +14,8 @@ namespace CustomerMicroservice.Models.LegallyPerson
         /// <summary>
         /// ID pravnog lica
         /// </summary>
-        [Required]
-        public Guid LegallyPersonID { get; set; }
+        //[Required]
+        //public Guid LegallyPersonID { get; set; }
 
         /// <summary>
         /// Maticni broj pravnog lica

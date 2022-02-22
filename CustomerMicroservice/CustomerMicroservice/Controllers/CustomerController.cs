@@ -2,6 +2,7 @@
 using CustomerMicroservice.Data;
 using CustomerMicroservice.Entities;
 using CustomerMicroservice.Models;
+using CustomerMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,18 +20,22 @@ namespace CustomerMicroservice.Controllers
     [ApiController]
     [Route("api/customers")]
     [Produces("application/json", "application/xml")]
-    //[Authorize]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerRepository customerRepository;
+        private readonly IPhysicalPersonRepository physicalPersonRepository;
+        private readonly ILegallyPersonRepository legallyPersonRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
+        private readonly IAddressService addressService;
 
-        public CustomerController(ICustomerRepository customerRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public CustomerController(IPhysicalPersonRepository physicalPersonRepository, ILegallyPersonRepository legallyPersonRepository, IMapper mapper, LinkGenerator linkGenerator, IAddressService addressService)
         {
-            this.customerRepository = customerRepository;
+            this.physicalPersonRepository = physicalPersonRepository;
+            this.legallyPersonRepository = legallyPersonRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
+            this.addressService = addressService;
         }
 
         /// <summary>
@@ -46,8 +51,14 @@ namespace CustomerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<CustomerDto>> GetCustomers()
         {
-            List<Customer> customers = customerRepository.GetCustomers();
-            if (customers.Count == 0)
+            List<PhysicalPerson> physicalPeople = physicalPersonRepository.GetPhysicalPeople();
+            List<LegallyPerson> legallyPeople = legallyPersonRepository.GetLegallyPeople();
+
+            List<Customer> customers = physicalPeople.ConvertAll(p => (Customer)p);
+            List<Customer> customersLegally = legallyPeople.ConvertAll(l => (Customer)l);
+
+            customers.AddRange(customersLegally);
+            if (customers == null || customers.Count == 0)
             {
                 return NoContent();
             }
@@ -67,7 +78,14 @@ namespace CustomerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<CustomerDto>> GetCustomerById(Guid customerId)
         {
-            Customer customer = customerRepository.GetCustomerById(customerId);
+            Customer customer;
+            customer = (Customer)physicalPersonRepository.GetPhysicalPersonById(customerId);
+
+            if (customer == null)
+            {
+                customer = (Customer)legallyPersonRepository.GetLegallyPersonById(customerId);
+            }
+
             if (customer == null)
             {
                 return NotFound();
@@ -83,6 +101,7 @@ namespace CustomerMicroservice.Controllers
         /// <response code="201">Kupac je uspešno kreiran</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja kupca</response>
         [HttpPost]
+        [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<CustomerConfirmationDto> CreateCustomer([FromBody] CustomerCreationDto customerDto)
@@ -92,8 +111,20 @@ namespace CustomerMicroservice.Controllers
             {
                 customerDto.CustomerID = Guid.NewGuid();
                 Customer customer = mapper.Map<Customer>(customerDto);
-                CustomerConfirmation confirmation = customerRepository.CreateCustomer(customer);
-                customerRepository.SaveChanges();
+                CustomerConfirmation confirmation;
+
+                if(customer.IsPhysicalPerson == true)
+                {
+                    PhysicalPerson physicalPerson = customer as PhysicalPerson;
+                    confirmation = physicalPersonRepository.CreatePhysicalPerson(physicalPerson);
+                    physicalPersonRepository.SaveChanges();
+                }
+                else
+                {
+                    LegallyPerson legallyPerson = customer as LegallyPerson;
+                    confirmation = legallyPersonRepository.CreateLegallyPerson(legallyPerson);
+                    legallyPersonRepository.SaveChanges();
+                }
 
                 string location = linkGenerator.GetPathByAction("GetCustomerById", "Customer", new { customerID = confirmation.CustomerID });
 
@@ -119,15 +150,27 @@ namespace CustomerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteCustomer(Guid customerID)
         {
+            Customer customer;
+
             try
             {
-                Customer customer = customerRepository.GetCustomerById(customerID);
+                customer = legallyPersonRepository.GetLegallyPersonById(customerID);
                 if (customer == null)
                 {
                     return NotFound();
                 }
-                customerRepository.DeleteCustomer(customerID);
-                customerRepository.SaveChanges();
+
+                if(customer.IsPhysicalPerson == true)
+                {
+                    physicalPersonRepository.DeletePhysicalPerson(customerID);
+                    physicalPersonRepository.SaveChanges();
+                }
+                else if(customer.IsPhysicalPerson == false)
+                {
+                    legallyPersonRepository.DeleteLegallyPerson(customerID);
+                    legallyPersonRepository.SaveChanges();
+                }
+
                 return NoContent();
             }
             catch
@@ -145,21 +188,65 @@ namespace CustomerMicroservice.Controllers
         /// <response code="404">Kupac kojeg je potrebno ažurirati nije pronađen</response>
         /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja kupca</response>
         [HttpPut]
+        [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<CustomerConfirmationDto> UpdateCustomer([FromBody] CustomerUpdateDto customerDto)
+        public ActionResult<CustomerConfirmationDto> UpdateCustomer([FromBody] CustomerUpdateDto customer)
         {
             try
             {
-                var oldCustomer = customerRepository.GetCustomerById(customerDto.CustomerID);
-                if (oldCustomer == null)
+                if(customer.IsPhysicalPerson == true)
                 {
-                    return NotFound();
+                    var oldCustomerPhy = physicalPersonRepository.GetPhysicalPersonById(customer.CustomerID);
+                    oldCustomerPhy.CustomerID = customer.CustomerID;
+                    oldCustomerPhy.IsPhysicalPerson = customer.IsPhysicalPerson;
+                    oldCustomerPhy.Priority = customer.Priority;
+                    oldCustomerPhy.RealizedArea = customer.RealizedArea;
+                    oldCustomerPhy.HasABan = customer.HasABan;
+                    oldCustomerPhy.StartDateBan = customer.StartDateBan;
+                    oldCustomerPhy.DurationBan = customer.DurationBan;
+                    oldCustomerPhy.EndDateBan = customer.EndDateBan;
+                    oldCustomerPhy.AddressId = customer.AddressId;
+
+                    if (oldCustomerPhy == null)
+                    {
+                        return NotFound();
+                    }
+
+                    Customer customerEnt = mapper.Map<Customer>(customer);
+
+                    PhysicalPerson physicalPerson = (PhysicalPerson)customerEnt;
+                    mapper.Map(physicalPerson, oldCustomerPhy);
+                    physicalPersonRepository.SaveChanges();
+                    return Ok(mapper.Map<CustomerConfirmationDto>(oldCustomerPhy));
                 }
-                Customer customer = mapper.Map<Customer>(customerDto);
-                mapper.Map(customer, oldCustomer);
-                return Ok(mapper.Map<CustomerConfirmationDto>(oldCustomer));
+                else
+                {
+                    var oldCustomerLeg = legallyPersonRepository.GetLegallyPersonById(customer.CustomerID);
+                    oldCustomerLeg.CustomerID = customer.CustomerID;
+                    oldCustomerLeg.IsPhysicalPerson = customer.IsPhysicalPerson;
+                    oldCustomerLeg.Priority = customer.Priority;
+                    oldCustomerLeg.RealizedArea = customer.RealizedArea;
+                    oldCustomerLeg.HasABan = customer.HasABan;
+                    oldCustomerLeg.StartDateBan = customer.StartDateBan;
+                    oldCustomerLeg.DurationBan = customer.DurationBan;
+                    oldCustomerLeg.EndDateBan = customer.EndDateBan;
+                    oldCustomerLeg.AddressId = customer.AddressId;
+
+                    if (oldCustomerLeg == null)
+                    {
+                        return NotFound();
+                    }
+
+                    Customer customerEnt = mapper.Map<Customer>(customer);
+
+                    LegallyPerson legallyPerson = (LegallyPerson)customerEnt;
+                    mapper.Map(legallyPerson, oldCustomerLeg);
+                    legallyPersonRepository.SaveChanges();
+                    return Ok(mapper.Map<CustomerConfirmationDto>(oldCustomerLeg));
+                }
+                
             }
             catch
             {

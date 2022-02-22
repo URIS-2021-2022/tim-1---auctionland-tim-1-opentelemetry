@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CustomerMicroservice.Entities
 {
-    public class AuthorizedPerson
+    public class AuthorizedPersonConfirmation
     {
         /// <summary>
         /// ID ovlascenog lica
@@ -17,19 +18,19 @@ namespace CustomerMicroservice.Entities
         /// <summary>
         /// Ime ovlascenog lica
         /// </summary>
-        [Required]
+        //[Required]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Prezime ovlascenog lica
         /// </summary>
-        [Required]
+        //[Required]
         public string LastName { get; set; }
 
         /// <summary>
         /// Broj licnog dokumenta (jmbg ili broj pasosa)
         /// </summary>
-        [Required]
+        //[Required]
         public string NumberPersonalDocument { get; set; }
 
         /// <summary>
@@ -40,6 +41,7 @@ namespace CustomerMicroservice.Entities
         /// <summary>
         /// Adresa ovlascenog lica
         /// </summary>
-        //public Guid AddressID { get; set; }
+        [ForeignKey("Address")]
+        public Guid AddressId { get; set; }
     }
 }

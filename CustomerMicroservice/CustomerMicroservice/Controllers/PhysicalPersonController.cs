@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using CustomerMicroservice.Data;
 using CustomerMicroservice.Entities;
 using CustomerMicroservice.Models.PhysicalPerson;
@@ -90,12 +90,12 @@ namespace CustomerMicroservice.Controllers
             // komunikacija
             try
             {
-                physicalPersonDto.PhysicalPersonID = Guid.NewGuid();
+                physicalPersonDto.CustomerID = Guid.NewGuid();
                 PhysicalPerson physicalPerson = mapper.Map<PhysicalPerson>(physicalPersonDto);
                 PhysicalPersonConfirmation confirmation = physicalPersonRepository.CreatePhysicalPerson(physicalPerson);
                 physicalPersonRepository.SaveChanges();
 
-                string location = linkGenerator.GetPathByAction("GetPhysicalPersonById", "PhysicalPerson", new { physicalPersonID = confirmation.PhysicalPersonID });
+                string location = linkGenerator.GetPathByAction("GetPhysicalPersonById", "PhysicalPerson", new { physicalPersonID = confirmation.CustomerID });
 
                 return Created(location, mapper.Map<PhysicalPersonConfirmationDto>(confirmation));
             }
@@ -152,7 +152,7 @@ namespace CustomerMicroservice.Controllers
         {
             try
             {
-                var oldPhysicalPerson = physicalPersonRepository.GetPhysicalPersonById(physicalPersonDto.PhysicalPersonID);
+                var oldPhysicalPerson = physicalPersonRepository.GetPhysicalPersonById(physicalPersonDto.CustomerID);
                 if (oldPhysicalPerson == null)
                 {
                     return NotFound();
@@ -179,4 +179,4 @@ namespace CustomerMicroservice.Controllers
             return Ok();
         }
     }
-}
+}*/

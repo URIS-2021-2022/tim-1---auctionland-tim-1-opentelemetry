@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using CustomerMicroservice.Data;
 using CustomerMicroservice.Entities;
 using CustomerMicroservice.Models.LegallyPerson;
@@ -90,12 +90,12 @@ namespace CustomerMicroservice.Controllers
             // komunikacija
             try
             {
-                legallyPersonDto.LegallyPersonID = Guid.NewGuid();
+                legallyPersonDto.CustomerID = Guid.NewGuid();
                 LegallyPerson legallyPerson = mapper.Map<LegallyPerson>(legallyPersonDto);
                 LegallyPersonConfirmation confirmation = legallyPersonRepository.CreateLegallyPerson(legallyPerson);
                 legallyPersonRepository.SaveChanges();
 
-                string location = linkGenerator.GetPathByAction("GetLegallyPersonById", "LegallyPerson", new { legallyPersonID = confirmation.LegallyPersonID });
+                string location = linkGenerator.GetPathByAction("GetLegallyPersonById", "LegallyPerson", new { legallyPersonID = confirmation.CustomerID });
 
                 return Created(location, mapper.Map<LegallyPersonConfirmationDto>(confirmation));
             }
@@ -152,7 +152,7 @@ namespace CustomerMicroservice.Controllers
         {
             try
             {
-                var oldLegallyPerson = legallyPersonRepository.GetLegallyPersonById(legallyPersonDto.LegallyPersonID);
+                var oldLegallyPerson = legallyPersonRepository.GetLegallyPersonById(legallyPersonDto.CustomerID);
                 if (oldLegallyPerson == null)
                 {
                     return NotFound();
@@ -179,4 +179,4 @@ namespace CustomerMicroservice.Controllers
             return Ok();
         }
     }
-}
+}*/

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CustomerMicroservice.Entities
 {
-    public class Customer
+    public class CustomerConfirmation
     {
+        public CustomerConfirmation() { }
         /// <summary>
         /// ID kupca
         /// </summary>
@@ -15,21 +17,26 @@ namespace CustomerMicroservice.Entities
         public Guid CustomerID { get; set; }
 
         /// <summary>
+        /// Da li je kupac fizicko lice, ako nije onda je pravno
+        /// </summary>
+        public bool IsPhysicalPerson { get; set; }
+
+        /// <summary>
         /// Prioritet 
         /// </summary>
-        [Required]
+        //[Required]
         public string Priority { get; set; }
 
         /// <summary>
         /// Ostvarena povrsina
         /// </summary>
-        [Required]
+        //[Required]
         public string RealizedArea { get; set; }
 
         /// <summary>
         /// Da li kupac ima zabranu
         /// </summary>
-        [Required]
+        //[Required]
         public bool HasABan { get; set; }
 
         /// <summary>
@@ -50,7 +57,8 @@ namespace CustomerMicroservice.Entities
         /// <summary>
         /// Adresa kupca
         /// </summary>
-        //public Guid AddressID { get; set; }
+        [ForeignKey("Address")]
+        public Guid AddressId { get; set; }
 
         /// <summary>
         /// Dokumenati kupca

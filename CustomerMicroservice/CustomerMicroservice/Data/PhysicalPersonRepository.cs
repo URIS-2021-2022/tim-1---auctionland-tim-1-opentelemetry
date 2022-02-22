@@ -32,12 +32,12 @@ namespace CustomerMicroservice.Data
 
         public List<PhysicalPerson> GetPhysicalPeople()
         {
-            return context.PhysicalPeople.ToList();
+            return context.PhysicalPerson.ToList();
         }
 
         public PhysicalPerson GetPhysicalPersonById(Guid physicalPersonID)
         {
-            return context.PhysicalPeople.FirstOrDefault(e => e.PhysicalPersonID == physicalPersonID);
+            return context.PhysicalPerson.FirstOrDefault(e => e.CustomerID == physicalPersonID);
         }
 
         public bool SaveChanges()
