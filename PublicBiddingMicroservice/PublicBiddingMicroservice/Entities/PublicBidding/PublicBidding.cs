@@ -9,7 +9,6 @@ namespace PublicBiddingMicroservice.Entities
     public class PublicBidding
     {
         public Guid PublicBiddingId { get; set; }
-
         public DateTime Date { get; set; }
 
         public DateTime StartTime { get; set; }
@@ -26,10 +25,9 @@ namespace PublicBiddingMicroservice.Entities
 
         public int NumberOfParticipants { get; set; }
 
-        public double DepositReplenishment{ get; set; }
+        public double DepositReplenishment { get; set; }
 
         public int Circle { get; set; }
-
 
         [ForeignKey("Status")]
         public Guid? StatusId { get; set; }
@@ -43,5 +41,7 @@ namespace PublicBiddingMicroservice.Entities
         public Guid? PublicBiddingTypeId { get; set; }
         public Stage PublicBiddingType { get; set; }
 
+        [ForeignKey("Address")]
+        public Guid AddressId { get; set; }
     }
 }

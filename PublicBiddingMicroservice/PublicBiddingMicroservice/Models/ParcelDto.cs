@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace PublicBiddingMicroservice.Models
 {
-    public class AddressDto
+    public class ParcelDto
     {
         /// <summary>
-        /// ID adrese.
+        /// ID parcele.
         /// </summary>
-        public Guid AddressId { get; set; }
+        public Guid ParcelID { get; set; }
+
     }
 }

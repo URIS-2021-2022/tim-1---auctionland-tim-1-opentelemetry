@@ -120,22 +120,27 @@ namespace PublicBiddingMicroservice.Controllers
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetPublicBidding", "PublicBidding", new { publicBiddingId = confirmation.PublicBiddingId });
-                loggerDto.Response = "201 CREATED";
-                loggerMicroservice.CreateLog(loggerDto);
+                
                 var addressInfo = mapper.Map<AddressDto>(publicBidding);
-
-                addressInfo.PublicBiddingId = confirmation.PublicBiddingId;
-                bool createdAddress = addressService.GetAddressOfPubblicBidding(addressInfo);
+                addressInfo.AddressId = confirmation.AddressId;
+                bool isAddress = addressService.GetAddressById(addressInfo.AddressId);
 
                 //Ukoliko iz nekog razloga ne uspemo da naplatimo prijavu ispita ista se briše
-                if (!createdAddress)
+                if (!isAddress)
                 {
                     publicBiddingRepository.DeletePublicBidding(confirmation.PublicBiddingId);
                     throw new AddressException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
                 }
 
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
+
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (javnog nadmetanja) i samim javnim nadmetanjem.
                 return Created(location, mapper.Map<PublicBiddingConfirmationDto>(confirmation));
+            }
+            catch (AddressException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
             catch (Exception ex)
             {

@@ -89,6 +89,7 @@ namespace PublicBiddingMicroservice.Entities
                     StatusId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     StageId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                     PublicBiddingTypeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                    AddressId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                 });
 
             modelBuilder.Entity<Auction>()

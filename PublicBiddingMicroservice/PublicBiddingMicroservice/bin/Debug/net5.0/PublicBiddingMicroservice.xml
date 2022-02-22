@@ -310,6 +310,11 @@
             <param name="principal">Autentifikovani principal</param>
             <returns></returns>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.AddressDto.AddressId">
+            <summary>
+            ID adrese.
+            </summary>
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.AuctionConfirmationDto">
             <summary>
             DTO za licitaciju.
@@ -328,6 +333,11 @@
         <member name="T:PublicBiddingMicroservice.Models.AuctionUpdateDto">
             <summary>
             Model za azuriranje licitacije.
+            </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.ParcelDto.ParcelID">
+            <summary>
+            ID parcele.
             </summary>
         </member>
         <member name="P:PublicBiddingMicroservice.Models.Principal.Username">
