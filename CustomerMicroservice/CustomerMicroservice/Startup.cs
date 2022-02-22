@@ -135,7 +135,9 @@ namespace CustomerMicroservice
                         License = new Microsoft.OpenApi.Models.OpenApiLicense
                         {
                             Name = "FTN licence",
+#pragma warning disable S1075
                             Url = new Uri("http://www.ftn.uns.ac.rs/")
+#pragma warning restore S1075
                         }
                     });
 
@@ -146,7 +148,7 @@ namespace CustomerMicroservice
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
                 //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
-                //setupAction.IncludeXmlComments(xmlCommentsPath);
+                setupAction.IncludeXmlComments(xmlCommentsPath);
 
                 setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

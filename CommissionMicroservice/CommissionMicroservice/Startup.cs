@@ -134,7 +134,9 @@ namespace CommissionMicroservice
                         License = new Microsoft.OpenApi.Models.OpenApiLicense
                         {
                             Name = "FTN licence",
+#pragma warning disable S1075
                             Url = new Uri("http://www.ftn.uns.ac.rs/")
+#pragma warning restore S1075
                         }
                     });
 
