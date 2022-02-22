@@ -20,17 +20,23 @@ namespace PublicBiddingRegistrationMicroservice.ServiceCalls.CustomerMicroservic
 
         public async Task<CustomerDto> GetCustomerByIdAsync(Guid? customerId)
         {
-            using (HttpClient client = new HttpClient())
+            try
             {
-                var x = configuration["Services:CustomerMicroservice"];
-                Uri url = new Uri($"{ configuration["Services:CustomerMicroservice"] }api/customers/{customerId}");
+                using (HttpClient client = new HttpClient())
+                {
+                    Uri url = new Uri($"{ configuration["Services:CustomerMicroservice"] }api/customers/{customerId}");
 
-                HttpResponseMessage response = client.GetAsync(url).Result;
+                    HttpResponseMessage response = client.GetAsync(url).Result;
 
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var customer = JsonConvert.DeserializeObject<CustomerDto>(responseContent);
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var customer = JsonConvert.DeserializeObject<CustomerDto>(responseContent);
 
-                return customer;
+                    return customer;
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
     }

@@ -11,6 +11,7 @@ using PublicBiddingRegistrationMicroservice.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using PublicBiddingRegistrationMicroservice.ServiceCalls;
+using PublicBiddingRegistrationMicroservice.ServiceCalls.CustomerMicroservice;
 
 namespace PublicBiddingRegistrationMicroservice.Controllers
 {
@@ -24,15 +25,17 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateExamRegistration)
         private readonly IMapper mapper;
         private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly ICustomerMicroservice customerMicroservice;
         private readonly LoggerDto loggerDto;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public ApplicationController(IApplicationRepository applicationRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
+        public ApplicationController(IApplicationRepository applicationRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice, ICustomerMicroservice customerMicroservice)
         {
             this.applicationRepository = applicationRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.loggerMicroservice = loggerMicroservice;
+            this.customerMicroservice = customerMicroservice;
             loggerDto = new LoggerDto();
             loggerDto.Service = "APPLICATION";
         }

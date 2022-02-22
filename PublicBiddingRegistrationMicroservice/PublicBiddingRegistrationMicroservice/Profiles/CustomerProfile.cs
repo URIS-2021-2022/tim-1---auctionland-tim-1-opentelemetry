@@ -11,7 +11,7 @@ namespace PublicBiddingRegistrationMicroservice.Profiles
     {
         public CustomerProfile()
         {
-            CreateMap<ApplicationDto, CustomerDto>();
+            CreateMap<ApplicationDto, CustomerDto>().ForMember(dest => dest.CustomerID, opt => opt.MapFrom(src => $"{src.BuyerId}"));
         }
     }
 }
