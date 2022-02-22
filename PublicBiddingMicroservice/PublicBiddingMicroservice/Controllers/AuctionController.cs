@@ -15,7 +15,6 @@ namespace PublicBiddingMicroservice.Controllers
     [ApiController]
     [Route("api/auctions")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class AuctionController : ControllerBase //Daje nam pristup korisnim poljima i metodama
     {
         private readonly IAuctionRepository auctionRepository;

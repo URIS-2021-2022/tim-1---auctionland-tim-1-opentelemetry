@@ -6,6 +6,43 @@
 	},
 	"item": [
 		{
+			"name": "Authenticate User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"ana.zuber\",\r\n  \"password\": \"testpassword\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5021/authenticate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5021",
+					"path": [
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Auctions",
 			"request": {
 				"method": "GET",
@@ -173,7 +210,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"date\": \"2020-11-15T09:00:00\",\r\n    \"startTime\": \"2020-11-15T09:00:00\",\r\n    \"endTime\": \"2020-11-15T12:00:00\",\r\n    \"startingPricePerHe\": 10,\r\n    \"exclude\": true,\r\n    \"auctionedPrice\": 139,\r\n    \"leasePeriod\": 1,\r\n    \"numberOfParticipants\": 12,\r\n    \"depositReplenishment\": 13,\r\n    \"circle\": 1,\r\n    \"statusId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"stageId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"publicBiddingTypeId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"addressId\": \"3aa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n}",
+					"raw": "{\r\n    \"date\": \"2020-11-15T09:00:00\",\r\n    \"startTime\": \"2020-11-15T09:00:00\",\r\n    \"endTime\": \"2020-11-15T12:00:00\",\r\n    \"startingPricePerHe\": 10,\r\n    \"exclude\": true,\r\n    \"auctionedPrice\": 139,\r\n    \"leasePeriod\": 1,\r\n    \"numberOfParticipants\": 12,\r\n    \"depositReplenishment\": 13,\r\n    \"circle\": 1,\r\n    \"statusId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"stageId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"publicBiddingTypeId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"addressId\": \"1c7ea607-8ddb-493a-87fa-4bf5893e965b\",\r\n    \"parcelId\": \"866f2352-771f-4405-a9b5-9878b0fbff0f\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -611,7 +648,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU1Mzk4MjAsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzgxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODEifQ.wTN7xq3lG5h0slXylWlvQ36rNk0yMp2RrUoBbLE5Ov4",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU1NzM5MjIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzYyIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjIifQ.HMvtnZSItBBofLoNHZ-w8ha1GY4QfNSZrRSC9aJmr4M",
 				"type": "string"
 			}
 		]
