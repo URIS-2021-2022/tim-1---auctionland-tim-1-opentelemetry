@@ -108,7 +108,7 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
                 var publicBiddingInfo = mapper.Map<PublicBiddingDto>(paymentEntity);
 
                 publicBiddingInfo.PublicBiddingId = confirmation.PublicBiddingId;
-                bool createdPublicBidding = publicBiddingService.GetPublicBidding(publicBiddingInfo);
+                bool createdPublicBidding = publicBiddingService.GetPublicBidding(publicBiddingInfo.PublicBiddingId);
 
                 //Ukoliko iz nekog razloga ne uspemo da naplatimo prijavu ispita ista se briše
                 if (!createdPublicBidding)

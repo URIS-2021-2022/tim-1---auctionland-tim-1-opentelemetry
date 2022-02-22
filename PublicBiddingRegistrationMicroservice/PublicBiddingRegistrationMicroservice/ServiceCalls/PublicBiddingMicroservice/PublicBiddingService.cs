@@ -18,14 +18,14 @@ namespace PublicBiddingRegistrationMicroservice.ServiceCalls
             this.configuration = configuration;
         }
 
-        public bool GetPublicBidding(PublicBiddingDto publicBiddingDto)
+        public bool GetPublicBidding(Guid publicBiddingId)
         {
             using (HttpClient client = new HttpClient())
             {
                 var x = configuration["Services:PublicBiddingService"];
                 Uri url = new Uri($"{ configuration["Services:PublicBiddingService"] }api/publicBiddings");
 
-                HttpContent content = new StringContent(JsonConvert.SerializeObject(publicBiddingDto));
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(publicBiddingId));
                 content.Headers.ContentType.MediaType = "application/json";
 
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
