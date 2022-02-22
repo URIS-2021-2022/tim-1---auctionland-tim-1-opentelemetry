@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ComplaintMicroservice.Data;
 using ComplaintMicroservice.Entities;
 using ComplaintMicroservice.Helpers;
+using ComplaintMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -97,6 +98,7 @@ namespace ComplaintMicroservice
             services.AddScoped<IComplaintRepository, ComplaintRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
+            services.AddScoped<ILoggerService, LoggerService>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("ComplaintOpenApiSpecification",
