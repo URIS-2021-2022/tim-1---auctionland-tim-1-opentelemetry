@@ -14,9 +14,11 @@ namespace ParcelMicroservice.Profiles
         {
             CreateMap<Parcel, ParcelDto>();//+
             CreateMap<ParcelCreationDto, Parcel>();//+
-            //CreateMap<ParcelConfirmationDto, Parcel>();
+            CreateMap<Parcel, ParcelConfirmationDto>();
             CreateMap<ParcelUpdateDto, Parcel>();//+
             CreateMap<ParcelConfirmation, ParcelConfirmationDto>();//+
+            CreateMap<Parcel, Parcel>();
+            CreateMap<Parcel, ParcelConfirmation>();
         }
     }
 }

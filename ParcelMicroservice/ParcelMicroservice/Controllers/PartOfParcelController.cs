@@ -15,7 +15,8 @@ namespace ParcelMicroservice.Controllers
 {
     [ApiController]
     [Route("api/parcels/partofparcels")]
-    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
+    [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
+    //[Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class PartOfParcelController : ControllerBase
     {
         private readonly IPartOfParcelRepository partOfParcelRepository;
@@ -63,6 +64,7 @@ namespace ParcelMicroservice.Controllers
                 PartOfParcelConfirmation confirmation = partOfParcelRepository.CreatePartOfParcel(partOfParcelEntity);
                 // Dobar API treba da vrati lokator gde se taj resurs nalazi
                 string location = linkGenerator.GetPathByAction("GetPartOfParcels", "PartOfParcel", new { partOfParcelID = confirmation.PartOfParcelID});//dodato
+                partOfParcelRepository.SaveChanges();
                 return Created(location, mapper.Map<PartOfParcelConfirmationDto>(confirmation));
             }
             catch
@@ -77,16 +79,20 @@ namespace ParcelMicroservice.Controllers
         {
             try
             {
+                var oldPartOfParcelEntity = partOfParcelRepository.GetPartOfParcelById(model.PartOfParcelID);
                 //Proveriti da li uopšte postoji prijava koju pokušavamo da ažuriramo.
-                if (partOfParcelRepository.GetPartOfParcelById(model.PartOfParcelID) == null)
+                if (oldPartOfParcelEntity == null)
                 {
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
 
                 PartOfParcel partOfParcelEntity = mapper.Map<PartOfParcel>(model);
 
-                PartOfParcelConfirmation confirmation = partOfParcelRepository.UpdatePartOfParcel(partOfParcelEntity);
-                return Ok(mapper.Map<PartOfParcelConfirmationDto>(confirmation));
+                mapper.Map(partOfParcelEntity, oldPartOfParcelEntity);
+
+                partOfParcelRepository.SaveChanges();
+
+                return Ok(mapper.Map<PartOfParcelConfirmationDto>(oldPartOfParcelEntity));
             }
             catch (Exception)
             {
@@ -105,6 +111,7 @@ namespace ParcelMicroservice.Controllers
                     return NotFound();
                 }
                 partOfParcelRepository.DeletePartOfParcel(partOfParcelID);
+                partOfParcelRepository.SaveChanges();
                 // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
                 return NoContent();
             }

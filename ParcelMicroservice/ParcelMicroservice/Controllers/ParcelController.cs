@@ -15,7 +15,8 @@ namespace ParcelMicroservice.Controllers
 {
     [ApiController]
     [Route("api/parcels")]
-    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
+    [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
+    //[Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class ParcelController : ControllerBase
     {
         private readonly IParcelRepository parcelRepository;
@@ -78,6 +79,7 @@ namespace ParcelMicroservice.Controllers
                 ParcelConfirmation confirmation = parcelRepository.CreateParcel(parcelEntity);
                 // Dobar API treba da vrati lokator gde se taj resurs nalazi
                 string location = linkGenerator.GetPathByAction("GetParcels", "Parcel", new { parcelID = confirmation.ParcelID });
+                parcelRepository.SaveChanges();
                 return Created(location, mapper.Map<ParcelConfirmationDto>(confirmation));
             }
             catch
@@ -92,14 +94,19 @@ namespace ParcelMicroservice.Controllers
         {
             try
             {
+                var oldparcelEntity = parcelRepository.GetParcelById(model.ParcelID);
                 //Proveriti da li uopšte postoji prijava koju pokušavamo da ažuriramo.
-                if (parcelRepository.GetParcelById(model.ParcelID) == null)
+                if (oldparcelEntity == null)
                 {
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
+
                 Parcel parcelEntity = mapper.Map<Parcel>(model);
-                ParcelConfirmation confirmation = parcelRepository.UpdateParcel(parcelEntity);
-                return Ok(mapper.Map<ParcelConfirmationDto>(confirmation));
+
+                mapper.Map(parcelEntity, oldparcelEntity); //Update objekta koji treba da sačuvamo u bazi                
+
+                parcelRepository.SaveChanges(); //Perzistiramo promene
+                return Ok(mapper.Map<ParcelConfirmationDto>(oldparcelEntity));
             }
             catch (Exception)
             {
@@ -118,6 +125,7 @@ namespace ParcelMicroservice.Controllers
                     return NotFound();
                 }
                 parcelRepository.DeleteParcel(parcelID);
+                parcelRepository.SaveChanges();
                 // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
                 return NoContent();
             }
