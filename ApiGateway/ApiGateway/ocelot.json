@@ -1,7 +1,7 @@
 {
     "Routes": [
         {
-            "DownstreamPathTemplate": "/api/complaint",
+            "DownstreamPathTemplate": "/api/complaint", //Complaint
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
@@ -10,7 +10,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/complaint",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/complaint/{complaintId}",
@@ -22,10 +26,14 @@
                 }
             ],
             "UpstreamPathTemplate": "/complaint/{complaintId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
-            "DownstreamPathTemplate": "/api/addresses",
+            "DownstreamPathTemplate": "/api/addresses", //Address
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
@@ -34,7 +42,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/addresses",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/addresses/{addressID}",
@@ -45,11 +57,15 @@
                     "Port": 44348
                 }
             ],
-            "UpstreamPathTemplate": "/addresses/{addressId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamPathTemplate": "/addresses/{addressID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
-            "DownstreamPathTemplate": "/api/ads",
+            "DownstreamPathTemplate": "/api/ads", //Ad
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
@@ -58,7 +74,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/ads",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/ads/{adId}",
@@ -70,10 +90,14 @@
                 }
             ],
             "UpstreamPathTemplate": "/ads/{adId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
-            "DownstreamPathTemplate": "/api/document",
+            "DownstreamPathTemplate": "/api/document", //Document
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
@@ -82,7 +106,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/document",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/document/{documentID}",
@@ -94,7 +122,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/document/{documentID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/document/leaseAgreement",
@@ -106,7 +138,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/document/leaseAgreement",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/document/leaseAgreement/{leaseId}",
@@ -118,7 +154,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/document/leaseAgreement/{leaseId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/document/listOfDocuments",
@@ -130,7 +170,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/document/listOfDocuments",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/document/listOfDocuments/{listId}",
@@ -142,10 +186,14 @@
                 }
             ],
             "UpstreamPathTemplate": "/document/listOfDocuments/{listId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
-            "DownstreamPathTemplate": "/api/auctions",
+            "DownstreamPathTemplate": "/api/auctions", //Auction
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
@@ -154,7 +202,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/auctions",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/auctions/{auctionId}",
@@ -166,7 +218,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/auctions/{auctionId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/publicBiddings",
@@ -178,7 +234,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/publicBiddings",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/publicBiddings/{publicBiddingId}",
@@ -190,7 +250,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/publicBiddings/{publicBiddingId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/publicBiddingTypes",
@@ -202,7 +266,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/publicBiddingTypes",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/publicBiddingTypes/{publicBiddingTypeId}",
@@ -215,7 +283,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/publicBiddingTypes/{publicBiddingTypeId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/stages",
@@ -227,7 +299,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/stages",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/stages/{stageId}",
@@ -240,7 +316,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/stages/{stageId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/statuses",
@@ -252,7 +332,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/statuses",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/statuses/{statusId}",
@@ -265,7 +349,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/statuses/{statusId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/application",
@@ -277,7 +365,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/application",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/application/{applicationId}",
@@ -290,7 +382,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/application/{applicationId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/application/payment",
@@ -302,7 +398,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/application/payment",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/application/payment/{paymentId}",
@@ -315,10 +415,26 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/application/payment/{paymentId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
-            "DownstreamPathTemplate": "/api/users",
+            "DownstreamPathTemplate": "/api/auth/users/authenticate", //Autentifikacija
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44381
+                }
+            ],
+            "UpstreamPathTemplate": "/authenticate",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/users", //Korisnik
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
@@ -327,7 +443,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/users",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/users/{userId}",
@@ -340,7 +460,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/users/{userId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/userTypes",
@@ -352,7 +476,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/userTypes",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/userTypes/{userTypeId}",
@@ -365,7 +493,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/userTypes/{userTypeId}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/parcels",
@@ -377,7 +509,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/parcels",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/parcels/{parcelID}",
@@ -390,7 +526,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/parcels/{parcelID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/parcels/partofparcels",
@@ -402,7 +542,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/parcels/partofparcels",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/parcels/partofparcels/{parcelID}",
@@ -415,32 +559,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/parcels/partofparcels/{parcelID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
-        },
-        {
-            "DownstreamPathTemplate": "/api/parcels/partofparcels",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 44343
-                }
-            ],
-            "UpstreamPathTemplate": "/parcels/partofparcels",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
-        },
-        {
-            "DownstreamPathTemplate": "/api/parcels/partofparcels/{parcelID}",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 44343
-                },
-                "publicBiddingTypes"
-            ],
-            "UpstreamPathTemplate": "/parcels/partofparcels/{parcelID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/commissions",
@@ -452,7 +575,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/commissions",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/commissions/{commissionID}",
@@ -465,7 +592,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/commissions/{commissionID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/customers",
@@ -477,7 +608,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/customers",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/customers/{customerID}",
@@ -490,7 +625,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/customers/{customerID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/legallyPeople",
@@ -502,7 +641,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/legallyPeople",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/legallyPeople/{legallyPersonID}",
@@ -515,7 +658,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/legallyPeople/{legallyPersonID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/physicalPeople",
@@ -527,7 +674,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/physicalPeople",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/physicalPeople/{physicalPersonID}",
@@ -540,7 +691,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/physicalPeople/{physicalPersonID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/authorizedPeople",
@@ -552,7 +707,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/authorizedPeople",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/authorizedPeople/{authorizedPersonID}",
@@ -565,7 +724,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/authorizedPeople/{authorizedPersonID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/authorizedPersonCustomers",
@@ -577,7 +740,11 @@
                 }
             ],
             "UpstreamPathTemplate": "/authorizedPersonCustomers",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         },
         {
             "DownstreamPathTemplate": "/api/authorizedPersonCustomers/{authorizedPersonCustomerID}",
@@ -590,7 +757,11 @@
                 "publicBiddingTypes"
             ],
             "UpstreamPathTemplate": "/authorizedPersonCustomers/{authorizedPersonCustomerID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
         }
     ],
     "GlobalConfiguration": {
