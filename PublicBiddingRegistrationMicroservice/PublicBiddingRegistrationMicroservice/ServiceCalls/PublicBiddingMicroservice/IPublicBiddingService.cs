@@ -8,6 +8,6 @@ namespace PublicBiddingRegistrationMicroservice.ServiceCalls
 {
     public interface IPublicBiddingService
     {
-        public bool GetPublicBidding(PublicBiddingDto publicBiddingDto);
+        public bool GetPublicBidding(Guid publicBiddingId);
     }
 }
