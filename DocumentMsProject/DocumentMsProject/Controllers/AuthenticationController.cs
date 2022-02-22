@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace DocumentMsProject.Controllers
 {
     [ApiController]
-    [Route("api/examRegistrations")]
+    [Route("api/document")]
     [Produces("application/json", "application/xml")]
     public class AuthenticationController : ControllerBase
     {

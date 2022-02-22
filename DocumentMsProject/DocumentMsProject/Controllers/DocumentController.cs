@@ -33,7 +33,7 @@ namespace DocumentMsProject.Controllers
             this.linkGenerator = linkGenerator;
             this.loggerMicroservice = loggerMicroservice;
             loggerDto = new LoggerDto();
-            loggerDto.Service = "ADDRESS";
+            loggerDto.Service = "DOCUMENT";
         }
 
         /// <summary>
@@ -207,6 +207,8 @@ namespace DocumentMsProject.Controllers
 
                 documentRepository.DeleteDocument(documentID);
                 documentRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch (Exception)

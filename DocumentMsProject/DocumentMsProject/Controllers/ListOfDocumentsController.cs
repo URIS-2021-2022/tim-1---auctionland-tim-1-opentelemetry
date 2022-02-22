@@ -2,6 +2,7 @@
 using DocumentMsProject.Data;
 using DocumentMsProject.Entities;
 using DocumentMsProject.Models;
+using DocumentMsProject.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +23,17 @@ namespace DocumentMsProject.Controllers
         private readonly IListOfDocumentsRepository documentsRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
-        public ListOfDocumentsController(IListOfDocumentsRepository documentsRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public ListOfDocumentsController(IListOfDocumentsRepository documentsRepository, IMapper mapper, LinkGenerator linkGenerator, ILoggerMicroservice loggerMicroservice)
         {
             this.documentsRepository = documentsRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "LIST OF DOCUMENTS";
         }
 
         /// <summary>
@@ -42,12 +48,17 @@ namespace DocumentMsProject.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<ListOfDocumentsDto>> GetAllList()
         {
+            loggerDto.HttpMethodName = "GET";
             var lists = documentsRepository.GetAllListOfDocuments();
 
             if (lists == null || lists.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<ListOfDocumentsDto>>(lists));
         }
 
@@ -62,11 +73,17 @@ namespace DocumentMsProject.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ListOfDocumentsDto> GetListOfDocumentsById(Guid listId)
         {
+            loggerDto.HttpMethodName = "GET";
             ListOfDocuments listOfDocuments = documentsRepository.GetListOfDocumentsById(listId);
             if (listOfDocuments == null)
             {
+                loggerDto.Response = "404 NOT FOUND";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<ListOfDocumentsDto>(listOfDocuments));
         }
 
@@ -91,6 +108,7 @@ namespace DocumentMsProject.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 ListOfDocuments listEntity = mapper.Map<ListOfDocuments>(listCreation);
                 ListOfDocumentsConfirmation confirmation = documentsRepository.CreateListOfDocuments(listEntity);
                 documentsRepository.SaveChanges(); //Perzistiramo promene
@@ -98,11 +116,14 @@ namespace DocumentMsProject.Controllers
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetListOfDocumentsById", "ListOfDocuments", new { listId = confirmation.ListOfDocumentsId });
 
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Created(location, mapper.Map<ListOfDocumentsConfirmationDto>(confirmation)); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
-            catch (Exception ex)
+            catch
             {
-                //TODO: Logovati ex
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
             }
@@ -124,18 +145,25 @@ namespace DocumentMsProject.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var listOfDocs = documentsRepository.GetListOfDocumentsById(listId);
                 if (listOfDocs == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 documentsRepository.DeleteListOfDocuments(listId);
                 documentsRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
                 return NoContent();
             }
-            catch
+            catch(Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }
@@ -156,10 +184,13 @@ namespace DocumentMsProject.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 //Proveriti da li uopšte postoji prijava koju pokušavamo da ažuriramo.
                 var oldList = documentsRepository.GetListOfDocumentsById(updateDto.ListOfDocumentsId);
                 if (oldList == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 ListOfDocuments listEntity = mapper.Map<ListOfDocuments>(updateDto);
@@ -167,10 +198,14 @@ namespace DocumentMsProject.Controllers
                 mapper.Map(listEntity, oldList); //Update objekta koji treba da sačuvamo u bazi                
 
                 documentsRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<ListOfDocumentsDto>(oldList));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
