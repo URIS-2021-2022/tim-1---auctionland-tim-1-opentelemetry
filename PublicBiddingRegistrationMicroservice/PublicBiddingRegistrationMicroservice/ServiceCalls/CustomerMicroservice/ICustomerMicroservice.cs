@@ -1,11 +1,13 @@
-﻿using System;
+﻿using PublicBiddingRegistrationMicroservice.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PublicBiddingRegistrationMicroservice.ServiceCalls.CustomerMicroservice
 {
-    interface ICustomerMicroservice
+    public interface ICustomerMicroservice
     {
+        Task<CustomerDto> GetCustomerByIdAsync(Guid? customerId);
     }
 }

@@ -24,13 +24,18 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateExamRegistration)
         private readonly IMapper mapper;
         private readonly IPublicBiddingService publicBiddingService;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
-        public PaymentForApplicationController(IPaymentRepository paymentRepository, LinkGenerator linkGenerator, IMapper mapper, IPublicBiddingService publicBiddingService)
+        public PaymentForApplicationController(IPaymentRepository paymentRepository, LinkGenerator linkGenerator, IMapper mapper, IPublicBiddingService publicBiddingService, ILoggerMicroservice loggerMicroservice)
         {
             this.paymentRepository = paymentRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.publicBiddingService = publicBiddingService;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "PAYMENT FOR APPLICATION";
         }
 
         /// <summary>
@@ -45,11 +50,17 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<PaymentDto>> GetAllPayments()
         {
+            loggerDto.HttpMethodName = "GET";
             var paymentsEntities = paymentRepository.GetPayments();
             if(paymentsEntities == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<PaymentDto>>(paymentsEntities));
         }
 
@@ -64,11 +75,17 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<PaymentDto> GetPaymentById(Guid paymentId)
         {
+            loggerDto.HttpMethodName = "GET";
             var paymentModel = paymentRepository.GetPaymentsById(paymentId);
             if (paymentModel == null)
             {
+                loggerDto.Response = "404 NOT FOUND";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<PaymentDto>(paymentModel));
         }
 
@@ -98,6 +115,7 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 PaymentForApplication paymentEntity = mapper.Map<PaymentForApplication>(paymentCreation);
                 PaymentConfirmation confirmation = paymentRepository.CreatePayment(paymentEntity);
                 paymentRepository.SaveChanges();
@@ -108,19 +126,17 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
                 var publicBiddingInfo = mapper.Map<PublicBiddingDto>(paymentEntity);
 
                 publicBiddingInfo.PublicBiddingId = confirmation.PublicBiddingId;
-                bool createdPublicBidding = publicBiddingService.GetPublicBidding(publicBiddingInfo.PublicBiddingId);
 
                 //Ukoliko iz nekog razloga ne uspemo da naplatimo prijavu ispita ista se briše
-                if (!createdPublicBidding)
-                {
-                    paymentRepository.DeletePayment(confirmation.PaymentId);
-                    //throw new AddressException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
-                }
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Created(location, mapper.Map<PaymentConfirmationDto>(confirmation));
             }
-            catch
+            catch(Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
+                Console.WriteLine(ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error");
             }
         }
@@ -141,18 +157,25 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var paymentModel = paymentRepository.GetPaymentsById(paymentId);
                 if (paymentModel == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 paymentRepository.DeletePayment(paymentId);
                 paymentRepository.SaveChanges();
                 // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }
@@ -174,9 +197,12 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 var oldPayment = paymentRepository.GetPaymentsById(paymentUpdateDto.PaymentId);
                 if (oldPayment == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 PaymentForApplication examRegistrationEntity = mapper.Map<PaymentForApplication>(paymentUpdateDto);
@@ -184,10 +210,14 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
                 mapper.Map(examRegistrationEntity, oldPayment); //Update objekta koji treba da sačuvamo u bazi                
 
                 paymentRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<PaymentDto>(oldPayment));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
