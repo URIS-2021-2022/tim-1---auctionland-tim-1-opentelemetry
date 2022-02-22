@@ -29,21 +29,27 @@ namespace CustomerMicroservice.Controllers
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
         private readonly IAddressService addressService;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
-        public AuthorizedPersonController(IAuthorizedPersonRepository authorizedPersonRepository, IMapper mapper, LinkGenerator linkGenerator, IAddressService addressService)
+        public AuthorizedPersonController(IAuthorizedPersonRepository authorizedPersonRepository, IMapper mapper, LinkGenerator linkGenerator, 
+                                            IAddressService addressService, ILoggerMicroservice loggerMicroservice)
         {
             this.authorizedPersonRepository = authorizedPersonRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
             this.addressService = addressService;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "AuthorizedPerson";
         }
 
         /// <summary>
-        /// Vraca sve kupce
+        /// Vraca sva ovlascena lica 
         /// </summary>
-        /// <returns>Lista kupaca</returns>
-        /// <response code="200">Vraća listu kupaca</response>
-        /// <response code="404">Nije pronađen ni jedan kupac</response>
+        /// <returns>Lista ovlascenih lica</returns>
+        /// <response code="200">Vraća listu ovlascenih lica</response>
+        /// <response code="404">Nije pronađeno ni jedno ovlasceno lice</response>
         [HttpHead]
         [HttpGet]
         [AllowAnonymous]
@@ -51,43 +57,56 @@ namespace CustomerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<AuthorizedPersonDto>> GetAuthorizedPeople()
         {
+            loggerDto.HttpMethodName = "get";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
+
             List<AuthorizedPerson> authorizedPeople = authorizedPersonRepository.GetAuthorizedPeople();
             if (authorizedPeople == null || authorizedPeople.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
 
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<AuthorizedPersonDto>>(authorizedPeople));
         }
 
         /// <summary>
-        /// Vraca jednog kupca sa prosledjenim ID-jem
+        /// Vraca jedno ovlasceno lice sa prosledjenim ID-jem
         /// </summary>
-        /// <param name="customerId">ID kupca</param>
-        /// <returns>Vraca jednog kupca</returns>
-        /// <response code="200">Vraća kupca sa prosledjenim ID-jem</response>
-        /// <response code="404">Nije pronađen ni jedan kupac sa tim ID-jem</response>
+        /// <param name="authorizedPersonId">ID ovlascenog lica</param>
+        /// <returns>Vraca jedno ovlasceno lice</returns>
+        /// <response code="200">Vraća ovlasceno lice sa prosledjenim ID-jem</response>
+        /// <response code="404">Nije pronađeno ni jedno ovlasceno lice sa tim ID-jem</response>
         [HttpGet("{authorizedPersonID}")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<AuthorizedPersonDto>> GetAuthorizedPersonById(Guid authorizedPersonId)
         {
+            loggerDto.HttpMethodName = "GET";
             AuthorizedPerson authorizedPerson = authorizedPersonRepository.GetAuthorizedPersonById(authorizedPersonId);
             if (authorizedPerson == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<AuthorizedPersonDto>(authorizedPerson));
         }
 
         /// <summary>
-        /// Kreira novog kupca
+        /// Kreira novo ovlasceno lice
         /// </summary>
-        /// <param name="customerDto">Model kupca</param>
-        /// <returns>Potvrda o kreiranom kupcu</returns>
-        /// <response code="201">Kupac je uspešno kreiran</response>
-        /// <response code="500">Došlo je do greške na serveru prilikom kreiranja kupca</response>
+        /// <param name="authorizedPersonDto">Model ovlascenog lica</param>
+        /// <returns>Potvrda o kreiranom ovlascenom licu</returns>
+        /// <response code="201">Ovlasceno lice je uspešno kreirano</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom kreiranja ovlascenog lica</response>
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -96,6 +115,7 @@ namespace CustomerMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 authorizedPersonDto.AuthorizedPersonID = Guid.NewGuid();
                 AuthorizedPerson authorizedPerson = mapper.Map<AuthorizedPerson>(authorizedPersonDto);
                 AuthorizedPersonConfirmation confirmation = authorizedPersonRepository.CreateAuthorizedPerson(authorizedPerson);
@@ -114,22 +134,28 @@ namespace CustomerMicroservice.Controllers
                     throw new AddressException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
                 }
 
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
+
                 return Created(location, mapper.Map<AuthorizedPersonConfirmationDto>(confirmation));
             }
-            catch
+            catch (Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
+                Console.WriteLine(ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error");
             }
         }
 
         /// <summary>
-        /// Brisanje kupca sa prosledjenim ID-jem
+        /// Brisanje ovlascenog lica sa prosledjenim ID-jem
         /// </summary>
-        /// <param name="customerID">ID kupca</param>
+        /// <param name="authorizedPersonID">ID ovlascenog lica</param>
         /// <returns></returns>
-        /// <response code="404">Nije pronađen kupac</response>
-        /// <response code="204">Kupac sa prosleđenim id-jem je obrisan</response>
-        /// <response code="500">Došlo je do greške na serveru prilikom brisanja kupca</response>
+        /// <response code="404">Nije pronađeno ovlasceno lice</response>
+        /// <response code="204">Ovlasceno lice sa prosleđenim id-jem je obrisano</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja ovlascenog lica</response>
         [HttpDelete("{authorizedPersonID}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -138,29 +164,36 @@ namespace CustomerMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 AuthorizedPerson authorizedPerson = authorizedPersonRepository.GetAuthorizedPersonById(authorizedPersonID);
                 if (authorizedPerson == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 authorizedPersonRepository.DeleteAuthorizedPerson(authorizedPersonID);
                 authorizedPersonRepository.SaveChanges();
                 return NoContent();
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }
 
         /// <summary>
-        /// Modifikacija postojeceg kupca
+        /// Modifikacija postojeceg ovlascenog lica
         /// </summary>
-        /// <param name="customerDto">Model kupca</param>
-        /// <returns>Potvrda o modifikovanom kupcu</returns>
-        /// <response code="200">Vraća ažuriranog kupca</response>
-        /// <response code="404">Kupac kojeg je potrebno ažurirati nije pronađen</response>
-        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja kupca</response>
+        /// <param name="customerDto">Model ovlascenog lica</param>
+        /// <returns>Potvrda o modifikovanom ovlascenom licu</returns>
+        /// <response code="200">Vraća ažurirano ovlasceno lice</response>
+        /// <response code="404">Ovlasceno lice koje je potrebno ažurirati nije pronađeno</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja ovlascenog lica</response>
         [HttpPut]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -170,17 +203,25 @@ namespace CustomerMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 var oldAuthorizedPerson = authorizedPersonRepository.GetAuthorizedPersonById(authorizedPersonDto.AuthorizedPersonID);
                 if (oldAuthorizedPerson == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 AuthorizedPerson authorizedPerson = mapper.Map<AuthorizedPerson>(authorizedPersonDto);
                 mapper.Map(authorizedPerson, oldAuthorizedPerson);
+                authorizedPersonRepository.SaveChanges();
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<AuthorizedPersonConfirmationDto>(oldAuthorizedPerson));
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update Error");
             }
         }

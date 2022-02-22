@@ -47,8 +47,8 @@ namespace CustomerMicroservice.Entities
                     StartDateBan = DateTime.Parse("2018-10-13T09:00:00"),
                     DurationBan = 3,
                     EndDateBan = DateTime.Parse("2021-10-13T09:00:00"),
-                    AddressId = Guid.Parse("1b411c11-a196-48f7-88bd-67596c3974c1")
-                    //DocumentsID = Guid.Parse("3a411c13-a196-48f7-88bd-57596c3974b3")
+                    AddressId = Guid.Parse("1b411c11-a196-48f7-88bd-67596c3974c1"),
+                    DocumentID = Guid.Parse("3a411c13-a196-48f7-88bd-57596c3974b3")
                 });
 
             modelBuilder.Entity<LegallyPerson>().HasData(
@@ -69,8 +69,8 @@ namespace CustomerMicroservice.Entities
                     StartDateBan = DateTime.Parse("2020-11-13T09:00:00"),
                     DurationBan = 1,
                     EndDateBan = DateTime.Parse("2021-11-13T09:00:00"),
-                    AddressId = Guid.Parse("5b411c15-a196-48f7-88bd-67596c3974c5")
-                    //DocumentsID = Guid.Parse("6a411c13-6196-48f7-88bd-57596c3974b6")
+                    AddressId = Guid.Parse("5b411c15-a196-48f7-88bd-67596c3974c5"),
+                    DocumentID = Guid.Parse("6a411c13-6196-48f7-88bd-57596c3974b6")
                 });
 
             modelBuilder.Entity<AuthorizedPerson>().HasData(

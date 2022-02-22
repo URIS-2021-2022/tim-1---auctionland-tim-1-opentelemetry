@@ -65,6 +65,7 @@ namespace CustomerMicroservice.Models
         /// <summary>
         /// Dokumenati kupca
         /// </summary>
-        //public Guid DocumentsID { get; set; }
+        [ForeignKey("Document")]
+        public Guid DocumentID { get; set; }
     }
 }

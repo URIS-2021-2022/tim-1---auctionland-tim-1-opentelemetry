@@ -59,8 +59,9 @@ namespace CustomerMicroservice.Models
         public Guid AddressId { get; set; }
 
         /// <summary>
-        /// Dokumenati kupca
+        /// Dokumenti kupca
         /// </summary>
-        //public Guid DocumentsID { get; set; }
+        [ForeignKey("Document")]
+        public Guid DocumentID { get; set; }
     }
 }
