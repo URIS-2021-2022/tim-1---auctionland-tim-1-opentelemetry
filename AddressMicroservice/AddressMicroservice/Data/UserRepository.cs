@@ -16,7 +16,7 @@ namespace AddressMicroservice.Data
         {
             FillData();
         }
-        private void FillData()
+        private static void FillData()
         {
             var user1 = HashPassword("testpassword");
 
