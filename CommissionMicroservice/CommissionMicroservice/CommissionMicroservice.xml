@@ -188,6 +188,11 @@
             Clanovi komisije
             </summary>
         </member>
+        <member name="P:CommissionMicroservice.Entities.Commission.UserId">
+            <summary>
+            ID korisnika
+            </summary>
+        </member>
         <member name="P:CommissionMicroservice.Entities.CommissionConfirmation.CommissionID">
             <summary>
             ID komisije
@@ -201,6 +206,11 @@
         <member name="P:CommissionMicroservice.Entities.CommissionConfirmation.MembersOfCommission">
             <summary>
             Clanovi komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Entities.CommissionConfirmation.UserId">
+            <summary>
+            ID korisnika
             </summary>
         </member>
         <member name="P:CommissionMicroservice.Entities.Member.MemberID">
@@ -278,6 +288,11 @@
             Clanovi komisije
             </summary>
         </member>
+        <member name="P:CommissionMicroservice.Models.CommissionConfirmationDto.UserId">
+            <summary>
+            ID korisnika
+            </summary>
+        </member>
         <member name="T:CommissionMicroservice.Models.CommissionCreationDto">
             <summary>
             DTO za kreiranje komisije
@@ -301,6 +316,11 @@
         <member name="P:CommissionMicroservice.Models.CommissionCreationDto.MembersOfCommission">
             <summary>
             Clanovi komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionCreationDto.UserId">
+            <summary>
+            ID korisnika
             </summary>
         </member>
         <member name="T:CommissionMicroservice.Models.CommissionDto">
@@ -328,6 +348,11 @@
             Clanovi komisije
             </summary>
         </member>
+        <member name="P:CommissionMicroservice.Models.CommissionDto.UserId">
+            <summary>
+            ID korisnika
+            </summary>
+        </member>
         <member name="T:CommissionMicroservice.Models.CommissionUpdateDto">
             <summary>
             DTO za ažuriranje komisije
@@ -351,6 +376,11 @@
         <member name="P:CommissionMicroservice.Models.CommissionUpdateDto.MembersOfCommission">
             <summary>
             Clanovi komisije
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.CommissionUpdateDto.UserId">
+            <summary>
+            ID korisnika
             </summary>
         </member>
         <member name="T:CommissionMicroservice.Models.MemberConfirmationDto">
@@ -496,6 +526,11 @@
         <member name="T:CommissionMicroservice.Models.UserDto">
             <summary>
             DTO za korisnika koji moze pristupiti komisiji 
+            </summary>
+        </member>
+        <member name="P:CommissionMicroservice.Models.UserDto.UserId">
+            <summary>
+            ID korisnika
             </summary>
         </member>
         <member name="P:CommissionMicroservice.Models.UserDto.FirstName">

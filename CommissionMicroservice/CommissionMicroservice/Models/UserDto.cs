@@ -11,6 +11,10 @@ namespace CommissionMicroservice.Models
     public class UserDto
     {
         /// <summary>
+        /// ID korisnika
+        /// </summary>
+        public Guid UserId { get; set; }
+        /// <summary>
         /// Ime korisnika
         /// </summary>
         public string FirstName { get; set; }

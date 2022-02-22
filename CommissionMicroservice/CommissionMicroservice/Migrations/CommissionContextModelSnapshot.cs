@@ -29,6 +29,9 @@ namespace CommissionMicroservice.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("CommissionID");
 
                     b.ToTable("Commissions");
@@ -37,12 +40,14 @@ namespace CommissionMicroservice.Migrations
                         new
                         {
                             CommissionID = new Guid("8a411c13-a195-48f7-8dbd-67596c3974c0"),
-                            NameCommission = "Prva komisija"
+                            NameCommission = "Prva komisija",
+                            UserId = new Guid("7a411c13-a295-48f7-8dbd-68596c3974c0")
                         },
                         new
                         {
                             CommissionID = new Guid("8a211c13-a195-48f7-8dbd-67596c3974c0"),
-                            NameCommission = "Druga komisija"
+                            NameCommission = "Druga komisija",
+                            UserId = new Guid("5a411c13-a295-44f7-8dbd-68596c3974c1")
                         });
                 });
 
