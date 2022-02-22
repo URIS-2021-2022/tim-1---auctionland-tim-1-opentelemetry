@@ -1,0 +1,600 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/complaint",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44365
+                }
+            ],
+            "UpstreamPathTemplate": "/complaint",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/complaint/{complaintId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44365
+                }
+            ],
+            "UpstreamPathTemplate": "/complaint/{complaintId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/addresses",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44348
+                }
+            ],
+            "UpstreamPathTemplate": "/addresses",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/addresses/{addressID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44348
+                }
+            ],
+            "UpstreamPathTemplate": "/addresses/{addressId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/ads",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44372
+                }
+            ],
+            "UpstreamPathTemplate": "/ads",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/ads/{adId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44372
+                }
+            ],
+            "UpstreamPathTemplate": "/ads/{adId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/document",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44312
+                }
+            ],
+            "UpstreamPathTemplate": "/document",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/document/{documentID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44312
+                }
+            ],
+            "UpstreamPathTemplate": "/document/{documentID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/document/leaseAgreement",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44312
+                }
+            ],
+            "UpstreamPathTemplate": "/document/leaseAgreement",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/document/leaseAgreement/{leaseId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44312
+                }
+            ],
+            "UpstreamPathTemplate": "/document/leaseAgreement/{leaseId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/document/listOfDocuments",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44312
+                }
+            ],
+            "UpstreamPathTemplate": "/document/listOfDocuments",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/document/listOfDocuments/{listId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44312
+                }
+            ],
+            "UpstreamPathTemplate": "/document/listOfDocuments/{listId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/auctions",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                }
+            ],
+            "UpstreamPathTemplate": "/auctions",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/auctions/{auctionId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                }
+            ],
+            "UpstreamPathTemplate": "/auctions/{auctionId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/publicBiddings",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                }
+            ],
+            "UpstreamPathTemplate": "/publicBiddings",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/publicBiddings/{publicBiddingId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                }
+            ],
+            "UpstreamPathTemplate": "/publicBiddings/{publicBiddingId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/publicBiddingTypes",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                }
+            ],
+            "UpstreamPathTemplate": "/publicBiddingTypes",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/publicBiddingTypes/{publicBiddingTypeId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/publicBiddingTypes/{publicBiddingTypeId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/stages",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                }
+            ],
+            "UpstreamPathTemplate": "/stages",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/stages/{stageId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/stages/{stageId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/statuses",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                }
+            ],
+            "UpstreamPathTemplate": "/statuses",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/statuses/{statusId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44362
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/statuses/{statusId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/application",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44316
+                }
+            ],
+            "UpstreamPathTemplate": "/application",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/application/{applicationId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44316
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/application/{applicationId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/application/payment",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44316
+                }
+            ],
+            "UpstreamPathTemplate": "/application/payment",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/application/payment/{paymentId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44316
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/application/payment/{paymentId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/users",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44381
+                }
+            ],
+            "UpstreamPathTemplate": "/users",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/users/{userId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44381
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/users/{userId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/userTypes",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44381
+                }
+            ],
+            "UpstreamPathTemplate": "/userTypes",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/userTypes/{userTypeId}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44381
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/userTypes/{userTypeId}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/parcels",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44343
+                }
+            ],
+            "UpstreamPathTemplate": "/parcels",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/parcels/{parcelID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44343
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/parcels/{parcelID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/parcels/partofparcels",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44343
+                }
+            ],
+            "UpstreamPathTemplate": "/parcels/partofparcels",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/parcels/partofparcels/{parcelID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44343
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/parcels/partofparcels/{parcelID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/parcels/partofparcels",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44343
+                }
+            ],
+            "UpstreamPathTemplate": "/parcels/partofparcels",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/parcels/partofparcels/{parcelID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44343
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/parcels/partofparcels/{parcelID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/commissions",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                }
+            ],
+            "UpstreamPathTemplate": "/commissions",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/commissions/{commissionID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/commissions/{commissionID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/customers",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                }
+            ],
+            "UpstreamPathTemplate": "/customers",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/customers/{customerID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/customers/{customerID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/legallyPeople",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                }
+            ],
+            "UpstreamPathTemplate": "/legallyPeople",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/legallyPeople/{legallyPersonID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/legallyPeople/{legallyPersonID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/physicalPeople",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                }
+            ],
+            "UpstreamPathTemplate": "/physicalPeople",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/physicalPeople/{physicalPersonID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/physicalPeople/{physicalPersonID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/authorizedPeople",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                }
+            ],
+            "UpstreamPathTemplate": "/authorizedPeople",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/authorizedPeople/{authorizedPersonID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/authorizedPeople/{authorizedPersonID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/authorizedPersonCustomers",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                }
+            ],
+            "UpstreamPathTemplate": "/authorizedPersonCustomers",
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/authorizedPersonCustomers/{authorizedPersonCustomerID}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                },
+                "publicBiddingTypes"
+            ],
+            "UpstreamPathTemplate": "/authorizedPersonCustomers/{authorizedPersonCustomerID}",
+            "UpstreamHttpMethod": [ "GET", "DELETE" ]
+        }
+    ],
+    "GlobalConfiguration": {
+
+        "BaseUrl": "https://localhost:5021"
+    }                      
+}

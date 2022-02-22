@@ -7,6 +7,7 @@ using AutoMapper;
 using ComplaintMicroservice.Data;
 using ComplaintMicroservice.Entities;
 using ComplaintMicroservice.Models;
+using ComplaintMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,12 +24,19 @@ namespace ComplaintMicroservice.Controllers
         private readonly IComplaintRepository complaintRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
+        private readonly ILoggerService loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
-        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService loggerMicroservice)
         {
             this.complaintRepository = complaintRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto
+            {
+                Service = "COMPLAINT"
+            };
         }
 
         /// <summary>
@@ -45,11 +53,18 @@ namespace ComplaintMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<ComplaintDto>> GetComplaints(string type, string status)
         {
+            loggerDto.HttpMethodName = "GET";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             var complaints = complaintRepository.GetComplaints(type, status);
             if(complaints == null || complaints.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<ComplaintDto>>(complaints));
         }
 
@@ -65,12 +80,17 @@ namespace ComplaintMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ComplaintDto> GetComplaint(Guid complaintId)
         {
-                Complaint model = complaintRepository.GetComplaintById(complaintId);
-                if (model == null)
-                {
-                    return NotFound();
-                }
-                return Ok(mapper.Map<ComplaintDto>(model));
+            loggerDto.HttpMethodName = "GET";
+            Complaint model = complaintRepository.GetComplaintById(complaintId);
+            if (model == null)
+            {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
+                return NotFound();
+            }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
+            return Ok(mapper.Map<ComplaintDto>(model));
         }
 
         /// <summary>
@@ -89,17 +109,24 @@ namespace ComplaintMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 Complaint complaintModel = complaintRepository.GetComplaintById(complaintId);
                 if (complaintModel == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 complaintRepository.DeleteComplaint(complaintId);
                 complaintRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }
@@ -135,15 +162,20 @@ namespace ComplaintMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 Complaint complaint = mapper.Map<Complaint>(complaintCreationDto);
                 if (Validate(complaint))
                 {
                     ComplaintConfirmation confirmation = complaintRepository.CreateComplaint(complaint);
                     complaintRepository.SaveChanges();
                     string location = linkGenerator.GetPathByAction("GetComplaint", "Complaint", new { complaintId = confirmation.ComplaintId });
+                    loggerDto.Response = "201 CREATED";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return Created(location, mapper.Map<ComplaintConfirmationDto>(confirmation));
                 } else
                 {
+                    loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return StatusCode(StatusCodes.Status400BadRequest, "Nije moguće da datum donošenja rešenja na osnovu žalbe bude pre datuma podnosenja žalbe!");
                 }
             }
@@ -168,9 +200,12 @@ namespace ComplaintMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 Complaint oldComplaint = complaintRepository.GetComplaintById(newComplaint.ComplaintId);
                 if (oldComplaint == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 Complaint complaintEntity = mapper.Map<Complaint>(newComplaint);
@@ -178,6 +213,8 @@ namespace ComplaintMicroservice.Controllers
                 {
                     mapper.Map(complaintEntity, oldComplaint);
                     complaintRepository.SaveChanges();
+                    loggerDto.Response = "200 OK";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return Ok(mapper.Map<ComplaintConfirmationDto>(oldComplaint));
                 }else
                 {
@@ -186,6 +223,8 @@ namespace ComplaintMicroservice.Controllers
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error!");
             }
         }
