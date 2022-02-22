@@ -1,6 +1,5 @@
 ﻿using DocumentMsProject.Data;
 using DocumentMsProject.Entities;
-using DocumentMsProject.Helpers;
 using DocumentMsProject.ServiceCalls;
 using DocumentMsProject.ServiceCalls.CommissionMicroservice;
 using DocumentMsProject.ServiceCalls.CustomerMicroservice;
@@ -111,7 +110,6 @@ namespace DocumentMsProject
             services.AddScoped<IListOfDocumentsRepository, ListOfDocumentsRepository>();
             services.AddScoped<ILeaseAgreementRepository, LeaseAgreementRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
-            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddScoped<ICommissionMicroservice, CommissionMicroservice>();
             services.AddScoped<ICustomerMicroservice, CustomerMicroservice>();

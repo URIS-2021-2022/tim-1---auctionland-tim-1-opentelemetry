@@ -20,7 +20,6 @@ namespace DocumentMsProject.Controllers
     [ApiController]
     [Route("api/document/leaseAgreement")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
     public class LeaseAgreementController : ControllerBase
     {
         private readonly ILeaseAgreementRepository agreementRepository;

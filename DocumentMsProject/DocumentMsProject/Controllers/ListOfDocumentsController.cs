@@ -17,7 +17,6 @@ namespace DocumentMsProject.Controllers
     [ApiController]
     [Route("api/document/listOfDocuments")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
     public class ListOfDocumentsController : ControllerBase
     {
         private readonly IListOfDocumentsRepository documentsRepository;

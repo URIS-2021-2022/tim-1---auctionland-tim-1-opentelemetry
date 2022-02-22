@@ -4,13 +4,6 @@
         <name>DocumentMsProject</name>
     </assembly>
     <members>
-        <member name="M:DocumentMsProject.Controllers.AuthenticationController.Authenticate(DocumentMsProject.Models.Principal)">
-            <summary>
-            Sluzi za autentifikaciju korisnika
-            </summary>
-            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
-            <returns></returns>
-        </member>
         <member name="M:DocumentMsProject.Controllers.DocumentController.GetAllDocuments">
             <summary>
             Vraća listu svih dokumenata u vezi sa javnim nadmetanjem
@@ -474,20 +467,6 @@
             <summary>
             Salt
             </summary>
-        </member>
-        <member name="M:DocumentMsProject.Helpers.AuthenticationHelper.AuthenticatePrincipal(DocumentMsProject.Models.Principal)">
-            <summary>
-            Vrši autentifikaciju principala
-            </summary>
-            <param name="principal">Principal za autentifikaciju</param>
-            <returns></returns>
-        </member>
-        <member name="M:DocumentMsProject.Helpers.AuthenticationHelper.GenerateJwt(DocumentMsProject.Models.Principal)">
-            <summary>
-            Generiše novi token za autentifikovanog principala
-            </summary>
-            <param name="principal">Autentifikovani principal</param>
-            <returns></returns>
         </member>
         <member name="T:DocumentMsProject.Models.CommissionDto">
             <summary>
