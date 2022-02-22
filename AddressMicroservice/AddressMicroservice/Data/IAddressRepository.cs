@@ -8,7 +8,7 @@ namespace AddressMicroservice.Data
 {
     public interface IAddressRepository
     {
-        List<Address> GetAllAddresses();
+        List<Address> GetAllAddresses(string countryName = null, string cityName = null);
 
         Address GetAddressById(Guid addressID);
 

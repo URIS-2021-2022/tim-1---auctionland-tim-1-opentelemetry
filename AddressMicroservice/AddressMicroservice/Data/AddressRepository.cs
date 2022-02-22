@@ -39,9 +39,10 @@ namespace AddressMicroservice.Data.Implementation
             return context.Addresses.FirstOrDefault(e => e.AddressID == addressID);
         }
 
-        public List<Address> GetAllAddresses()
+        public List<Address> GetAllAddresses(string countryName = null, string cityName = null)
         {
-            return context.Addresses.ToList();
+            return context.Addresses.Where(e => (countryName == null || e.CountryName == countryName) &&
+                                                        (cityName == null || e.CityName == cityName)).ToList();
         }
 
         public void UpdateAddress(Address address)
