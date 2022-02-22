@@ -28,10 +28,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ServiceCalls\CustomerMicroservice\" />
-    <Folder Include="ServiceCalls\ComissionMicroservice\" />
-    <Folder Include="ServiceCalls\PublicBiddingMicroservice\" />
-  </ItemGroup>
-
 </Project>
