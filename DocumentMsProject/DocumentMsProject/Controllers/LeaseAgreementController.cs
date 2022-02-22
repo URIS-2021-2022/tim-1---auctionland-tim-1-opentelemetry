@@ -23,10 +23,10 @@ namespace DocumentMsProject.Controllers
         private readonly ILeaseAgreementRepository agreementRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
-        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly IPublicBiddingMicroservice loggerMicroservice;
         private readonly LoggerDto loggerDto;
 
-        public LeaseAgreementController(ILeaseAgreementRepository agreementRepository, IMapper mapper, LinkGenerator linkGenerator, ILoggerMicroservice loggerMicroservice)
+        public LeaseAgreementController(ILeaseAgreementRepository agreementRepository, IMapper mapper, LinkGenerator linkGenerator, IPublicBiddingMicroservice loggerMicroservice)
         {
             this.agreementRepository = agreementRepository;
             this.mapper = mapper;
