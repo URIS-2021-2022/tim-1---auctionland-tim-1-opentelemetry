@@ -10,7 +10,7 @@ using UserMicroservice.Entities;
 namespace UserMicroservice.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20220201204613_InitialCreate")]
+    [Migration("20220222144507_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,9 @@ namespace UserMicroservice.Migrations
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DocumentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
@@ -58,6 +61,7 @@ namespace UserMicroservice.Migrations
                         new
                         {
                             UserId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                            DocumentId = new Guid("8b44e760-3c55-4ae4-8d1b-c4ea053672ff"),
                             Email = "petrović@gmail.com",
                             FirstName = "Petar",
                             LastName = "Petrović",
