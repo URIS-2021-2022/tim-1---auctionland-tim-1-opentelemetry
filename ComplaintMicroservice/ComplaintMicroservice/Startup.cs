@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ComplaintMicroservice.Data;
 using ComplaintMicroservice.Entities;
-using ComplaintMicroservice.Helpers;
 using ComplaintMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -80,25 +79,11 @@ namespace ComplaintMicroservice
                 };
             });
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
-            });
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());          
 
-            services.AddScoped<IComplaintRepository, ComplaintRepository>();
-            services.AddSingleton<IUserRepository, UserMockRepository>();
-            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
+            services.AddScoped<IComplaintRepository, ComplaintRepository>();           
             services.AddScoped<ILoggerService, LoggerService>();
+            services.AddScoped<IPublicBiddingService, PublicBiddingService>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("ComplaintOpenApiSpecification",
@@ -117,32 +102,7 @@ namespace ComplaintMicroservice
 
                 //Pravimo putanju do XML fajla sa komentarima
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
-                setupAction.IncludeXmlComments(xmlCommentsPath);
-
-                setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Molim Vas unesite vaš token",
-                    Name = "Autorizacija korisnika",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Scheme = "bearer"
-                });
-
-                setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                    }
-                });
+                setupAction.IncludeXmlComments(xmlCommentsPath);                
             });
 
             services.AddDbContextPool<ComplaintContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ComplaintDB")));
@@ -157,10 +117,10 @@ namespace ComplaintMicroservice
             }
 
             app.UseHttpsRedirection();
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
             app.UseSwagger(); // da se prilikom pokretanja projekta pokrene i swagger dokumentacija
 
             app.UseSwaggerUI(setupAction =>

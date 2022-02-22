@@ -61,5 +61,7 @@ namespace ComplaintMicroservice.Models
         /// </summary>
         public string ComplaintStatus { get; set; }
         #endregion
+
+        public PublicBiddingDto PublicBidding { get; set; }
     }
 }

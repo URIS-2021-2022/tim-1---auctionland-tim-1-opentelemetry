@@ -18,21 +18,30 @@ namespace ComplaintMicroservice.ServiceCalls
             this.configuration = configuration;
         }
 
-        public bool GetPublicBidding(PublicBiddingDto publicBiddingDto)
+        public async Task<PublicBiddingDto> GetPublicBiddingById(Guid publicBiddingId)
         {
-            using HttpClient client = new();
-            var x = configuration["Services:PublicBiddingService"];
-            Uri url = new($"{ configuration["Services:PublicBiddingService"] }api/publicBiddings");
-
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(publicBiddingDto));
-            content.Headers.ContentType.MediaType = "application/json";
-
-            HttpResponseMessage response = client.PostAsync(url, content).Result;
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                using var httpClient = new HttpClient();
+                Uri url = new($"{ configuration["Services:PublicBiddingService"] }api/publicBiddings/" + publicBiddingId);
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Add("Accept", "application/json");
+                var response = await httpClient.SendAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    if (string.IsNullOrEmpty(content))
+                    {
+                        return default;
+                    }
+                    return JsonConvert.DeserializeObject<PublicBiddingDto>(content);
+                }
+                return default;
             }
-            return false;
+            catch
+            {
+                return default;
+            }
         }
     }
 }

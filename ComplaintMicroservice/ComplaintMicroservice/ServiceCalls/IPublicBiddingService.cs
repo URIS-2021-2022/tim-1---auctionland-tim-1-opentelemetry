@@ -8,6 +8,6 @@ namespace ComplaintMicroservice.ServiceCalls
 {
     public interface IPublicBiddingService
     {
-        public bool GetPublicBidding(PublicBiddingDto publicBiddingDto);
+        public Task<PublicBiddingDto> GetPublicBiddingById(Guid publicBiddingId);
     }
 }
