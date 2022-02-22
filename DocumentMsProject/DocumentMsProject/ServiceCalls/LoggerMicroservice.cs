@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DocumentMsProject.ServiceCalls
 {
-    public class LoggerMicroservice : IPublicBiddingMicroservice
+    public class LoggerMicroservice : ILoggerMicroservice
     {
         private readonly IConfiguration configuration;
 

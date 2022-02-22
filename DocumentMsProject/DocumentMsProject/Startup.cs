@@ -4,6 +4,7 @@ using DocumentMsProject.Helpers;
 using DocumentMsProject.ServiceCalls;
 using DocumentMsProject.ServiceCalls.CommissionMicroservice;
 using DocumentMsProject.ServiceCalls.CustomerMicroservice;
+using DocumentMsProject.ServiceCalls.PublicBiddingMicroservice;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -111,10 +112,10 @@ namespace DocumentMsProject
             services.AddScoped<ILeaseAgreementRepository, LeaseAgreementRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
-            services.AddScoped<IPublicBiddingMicroservice, LoggerMicroservice>();
+            services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddScoped<ICommissionMicroservice, CommissionMicroservice>();
             services.AddScoped<ICustomerMicroservice, CustomerMicroservice>();
-            services.AddScoped<IPublicBiddingMicroservice, IPublicBiddingMicroservice>();
+            services.AddScoped<IPublicBiddingMicroservice, PublicBiddingMicroservice>();
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("DocumentProjectOpenApiSpecification",

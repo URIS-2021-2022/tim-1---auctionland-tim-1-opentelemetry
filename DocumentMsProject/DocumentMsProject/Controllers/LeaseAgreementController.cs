@@ -3,6 +3,9 @@ using DocumentMsProject.Data;
 using DocumentMsProject.Entities;
 using DocumentMsProject.Models;
 using DocumentMsProject.ServiceCalls;
+using DocumentMsProject.ServiceCalls.CommissionMicroservice;
+using DocumentMsProject.ServiceCalls.CustomerMicroservice;
+using DocumentMsProject.ServiceCalls.PublicBiddingMicroservice;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,15 +26,21 @@ namespace DocumentMsProject.Controllers
         private readonly ILeaseAgreementRepository agreementRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
-        private readonly IPublicBiddingMicroservice loggerMicroservice;
+        private readonly IPublicBiddingMicroservice publicBiddingMicroservice;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly ICustomerMicroservice customerMicroservice;
+        private readonly ICommissionMicroservice commissionMicroservice;
         private readonly LoggerDto loggerDto;
 
-        public LeaseAgreementController(ILeaseAgreementRepository agreementRepository, IMapper mapper, LinkGenerator linkGenerator, IPublicBiddingMicroservice loggerMicroservice)
+        public LeaseAgreementController(ILeaseAgreementRepository agreementRepository, IMapper mapper, LinkGenerator linkGenerator, ILoggerMicroservice loggerMicroservice, IPublicBiddingMicroservice publicBiddingMicroservice, ICustomerMicroservice customerMicroservice, ICommissionMicroservice commissionMicroservice)
         {
             this.agreementRepository = agreementRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
             this.loggerMicroservice = loggerMicroservice;
+            this.publicBiddingMicroservice = publicBiddingMicroservice;
+            this.customerMicroservice = customerMicroservice;
+            this.commissionMicroservice = commissionMicroservice;
             loggerDto = new LoggerDto();
             loggerDto.Service = "LEASE AGREEMENT";
         }
