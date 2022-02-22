@@ -1,4 +1,5 @@
-﻿using ParcelMicroservice.Entities;
+﻿using AutoMapper;
+using ParcelMicroservice.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,86 +9,46 @@ namespace ParcelMicroservice.Data
 {
     public class PartOfParcelRepository : IPartOfParcelRepository
     {
-        public static List<PartOfParcel> PartOfParcels { get; set; } = new List<PartOfParcel>();
-        public PartOfParcelRepository()
-        {
-            FillData();
-        }
+        private readonly ParcelContext parcelContext;
+        private readonly IMapper mapper;
 
-        private void FillData()
+        public PartOfParcelRepository(ParcelContext parcelContext, IMapper mapper)
         {
-            PartOfParcels.AddRange(new List<PartOfParcel> {
-                new PartOfParcel
-                {
-                    ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"),
-                    PartOfParcelID = Guid.Parse("67c31d49-b189-4de5-a6e2-b9b5557047a9"),
-                    SurfaceAreaPOP = 1000,
-                    ClassID = Guid.Parse("61847780-396a-42a7-8e04-941e0d4eddf9"),
-                    ClassLandLabel = "I"
-                },
-                new PartOfParcel
-                {
-                    ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"),
-                    PartOfParcelID = Guid.Parse("17321524-7822-4daa-8134-a2ec4bed98e0"),
-                    SurfaceAreaPOP = 500,
-                    ClassID = Guid.Parse("89e2bdc2-7153-463a-8c9f-37bfec240431"),
-                    ClassLandLabel = "II"
-                }
-            });
-        }
-
-        public List<PartOfParcel> GetPartOfParcels()
-        {
-            var list = (from p in PartOfParcels
-                        select p);
-            var bar = list.GroupBy(x => x.PartOfParcelID).Select(x => x.First()).ToList();
-            return bar;
-
-        }
-
-        public PartOfParcel GetPartOfParcelById(Guid partOfParcelID)
-        {
-            return PartOfParcels.FirstOrDefault(e => e.PartOfParcelID == partOfParcelID);
+            this.parcelContext = parcelContext;
+            this.mapper = mapper;
         }
 
         public PartOfParcelConfirmation CreatePartOfParcel(PartOfParcel partOfParcel)
         {
-            partOfParcel.PartOfParcelID = Guid.NewGuid(); //generise se kljuc novog dela parcele
-            partOfParcel.ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"); //testiranje 
-            PartOfParcels.Add(partOfParcel); //dodaje se nova parcela u listu parcela
-            PartOfParcel model = GetPartOfParcelById(partOfParcel.PartOfParcelID); //instancira se parcela preko metode GetParcelById
-
-            return new PartOfParcelConfirmation //vraca se model potvrde 
-            {
-                ParcelID = model.ParcelID,
-                PartOfParcelID = model.PartOfParcelID,
-                SurfaceAreaPOP = model.SurfaceAreaPOP,
-                ClassLandLabel = model.ClassLandLabel
-            };
+            var createdEntity = parcelContext.Add(partOfParcel);
+            return mapper.Map<PartOfParcelConfirmation>(createdEntity.Entity);
         }
 
-        public PartOfParcelConfirmation UpdatePartOfParcel(PartOfParcel partOfParcel)
+        public void DeletePartOfParcel(Guid parcelID)
         {
-            PartOfParcel model = GetPartOfParcelById(partOfParcel.PartOfParcelID); //instancira se parcela preko metode GetParcelById
-
-            model.ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f");
-            model.PartOfParcelID = partOfParcel.PartOfParcelID;
-            model.SurfaceAreaPOP = partOfParcel.SurfaceAreaPOP;
-            model.ClassID = partOfParcel.ClassID;
-            model.ClassLandLabel = partOfParcel.ClassLandLabel;
-
-            return new PartOfParcelConfirmation
-            {
-                ParcelID = model.ParcelID,
-                PartOfParcelID = model.PartOfParcelID,
-                SurfaceAreaPOP = model.SurfaceAreaPOP,
-                ClassLandLabel = model.ClassLandLabel
-            };
+            var parcel = GetPartOfParcelById(parcelID);
+            parcelContext.Remove(parcel);
         }
 
-        public void DeletePartOfParcel(Guid partOfParcelID)
+        public PartOfParcel GetPartOfParcelById(Guid partOfParcelId)
         {
-            PartOfParcels.Remove(PartOfParcels.FirstOrDefault(e => e.PartOfParcelID == partOfParcelID));
+            return parcelContext.PartOfParcels.FirstOrDefault(e => e.PartOfParcelID == partOfParcelId);
+        }
+
+        public List<PartOfParcel> GetPartOfParcels()
+        {
+            return parcelContext.PartOfParcels.ToList();
+        }
+
+        public bool SaveChanges()
+        {
+            return parcelContext.SaveChanges() > 0;
+        }
+
+        public void UpdatePartOfParcel(PartOfParcel parcel)
+        {
+            //Nije potrebna implementacija jer EF core prati entitet koji smo izvukli iz baze
+            //i kada promenimo taj objekat i odradimo SaveChanges sve izmene će biti perzistirane
         }
     }
 }

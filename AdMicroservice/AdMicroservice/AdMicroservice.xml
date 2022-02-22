@@ -382,7 +382,7 @@
             <summary>
             Kreiranje i inicijalno punjenje modela 
             </summary>
-            <param name="builder"></param>
+            <param name="modelBuilder"></param>
         </member>
         <member name="T:AdMicroservice.Entities.User">
             <summary>
