@@ -17,7 +17,6 @@ namespace DocumentMsProject.Controllers
     [ApiController]
     [Route("api/document")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
     public class DocumentController : ControllerBase
     {
         private readonly IDocumentRepository documentRepository;

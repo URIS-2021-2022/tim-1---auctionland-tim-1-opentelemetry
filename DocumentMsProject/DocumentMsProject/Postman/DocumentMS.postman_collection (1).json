@@ -404,6 +404,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ana.zuber\",\r\n    \"password\": \"testpassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/authenticate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"authenticate"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -411,7 +439,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU0MDMxNzEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzEyIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMTIifQ.73BeqNJUKBTq8kC4cF6lXxga5IonNEIRo3NnkdMUSvM",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU1ODExNTksImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzYyIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzNjIifQ.PMjHzxCsdtfstUxZ5VVr-2uWWMz5xQI7tONHYIosDkM",
 				"type": "string"
 			}
 		]

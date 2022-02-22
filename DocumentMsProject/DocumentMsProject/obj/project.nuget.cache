@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xyKeRYdP2E8rm29Vkfkgw6Bgm05OZLDVyhOs9Y/e6w8HsW/RF/oKHD8JV2wVmkS1w9etLTjxF0hlbcSp/tcDew==",
+  "dgSpecHash": "mjekuStNfY8V5qUkhNCvl8VUK835JRk5G0mHzuDaEP21z4VaIGas0SxdbRISKBamK8qhQoOoXzJq6F/lW7YGzA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Zeljana\\Desktop\\tim-1---auctionland-tim-1-opentelemetry\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj",
+  "projectFilePath": "C:\\Users\\Zeljana\\Desktop\\URISProjekat\\tim-1---auctionland-tim-1-opentelemetry\\DocumentMsProject\\DocumentMsProject\\DocumentMsProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Zeljana\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Zeljana\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
