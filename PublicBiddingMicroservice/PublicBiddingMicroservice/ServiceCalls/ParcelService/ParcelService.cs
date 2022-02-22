@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using PublicBiddingMicroservice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,21 +18,30 @@ namespace PublicBiddingMicroservice.ServiceCalls.ParcelService
             this.configuration = configuration;
         }
 
-        public bool GetParcelById(Guid parcelId)
+        public async Task<ParcelDto> GetParcel(Guid parcelId)
         {
-            using HttpClient client = new();
-            var x = configuration["Services:ParcelService"];
-            Uri url = new($"{ configuration["Services:AddressService"] }api/addresses");
-
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(parcelId));
-            content.Headers.ContentType.MediaType = "application/json";
-
-            HttpResponseMessage response = client.PostAsync(url, content).Result;
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                using var httpClient = new HttpClient();
+                Uri url = new Uri($"{ configuration["Services:ParcelService"] }api/parcels/" + parcelId);
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Add("Accept", "application/json");
+                var response = await httpClient.SendAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    if (string.IsNullOrEmpty(content))
+                    {
+                        return default;
+                    }
+                    return JsonConvert.DeserializeObject<ParcelDto>(content);
+                }
+                return default;
             }
-            return false;
+            catch
+            {
+                return default;
+            }
         }
     }
 }

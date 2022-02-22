@@ -10,7 +10,7 @@ using PublicBiddingMicroservice.Entities;
 namespace PublicBiddingMicroservice.Migrations
 {
     [DbContext(typeof(PublicBiddingContext))]
-    [Migration("20220222113550_InitialCreate")]
+    [Migration("20220222202938_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,7 +70,7 @@ namespace PublicBiddingMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AddressId")
+                    b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("AuctionedPrice")
@@ -96,6 +96,9 @@ namespace PublicBiddingMicroservice.Migrations
 
                     b.Property<int>("NumberOfParticipants")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("ParcelId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("PublicBiddingTypeId")
                         .HasColumnType("uniqueidentifier");
@@ -135,6 +138,7 @@ namespace PublicBiddingMicroservice.Migrations
                             Exclude = true,
                             LeasePeriod = 1,
                             NumberOfParticipants = 12,
+                            ParcelId = new Guid("866f2352-771f-4405-a9b5-9878b0fbff0f"),
                             PublicBiddingTypeId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             StageId = new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
                             StartTime = new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),

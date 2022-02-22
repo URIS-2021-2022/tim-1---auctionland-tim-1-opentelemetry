@@ -94,6 +94,13 @@ namespace PublicBiddingMicroservice.Controllers
         /// <summary>
         /// Kreira jednu etapu.
         /// </summary>
+        /// <remarks>
+        /// Primer zahteva za kreiranje novoe etape \
+        /// POST /api/stages \
+        /// {
+        ///  "date": "2022-02-16T15:30:46.232Z"
+        /// }
+        /// </remarks>
         /// <response code="200">Vraća kreiranu etapu</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranje etape</response>
         [HttpPost]

@@ -24,6 +24,18 @@
             <summary>
             Kreira jednu licitaciju.
             </summary>
+            <remarks>
+            Primer zahteva za kreiranje licitacije \
+            POST /api/auctions \
+            {
+            "number": 1,
+            "year": 2021,
+            "date": "2020-11-15T09:00:00",
+            "priceIncrease": 10,
+            "applicationDeadline": "2020-11-15T09:00:00",
+            "stageId": "1c7ea607-8ddb-493a-87fa-4bf5893e965b"
+            }
+            </remarks>
             <response code="200">Vraća kreiranu licitaciju</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranje licitacije</response>
         </member>
@@ -81,6 +93,27 @@
             <summary>
             Kreira jedno javno nadmetanje.
             </summary>
+            <remarks>
+            Primer zahteva za kreiranje novog javnog nadmetanja \
+            POST /api/publicBiddings \
+            {
+            "date": "2020-11-15T09:00:00",
+            "startTime": "2020-11-15T09:00:00",
+            "endTime": "2020-11-15T12:00:00",
+            "startingPricePerHe": 10,
+            "exclude": true,
+            "auctionedPrice": 139,
+            "leasePeriod": 1,
+            "numberOfParticipants": 12,
+            "depositReplenishment": 13,
+            "circle": 1,
+            "statusId": "1c7ea607-8ddb-493a-87fa-4bf5893e965b",
+            "stageId": "1c7ea607-8ddb-493a-87fa-4bf5893e965b",
+            "publicBiddingTypeId": "1c7ea607-8ddb-493a-87fa-4bf5893e965b",
+            "addressId": "e5fd4e92-1938-4bd8-fbb3-08d9f617ed32"
+            "parcelId": "866f2352-771f-4405-a9b5-9878b0fbff0f"
+            }
+            </remarks>
             <response code="200">Vraća kreirano javno nadmetanje</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranja javnog nadmetanja</response>
         </member>
@@ -130,6 +163,13 @@
             <summary>
             Kreira jedan tip javnog nadmetanja.
             </summary>
+            <remarks>
+            Primer zahteva za kreiranje novog tipa javnog nadmetanja \
+            POST /api/publicBiddingTypes \
+            {
+            "publicBiddingTypesName": "Javna Licitacija"
+            }
+            </remarks>
             <response code="200">Vraća kreirani tip javnog nadmetanja</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranja tipa javnog nadmetanja</response>
         </member>
@@ -179,6 +219,13 @@
             <summary>
             Kreira jednu etapu.
             </summary>
+            <remarks>
+            Primer zahteva za kreiranje novoe etape \
+            POST /api/stages \
+            {
+             "date": "2022-02-16T15:30:46.232Z"
+            }
+            </remarks>
             <response code="200">Vraća kreiranu etapu</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranje etape</response>
         </member>
@@ -228,6 +275,13 @@
             <summary>
             Kreira jedan status.
             </summary>
+            <remarks>
+            Primer zahteva za kreiranje statusa \
+            POST /api/statuses \
+            {
+             "statusName": "Prvi krug"
+            }
+            </remarks>
             <response code="200">Vraća kreirani status</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranje statusa</response>
         </member>
@@ -286,15 +340,295 @@
             <param name="savedSalt">Sačuvan salt</param>
             <returns></returns>
         </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Auction.AuctionId">
+            <summary>
+            Id licitacije
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Auction.Number">
+            <summary>
+            Id licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Auction.Year">
+            <summary>
+            Godina kada se licitacija izvodi
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Auction.Date">
+            <summary>
+            Datum licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Auction.PriceIncrease">
+            <summary>
+            Korak cene 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Auction.ApplicationDeadline">
+            <summary>
+            Rok za dostavljanje prijava, datum i sat
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Auction.StageId">
+            <summary>
+            Etapa licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.AuctionConfirmation.AuctionId">
+            <summary>
+            Id licitacije
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.AuctionConfirmation.Number">
+            <summary>
+            Id licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.AuctionConfirmation.Year">
+            <summary>
+            Godina kada se licitacija izvodi
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.AuctionConfirmation.Date">
+            <summary>
+            Datum licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.AuctionConfirmation.PriceIncrease">
+            <summary>
+            Korak cene 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.AuctionConfirmation.ApplicationDeadline">
+            <summary>
+            Rok za dostavljanje prijava, datum i sat
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.AuctionConfirmation.StageId">
+            <summary>
+            Etapa licitacije
+            </summary> 
+        </member>
         <member name="M:PublicBiddingMicroservice.Entities.PublicBiddingContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             Popunjava bazu sa nekim inicijalnim etapama
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingType.PublicBiddingTypeId">
+            <summary>
+            Id tipa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingType.PublicBiddingTypeName">
+            <summary>
+            Naziv tipa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.Date">
+            <summary>
+            Datum odrzavanja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.StartTime">
+            <summary>
+            Vreme početka javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.StartingPricePerHe">
+            <summary>
+            Početna cena po hektaru 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.Exclude">
+            <summary>
+            Izuzeto  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.AuctionedPrice">
+            <summary>
+            Izlicitirana Cena   
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.LeasePeriod">
+            <summary>
+            Period zakupa    
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.NumberOfParticipants">
+            <summary>
+            Broj učesnika  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.DepositReplenishment">
+            <summary>
+            Visina dopune depozita 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.Circle">
+            <summary>
+            Krug javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.StatusId">
+            <summary>
+            Status javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.StageId">
+            <summary>
+            Etapa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.PublicBiddingTypeId">
+            <summary>
+            Tip javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.AddressId">
+            <summary>
+            Adresa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBidding.ParcelId">
+            <summary>
+            Parcela javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.Date">
+            <summary>
+            Datum odrzavanja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.StartTime">
+            <summary>
+            Vreme početka javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.StartingPricePerHe">
+            <summary>
+            Početna cena po hektaru 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.Exclude">
+            <summary>
+            Izuzeto  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.AuctionedPrice">
+            <summary>
+            Izlicitirana Cena   
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.LeasePeriod">
+            <summary>
+            Period zakupa    
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.NumberOfParticipants">
+            <summary>
+            Broj učesnika  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.DepositReplenishment">
+            <summary>
+            Visina dopune depozita 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.Circle">
+            <summary>
+            Krug javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.StatusId">
+            <summary>
+            Status javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.StageId">
+            <summary>
+            Etapa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.PublicBiddingTypeId">
+            <summary>
+            Tip javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.AddressId">
+            <summary>
+            Adresa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.PublicBiddingConfirmation.ParcelId">
+            <summary>
+            Parcela javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Stage.StageId">
+            <summary>
+            Id etape
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Stage.Date">
+            <summary>
+            Naziv etape
+            </summary> 
+        </member>
         <member name="T:PublicBiddingMicroservice.Entities.StageConfirmation">
             <summary>
             Predstavlja potvrdu kreiranja etape.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.StageConfirmation.StageId">
+            <summary>
+            Id etape
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.StageConfirmation.Date">
+            <summary>
+            Naziv etape
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Status.StatusId">
+            <summary>
+            Id statusa
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.Status.StatusName">
+            <summary>
+            Naziv statusa
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.StatusConfirmation.StatusId">
+            <summary>
+            Id statusa
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Entities.StatusConfirmation.StatusName">
+            <summary>
+            Naziv statusa
+            </summary>  
         </member>
         <member name="M:PublicBiddingMicroservice.Helpers.AuthenticationHelper.AuthenticatePrincipal(PublicBiddingMicroservice.Models.Principal)">
             <summary>
@@ -310,9 +644,34 @@
             <param name="principal">Autentifikovani principal</param>
             <returns></returns>
         </member>
-        <member name="P:PublicBiddingMicroservice.Models.AddressDto.AddressId">
+        <member name="P:PublicBiddingMicroservice.Models.AddressDto.Address">
             <summary>
-            ID adrese.
+            Naziv ulice i broj stana ili kuće.
+            </summary>        
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AddressDto.City">
+            <summary>
+            Naziv grada i poštanski broj.
+            </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AddressDto.CityID">
+            <summary>
+            ID grada.
+            </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AddressDto.CityName">
+            <summary>
+            Naziv grada.
+            </summary>        
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AddressDto.CountryID">
+            <summary>
+            ID države.
+            </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AddressDto.CountryName">
+            <summary>
+            Naziv države.
             </summary>
         </member>
         <member name="T:PublicBiddingMicroservice.Models.AuctionConfirmationDto">
@@ -320,20 +679,160 @@
             DTO za licitaciju.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionConfirmationDto.AuctionId">
+            <summary>
+            Id licitacije
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionConfirmationDto.Number">
+            <summary>
+            Id licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionConfirmationDto.Year">
+            <summary>
+            Godina kada se licitacija izvodi
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionConfirmationDto.Date">
+            <summary>
+            Datum licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionConfirmationDto.PriceIncrease">
+            <summary>
+            Korak cene 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionConfirmationDto.ApplicationDeadline">
+            <summary>
+            Rok za dostavljanje prijava, datum i sat
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionConfirmationDto.Stage">
+            <summary>
+            Etapa licitacije
+            </summary> 
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.AuctionCreationDto">
             <summary>
             Model za kreiranje licitacije.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionCreationDto.AuctionId">
+            <summary>
+            Id licitacije
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionCreationDto.Number">
+            <summary>
+            Id licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionCreationDto.Year">
+            <summary>
+            Godina kada se licitacija izvodi
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionCreationDto.Date">
+            <summary>
+            Datum licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionCreationDto.PriceIncrease">
+            <summary>
+            Korak cene 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionCreationDto.ApplicationDeadline">
+            <summary>
+            Rok za dostavljanje prijava, datum i sat
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionCreationDto.Stage">
+            <summary>
+            Etapa licitacije
+            </summary> 
         </member>
         <member name="T:PublicBiddingMicroservice.Models.AuctionDto">
             <summary>
             DTO za licitaciju.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionDto.AuctionId">
+            <summary>
+            Id licitacije
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionDto.Number">
+            <summary>
+            Id licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionDto.Year">
+            <summary>
+            Godina kada se licitacija izvodi
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionDto.Date">
+            <summary>
+            Datum licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionDto.PriceIncrease">
+            <summary>
+            Korak cene 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionDto.ApplicationDeadline">
+            <summary>
+            Rok za dostavljanje prijava, datum i sat
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionDto.Stage">
+            <summary>
+            Etapa licitacije
+            </summary> 
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.AuctionUpdateDto">
             <summary>
             Model za azuriranje licitacije.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionUpdateDto.AuctionId">
+            <summary>
+            Id licitacije
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionUpdateDto.Number">
+            <summary>
+            Id licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionUpdateDto.Year">
+            <summary>
+            Godina kada se licitacija izvodi
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionUpdateDto.Date">
+            <summary>
+            Datum licitacije
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionUpdateDto.PriceIncrease">
+            <summary>
+            Korak cene 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionUpdateDto.ApplicationDeadline">
+            <summary>
+            Rok za dostavljanje prijava, datum i sat
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.AuctionUpdateDto.Stage">
+            <summary>
+            Etapa licitacije
+            </summary> 
         </member>
         <member name="P:PublicBiddingMicroservice.Models.ParcelDto.ParcelID">
             <summary>
@@ -355,80 +854,520 @@
             DTO za tip javnog nadmetanja.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingTypeConfirmationDto.PublicBiddingTypeId">
+            <summary>
+            Id tipa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingTypeConfirmationDto.PublicBiddingTypeName">
+            <summary>
+            Naziv tipa javnog nadmetanja
+            </summary> 
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingTypeCreationDto">
             <summary>
             Model za krerianje tipa javnog nadmetanja.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingTypeCreationDto.PublicBiddingTypeId">
+            <summary>
+            Id tipa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingTypeCreationDto.PublicBiddingTypeName">
+            <summary>
+            Naziv tipa javnog nadmetanja
+            </summary> 
         </member>
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingTypeDto">
             <summary>
             DTO za tip javnog nadmetanja.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingTypeDto.PublicBiddingTypeId">
+            <summary>
+            Id tipa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingTypeDto.PublicBiddingTypeName">
+            <summary>
+            Naziv tipa javnog nadmetanja
+            </summary> 
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingTypeUpdateDto">
             <summary>
-            Model za krerianje tipa javnog nadmetanja.
+            Model za azuriranje tipa javnog nadmetanja.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingTypeUpdateDto.PublicBiddingTypeId">
+            <summary>
+            Id tipa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingTypeUpdateDto.PublicBiddingTypeName">
+            <summary>
+            Naziv tipa javnog nadmetanja
+            </summary> 
         </member>
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto">
             <summary>
             DTO za javno nadmetanje.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.Date">
+            <summary>
+            Datum odrzavanja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.StartTime">
+            <summary>
+            Vreme početka javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.StartingPricePerHe">
+            <summary>
+            Početna cena po hektaru 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.Exclude">
+            <summary>
+            Izuzeto  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.AuctionedPrice">
+            <summary>
+            Izlicitirana Cena   
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.LeasePeriod">
+            <summary>
+            Period zakupa    
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.NumberOfParticipants">
+            <summary>
+            Broj učesnika  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.DepositReplenishment">
+            <summary>
+            Visina dopune depozita 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.Circle">
+            <summary>
+            Krug javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.StatusId">
+            <summary>
+            Status javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.StageId">
+            <summary>
+            Etapa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.PublicBiddingTypeId">
+            <summary>
+            Tip javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.AddressId">
+            <summary>
+            Adresa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingConfirmationDto.ParcelId">
+            <summary>
+            Parcela javnog nadmetanja
+            </summary> 
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingCreationDto">
             <summary>
             Model za krerianje javnog nadmetanja.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.Date">
+            <summary>
+            Datum odrzavanja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.StartTime">
+            <summary>
+            Vreme početka javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.StartingPricePerHe">
+            <summary>
+            Početna cena po hektaru 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.Exclude">
+            <summary>
+            Izuzeto  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.AuctionedPrice">
+            <summary>
+            Izlicitirana Cena   
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.LeasePeriod">
+            <summary>
+            Period zakupa    
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.NumberOfParticipants">
+            <summary>
+            Broj učesnika  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.DepositReplenishment">
+            <summary>
+            Visina dopune depozita 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.Circle">
+            <summary>
+            Krug javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.StatusId">
+            <summary>
+            Status javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.StageId">
+            <summary>
+            Etapa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.PublicBiddingTypeId">
+            <summary>
+            Tip javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.AddressId">
+            <summary>
+            Adresa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingCreationDto.ParcelId">
+            <summary>
+            Parcela javnog nadmetanja
+            </summary> 
         </member>
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingDto">
             <summary>
             DTO za javno nadmetanje.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.Date">
+            <summary>
+            Datum odrzavanja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.StartTime">
+            <summary>
+            Vreme početka javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.StartingPricePerHe">
+            <summary>
+            Početna cena po hektaru 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.Exclude">
+            <summary>
+            Izuzeto  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.AuctionedPrice">
+            <summary>
+            Izlicitirana Cena   
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.LeasePeriod">
+            <summary>
+            Period zakupa    
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.NumberOfParticipants">
+            <summary>
+            Broj učesnika  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.DepositReplenishment">
+            <summary>
+            Visina dopune depozita 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.Circle">
+            <summary>
+            Krug javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.StatusId">
+            <summary>
+            Status javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.StageId">
+            <summary>
+            Etapa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.PublicBiddingTypeId">
+            <summary>
+            Tip javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.AddressId">
+            <summary>
+            Adresa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingDto.ParcelId">
+            <summary>
+            Parcela javnog nadmetanja
+            </summary> 
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto">
             <summary>
             Model za azuriranje javnog nadmetanja.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.PublicBiddingId">
+            <summary>
+            Id javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.Date">
+            <summary>
+            Datum odrzavanja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.StartTime">
+            <summary>
+            Vreme početka javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.EndTime">
+            <summary>
+            Vreme kraja javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.StartingPricePerHe">
+            <summary>
+            Početna cena po hektaru 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.Exclude">
+            <summary>
+            Izuzeto  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.AuctionedPrice">
+            <summary>
+            Izlicitirana Cena   
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.LeasePeriod">
+            <summary>
+            Period zakupa    
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.NumberOfParticipants">
+            <summary>
+            Broj učesnika  
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.DepositReplenishment">
+            <summary>
+            Visina dopune depozita 
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.Circle">
+            <summary>
+            Krug javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.StatusId">
+            <summary>
+            Status javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.StageId">
+            <summary>
+            Etapa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.PublicBiddingTypeId">
+            <summary>
+            Tip javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.AddressId">
+            <summary>
+            Adresa javnog nadmetanja
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.PublicBiddingUpdateDto.ParcelId">
+            <summary>
+            Parcela javnog nadmetanja
+            </summary> 
         </member>
         <member name="T:PublicBiddingMicroservice.Models.StageConfirmationDto">
             <summary>
             DTO za etapu.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.StageConfirmationDto.StageId">
+            <summary>
+            Id etape
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StageConfirmationDto.Date">
+            <summary>
+            Naziv etape
+            </summary> 
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.StageCreationDto">
             <summary>
             Model za kreiranje etape.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StageCreationDto.StageId">
+            <summary>
+            Id etape
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StageCreationDto.Date">
+            <summary>
+            Naziv etape
+            </summary> 
         </member>
         <member name="T:PublicBiddingMicroservice.Models.StageDto">
             <summary>
             DTO za etapu.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.StageDto.StageId">
+            <summary>
+            Id etape
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StageDto.Date">
+            <summary>
+            Naziv etape
+            </summary> 
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.StageUpdateDto">
             <summary>
             Model za azuriranje etape.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StageUpdateDto.StageId">
+            <summary>
+            Id etape
+            </summary> 
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StageUpdateDto.Date">
+            <summary>
+            Naziv etape
+            </summary> 
         </member>
         <member name="T:PublicBiddingMicroservice.Models.StatusConfirmationDto">
             <summary>
             DTO za status.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.StatusConfirmationDto.StatusId">
+            <summary>
+            Id statusa
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StatusConfirmationDto.StatusName">
+            <summary>
+            Naziv statusa
+            </summary>  
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.StatusCreationDto">
             <summary>
             Model za kreiranje statusa.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StatusCreationDto.StatusId">
+            <summary>
+            Id statusa
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StatusCreationDto.StatusName">
+            <summary>
+            Naziv statusa
+            </summary>  
         </member>
         <member name="T:PublicBiddingMicroservice.Models.StatusDto">
             <summary>
             DTO za status.
             </summary>
         </member>
+        <member name="P:PublicBiddingMicroservice.Models.StatusDto.StatusId">
+            <summary>
+            Id statusa
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StatusDto.StatusName">
+            <summary>
+            Naziv statusa
+            </summary>  
+        </member>
         <member name="T:PublicBiddingMicroservice.Models.StatusUpdateDto">
             <summary>
             Model za azuriranje statusa.
             </summary>
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StatusUpdateDto.StatusId">
+            <summary>
+            Id statusa
+            </summary>  
+        </member>
+        <member name="P:PublicBiddingMicroservice.Models.StatusUpdateDto.StatusName">
+            <summary>
+            Naziv statusa
+            </summary>  
         </member>
     </members>
 </doc>

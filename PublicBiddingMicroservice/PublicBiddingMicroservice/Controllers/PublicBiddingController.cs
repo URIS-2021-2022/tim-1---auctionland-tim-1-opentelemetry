@@ -23,16 +23,18 @@ namespace PublicBiddingMicroservice.Controllers
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreatePublicBidding)
         private readonly IMapper mapper;
         private readonly IAddressService addressService;
+        private readonly IParcelService parcelService;
         private readonly ILoggerMicroservice loggerMicroservice;
         private readonly LoggerDto loggerDto;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public PublicBiddingController(IPublicBiddingRepository publicBiddingRepository, LinkGenerator linkGenerator, IMapper mapper, IAddressService addressService, ILoggerMicroservice loggerMicroservice)
+        public PublicBiddingController(IPublicBiddingRepository publicBiddingRepository, LinkGenerator linkGenerator, IMapper mapper, IAddressService addressService, IParcelService parcelService, ILoggerMicroservice loggerMicroservice)
         {
             this.publicBiddingRepository = publicBiddingRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
             this.addressService = addressService;
+            this.parcelService = parcelService;
             this.loggerMicroservice = loggerMicroservice;
             loggerDto = new LoggerDto
             {
@@ -56,20 +58,29 @@ namespace PublicBiddingMicroservice.Controllers
             loggerDto.HttpMethodName = "GET";
             loggerDto.Date = " ";
             loggerDto.Time = " ";
-            var bidding = publicBiddingRepository.GetPublicBiddings(numberOfParticipants);
+            List<PublicBidding> publicBiddings = publicBiddingRepository.GetPublicBiddings(numberOfParticipants);
 
             //Ukoliko nismo pronašli ni jedno javno nadmetanje vratiti status 204 (NoContent)
-            if (bidding == null || bidding.Count == 0)
+            if (publicBiddings == null || publicBiddings.Count == 0)
             {
                 loggerDto.Response = "204 NO CONTENT";
                 loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+
+            foreach (PublicBidding b in publicBiddings)
+            {
+                AddressDto address = addressService.GetAddress(b.AddressId).Result;
+                ParcelDto parcel = parcelService.GetParcel(b.ParcelId).Result;
+                b.Address = address;
+                b.Parcel = parcel;
+            }
+
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
 
             //Ukoliko smo našli neko javno nadmetanje vratiti status 200 i listu pronađenih javnih nadmetanja (DTO objekti)
-            return Ok(mapper.Map<List<PublicBiddingDto>>(bidding));
+            return Ok(mapper.Map<List<PublicBiddingDto>>(publicBiddings));
         }
 
         /// <summary>
@@ -85,24 +96,50 @@ namespace PublicBiddingMicroservice.Controllers
         public ActionResult<PublicBiddingDto> GetPublicBidding(Guid publicBiddingId) //Na ovaj parametar će se mapirati ono što je prosleđeno u ruti
         {
             loggerDto.HttpMethodName = "GET";
-            var bidding = publicBiddingRepository.GetPublicBiddingById(publicBiddingId);
+            PublicBidding publicBidding = publicBiddingRepository.GetPublicBiddingById(publicBiddingId);
 
-            if (bidding == null)
+            if (publicBidding == null)
             {
                 loggerDto.Response = "404 NOT FOUND";
                 loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
-            
+
+            AddressDto address = addressService.GetAddress(publicBidding.AddressId).Result;
+            ParcelDto parcel = parcelService.GetParcel(publicBidding.ParcelId).Result;
+            publicBidding.Address = address;
+            publicBidding.Parcel = parcel;
+
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
-            return Ok(mapper.Map<PublicBiddingDto>(bidding));
+            return Ok(mapper.Map<PublicBiddingDto>(publicBidding));
         }
 
 
         /// <summary>
         /// Kreira jedno javno nadmetanje.
         /// </summary>
+        /// <remarks>
+        /// Primer zahteva za kreiranje novog javnog nadmetanja \
+        /// POST /api/publicBiddings \
+        /// {
+        /// "date": "2020-11-15T09:00:00",
+        /// "startTime": "2020-11-15T09:00:00",
+        /// "endTime": "2020-11-15T12:00:00",
+        /// "startingPricePerHe": 10,
+        /// "exclude": true,
+        /// "auctionedPrice": 139,
+        /// "leasePeriod": 1,
+        /// "numberOfParticipants": 12,
+        /// "depositReplenishment": 13,
+        /// "circle": 1,
+        /// "statusId": "1c7ea607-8ddb-493a-87fa-4bf5893e965b",
+        /// "stageId": "1c7ea607-8ddb-493a-87fa-4bf5893e965b",
+        /// "publicBiddingTypeId": "1c7ea607-8ddb-493a-87fa-4bf5893e965b",
+        /// "addressId": "e5fd4e92-1938-4bd8-fbb3-08d9f617ed32"
+        /// "parcelId": "866f2352-771f-4405-a9b5-9878b0fbff0f"
+        /// }
+        /// </remarks>
         /// <response code="200">Vraća kreirano javno nadmetanje</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja javnog nadmetanja</response>
         [HttpPost]
@@ -120,17 +157,6 @@ namespace PublicBiddingMicroservice.Controllers
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetPublicBidding", "PublicBidding", new { publicBiddingId = confirmation.PublicBiddingId });
-                
-                var addressInfo = mapper.Map<AddressDto>(publicBidding);
-                addressInfo.AddressId = confirmation.AddressId;
-                bool isAddress = addressService.GetAddressById(addressInfo.AddressId);
-
-                //Ukoliko iz nekog razloga ne uspemo da naplatimo prijavu ispita ista se briše
-                if (!isAddress)
-                {
-                    publicBiddingRepository.DeletePublicBidding(confirmation.PublicBiddingId);
-                    throw new AddressException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
-                }
 
                 loggerDto.Response = "201 CREATED";
                 loggerMicroservice.CreateLog(loggerDto);

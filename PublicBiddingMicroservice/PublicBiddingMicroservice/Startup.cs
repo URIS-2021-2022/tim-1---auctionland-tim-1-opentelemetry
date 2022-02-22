@@ -20,6 +20,7 @@ using Microsoft.EntityFrameworkCore;
 using PublicBiddingMicroservice.ServiceCalls;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
+using PublicBiddingMicroservice.ServiceCalls.ParcelService;
 
 namespace PublicBiddingMicroservice
 {
@@ -123,6 +124,7 @@ namespace PublicBiddingMicroservice
             services.AddSingleton<IUserAuthRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IParcelService, ParcelService>();
             services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddSwaggerGen(setupAction =>
             {

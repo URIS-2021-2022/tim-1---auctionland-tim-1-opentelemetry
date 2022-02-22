@@ -94,6 +94,18 @@ namespace PublicBiddingMicroservice.Controllers
         /// <summary>
         /// Kreira jednu licitaciju.
         /// </summary>
+        /// <remarks>
+        /// Primer zahteva za kreiranje licitacije \
+        /// POST /api/auctions \
+        /// {
+        /// "number": 1,
+        /// "year": 2021,
+        /// "date": "2020-11-15T09:00:00",
+        /// "priceIncrease": 10,
+        /// "applicationDeadline": "2020-11-15T09:00:00",
+        /// "stageId": "1c7ea607-8ddb-493a-87fa-4bf5893e965b"
+        /// }
+        /// </remarks>
         /// <response code="200">Vraća kreiranu licitaciju</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranje licitacije</response>
         [HttpPost]

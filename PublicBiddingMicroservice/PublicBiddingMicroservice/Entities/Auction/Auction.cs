@@ -9,18 +9,39 @@ namespace PublicBiddingMicroservice.Entities
 {
     public class Auction
     {
+        /// <summary>
+        /// Id licitacije
+        /// </summary>  
         public Guid AuctionId { get; set; }
 
+        /// <summary>
+        /// Id licitacije
+        /// </summary> 
         public int Number { get; set; }
 
+        /// <summary>
+        /// Godina kada se licitacija izvodi
+        /// </summary> 
         public int Year { get; set; }
 
+        /// <summary>
+        /// Datum licitacije
+        /// </summary> 
         public DateTime Date { get; set; }
 
+        /// <summary>
+        /// Korak cene 
+        /// </summary> 
         public double PriceIncrease { get; set; }
 
+        /// <summary>
+        /// Rok za dostavljanje prijava, datum i sat
+        /// </summary> 
         public DateTime ApplicationDeadline { get; set; }
 
+        /// <summary>
+        /// Etapa licitacije
+        /// </summary> 
         [ForeignKey("Stage")]
         public Guid? StageId { get; set; }
         public Stage Stage { get; set; }

@@ -84,7 +84,8 @@ namespace PublicBiddingMicroservice.Migrations
                     StatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     StageId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     PublicBiddingTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ParcelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,8 +141,8 @@ namespace PublicBiddingMicroservice.Migrations
 
             migrationBuilder.InsertData(
                 table: "PublicBidding",
-                columns: new[] { "PublicBiddingId", "AddressId", "AuctionedPrice", "Circle", "Date", "DepositReplenishment", "EndTime", "Exclude", "LeasePeriod", "NumberOfParticipants", "PublicBiddingTypeId", "StageId", "StartTime", "StartingPricePerHe", "StatusId" },
-                values: new object[] { new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), 139.0, 1, new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified), 13.0, new DateTime(2020, 11, 15, 12, 0, 0, 0, DateTimeKind.Unspecified), true, 1, 12, new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified), 10.0, new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b") });
+                columns: new[] { "PublicBiddingId", "AddressId", "AuctionedPrice", "Circle", "Date", "DepositReplenishment", "EndTime", "Exclude", "LeasePeriod", "NumberOfParticipants", "ParcelId", "PublicBiddingTypeId", "StageId", "StartTime", "StartingPricePerHe", "StatusId" },
+                values: new object[] { new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), 139.0, 1, new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified), 13.0, new DateTime(2020, 11, 15, 12, 0, 0, 0, DateTimeKind.Unspecified), true, 1, 12, new Guid("866f2352-771f-4405-a9b5-9878b0fbff0f"), new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), new DateTime(2020, 11, 15, 9, 0, 0, 0, DateTimeKind.Unspecified), 10.0, new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Auction_StageId",
