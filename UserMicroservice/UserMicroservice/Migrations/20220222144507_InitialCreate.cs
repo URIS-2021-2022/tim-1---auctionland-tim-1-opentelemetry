@@ -30,7 +30,8 @@ namespace UserMicroservice.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Salt = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    UserTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DocumentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,8 +61,8 @@ namespace UserMicroservice.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "UserId", "Email", "FirstName", "LastName", "Password", "Salt", "UserTypeId", "Username" },
-                values: new object[] { new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), "petrović@gmail.com", "Petar", "Petrović", "12345", null, new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), "Petar123" });
+                columns: new[] { "UserId", "DocumentId", "Email", "FirstName", "LastName", "Password", "Salt", "UserTypeId", "Username" },
+                values: new object[] { new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"), new Guid("8b44e760-3c55-4ae4-8d1b-c4ea053672ff"), "petrović@gmail.com", "Petar", "Petrović", "12345", null, new Guid("1c7ea607-8ddb-493a-87fa-4bf5893e965b"), "Petar123" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_UserTypeId",

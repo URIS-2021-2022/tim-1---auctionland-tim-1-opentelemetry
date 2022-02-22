@@ -90,6 +90,7 @@ namespace UserMicroservice.Entities
                     Email = "petrović@gmail.com",
                     Password = "12345",
                     UserTypeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+                    DocumentId = Guid.Parse("8b44e760-3c55-4ae4-8d1b-c4ea053672ff")
                 });
         }
     }

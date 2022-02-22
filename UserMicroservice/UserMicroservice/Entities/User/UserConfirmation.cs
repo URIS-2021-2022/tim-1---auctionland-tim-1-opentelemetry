@@ -24,6 +24,9 @@ namespace UserMicroservice.Entities
         public Guid? UserTypeId { get; set; }
         public UserType UserType { get; set; }
 
+        [ForeignKey("Document")]
+        public Guid DocumentId { get; set; }
+
     }
 
 }

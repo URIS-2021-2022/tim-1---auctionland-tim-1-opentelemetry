@@ -25,6 +25,9 @@ namespace UserMicroservice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -56,6 +59,7 @@ namespace UserMicroservice.Migrations
                         new
                         {
                             UserId = new Guid("6a411c13-a195-48f7-8dbd-67596c3974c0"),
+                            DocumentId = new Guid("8b44e760-3c55-4ae4-8d1b-c4ea053672ff"),
                             Email = "petrović@gmail.com",
                             FirstName = "Petar",
                             LastName = "Petrović",

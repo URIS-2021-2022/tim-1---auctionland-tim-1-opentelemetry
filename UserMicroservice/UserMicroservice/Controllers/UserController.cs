@@ -9,27 +9,30 @@ using UserMicroservice.Data;
 using UserMicroservice.Entities;
 using UserMicroservice.Models;
 using UserMicroservice.ServiceCalls;
+using UserMicroservice.ServiceCalls.Document;
 
 namespace UserService.Controllers
 {
     [ApiController]
     [Route("api/users")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
+    //[Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class UserController : ControllerBase //Daje nam pristup korisnim poljima i metodama
     {
         private readonly IUserRepository userRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateUser)
         private readonly IMapper mapper;
+        private readonly IDocumentMicroservice documentmicroservice;
         private readonly ILoggerMicroservice loggerMicroservice;
         private readonly LoggerDto loggerDto;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public UserController(IUserRepository userRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
+        public UserController(IUserRepository userRepository, LinkGenerator linkGenerator, IMapper mapper, IDocumentMicroservice documentmicroservice, ILoggerMicroservice loggerMicroservice)
         {
             this.userRepository = userRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.documentmicroservice = documentmicroservice;
             this.loggerMicroservice = loggerMicroservice;
             loggerDto = new LoggerDto
             {
@@ -115,6 +118,18 @@ namespace UserService.Controllers
 
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetUser", "User", new { userId = confirmation.UserId });
+
+                var documentInfo = mapper.Map<DocumentDto>(user);
+                documentInfo.DocumentId = confirmation.DocumentId;
+                bool isDocument = documentmicroservice.GetDocumentById(documentInfo.DocumentId);
+
+                if (!isDocument)
+                {
+                    userRepository.DeleteUser(confirmation.UserId);
+                    //throw new DocumentException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
+                }
+
+
                 loggerDto.Response = "201 CREATED";
                 loggerMicroservice.CreateLog(loggerDto);
 

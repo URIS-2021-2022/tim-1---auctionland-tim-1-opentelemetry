@@ -34,7 +34,8 @@ namespace UserMicroservice.Data.Impelmentation
                     Username = "ana.zuber",
                     Email = "ana.zuber@testmail.com",
                     Password = user1.Item1,
-                    Salt = user1.Item2
+                    Salt = user1.Item2,
+                    DocumentId = Guid.Parse("8b44e760-3c55-4ae4-8d1b-c4ea053672ff"),
                 }
             });
         }
