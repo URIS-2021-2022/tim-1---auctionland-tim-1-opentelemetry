@@ -18,10 +18,12 @@
             <param name="mapper"></param>
             <param name="loggerMicroservice"></param>
         </member>
-        <member name="M:AddressMicroservice.Controllers.AddressController.GetAllAddresses">
+        <member name="M:AddressMicroservice.Controllers.AddressController.GetAllAddresses(System.String,System.String)">
             <summary>
             Vraća sve adrese.
             </summary>
+            /// <param name="countryName">Država iz koje se potražuju adrese.</param>
+            <param name="cityName">Grad iz kog se potražuju adrese.</param>
             <returns>Lista svih adresa u sistemu.</returns>
             <response code="200"> Vraća listu adresa.</response>
             <response code="204"> Nije pronađena ni jedna adresa.</response>

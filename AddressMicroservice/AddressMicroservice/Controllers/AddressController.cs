@@ -20,12 +20,12 @@ namespace AddressMicroservice.Controllers
     [ApiController]
     [Route("api/addresses")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
+    // [Authorize]
     //AUTORIZACIJA ne prolazi posle negerisanja tokena
     public class AddressController : ControllerBase
     {
         private readonly IAddressRepository addressRepository;
-        private readonly LinkGenerator linkGenerator; 
+        private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
         private readonly ILoggerMicroservice loggerMicroservice;
         private readonly LoggerDto loggerDto;
@@ -51,6 +51,8 @@ namespace AddressMicroservice.Controllers
         /// <summary>
         /// Vraća sve adrese.
         /// </summary>
+        /// /// <param name="countryName">Država iz koje se potražuju adrese.</param>
+        /// <param name="cityName">Grad iz kog se potražuju adrese.</param>
         /// <returns>Lista svih adresa u sistemu.</returns>
         /// <response code="200"> Vraća listu adresa.</response>
         /// <response code="204"> Nije pronađena ni jedna adresa.</response>
@@ -58,10 +60,10 @@ namespace AddressMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<AddressDto>> GetAllAddresses()
+        public ActionResult<List<AddressDto>> GetAllAddresses(string countryName, string cityName)
         {
             loggerDto.HttpMethodName = "GET";
-            var addresses = addressRepository.GetAllAddresses();
+            var addresses = addressRepository.GetAllAddresses(countryName,cityName);
             if (addresses == null || addresses.Count == 0)
             {
                 loggerDto.Response = "204 NO CONTENT";
