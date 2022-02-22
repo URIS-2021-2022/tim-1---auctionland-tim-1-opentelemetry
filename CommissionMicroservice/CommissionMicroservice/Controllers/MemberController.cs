@@ -2,6 +2,7 @@
 using CommissionMicroservice.Data;
 using CommissionMicroservice.Entities;
 using CommissionMicroservice.Models;
+using CommissionMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,11 +26,17 @@ namespace CommissionMicroservice.Controllers
         private readonly IMemberRepository memberRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
-        public MemberController(IMemberRepository memberRepository, IMapper mapper, LinkGenerator linkGenerator)
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
+
+        public MemberController(IMemberRepository memberRepository, IMapper mapper, LinkGenerator linkGenerator, ILoggerMicroservice loggerMicroservice)
         {
             this.memberRepository = memberRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "Member";
         }
 
         /// <summary>
@@ -49,11 +56,18 @@ namespace CommissionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<List<MemberDto>> GetMembers(string firstName, string lastName)
         {
+            loggerDto.HttpMethodName = "get";
+            loggerDto.Date = " ";
+            loggerDto.Time = " ";
             List<Member> members = memberRepository.GetMembers(firstName, lastName);
             if (members.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<MemberDto>>(members));
         }
 
@@ -72,11 +86,16 @@ namespace CommissionMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<MemberDto> GetMemberById(Guid memberID)
         {
+            loggerDto.HttpMethodName = "GET";
             Member member = memberRepository.GetMemberById(memberID);
             if (member == null)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<MemberDto>(member));
         }
 
@@ -88,12 +107,14 @@ namespace CommissionMicroservice.Controllers
         /// <response code="201">Clan komisije je uspešno kreiran</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja clana komisije</response>
         [HttpPost]
+        [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<MemberConfirmationDto> CreateMember([FromBody] MemberCreationDto memberDto)
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 bool memberValid = ValidateMember(memberDto);
 
                 if (!memberValid)
@@ -104,10 +125,15 @@ namespace CommissionMicroservice.Controllers
                 Member member = mapper.Map<Member>(memberDto);
                 MemberConfirmation confirmation = memberRepository.CreateMember(member);
                 string location = linkGenerator.GetPathByAction("GetMemberById", "Member", new { memberID = confirmation.MemberID });
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Created(location, mapper.Map<MemberConfirmationDto>(confirmation));
             }
-            catch
+            catch(Exception ex)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
+                Console.WriteLine(ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error");
             }
         }
@@ -128,16 +154,24 @@ namespace CommissionMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 Member member = memberRepository.GetMemberById(memberID);
                 if (member == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 memberRepository.DeleteMember(memberID);
+                memberRepository.SaveChanges();
                 return NoContent();
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }
@@ -151,6 +185,7 @@ namespace CommissionMicroservice.Controllers
         /// <response code="404">Clan komisije kog je potrebno ažurirati nije pronađen</response>
         /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja clana komisije</response>
         [HttpPut]
+        [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -158,17 +193,25 @@ namespace CommissionMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 var oldMember = memberRepository.GetMemberById(memberDto.MemberID);
                 if (oldMember == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 Member member = mapper.Map<Member>(memberDto);
                 mapper.Map(member, oldMember);
+                memberRepository.SaveChanges();
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<MemberDto>(oldMember));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update Error");
             }
         }
