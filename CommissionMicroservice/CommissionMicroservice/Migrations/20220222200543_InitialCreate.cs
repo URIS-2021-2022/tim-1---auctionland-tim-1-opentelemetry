@@ -12,7 +12,8 @@ namespace CommissionMicroservice.Migrations
                 columns: table => new
                 {
                     CommissionID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NameCommission = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NameCommission = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,13 +44,13 @@ namespace CommissionMicroservice.Migrations
 
             migrationBuilder.InsertData(
                 table: "Commissions",
-                columns: new[] { "CommissionID", "NameCommission" },
-                values: new object[] { new Guid("8a411c13-a195-48f7-8dbd-67596c3974c0"), "Prva komisija" });
+                columns: new[] { "CommissionID", "NameCommission", "UserId" },
+                values: new object[] { new Guid("8a411c13-a195-48f7-8dbd-67596c3974c0"), "Prva komisija", new Guid("7a411c13-a295-48f7-8dbd-68596c3974c0") });
 
             migrationBuilder.InsertData(
                 table: "Commissions",
-                columns: new[] { "CommissionID", "NameCommission" },
-                values: new object[] { new Guid("8a211c13-a195-48f7-8dbd-67596c3974c0"), "Druga komisija" });
+                columns: new[] { "CommissionID", "NameCommission", "UserId" },
+                values: new object[] { new Guid("8a211c13-a195-48f7-8dbd-67596c3974c0"), "Druga komisija", new Guid("5a411c13-a295-44f7-8dbd-68596c3974c1") });
 
             migrationBuilder.InsertData(
                 table: "Members",

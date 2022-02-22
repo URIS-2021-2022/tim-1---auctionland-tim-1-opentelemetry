@@ -31,12 +31,14 @@ namespace CommissionMicroservice.Entities
                 b.HasData(new
                 {
                     CommissionID = Guid.Parse("8a411c13-a195-48f7-8dbd-67596c3974c0"),
-                    NameCommission = "Prva komisija"
+                    NameCommission = "Prva komisija",
+                    UserId = Guid.Parse("7a411c13-a295-48f7-8dbd-68596c3974c0")
                 },
                 new
                 {
                     CommissionID = Guid.Parse("8a211c13-a195-48f7-8dbd-67596c3974c0"),
-                    NameCommission = "Druga komisija"
+                    NameCommission = "Druga komisija",
+                    UserId = Guid.Parse("5a411c13-a295-44f7-8dbd-68596c3974c1")
                 });
             });
 

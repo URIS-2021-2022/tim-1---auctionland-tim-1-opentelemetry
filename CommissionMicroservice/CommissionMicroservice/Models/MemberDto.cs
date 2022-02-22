@@ -45,5 +45,6 @@ namespace CommissionMicroservice.Models
         /// Naziv komisije
         /// </summary>
         public string NameCommission { get; set; }
+
     }
 }
