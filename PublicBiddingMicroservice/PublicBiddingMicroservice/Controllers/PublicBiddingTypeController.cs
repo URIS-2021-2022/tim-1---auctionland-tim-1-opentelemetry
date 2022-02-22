@@ -15,7 +15,6 @@ namespace PublicBiddingMicroservice.Controllers
     [ApiController]
     [Route("api/publicBiddingTypes")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class PublicBiddingTypeController : ControllerBase //Daje nam pristup korisnim poljima i metodama
     {
         private readonly IPublicBiddingTypeRepository publicBiddingTypeRepository;
