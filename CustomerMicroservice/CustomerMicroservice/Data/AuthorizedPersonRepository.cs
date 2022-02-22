@@ -32,12 +32,12 @@ namespace CustomerMicroservice.Data
 
         public List<AuthorizedPerson> GetAuthorizedPeople()
         {
-            return context.AuthorizedPeople.ToList();
+            return context.AuthorizedPerson.ToList();
         }
 
         public AuthorizedPerson GetAuthorizedPersonById(Guid authorizedPersonID)
         {
-            return context.AuthorizedPeople.FirstOrDefault(e => e.AuthorizedPersonID == authorizedPersonID);
+            return context.AuthorizedPerson.FirstOrDefault(e => e.AuthorizedPersonID == authorizedPersonID);
         }
 
         public bool SaveChanges()

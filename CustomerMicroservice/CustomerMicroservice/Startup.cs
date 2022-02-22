@@ -148,7 +148,7 @@ namespace CustomerMicroservice
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
                 //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
-                setupAction.IncludeXmlComments(xmlCommentsPath);
+                //setupAction.IncludeXmlComments(xmlCommentsPath);
 
                 setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

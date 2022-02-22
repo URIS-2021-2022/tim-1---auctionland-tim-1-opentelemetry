@@ -17,19 +17,19 @@ namespace CustomerMicroservice.Entities
         /// <summary>
         /// Ime ovlascenog lica
         /// </summary>
-        [Required]
+        //[Required]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Prezime ovlascenog lica
         /// </summary>
-        [Required]
+        //[Required]
         public string LastName { get; set; }
 
         /// <summary>
         /// Broj licnog dokumenta (jmbg ili broj pasosa)
         /// </summary>
-        [Required]
+        //[Required]
         public string NumberPersonalDocument { get; set; }
 
         /// <summary>

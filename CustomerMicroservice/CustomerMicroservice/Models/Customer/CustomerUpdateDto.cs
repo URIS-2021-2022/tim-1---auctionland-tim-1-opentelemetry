@@ -18,6 +18,11 @@ namespace CustomerMicroservice.Models
         public Guid CustomerID { get; set; }
 
         /// <summary>
+        /// Da li je kupac fizicko lice, ako nije onda je pravno
+        /// </summary>
+        public bool IsPhysicalPerson { get; set; }
+
+        /// <summary>
         /// Prioritet 
         /// </summary>
         [Required(ErrorMessage = "Mora se uneti prioritet")]

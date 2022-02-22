@@ -8,27 +8,41 @@ namespace CustomerMicroservice.Entities
 {
     public class LegallyPersonConfirmation : CustomerConfirmation
     {
+        public LegallyPersonConfirmation() { }
+
+        public LegallyPersonConfirmation(Customer customer)
+        {
+            CustomerID = customer.CustomerID;
+            IsPhysicalPerson = customer.IsPhysicalPerson;
+            Priority = customer.Priority;
+            RealizedArea = customer.RealizedArea;
+            HasABan = customer.HasABan;
+            StartDateBan = customer.StartDateBan;
+            DurationBan = customer.DurationBan;
+            EndDateBan = customer.EndDateBan;
+        }
+
         /// <summary>
         /// ID pravnog lica
         /// </summary>
-        public Guid LegallyPersonID { get; set; }
+        //public Guid LegallyPersonID { get; set; }
 
         /// <summary>
         /// Maticni broj pravnog lica
         /// </summary>
-        [Required]
+        //[Required]
         public string IdentificationNumber { get; set; }
 
         /// <summary>
         /// Naziv pravnog lica lica
         /// </summary>
-        [Required]
+        //[Required]
         public string Name { get; set; }
 
         /// <summary>
         /// Faks pravnog lica
         /// </summary>
-        [Required]
+        //[Required]
         public string Fax { get; set; }
 
         /// <summary>
@@ -49,7 +63,7 @@ namespace CustomerMicroservice.Entities
         /// <summary>
         /// Broj racuna pravnog lica
         /// </summary>
-        [Required]
+        //[Required]
         public string AccountNumber { get; set; }
     }
 }

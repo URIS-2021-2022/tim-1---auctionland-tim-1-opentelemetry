@@ -14,8 +14,8 @@ namespace CustomerMicroservice.Models.PhysicalPerson
         /// <summary>
         /// ID fizickog lica
         /// </summary>
-        [Required]
-        public Guid PhysicalPersonID { get; set; }
+        //[Required]
+        //public Guid PhysicalPersonID { get; set; }
 
         /// <summary>
         /// JMBG fizickog lica

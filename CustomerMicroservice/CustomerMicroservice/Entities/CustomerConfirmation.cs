@@ -8,6 +8,7 @@ namespace CustomerMicroservice.Entities
 {
     public class CustomerConfirmation
     {
+        public CustomerConfirmation() { }
         /// <summary>
         /// ID kupca
         /// </summary>
@@ -15,21 +16,26 @@ namespace CustomerMicroservice.Entities
         public Guid CustomerID { get; set; }
 
         /// <summary>
+        /// Da li je kupac fizicko lice, ako nije onda je pravno
+        /// </summary>
+        public bool IsPhysicalPerson { get; set; }
+
+        /// <summary>
         /// Prioritet 
         /// </summary>
-        [Required]
+        //[Required]
         public string Priority { get; set; }
 
         /// <summary>
         /// Ostvarena povrsina
         /// </summary>
-        [Required]
+        //[Required]
         public string RealizedArea { get; set; }
 
         /// <summary>
         /// Da li kupac ima zabranu
         /// </summary>
-        [Required]
+        //[Required]
         public bool HasABan { get; set; }
 
         /// <summary>
