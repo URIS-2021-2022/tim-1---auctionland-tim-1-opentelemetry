@@ -1,6 +1,7 @@
 ﻿using CustomerMicroservice.Data;
 using CustomerMicroservice.Entities;
 using CustomerMicroservice.Helpers;
+using CustomerMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -116,6 +117,8 @@ namespace CustomerMicroservice
             services.AddScoped<IAuthorizedPersonCustomerRepository, AuthorizedPersonCustomerRepository>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
+            services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IDocumentService, DocumentService>();
 
             services.AddHttpContextAccessor();
 

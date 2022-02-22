@@ -28,14 +28,18 @@ namespace CustomerMicroservice.Controllers
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
         private readonly IAddressService addressService;
+        private readonly IDocumentService documentService;
 
-        public CustomerController(IPhysicalPersonRepository physicalPersonRepository, ILegallyPersonRepository legallyPersonRepository, IMapper mapper, LinkGenerator linkGenerator, IAddressService addressService)
+        public CustomerController(IPhysicalPersonRepository physicalPersonRepository, ILegallyPersonRepository legallyPersonRepository,
+                                    IMapper mapper, LinkGenerator linkGenerator, IAddressService addressService, 
+                                    IDocumentService documentService)
         {
             this.physicalPersonRepository = physicalPersonRepository;
             this.legallyPersonRepository = legallyPersonRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
             this.addressService = addressService;
+            this.documentService = documentService;
         }
 
         /// <summary>
@@ -208,6 +212,7 @@ namespace CustomerMicroservice.Controllers
                     oldCustomerPhy.DurationBan = customer.DurationBan;
                     oldCustomerPhy.EndDateBan = customer.EndDateBan;
                     oldCustomerPhy.AddressId = customer.AddressId;
+                    oldCustomerPhy.DocumentID = customer.DocumentID;
 
                     if (oldCustomerPhy == null)
                     {
@@ -233,6 +238,7 @@ namespace CustomerMicroservice.Controllers
                     oldCustomerLeg.DurationBan = customer.DurationBan;
                     oldCustomerLeg.EndDateBan = customer.EndDateBan;
                     oldCustomerLeg.AddressId = customer.AddressId;
+                    oldCustomerLeg.DocumentID = customer.DocumentID;
 
                     if (oldCustomerLeg == null)
                     {
