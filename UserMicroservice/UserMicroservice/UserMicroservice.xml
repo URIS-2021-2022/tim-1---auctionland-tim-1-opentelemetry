@@ -27,13 +27,7 @@
             <returns></returns>
             <response code="200">Vraća traženog tipa korisnika</response>
         </member>
-        <member name="M:UserMicroservice.Controllers.UserTypeController.CreateUserType(UserMicroservice.Models.UserTypeCreationDto)">
-            <summary>
-            Krerira jedan tip korisnika.
-            </summary>
-            <response code="200">Vraća kreiran Tip Korisnika</response>
-            <response code="500">Došlo je do greške na serveru prilikom kreiranja tip korisnika</response>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:UserMicroservice.Controllers.UserTypeController.CreateUserType(UserMicroservice.Models.UserTypeCreationDto)" -->
         <member name="M:UserMicroservice.Controllers.UserTypeController.UpdateUserType(UserMicroservice.Models.UserTypeUpdateDto)">
             <summary>
             Ažurira jedan tip korisnika.
@@ -94,6 +88,106 @@
             Popunjava bazu sa nekim inicijalnim podacima
             </summary>
         </member>
+        <member name="P:UserMicroservice.Entities.UserType.UserTypeId">
+            <summary>
+            Id tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserType.UserTypeName">
+            <summary>
+            Naziv tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserTypeConfirmation.UserTypeId">
+            <summary>
+            Id tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserTypeConfirmation.UserTypeName">
+            <summary>
+            Naziv tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.User.UserId">
+            <summary>
+            Id korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.User.FirstName">
+            <summary>
+            Ime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.User.LastName">
+            <summary>
+            Prezime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.User.Username">
+            <summary>
+            Korisnicko ime
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.User.Email">
+            <summary>
+            Email korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.User.Password">
+            <summary>
+            Lozinka korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.User.UserTypeId">
+            <summary>
+            Tip korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.User.DocumentId">
+            <summary>
+            Dokumenti korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserConfirmation.UserId">
+            <summary>
+            Id korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserConfirmation.FirstName">
+            <summary>
+            Ime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserConfirmation.LastName">
+            <summary>
+            Prezime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserConfirmation.Username">
+            <summary>
+            Korisnicko ime
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserConfirmation.Email">
+            <summary>
+            Email korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserConfirmation.Password">
+            <summary>
+            Lozinka korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserConfirmation.UserTypeId">
+            <summary>
+            Tip korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Entities.UserConfirmation.DocumentId">
+            <summary>
+            Dokumenti korisnika
+            </summary>
+        </member>
         <member name="M:UserMicroservice.Helpers.AuthenticationHelper.AuthenticatePrincipal(UserMicroservice.Models.Principal)">
             <summary>
             Vrši autentifikaciju principala
@@ -123,9 +217,29 @@
             Model za potvrdu tipa korisnika
             </summary>
         </member>
+        <member name="P:UserMicroservice.Models.UserTypeConfirmationDto.UserTypeId">
+            <summary>
+            Id tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserTypeConfirmationDto.UserTypeName">
+            <summary>
+            Naziv tipa korisnika
+            </summary>
+        </member>
         <member name="T:UserMicroservice.Models.UserTypeCreationDto">
             <summary>
             Model za kreiranje tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserTypeCreationDto.UserTypeId">
+            <summary>
+            Id tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserTypeCreationDto.UserTypeName">
+            <summary>
+            Naziv tipa korisnika
             </summary>
         </member>
         <member name="T:UserMicroservice.Models.UserTypeDto">
@@ -133,9 +247,29 @@
             DTO za korisnika
             </summary>
         </member>
+        <member name="P:UserMicroservice.Models.UserTypeDto.UserTypeId">
+            <summary>
+            Id tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserTypeDto.UserTypeName">
+            <summary>
+            Naziv tipa korisnika
+            </summary>
+        </member>
         <member name="T:UserMicroservice.Models.UserTypeUpdateDto">
             <summary>
             Model za ažuriranje tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserTypeUpdateDto.UserTypeId">
+            <summary>
+            Id tipa korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserTypeUpdateDto.UserTypeName">
+            <summary>
+            Naziv tipa korisnika
             </summary>
         </member>
         <member name="T:UserMicroservice.Models.UserConfirmationDto">
@@ -143,9 +277,89 @@
             DTO za korisnika
             </summary>
         </member>
+        <member name="P:UserMicroservice.Models.UserConfirmationDto.UserId">
+            <summary>
+            Id korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserConfirmationDto.FirstName">
+            <summary>
+            Ime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserConfirmationDto.LastName">
+            <summary>
+            Prezime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserConfirmationDto.Username">
+            <summary>
+            Korisnicko ime
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserConfirmationDto.Email">
+            <summary>
+            Email korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserConfirmationDto.Password">
+            <summary>
+            Lozinka korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserConfirmationDto.UserTypeId">
+            <summary>
+            Tip korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserConfirmationDto.DocumentId">
+            <summary>
+            Dokumenti korisnika
+            </summary>
+        </member>
         <member name="T:UserMicroservice.Models.UserCreationDto">
             <summary>
             Model za kreiranje korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserCreationDto.UserId">
+            <summary>
+            Id korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserCreationDto.FirstName">
+            <summary>
+            Ime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserCreationDto.LastName">
+            <summary>
+            Prezime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserCreationDto.Username">
+            <summary>
+            Korisnicko ime
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserCreationDto.Email">
+            <summary>
+            Email korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserCreationDto.Password">
+            <summary>
+            Lozinka korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserCreationDto.UserTypeId">
+            <summary>
+            Tip korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserCreationDto.DocumentId">
+            <summary>
+            Dokumenti korisnika
             </summary>
         </member>
         <member name="T:UserMicroservice.Models.UserDto">
@@ -153,9 +367,89 @@
             DTO za korisnika
             </summary>
         </member>
+        <member name="P:UserMicroservice.Models.UserDto.UserId">
+            <summary>
+            Id korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserDto.FirstName">
+            <summary>
+            Ime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserDto.LastName">
+            <summary>
+            Prezime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserDto.Username">
+            <summary>
+            Korisnicko ime
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserDto.Email">
+            <summary>
+            Email korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserDto.Password">
+            <summary>
+            Lozinka korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserDto.UserTypeId">
+            <summary>
+            Tip korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserDto.DocumentId">
+            <summary>
+            Dokumenti korisnika
+            </summary>
+        </member>
         <member name="T:UserMicroservice.Models.UserUpdateDto">
             <summary>
             Model za ažuriranje korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserUpdateDto.UserId">
+            <summary>
+            Id korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserUpdateDto.FirstName">
+            <summary>
+            Ime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserUpdateDto.LastName">
+            <summary>
+            Prezime korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserUpdateDto.Username">
+            <summary>
+            Korisnicko ime
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserUpdateDto.Email">
+            <summary>
+            Email korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserUpdateDto.Password">
+            <summary>
+            Lozinka korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserUpdateDto.UserTypeId">
+            <summary>
+            Tip korisnika
+            </summary>
+        </member>
+        <member name="P:UserMicroservice.Models.UserUpdateDto.DocumentId">
+            <summary>
+            Dokumenti korisnika
             </summary>
         </member>
         <member name="M:UserService.Controllers.UserController.GetUsers(System.String,System.String)">
@@ -180,6 +474,19 @@
             <summary>
             Kreira jednog korisnika.
             </summary>
+             <remarks>
+            Primer zahteva za kreiranje novog javnog nadmetanja \
+            POST /api/users \
+            {
+            "firstName": "Marko",
+            "lastName": "Markovic",
+            "userName": "Mare",
+            "email": "marko@gmail.com",
+            "password": "mar123",
+            "userTypeId = Guid.Parse("1c7ea607-8ddb-493a-87fa-4bf5893e965b"),
+            "documentId": "8b44e760-3c55-4ae4-8d1b-c4ea053672ff"
+            }
+            </remarks>
             <response code="200">Vraća kreiranog korisnika</response>
             <response code="500">Došlo je do greške na serveru prilikom kreiranja korisnika</response>
         </member>

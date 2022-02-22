@@ -11,8 +11,14 @@ namespace UserMicroservice.Models
     /// </summary>
     public class UserTypeConfirmationDto 
     {
+        /// <summary>
+        /// Id tipa korisnika
+        /// </summary>
         public Guid UserTypeId { get; set; }
 
+        /// <summary>
+        /// Naziv tipa korisnika
+        /// </summary>
         public string UserTypeName { get; set; }
     }
 }

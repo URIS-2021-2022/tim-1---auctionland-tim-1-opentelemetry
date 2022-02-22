@@ -91,7 +91,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"firstName\": \"Marko\",\r\n  \"lastName\": \"Markovic\",\r\n  \"userName\": \"Mare\",\r\n  \"email\": \"string@gmail.com\",\r\n  \"password\": \"mar123\",\r\n  \"userType\": null\r\n}",
+					"raw": "{\r\n  \"firstName\": \"Marko\",\r\n  \"lastName\": \"Markovic\",\r\n  \"userName\": \"Mare\",\r\n  \"email\": \"string@gmail.com\",\r\n  \"password\": \"mar123\",\r\n  \"userType\": null,\r\n  \"documentId\": \"8b44e760-3c55-4ae4-8d1b-c4ea053672ff\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -120,7 +120,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userId\": \"75134947-a2ee-4464-e3ca-08d9f1697c4c\",\r\n    \"firstName\": \"Marko\",\r\n    \"lastName\": \"Markovic\",\r\n    \"username\": \"Mare\",\r\n    \"email\": \"string@gmail.com\",\r\n    \"password\": \"mar123\",\r\n    \"salt\": null,\r\n    \"userTypeId\": null,\r\n    \"userType\": null\r\n}",
+					"raw": "{\r\n    \"userId\": \"75134947-a2ee-4464-e3ca-08d9f1697c4c\",\r\n    \"firstName\": \"Marko\",\r\n    \"lastName\": \"Markovic\",\r\n    \"username\": \"Mare\",\r\n    \"email\": \"string@gmail.com\",\r\n    \"password\": \"mar123\",\r\n    \"salt\": null,\r\n    \"userTypeId\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
