@@ -17,7 +17,6 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
     [ApiController]
     [Route("api/application/payment")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
     public class PaymentForApplicationController : ControllerBase
     {
         private readonly IPaymentRepository paymentRepository;

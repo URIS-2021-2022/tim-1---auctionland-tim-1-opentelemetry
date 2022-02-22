@@ -63,13 +63,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:PublicBiddingRegistrationMicroservice.Controllers.AuthenticationController.Authenticate(PublicBiddingRegistrationMicroservice.Models.Principal)">
-            <summary>
-            Sluzi za autentifikaciju korisnika
-            </summary>
-            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
-            <returns></returns>
-        </member>
         <member name="M:PublicBiddingRegistrationMicroservice.Controllers.PaymentForApplicationController.GetAllPayments">
             <summary>
             Vraća listu svih uplata za javno nadmetanje
@@ -305,20 +298,6 @@
             <summary>
             Salt
             </summary>
-        </member>
-        <member name="M:PublicBiddingRegistrationMicroservice.Helpers.AuthenticationHelper.AuthenticatePrincipal(PublicBiddingRegistrationMicroservice.Models.Principal)">
-            <summary>
-            Vrši autentifikaciju principala
-            </summary>
-            <param name="principal">Principal za autentifikaciju</param>
-            <returns></returns>
-        </member>
-        <member name="M:PublicBiddingRegistrationMicroservice.Helpers.AuthenticationHelper.GenerateJwt(PublicBiddingRegistrationMicroservice.Models.Principal)">
-            <summary>
-            Generiše novi token za autentifikovanog principala
-            </summary>
-            <param name="principal">Autentifikovani principal</param>
-            <returns></returns>
         </member>
         <member name="T:PublicBiddingRegistrationMicroservice.Models.ApplicationConformationDto">
             <summary>
