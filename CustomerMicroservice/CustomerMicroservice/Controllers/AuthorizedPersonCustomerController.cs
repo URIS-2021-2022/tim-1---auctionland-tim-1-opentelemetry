@@ -19,7 +19,7 @@ namespace CustomerMicroservice.Controllers
     [ApiController]
     [Route("api/authorizedPersonCustomers")]
     [Produces("application/json", "application/xml")] 
-    //[Authorize]
+    [Authorize]
     public class AuthorizedPersonCustomerController : ControllerBase
     {
         private readonly IAuthorizedPersonCustomerRepository authorizedPersonCustomerRepository;

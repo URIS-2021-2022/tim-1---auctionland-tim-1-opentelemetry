@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -54,7 +55,8 @@ namespace CustomerMicroservice.Models
         /// <summary>
         /// Adresa kupca
         /// </summary>
-        //public Guid AddressID { get; set; }
+        [ForeignKey("Address")]
+        public Guid AddressId { get; set; }
 
         /// <summary>
         /// Dokumenati kupca

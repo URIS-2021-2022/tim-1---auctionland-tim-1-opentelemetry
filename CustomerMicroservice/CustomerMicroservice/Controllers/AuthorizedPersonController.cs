@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using CustomerMicroservice.Data;
 using CustomerMicroservice.Entities;
+using CustomerMicroservice.Models;
 using CustomerMicroservice.Models.AuthorizedPerson;
+using CustomerMicroservice.Models.Exceptions;
+using CustomerMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,18 +22,20 @@ namespace CustomerMicroservice.Controllers
     [ApiController]
     [Route("api/authorizedPeople")]
     [Produces("application/json", "application/xml")]
-    //[Authorize]
+    [Authorize]
     public class AuthorizedPersonController : ControllerBase
     {
         private readonly IAuthorizedPersonRepository authorizedPersonRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
+        private readonly IAddressService addressService;
 
-        public AuthorizedPersonController(IAuthorizedPersonRepository authorizedPersonRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public AuthorizedPersonController(IAuthorizedPersonRepository authorizedPersonRepository, IMapper mapper, LinkGenerator linkGenerator, IAddressService addressService)
         {
             this.authorizedPersonRepository = authorizedPersonRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
+            this.addressService = addressService;
         }
 
         /// <summary>
@@ -47,10 +52,11 @@ namespace CustomerMicroservice.Controllers
         public ActionResult<List<AuthorizedPersonDto>> GetAuthorizedPeople()
         {
             List<AuthorizedPerson> authorizedPeople = authorizedPersonRepository.GetAuthorizedPeople();
-            if (authorizedPeople.Count == 0)
+            if (authorizedPeople == null || authorizedPeople.Count == 0)
             {
                 return NoContent();
             }
+
             return Ok(mapper.Map<List<AuthorizedPersonDto>>(authorizedPeople));
         }
 
@@ -88,7 +94,6 @@ namespace CustomerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<AuthorizedPersonConfirmationDto> CreateAuthorizedPerson([FromBody] AuthorizedPersonCreationDto authorizedPersonDto)
         {
-            // komunikacija
             try
             {
                 authorizedPersonDto.AuthorizedPersonID = Guid.NewGuid();
@@ -97,6 +102,17 @@ namespace CustomerMicroservice.Controllers
                 authorizedPersonRepository.SaveChanges();
 
                 string location = linkGenerator.GetPathByAction("GetAuthorizedPersonById", "AuthorizedPerson", new { authorizedPersonID = confirmation.AuthorizedPersonID });
+
+                var addressInfo = mapper.Map<AddressDto>(authorizedPersonDto);
+                addressInfo.AddressId = confirmation.AddressId;
+                bool isAddress = addressService.GetAddressById(addressInfo.AddressId);
+
+                //Ukoliko iz nekog razloga ne uspemo da naplatimo prijavu ispita ista se briše
+                if (!isAddress)
+                {
+                    authorizedPersonRepository.DeleteAuthorizedPerson(confirmation.AuthorizedPersonID);
+                    throw new AddressException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
+                }
 
                 return Created(location, mapper.Map<AuthorizedPersonConfirmationDto>(confirmation));
             }

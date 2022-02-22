@@ -20,6 +20,7 @@ namespace CustomerMicroservice.Entities
             StartDateBan = customer.StartDateBan;
             DurationBan = customer.DurationBan;
             EndDateBan = customer.EndDateBan;
+            AddressId = customer.AddressId;
         }
 
         /// <summary>

@@ -47,7 +47,7 @@ namespace CustomerMicroservice.Entities
                     StartDateBan = DateTime.Parse("2018-10-13T09:00:00"),
                     DurationBan = 3,
                     EndDateBan = DateTime.Parse("2021-10-13T09:00:00"),
-                    //AddressID = Guid.Parse("1b411c11-a196-48f7-88bd-67596c3974c1"),
+                    AddressId = Guid.Parse("1b411c11-a196-48f7-88bd-67596c3974c1")
                     //DocumentsID = Guid.Parse("3a411c13-a196-48f7-88bd-57596c3974b3")
                 });
 
@@ -69,7 +69,7 @@ namespace CustomerMicroservice.Entities
                     StartDateBan = DateTime.Parse("2020-11-13T09:00:00"),
                     DurationBan = 1,
                     EndDateBan = DateTime.Parse("2021-11-13T09:00:00"),
-                    //AddressID = Guid.Parse("5b411c15-a196-48f7-88bd-67596c3974c5"),
+                    AddressId = Guid.Parse("5b411c15-a196-48f7-88bd-67596c3974c5")
                     //DocumentsID = Guid.Parse("6a411c13-6196-48f7-88bd-57596c3974b6")
                 });
 
@@ -81,7 +81,7 @@ namespace CustomerMicroservice.Entities
                     LastName = "Nikolic",
                     NumberPersonalDocument = "012345788",
                     BoardTable = "1",
-                    //AddressID = Guid.Parse("2a151b12-a287-47f2-61bd-4a596c397461")
+                    AddressId = Guid.Parse("2a151b12-a287-47f2-61bd-4a596c397461")
                 },
                 new AuthorizedPerson
                 {
@@ -90,7 +90,7 @@ namespace CustomerMicroservice.Entities
                     LastName = "Nenadovic",
                     NumberPersonalDocument = "025445739",
                     BoardTable = "2",
-                    //AddressID = Guid.Parse("3a151b32-a287-47f3-61bd-4a596c397463")
+                    AddressId = Guid.Parse("3a151b32-a287-47f3-61bd-4a596c397463")
                 });
 
             modelBuilder.Entity<AuthorizedPersonCustomer>().HasData(

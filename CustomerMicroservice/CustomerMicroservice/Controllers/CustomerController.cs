@@ -2,6 +2,7 @@
 using CustomerMicroservice.Data;
 using CustomerMicroservice.Entities;
 using CustomerMicroservice.Models;
+using CustomerMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,21 +20,22 @@ namespace CustomerMicroservice.Controllers
     [ApiController]
     [Route("api/customers")]
     [Produces("application/json", "application/xml")]
-    //[Authorize]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly IPhysicalPersonRepository physicalPersonRepository;
         private readonly ILegallyPersonRepository legallyPersonRepository;
-        //private readonly ICustomerRepository customerRepository;
         private readonly IMapper mapper;
         private readonly LinkGenerator linkGenerator;
+        private readonly IAddressService addressService;
 
-        public CustomerController(IPhysicalPersonRepository physicalPersonRepository, ILegallyPersonRepository legallyPersonRepository, IMapper mapper, LinkGenerator linkGenerator)
+        public CustomerController(IPhysicalPersonRepository physicalPersonRepository, ILegallyPersonRepository legallyPersonRepository, IMapper mapper, LinkGenerator linkGenerator, IAddressService addressService)
         {
             this.physicalPersonRepository = physicalPersonRepository;
             this.legallyPersonRepository = legallyPersonRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
+            this.addressService = addressService;
         }
 
         /// <summary>
@@ -205,6 +207,7 @@ namespace CustomerMicroservice.Controllers
                     oldCustomerPhy.StartDateBan = customer.StartDateBan;
                     oldCustomerPhy.DurationBan = customer.DurationBan;
                     oldCustomerPhy.EndDateBan = customer.EndDateBan;
+                    oldCustomerPhy.AddressId = customer.AddressId;
 
                     if (oldCustomerPhy == null)
                     {
@@ -229,6 +232,7 @@ namespace CustomerMicroservice.Controllers
                     oldCustomerLeg.StartDateBan = customer.StartDateBan;
                     oldCustomerLeg.DurationBan = customer.DurationBan;
                     oldCustomerLeg.EndDateBan = customer.EndDateBan;
+                    oldCustomerLeg.AddressId = customer.AddressId;
 
                     if (oldCustomerLeg == null)
                     {
