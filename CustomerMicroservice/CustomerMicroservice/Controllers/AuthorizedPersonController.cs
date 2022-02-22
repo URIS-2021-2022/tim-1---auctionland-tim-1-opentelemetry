@@ -30,14 +30,16 @@ namespace CustomerMicroservice.Controllers
         private readonly IAddressService addressService;
         private readonly ILoggerMicroservice loggerMicroservice;
         private readonly LoggerDto loggerDto;
+        private readonly IPublicBiddingMicroservice publicBiddingMicroservice;
 
         public AuthorizedPersonController(IAuthorizedPersonRepository authorizedPersonRepository, IMapper mapper, LinkGenerator linkGenerator, 
-                                            IAddressService addressService, ILoggerMicroservice loggerMicroservice)
+                                            IAddressService addressService,IPublicBiddingMicroservice publicBiddingMicroservice, ILoggerMicroservice loggerMicroservice)
         {
             this.authorizedPersonRepository = authorizedPersonRepository;
             this.mapper = mapper;
             this.linkGenerator = linkGenerator;
             this.addressService = addressService;
+            this.publicBiddingMicroservice = publicBiddingMicroservice;
             this.loggerMicroservice = loggerMicroservice;
             loggerDto = new LoggerDto();
             loggerDto.Service = "AuthorizedPerson";
@@ -68,6 +70,14 @@ namespace CustomerMicroservice.Controllers
                 return NoContent();
             }
 
+            foreach (AuthorizedPerson b in authorizedPeople)
+            {
+                AddressDto address = addressService.GetAddress(b.AddressId).Result;
+                PublicBiddingDto publicBidding = publicBiddingMicroservice.GetPublicBiddings(b.PublicBiddingID).Result;
+                b.Address = address;
+                b.PublicBidding = publicBidding;
+            }
+
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<AuthorizedPersonDto>>(authorizedPeople));
@@ -94,6 +104,12 @@ namespace CustomerMicroservice.Controllers
                 loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+
+            AddressDto address = addressService.GetAddress(authorizedPerson.AddressId).Result;
+            PublicBiddingDto publicBidding = publicBiddingMicroservice.GetPublicBiddings(authorizedPerson.PublicBiddingID).Result;
+            authorizedPerson.Address = address;
+            authorizedPerson.PublicBidding = publicBidding;
+
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<AuthorizedPersonDto>(authorizedPerson));
@@ -121,17 +137,6 @@ namespace CustomerMicroservice.Controllers
                 authorizedPersonRepository.SaveChanges();
 
                 string location = linkGenerator.GetPathByAction("GetAuthorizedPersonById", "AuthorizedPerson", new { authorizedPersonID = confirmation.AuthorizedPersonID });
-
-                var addressInfo = mapper.Map<AddressDto>(authorizedPersonDto);
-                addressInfo.AddressId = confirmation.AddressId;
-                bool isAddress = addressService.GetAddressById(addressInfo.AddressId);
-
-                //Ukoliko iz nekog razloga ne uspemo da naplatimo prijavu ispita ista se briše
-                if (!isAddress)
-                {
-                    authorizedPersonRepository.DeleteAuthorizedPerson(confirmation.AuthorizedPersonID);
-                    throw new AddressException("Neuspešno kreiranje javnog nadmetanja. Postoji problem sa upisom adrese. Molimo kontaktirajte administratora"); //Bacamo izuzetak koji će biti uhvaćen i vraćen kao status 500
-                }
 
                 loggerDto.Response = "201 CREATED";
                 loggerMicroservice.CreateLog(loggerDto);
@@ -188,7 +193,7 @@ namespace CustomerMicroservice.Controllers
         /// <summary>
         /// Modifikacija postojeceg ovlascenog lica
         /// </summary>
-        /// <param name="customerDto">Model ovlascenog lica</param>
+        /// <param name="authorizedPersonDto">Model ovlascenog lica</param>
         /// <returns>Potvrda o modifikovanom ovlascenom licu</returns>
         /// <response code="200">Vraća ažurirano ovlasceno lice</response>
         /// <response code="404">Ovlasceno lice koje je potrebno ažurirati nije pronađeno</response>

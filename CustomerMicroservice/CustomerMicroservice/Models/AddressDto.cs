@@ -8,8 +8,38 @@ namespace CustomerMicroservice.Models
     public class AddressDto
     {
         /// <summary>
-        /// ID adrese
+        /// Naziv ulice i broj stana ili kuće.
+        /// </summary>        
+        public string Address { get; set; }
+
+        /// <summary>
+        /// Naziv grada i poštanski broj.
         /// </summary>
-        public Guid AddressId { get; set; }
+        public string City { get; set; }
+
+        #region City
+        /// <summary>
+        /// ID grada.
+        /// </summary>
+        public Guid CityID { get; set; }
+
+        /// <summary>
+        /// Naziv grada.
+        /// </summary>        
+        public string CityName { get; set; }
+
+        #endregion
+
+        #region Country
+        /// <summary>
+        /// ID države.
+        /// </summary>
+        public Guid CountryID { get; set; }
+
+        /// <summary>
+        /// Naziv države.
+        /// </summary>
+        public string CountryName { get; set; }
+        #endregion
     }
 }

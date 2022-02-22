@@ -48,7 +48,8 @@ namespace CustomerMicroservice.Entities
                     DurationBan = 3,
                     EndDateBan = DateTime.Parse("2021-10-13T09:00:00"),
                     AddressId = Guid.Parse("1b411c11-a196-48f7-88bd-67596c3974c1"),
-                    DocumentID = Guid.Parse("3a411c13-a196-48f7-88bd-57596c3974b3")
+                    DocumentID = Guid.Parse("3a411c13-a196-48f7-88bd-57596c3974b3"),
+                    PublicBiddingID = Guid.Parse("3b411c13-a186-48f7-78bd-57596c3974b3")
                 });
 
             modelBuilder.Entity<LegallyPerson>().HasData(
@@ -70,7 +71,8 @@ namespace CustomerMicroservice.Entities
                     DurationBan = 1,
                     EndDateBan = DateTime.Parse("2021-11-13T09:00:00"),
                     AddressId = Guid.Parse("5b411c15-a196-48f7-88bd-67596c3974c5"),
-                    DocumentID = Guid.Parse("6a411c13-6196-48f7-88bd-57596c3974b6")
+                    DocumentID = Guid.Parse("6a411c13-6196-48f7-88bd-57596c3974b6"),
+                    PublicBiddingID = Guid.Parse("5a411c13-a146-48f7-78bd-57896c3974b3")
                 });
 
             modelBuilder.Entity<AuthorizedPerson>().HasData(
@@ -81,7 +83,8 @@ namespace CustomerMicroservice.Entities
                     LastName = "Nikolic",
                     NumberPersonalDocument = "012345788",
                     BoardTable = "1",
-                    AddressId = Guid.Parse("2a151b12-a287-47f2-61bd-4a596c397461")
+                    AddressId = Guid.Parse("2a151b12-a287-47f2-61bd-4a596c397461"),
+                    PublicBiddingID = Guid.Parse("6b411c13-a186-48f7-78ad-57896c3944b1")
                 },
                 new AuthorizedPerson
                 {
@@ -90,7 +93,8 @@ namespace CustomerMicroservice.Entities
                     LastName = "Nenadovic",
                     NumberPersonalDocument = "025445739",
                     BoardTable = "2",
-                    AddressId = Guid.Parse("3a151b32-a287-47f3-61bd-4a596c397463")
+                    AddressId = Guid.Parse("3a151b32-a287-47f3-61bd-4a596c397463"),
+                    PublicBiddingID = Guid.Parse("2b411c13-a186-28f7-78bd-57296c3974b0")
                 });
 
             modelBuilder.Entity<AuthorizedPersonCustomer>().HasData(

@@ -21,7 +21,6 @@ namespace CommissionMicroservice.Controllers
     [ApiController]
     [Route("api/commissions")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class CommissionController : ControllerBase
     {
         private readonly ICommissionRepository commissionRepository;

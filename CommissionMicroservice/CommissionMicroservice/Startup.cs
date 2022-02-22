@@ -1,6 +1,5 @@
 ﻿using CommissionMicroservice.Data;
 using CommissionMicroservice.Entities;
-using CommissionMicroservice.Helpers;
 using CommissionMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -112,8 +111,6 @@ namespace CommissionMicroservice
 
             services.AddScoped<ICommissionRepository, CommissionRepository>();
             services.AddScoped<IMemberRepository, MemberRepository>();
-            services.AddSingleton<IUserRepository, UserMockRepository>();
-            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
 
@@ -150,30 +147,6 @@ namespace CommissionMicroservice
                 //Govorimo swagger-u gde se nalazi dati xml fajl sa komentarima
                 setupAction.IncludeXmlComments(xmlCommentsPath);
 
-                setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Molim Vas unesite vaš token",
-                    Name = "Autorizacija korisnika",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Scheme = "bearer"
-                });
-
-                setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                    }
-                });
             });
 
         }

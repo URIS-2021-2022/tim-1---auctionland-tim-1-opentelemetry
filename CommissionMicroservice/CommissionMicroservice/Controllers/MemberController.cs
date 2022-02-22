@@ -19,8 +19,7 @@ namespace CommissionMicroservice.Controllers
     /// </summary>
     [ApiController]
     [Route("api/members")]
-    [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    [Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
+    [Produces("application/json", "application/xml")]
     public class MemberController : ControllerBase
     {
         private readonly IMemberRepository memberRepository;

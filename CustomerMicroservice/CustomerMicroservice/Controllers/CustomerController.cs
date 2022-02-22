@@ -28,12 +28,13 @@ namespace CustomerMicroservice.Controllers
         private readonly LinkGenerator linkGenerator;
         private readonly IAddressService addressService;
         private readonly IDocumentService documentService;
+        private readonly IPublicBiddingMicroservice publicBiddingMicroservice;
         private readonly ILoggerMicroservice loggerMicroservice;
         private readonly LoggerDto loggerDto;
 
         public CustomerController(IPhysicalPersonRepository physicalPersonRepository, ILegallyPersonRepository legallyPersonRepository,
                                     IMapper mapper, LinkGenerator linkGenerator, IAddressService addressService,
-                                    IDocumentService documentService, ILoggerMicroservice loggerMicroservice)
+                                    IDocumentService documentService, IPublicBiddingMicroservice publicBiddingMicroservice, ILoggerMicroservice loggerMicroservice)
         {
             this.physicalPersonRepository = physicalPersonRepository;
             this.legallyPersonRepository = legallyPersonRepository;
@@ -41,6 +42,7 @@ namespace CustomerMicroservice.Controllers
             this.linkGenerator = linkGenerator;
             this.addressService = addressService;
             this.documentService = documentService;
+            this.publicBiddingMicroservice = publicBiddingMicroservice;
             this.loggerMicroservice = loggerMicroservice;
             loggerDto = new LoggerDto();
             loggerDto.Service = "Customer";
@@ -75,6 +77,17 @@ namespace CustomerMicroservice.Controllers
                 loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+
+            foreach (Customer b in customers)
+            {
+                AddressDto address = addressService.GetAddress(b.AddressId).Result;
+                DocumentDto document = documentService.GetDocument(b.DocumentID).Result;
+                PublicBiddingDto publicBidding = publicBiddingMicroservice.GetPublicBiddings(b.PublicBiddingID).Result;
+                b.Address = address;
+                b.Document = document;
+                b.PublicBidding = publicBidding;
+            }
+
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<List<CustomerDto>>(customers));
@@ -108,6 +121,14 @@ namespace CustomerMicroservice.Controllers
                 loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+
+            AddressDto address = addressService.GetAddress(customer.AddressId).Result;
+            DocumentDto document = documentService.GetDocument(customer.DocumentID).Result;
+            PublicBiddingDto publicBidding = publicBiddingMicroservice.GetPublicBiddings(customer.PublicBiddingID).Result;
+            customer.Address = address;
+            customer.Document = document;
+            customer.PublicBidding = publicBidding;
+
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<CustomerDto>(customer));
@@ -214,7 +235,7 @@ namespace CustomerMicroservice.Controllers
         /// <summary>
         /// Modifikacija postojeceg kupca
         /// </summary>
-        /// <param name="customerDto">Model kupca</param>
+        /// <param name="customer">Model kupca</param>
         /// <returns>Potvrda o modifikovanom kupcu</returns>
         /// <response code="200">Vraća ažuriranog kupca</response>
         /// <response code="404">Kupac kojeg je potrebno ažurirati nije pronađen</response>
@@ -242,6 +263,7 @@ namespace CustomerMicroservice.Controllers
                     oldCustomerPhy.EndDateBan = customer.EndDateBan;
                     oldCustomerPhy.AddressId = customer.AddressId;
                     oldCustomerPhy.DocumentID = customer.DocumentID;
+                    oldCustomerPhy.PublicBiddingID = customer.PublicBiddingID;
 
                     if (oldCustomerPhy == null)
                     {
@@ -272,6 +294,7 @@ namespace CustomerMicroservice.Controllers
                     oldCustomerLeg.EndDateBan = customer.EndDateBan;
                     oldCustomerLeg.AddressId = customer.AddressId;
                     oldCustomerLeg.DocumentID = customer.DocumentID;
+                    oldCustomerLeg.PublicBiddingID = customer.PublicBiddingID;
 
                     if (oldCustomerLeg == null)
                     {
