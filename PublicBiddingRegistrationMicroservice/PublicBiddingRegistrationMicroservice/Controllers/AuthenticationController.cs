@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace PublicBiddingRegistrationMicroservice.Controllers
 {
     [ApiController]
-    [Route("api/examRegistrations")]
+    [Route("api/auth")]
     [Produces("application/json", "application/xml")]
     public class AuthenticationController : ControllerBase
     {

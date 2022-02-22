@@ -391,6 +391,16 @@
             ID kupca.
             </summary>
         </member>
+        <member name="T:PublicBiddingRegistrationMicroservice.Models.CustomerDto">
+            <summary>
+            DTO za kupca
+            </summary>
+        </member>
+        <member name="P:PublicBiddingRegistrationMicroservice.Models.CustomerDto.CustomerID">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
         <member name="T:PublicBiddingRegistrationMicroservice.Models.PaymentConfirmationDto">
             <summary>
             DTO za potvrdu uplate za javno nadmetanje.

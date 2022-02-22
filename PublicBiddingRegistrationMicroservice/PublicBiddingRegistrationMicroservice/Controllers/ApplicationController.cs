@@ -10,6 +10,7 @@ using PublicBiddingRegistrationMicroservice.Models;
 using PublicBiddingRegistrationMicroservice.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using PublicBiddingRegistrationMicroservice.ServiceCalls;
 
 namespace PublicBiddingRegistrationMicroservice.Controllers
 {
@@ -22,13 +23,18 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         private readonly IApplicationRepository applicationRepository;
         private readonly LinkGenerator linkGenerator; //Služi za generisanje putanje do neke akcije (videti primer u metodu CreateExamRegistration)
         private readonly IMapper mapper;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
-        public ApplicationController(IApplicationRepository applicationRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public ApplicationController(IApplicationRepository applicationRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
         {
             this.applicationRepository = applicationRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "APPLICATION";
         }
 
         /// <summary>
@@ -43,12 +49,18 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<ApplicationDto>> GetApplications()
         {
+            loggerDto.HttpMethodName = "GET";
             var applications = applicationRepository.GetApplications();
 
             if (applications == null || applications.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return (mapper.Map<List<ApplicationDto>>(applications));
         }
 
@@ -63,11 +75,17 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ApplicationDto> GetApplicationById(Guid applicationId)
         {
+            loggerDto.HttpMethodName = "GET";
             ApplicationForPublicBidding applicationForPublicBidding = applicationRepository.GetApplicationById(applicationId);
             if (applicationForPublicBidding == null)
             {
+                loggerDto.Response = "404 NOT FOUND";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
+
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
             return Ok(mapper.Map<ApplicationDto>(applicationForPublicBidding));
         }
 
@@ -94,6 +112,7 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 ApplicationForPublicBidding applicationEntity = mapper.Map<ApplicationForPublicBidding>(applicationCreation);
                 ApplicationConfirmation confirmation = applicationRepository.CreateApplication(applicationEntity);
                 applicationRepository.SaveChanges(); //Perzistiramo promene
@@ -101,14 +120,15 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
                 //Generisati identifikator novokreiranog resursa
                 string location = linkGenerator.GetPathByAction("GetApplicationById", "ApplicationForPublicBidding", new { applicationId = confirmation.ApplicationId });
 
-                //TODO: treba da se doda neka logika kao provera da li ce moci da se unese prijava ali sam je za sada preskocila
-
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 //Vratiti status 201 (Created), zajedno sa identifikatorom novokreiranog resursa (prijave ispita) i samom prijavom ispita.
                 return CreatedAtRoute(location, mapper.Map<ApplicationConformationDto>(confirmation)); //Druga opcija za vraćanje kreiranog resursa i lokacije
             }
-            catch (Exception ex)
+            catch
             {
-                //TODO: Logovati ex
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 //Ukoliko nastane neka greška na servisu vratiti status 500 (InternalServerError).
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create error");
             }
@@ -130,18 +150,25 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var application = applicationRepository.GetApplicationById(applicationId);
                 if (application == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 applicationRepository.DeleteAplication(applicationId);
                 applicationRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
                 return NoContent();
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }
@@ -162,10 +189,13 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 //Proveriti da li uopšte postoji prijava koju pokušavamo da ažuriramo.
                 var oldApplication = applicationRepository.GetApplicationById(updateDto.ApplicationId);
                 if (oldApplication == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 ApplicationForPublicBidding applicationEntity = mapper.Map<ApplicationForPublicBidding>(updateDto);
@@ -173,10 +203,14 @@ namespace PublicBiddingRegistrationMicroservice.Controllers
                 mapper.Map(applicationEntity, oldApplication); //Update objekta koji treba da sačuvamo u bazi                
 
                 applicationRepository.SaveChanges(); //Perzistiramo promene
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<ApplicationDto>(oldApplication));
             }
             catch (Exception)
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
