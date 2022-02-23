@@ -1,6 +1,9 @@
-﻿using AdMicroservice.Data;
+﻿using AddressMicroservice.Models;
+using AddressMicroservice.ServiceCalls;
+using AdMicroservice.Data;
 using AdMicroservice.Entities;
 using AdMicroservice.Models;
+using AdMicroservice.ServiceCalls;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +28,9 @@ namespace AdMicroservice.Controllers
         private readonly IAdRepository adRepository;
         private readonly LinkGenerator linkGenerator;
         private readonly IMapper mapper;
+        private readonly IPublicBiddingService biddingService;
+        private readonly ILoggerMicroservice loggerMicroservice;
+        private readonly LoggerDto loggerDto;
 
         /// <summary>
         /// Kreiran konstruktor za injektovanje zavisnosti
@@ -32,11 +38,15 @@ namespace AdMicroservice.Controllers
         /// <param name="adRepository"></param>
         /// <param name="linkGenerator"></param>
         /// <param name="mapper"></param>
-        public AdController(IAdRepository adRepository, LinkGenerator linkGenerator, IMapper mapper)
+        public AdController(IAdRepository adRepository, LinkGenerator linkGenerator, IMapper mapper, IPublicBiddingService biddingService, ILoggerMicroservice loggerMicroservice)
         {
             this.adRepository = adRepository;
             this.linkGenerator = linkGenerator;
             this.mapper = mapper;
+            this.biddingService = biddingService;
+            this.loggerMicroservice = loggerMicroservice;
+            loggerDto = new LoggerDto();
+            loggerDto.Service = "AD";
         }
 
 
@@ -51,16 +61,20 @@ namespace AdMicroservice.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public ActionResult<List<AdDto>> GetAds(string municipalityName)
+        public ActionResult<List<AdDto2>> GetAds(string municipalityName)
         {
+            loggerDto.HttpMethodName = "GET";
             var ads = adRepository.GetAds(municipalityName);
 
             if (ads == null || ads.Count == 0)
             {
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
-
-            return Ok(mapper.Map<List<AdDto>>(ads));
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
+            return Ok(mapper.Map<List<AdDto2>>(ads));
         }
 
         /// <summary>
@@ -75,14 +89,27 @@ namespace AdMicroservice.Controllers
         [HttpGet("{adId}")]
         public ActionResult<AdDto> GetAd(Guid adId)
         {
+            loggerDto.HttpMethodName = "GET";
             Ad model = adRepository.GetAdById(adId);
+            PublicBiddingDto dto = biddingService.GetPublicBiddingById(Guid.Parse("6A411C13-A195-48F7-8DBD-67596C3974C0")).Result;
 
             if (model == null)
             {
+                loggerDto.Response = "404 NOT FOUND";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
 
-            return Ok(mapper.Map<AdDto>(model));
+            /* if (biddingService.GetPublicBiddingByIdAsync() != null)
+             {
+                 return ;
+             }*/
+
+            var adWithPB = mapper.Map<AdDto>(model);
+            adWithPB.PublicBidding = dto;
+            loggerDto.Response = "200 OK";
+            loggerMicroservice.CreateLog(loggerDto);
+            return Ok(mapper.Map<AdDto>(adWithPB));
         }
 
         /// <summary>
@@ -108,19 +135,24 @@ namespace AdMicroservice.Controllers
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<AdDto> CreateAd([FromBody] AdCreationDto adModel)
+        public ActionResult<AdDto2> CreateAd([FromBody] AdCreationDto adModel)
         {
             try
             {
+                loggerDto.HttpMethodName = "POST";
                 Ad ad = mapper.Map<Ad>(adModel);
 
                 AdConfirmation confirmation = adRepository.CreateAd(ad);
                 string location = linkGenerator.GetPathByAction("GetAd", "Ad", new { adId = confirmation.AdID });
                 adRepository.SaveChanges();
+                loggerDto.Response = "201 CREATED";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Created(location, mapper.Map<AdConfirmationDto>(confirmation));
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Create Error");
             }
         }
@@ -142,19 +174,26 @@ namespace AdMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "PUT";
                 var oldAd = adRepository.GetAdById(adModel.AdID);
                 //Proveriti da li uopšte postoji prijava koju pokušavamo da ažuriramo.
                 if (oldAd == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound(); //Ukoliko ne postoji vratiti status 404 (NotFound).
                 }
                 Ad adEntity = mapper.Map<Ad>(adModel);
                 mapper.Map(adEntity, oldAd);
                 adRepository.SaveChanges();
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
                 return Ok(mapper.Map<AdConfirmationDto>(oldAd));
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Update error");
             }
         }
@@ -175,18 +214,25 @@ namespace AdMicroservice.Controllers
         {
             try
             {
+                loggerDto.HttpMethodName = "DELETE";
                 var model = adRepository.GetAdById(adId);
                 if (model == null)
                 {
+                    loggerDto.Response = "404 NOT FOUND";
+                    loggerMicroservice.CreateLog(loggerDto);
                     return NotFound();
                 }
                 adRepository.DeleteAd(adId);
                 // Status iz familije 2xx koji se koristi kada se ne vraca nikakav objekat, ali naglasava da je sve u redu
                 adRepository.SaveChanges();
+                loggerDto.Response = "204 NO CONTENT";
+                loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
             catch
             {
+                loggerDto.Response = "500 INTERNAL SERVER ERROR";
+                loggerMicroservice.CreateLog(loggerDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete Error");
             }
         }

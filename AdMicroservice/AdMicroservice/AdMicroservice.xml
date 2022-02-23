@@ -9,7 +9,7 @@
             Kreirana klasa AdController
             </summary>
         </member>
-        <member name="M:AdMicroservice.Controllers.AdController.#ctor(AdMicroservice.Data.IAdRepository,Microsoft.AspNetCore.Routing.LinkGenerator,AutoMapper.IMapper)">
+        <member name="M:AdMicroservice.Controllers.AdController.#ctor(AdMicroservice.Data.IAdRepository,Microsoft.AspNetCore.Routing.LinkGenerator,AutoMapper.IMapper,AdMicroservice.ServiceCalls.IPublicBiddingService,AddressMicroservice.ServiceCalls.ILoggerMicroservice)">
             <summary>
             Kreiran konstruktor za injektovanje zavisnosti
             </summary>
@@ -562,6 +562,36 @@
             </summary>
         </member>
         <member name="P:AdMicroservice.Models.AdDto.DateOfIssue">
+            <summary>
+            Datum izdavanja službenog lista
+            </summary>
+        </member>
+        <member name="T:AdMicroservice.Models.AdDto2">
+            <summary>
+            Kreiranje DTO za mikroservis oglas.
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdDto2.AdName">
+            <summary>
+            Naziv oglasa
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdDto2.OfficialListID">
+            <summary>
+            ID službenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdDto2.MunicipalityName">
+            <summary>
+            Naziv opštine
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdDto2.OfficialListNumber">
+            <summary>
+            Broj službenog lista
+            </summary>
+        </member>
+        <member name="P:AdMicroservice.Models.AdDto2.DateOfIssue">
             <summary>
             Datum izdavanja službenog lista
             </summary>

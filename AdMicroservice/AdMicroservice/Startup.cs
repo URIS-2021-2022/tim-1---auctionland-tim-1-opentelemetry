@@ -1,11 +1,12 @@
-﻿using AdMicroservice.Data;
+﻿using AddressMicroservice.ServiceCalls;
+using AdMicroservice.Data;
 using AdMicroservice.Entities;
 using AdMicroservice.Helpers;
+using AdMicroservice.ServiceCalls;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -13,16 +14,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AdMicroservice
 {
@@ -139,9 +136,11 @@ namespace AdMicroservice
             services.AddScoped<IAdRepository, AdRepository>(); //Koristimo konkretni repozitorijum
             services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
+            services.AddScoped<IPublicBiddingService, PublicBiddingService>();
+            services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddSwaggerGen(setupAction =>
             {
-                setupAction.SwaggerDoc("ExamRegistrationOpenApiSpecification",
+                setupAction.SwaggerDoc("AdOpenApiSpecification",
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
                         Title = "Ad API",
@@ -239,7 +238,7 @@ namespace AdMicroservice
             app.UseSwaggerUI(setupAction =>
             {
                 //Podesavamo endpoint gde Swagger UI moze da pronadje OpenAPI specifikaciju
-                setupAction.SwaggerEndpoint("/swagger/ExamRegistrationOpenApiSpecification/swagger.json", "Student Exam Registration API");
+                setupAction.SwaggerEndpoint("/swagger/AdOpenApiSpecification/swagger.json", "Ad API");
                 //setupAction.RoutePrefix = ""; //Dokumentacija ce sada biti dostupna na root-u (ne mora da se pise /swagger)
             });
 

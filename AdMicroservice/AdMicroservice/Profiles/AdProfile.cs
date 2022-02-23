@@ -23,6 +23,9 @@ namespace AdMicroservice.Profiles
             CreateMap<AdCreationDto, Ad>();
             CreateMap<AdUpdateDto, Ad>();
             CreateMap<Ad, Ad>();
+            CreateMap<Ad, AdConfirmation>();
+            CreateMap<Ad, AdDto2>();
+            CreateMap<AdDto2, Ad>();
         }
     }
 }
