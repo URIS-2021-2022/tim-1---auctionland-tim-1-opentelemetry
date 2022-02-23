@@ -279,8 +279,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44362
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/publicBiddingTypes/{publicBiddingTypeId}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -312,8 +311,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44362
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/stages/{stageId}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -345,8 +343,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44362
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/statuses/{statusId}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -378,8 +375,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44316
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/application/{applicationId}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -411,8 +407,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44316
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/application/payment/{paymentId}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -456,8 +451,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44381
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/users/{userId}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -489,8 +483,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44381
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/userTypes/{userTypeId}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -522,8 +515,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44343
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/parcels/{parcelID}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -555,8 +547,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44343
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/parcels/partofparcels/{parcelID}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -588,8 +579,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44361
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/commissions/{commissionID}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -621,8 +611,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44361
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/customers/{customerID}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -630,73 +619,7 @@
                 "AuthenticationProviderKey": "Bearer",
                 "AllowedScopes": []
             }
-        },
-        {
-            "DownstreamPathTemplate": "/api/legallyPeople",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 44361
-                }
-            ],
-            "UpstreamPathTemplate": "/legallyPeople",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Bearer",
-                "AllowedScopes": []
-            }
-        },
-        {
-            "DownstreamPathTemplate": "/api/legallyPeople/{legallyPersonID}",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 44361
-                },
-                "publicBiddingTypes"
-            ],
-            "UpstreamPathTemplate": "/legallyPeople/{legallyPersonID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Bearer",
-                "AllowedScopes": []
-            }
-        },
-        {
-            "DownstreamPathTemplate": "/api/physicalPeople",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 44361
-                }
-            ],
-            "UpstreamPathTemplate": "/physicalPeople",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "OPTIONS", "HEAD" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Bearer",
-                "AllowedScopes": []
-            }
-        },
-        {
-            "DownstreamPathTemplate": "/api/physicalPeople/{physicalPersonID}",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 44361
-                },
-                "publicBiddingTypes"
-            ],
-            "UpstreamPathTemplate": "/physicalPeople/{physicalPersonID}",
-            "UpstreamHttpMethod": [ "GET", "DELETE" ],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Bearer",
-                "AllowedScopes": []
-            }
-        },
+        },       
         {
             "DownstreamPathTemplate": "/api/authorizedPeople",
             "DownstreamScheme": "https",
@@ -720,8 +643,7 @@
                 {
                     "Host": "localhost",
                     "Port": 44361
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/authorizedPeople/{authorizedPersonID}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -753,11 +675,26 @@
                 {
                     "Host": "localhost",
                     "Port": 44361
-                },
-                "publicBiddingTypes"
+                }
             ],
             "UpstreamPathTemplate": "/authorizedPersonCustomers/{authorizedPersonCustomerID}",
             "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/logger",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 44361
+                }              
+            ],
+            "UpstreamPathTemplate": "/logger",
+            "UpstreamHttpMethod": [ "POST" ],
             "AuthenticationOptions": {
                 "AuthenticationProviderKey": "Bearer",
                 "AllowedScopes": []
