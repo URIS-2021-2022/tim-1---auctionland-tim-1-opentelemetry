@@ -17,6 +17,8 @@ namespace AdMicroservice.Pages
             _logger = logger;
         }
 
+        public ILogger<IndexModel> Logger => _logger;
+
         public void OnGet()
         {
 

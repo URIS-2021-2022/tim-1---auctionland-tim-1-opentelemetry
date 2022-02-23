@@ -17,6 +17,8 @@ namespace AdMicroservice.Pages
             _logger = logger;
         }
 
+        public ILogger<PrivacyModel> Logger => _logger;
+
         public void OnGet()
         {
         }

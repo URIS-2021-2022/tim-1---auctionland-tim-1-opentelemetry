@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AdMicroservice.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,5 +45,6 @@ namespace AdMicroservice.Entities
         public DateTime DateOfIssue { get; set; }
 
         #endregion
+
     }
 }

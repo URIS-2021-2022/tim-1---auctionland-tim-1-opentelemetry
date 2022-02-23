@@ -17,6 +17,8 @@ namespace AdMicroservice.Pages
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
+        public ILogger<ErrorModel> Logger => _logger;
+
         private readonly ILogger<ErrorModel> _logger;
 
         public ErrorModel(ILogger<ErrorModel> logger)
