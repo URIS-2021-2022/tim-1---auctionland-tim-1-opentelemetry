@@ -15,7 +15,7 @@ namespace PublicBiddingRegistrationMicroservice.Data
             FillData();
         }
 
-        private void FillData()
+        private static void FillData()
         {
             ApplicationForPublics.AddRange(new List<ApplicationForPublicBidding>
             {

@@ -68,9 +68,13 @@ body {
 }
 
 hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -85,13 +89,12 @@ p {
 
 abbr[title],
 abbr[data-original-title] {
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-  cursor: help;
-  border-bottom: 0;
-  -webkit-text-decoration-skip-ink: none;
-  text-decoration-skip-ink: none;
+    text-decoration: underline dotted;
+    -webkit-text-decoration: underline dotted;
+    cursor: help;
+    border-bottom: 0;
+    -webkit-text-decoration-skip-ink: none;
+    text-decoration-skip-ink: none;
 }
 
 address {
@@ -186,9 +189,12 @@ samp {
 }
 
 pre {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  overflow: auto;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    overflow: auto;
+    display: block;
+    font-size: 87.5%;
+    color: #212529;
 }
 
 figure {
@@ -419,13 +425,6 @@ h6, .h6 {
   line-height: 1.2;
 }
 
-hr {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 small,
 .small {
   font-size: 80%;
@@ -526,12 +525,6 @@ kbd kbd {
   padding: 0;
   font-size: 100%;
   font-weight: 700;
-}
-
-pre {
-  display: block;
-  font-size: 87.5%;
-  color: #212529;
 }
 
 pre code {
@@ -3173,10 +3166,6 @@ input[type="button"].btn-block {
   margin-left: 0;
 }
 
-.dropright .dropdown-toggle::after {
-  vertical-align: 0;
-}
-
 .dropleft .dropdown-menu {
   top: 0;
   right: 100%;
@@ -3192,10 +3181,6 @@ input[type="button"].btn-block {
   content: "";
 }
 
-.dropleft .dropdown-toggle::after {
-  display: none;
-}
-
 .dropleft .dropdown-toggle::before {
   display: inline-block;
   margin-right: 0.255em;
@@ -3208,10 +3193,6 @@ input[type="button"].btn-block {
 
 .dropleft .dropdown-toggle:empty::after {
   margin-left: 0;
-}
-
-.dropleft .dropdown-toggle::before {
-  vertical-align: 0;
 }
 
 .dropdown-menu[x-placement^="top"], .dropdown-menu[x-placement^="right"], .dropdown-menu[x-placement^="bottom"], .dropdown-menu[x-placement^="left"] {
@@ -4824,10 +4805,6 @@ input[type="button"].btn-block {
 
 .breadcrumb-item + .breadcrumb-item:hover::before {
   text-decoration: underline;
-}
-
-.breadcrumb-item + .breadcrumb-item:hover::before {
-  text-decoration: none;
 }
 
 .breadcrumb-item.active {
