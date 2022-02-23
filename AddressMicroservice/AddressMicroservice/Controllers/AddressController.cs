@@ -119,7 +119,7 @@ namespace AddressMicroservice.Controllers
         ///     "countryName": "Srbija" \
         ///}
         /// </remarks>
-        /// <response code="200">Vraća kreiranu adresu.</response>
+        /// <response code="201">Vraća kreiranu adresu.</response>
         /// <response code="500">Došlo je do greške na serveru prilikom kreiranja adrese.</response>
         [HttpPost]
         [Consumes("application/json")]
