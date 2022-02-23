@@ -16,6 +16,7 @@ namespace ComplaintMicroservice.Profiles
             CreateMap<Complaint, Complaint>();
             CreateMap<ComplaintCreationDto, Complaint>();
             CreateMap<ComplaintUpdateDto, Complaint>();
+            CreateMap<ComplaintByIdDto, ComplaintByIdDto>();
         }
     }
 }

@@ -243,6 +243,61 @@
             Status žalbe
             </summary>
         </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.SubmissionDate">
+            <summary>
+            Datum podnošenja žalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.Reason">
+            <summary>
+            Razlog podnošenja žalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.Explanation">
+            <summary>
+            Obrazloženje žalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.DateOfDecision">
+            <summary>
+            Datum donošenja rešenja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.NumberOfDecision">
+            <summary>
+            Broj rešenja
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.Action">
+            <summary>
+            Akcija sprovedena na osnovu žalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.ComplaintTypeId">
+            <summary>
+            Id tipa
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.ComplaintTypeName">
+            <summary>
+            Tip žalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.ComplaintStatusId">
+            <summary>
+            Id statusa
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.ComplaintStatus">
+            <summary>
+            Status žalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.PublicBidding">
+            <summary>
+            Javno nadmetanje na koje se žalba odnosi
+            </summary>
+        </member>
         <member name="T:ComplaintMicroservice.Models.ComplaintConfirmationDto">
             <summary>
             DTO za potvrdu kreiranja žalbe
@@ -446,6 +501,31 @@
         <member name="P:ComplaintMicroservice.Models.ComplaintUpdateDto.ComplaintStatus">
             <summary>
             Status žalbe
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.CustomerDto.CustomerID">
+            <summary>
+            ID kupca
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.CustomerDto.IsPhysicalPerson">
+            <summary>
+            Da li je kupac fizicko lice, ako nije onda je pravno
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.CustomerDto.Priority">
+            <summary>
+            Prioritet 
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.CustomerDto.RealizedArea">
+            <summary>
+            Ostvarena povrsina
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.CustomerDto.HasABan">
+            <summary>
+            Da li kupac ima zabranu
             </summary>
         </member>
     </members>
