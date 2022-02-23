@@ -18,12 +18,12 @@ namespace CustomerMicroservice.ServiceCalls
             this.configuration = configuration;
         }
 
-        public async Task<PublicBiddingDto> GetPublicBiddings(Guid publicBiddingId)
+        public async Task<PublicBiddingDto> GetPublicBiddings(Guid publicBiddingID)
         {
             try
             {
                 using var httpClient = new HttpClient();
-                Uri url = new Uri($"{ configuration["Services:PublicBiddingMicroservice"] }api/publicBiddings/" + publicBiddingId);
+                Uri url = new Uri($"{ configuration["Services:PublicBiddingMicroservice"] }api/publicBiddings/" + publicBiddingID);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Accept", "application/json");
                 var response = await httpClient.SendAsync(request);
