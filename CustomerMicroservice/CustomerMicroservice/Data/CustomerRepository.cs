@@ -33,12 +33,14 @@ namespace CustomerMicroservice.Data
         public Customer GetCustomerById(Guid customerID)
         {
             return new Customer();
+            //return context.Customer.FirstOrDefault(e => e.CustomerID == customerID);
         }
 
         public List<Customer> GetCustomers()
         {
             List<Customer> customers = new List<Customer>();
             return customers;
+            //return context.Customer.ToList();
         }
 
         public bool SaveChanges()

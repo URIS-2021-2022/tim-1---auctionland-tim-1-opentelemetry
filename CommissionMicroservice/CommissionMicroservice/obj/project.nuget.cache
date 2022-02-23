@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2WHow4fiK7qUKXZ7kPax1ayUEICcYwdvB8NxNZXQ3DubXyLSRIU7oZu10KHPZfifqWH3Phr4qDpcftLVrLAzIQ==",
+  "dgSpecHash": "gpvmHq1u8RbYRfQaZ4ibpnJiaMj0DjGM9zjGJvtykserT4pNOusubSXC5LVY6XDBTxbBmPFicKYo3snCjKGMFA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Andjela\\Source\\Repos\\tim-1---auctionland\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj",
+  "projectFilePath": "C:\\Users\\Andjela\\Source\\Repos\\tim-1\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Andjela\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Andjela\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

@@ -4,6 +4,13 @@
         <name>CommissionMicroservice</name>
     </assembly>
     <members>
+        <member name="M:CommissionMicroservice.Controllers.AuthenticationController.Authenticate(CommissionMicroservice.Models.Principal)">
+            <summary>
+            Sluzi za autentifikaciju korisnika
+            </summary>
+            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
+            <returns></returns>
+        </member>
         <member name="T:CommissionMicroservice.Controllers.CommissionController">
             <summary>
             Kontroler komisije sa CRUD 
@@ -135,6 +142,35 @@
             Proveravanje validnosti unesenih podataka
             </summary>
             <param name="member">Model clana komisije</param>
+            <returns></returns>
+        </member>
+        <member name="M:CommissionMicroservice.Data.UserMockRepository.FillData">
+            <summary>
+            Metoda koja upisuje testne podatke
+            </summary>
+        </member>
+        <member name="M:CommissionMicroservice.Data.UserMockRepository.UserWithCredentialsExists(System.String,System.String)">
+            <summary>
+            Proverava da li postoji korisnik sa prosleđenim kredencijalima
+            </summary>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CommissionMicroservice.Data.UserMockRepository.HashPassword(System.String)">
+            <summary>
+            Vrši hash-ovanje korisničke lozinke
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <returns>Generisan hash i salt</returns>
+        </member>
+        <member name="M:CommissionMicroservice.Data.UserMockRepository.VerifyPassword(System.String,System.String,System.String)">
+            <summary>
+            Proverava validnost prosleđene lozinke sa prosleđenim hash-om
+            </summary>
+            <param name="password">Korisnička lozinka</param>
+            <param name="savedHash">Sačuvan hash</param>
+            <param name="savedSalt">Sačuvan salt</param>
             <returns></returns>
         </member>
         <member name="P:CommissionMicroservice.Entities.Commission.CommissionID">
