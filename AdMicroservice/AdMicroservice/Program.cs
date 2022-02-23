@@ -13,7 +13,7 @@ namespace OglasMicroservice
     /// <summary>
     /// Kreirana klasa Program
     /// </summary>
-    public class Program
+    public static class Program
     {
         /// <summary>
         /// Ulazna main metoda 
