@@ -96,3 +96,4 @@ C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\LoggerMicroser
 C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\LoggerMicroservice\LoggerMicroservice\obj\Debug\net5.0\LoggerMicroservice.pdb
 C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\LoggerMicroservice\LoggerMicroservice\obj\Debug\net5.0\LoggerMicroservice.genruntimeconfig.cache
 C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\LoggerMicroservice\LoggerMicroservice\obj\Debug\net5.0\LoggerMicroservice.csproj.CopyComplete
+C:\Users\Korisnik\Desktop\tim-1---auctionland-tim-1-opentelemetry\LoggerMicroservice\LoggerMicroservice\bin\Debug\net5.0\LoggerMicroservice.xml

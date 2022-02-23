@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LoggerMicroservice</name>
+    </assembly>
+    <members>
+        <member name="M:LoggerMicroservice.Controllers.LoggerController.CreateLog(LoggerMicroservice.Entities.Logger)">
+             <summary>
+             Metoda služi za ručno upisivanje logova. Koristiti samo u izuzetnim situacijama.
+             </summary>
+             <param name="logger">Model koji prikazuje strukturu jednog upisa u log fajl.</param>
+             <returns></returns>
+             <remarks>
+             Primer jednog upisa u log fajl. \
+             POST /api/logger \
+             {     \
+                 "date": "Wednesday, 23 February 2022", \
+                 "time": "12:15 AM", \
+                 "service": "ADDRESS", \
+                 "methodName": "GET", \
+                 "response": "200 OK" \
+            }
+             </remarks>
+             <response code="200">Uspešno upisan log.</response>
+             <response code="500">Došlo je do greške na serveru prilikom upisivanja log-a.</response>
+        </member>
+    </members>
+</doc>
