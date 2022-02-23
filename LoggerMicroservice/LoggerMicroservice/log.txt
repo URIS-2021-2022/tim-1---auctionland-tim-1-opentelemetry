@@ -1,6 +1,1 @@
 
-INFO Tuesday, 22 February 2022 09:44 PM Microservice ADDRESS sent GET request. Response was: 200 OK
-INFO Tuesday, 22 February 2022 11:13 PM Microservice ADDRESS sent GET request. Response was: 200 OK
-INFO Tuesday, 22 February 2022 11:15 PM Microservice ADDRESS sent GET request. Response was: 200 OK
-INFO Tuesday, 22 February 2022 11:15 PM Microservice ADDRESS sent GET request. Response was: 200 OK
-INFO Tuesday, 22 February 2022 11:15 PM Microservice ADDRESS sent GET request. Response was: 204 NO CONTENT
