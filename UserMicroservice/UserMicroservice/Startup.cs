@@ -130,15 +130,15 @@ namespace UserMicroservice
                         Contact = new Microsoft.OpenApi.Models.OpenApiContact
                         {
                             Name = "Ana Zuber",
-                            Email = "ana@mail.com",
-                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                            Email = "ana.zuber99@gmail.com",
+                            Url = new Uri($"http://www.ftn.uns.ac.rs/")
                         },
                         License = new Microsoft.OpenApi.Models.OpenApiLicense
                         {
                             Name = "FTN licence",
-                            Url = new Uri("http://www.ftn.uns.ac.rs/")
+                            Url = new Uri($"http://www.ftn.uns.ac.rs/")
                         },
-                        TermsOfService = new Uri("http://www.ftn.uns.ac.rs/userTermsOfService")
+                        TermsOfService = new Uri($"http://www.ftn.uns.ac.rs/userTermsOfService")
                     });
 
                 setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
