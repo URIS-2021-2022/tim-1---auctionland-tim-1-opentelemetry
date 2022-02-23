@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Andjela\\Source\\Repos\\tim-1\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj": {}
+    "C:\\Users\\Andjela\\Source\\Repos\\tim-1---auctionland\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Andjela\\Source\\Repos\\tim-1\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj": {
+    "C:\\Users\\Andjela\\Source\\Repos\\tim-1---auctionland\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andjela\\Source\\Repos\\tim-1\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj",
+        "projectUniqueName": "C:\\Users\\Andjela\\Source\\Repos\\tim-1---auctionland\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj",
         "projectName": "CommissionMicroservice",
-        "projectPath": "C:\\Users\\Andjela\\Source\\Repos\\tim-1\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj",
+        "projectPath": "C:\\Users\\Andjela\\Source\\Repos\\tim-1---auctionland\\CommissionMicroservice\\CommissionMicroservice\\CommissionMicroservice.csproj",
         "packagesPath": "C:\\Users\\Andjela\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andjela\\Source\\Repos\\tim-1\\CommissionMicroservice\\CommissionMicroservice\\obj\\",
+        "outputPath": "C:\\Users\\Andjela\\Source\\Repos\\tim-1---auctionland\\CommissionMicroservice\\CommissionMicroservice\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Andjela\\AppData\\Roaming\\NuGet\\NuGet.Config",
