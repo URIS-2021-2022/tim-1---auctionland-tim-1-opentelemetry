@@ -4,13 +4,6 @@
         <name>CustomerMicroservice</name>
     </assembly>
     <members>
-        <member name="M:CustomerMicroservice.Controllers.AuthenticationController.Authenticate(CustomerMicroservice.Models.Principal)">
-            <summary>
-            Sluzi za autentifikaciju korisnika
-            </summary>
-            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
-            <returns></returns>
-        </member>
         <member name="T:CustomerMicroservice.Controllers.AuthorizedPersonController">
             <summary>
             Kontroler za ovlasceno lice
@@ -180,35 +173,6 @@
             <summary>
             Vraca opcije za rad sa kupcima u sistemu
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CustomerMicroservice.Data.UserMockRepository.FillData">
-            <summary>
-            Metoda koja upisuje testne podatke
-            </summary>
-        </member>
-        <member name="M:CustomerMicroservice.Data.UserMockRepository.UserWithCredentialsExists(System.String,System.String)">
-            <summary>
-            Proverava da li postoji korisnik sa prosleđenim kredencijalima
-            </summary>
-            <param name="username"></param>
-            <param name="password"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CustomerMicroservice.Data.UserMockRepository.HashPassword(System.String)">
-            <summary>
-            Vrši hash-ovanje korisničke lozinke
-            </summary>
-            <param name="password">Korisnička lozinka</param>
-            <returns>Generisan hash i salt</returns>
-        </member>
-        <member name="M:CustomerMicroservice.Data.UserMockRepository.VerifyPassword(System.String,System.String,System.String)">
-            <summary>
-            Proverava validnost prosleđene lozinke sa prosleđenim hash-om
-            </summary>
-            <param name="password">Korisnička lozinka</param>
-            <param name="savedHash">Sačuvan hash</param>
-            <param name="savedSalt">Sačuvan salt</param>
             <returns></returns>
         </member>
         <member name="P:CustomerMicroservice.Entities.AuthorizedPerson.AuthorizedPersonID">
@@ -559,41 +523,6 @@
         <member name="P:CustomerMicroservice.Entities.PhysicalPersonConfirmation.AccountNumber">
             <summary>
             Broj racuna fizickog lica
-            </summary>
-        </member>
-        <member name="P:CustomerMicroservice.Entities.User.Id">
-            <summary>
-            ID korisnika 
-            </summary>
-        </member>
-        <member name="P:CustomerMicroservice.Entities.User.FirstName">
-            <summary>
-            Ime korisnika
-            </summary>
-        </member>
-        <member name="P:CustomerMicroservice.Entities.User.LastName">
-            <summary>
-            Prezime korisnika
-            </summary>
-        </member>
-        <member name="P:CustomerMicroservice.Entities.User.Username">
-            <summary>
-            Korisnicko ime korisnika
-            </summary>
-        </member>
-        <member name="P:CustomerMicroservice.Entities.User.Email">
-            <summary>
-            Mejl korisnika
-            </summary>
-        </member>
-        <member name="P:CustomerMicroservice.Entities.User.Password">
-            <summary>
-            Lozinka korisnika
-            </summary>
-        </member>
-        <member name="P:CustomerMicroservice.Entities.User.Salt">
-            <summary>
-            Salt 
             </summary>
         </member>
         <member name="P:CustomerMicroservice.Models.AddressDto.Address">

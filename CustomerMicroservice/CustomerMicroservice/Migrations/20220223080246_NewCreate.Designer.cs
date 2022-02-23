@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMicroservice.Migrations
 {
     [DbContext(typeof(CustomerContext))]
-    [Migration("20220222222222_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220223080246_NewCreate")]
+    partial class NewCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
