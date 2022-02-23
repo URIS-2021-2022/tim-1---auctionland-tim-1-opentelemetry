@@ -1,9 +1,7 @@
 ﻿using AddressMicroservice.ServiceCalls;
 using AdMicroservice.Data;
 using AdMicroservice.Entities;
-using AdMicroservice.Helpers;
 using AdMicroservice.ServiceCalls;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,12 +12,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
-using System.Text;
 
 namespace AdMicroservice
 {
@@ -109,22 +105,6 @@ namespace AdMicroservice
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //Konfigurisanje Jwt autentifikacije za projekat
-            //Registrujemo Jwt autentifikacionu shemu i definisemo sve potrebne Jwt opcije
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
-            });
-
             /*
              * Izvor: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0#lifetime-and-registration-options
                 - Transient objects are always different. The transient OperationId value is different in the IndexModel and in the middleware.
@@ -134,8 +114,6 @@ namespace AdMicroservice
              */
             //services.AddSingleton<IExamRegistrationRepository, ExamRegistrationMockRepository>(); //Koristimo mock repozitorijum
             services.AddScoped<IAdRepository, AdRepository>(); //Koristimo konkretni repozitorijum
-            services.AddSingleton<IUserRepository, UserMockRepository>();
-            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddScoped<IPublicBiddingService, PublicBiddingService>();
             services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddSwaggerGen(setupAction =>
@@ -160,31 +138,6 @@ namespace AdMicroservice
                         },
                         TermsOfService = new Uri(UriString1)
                     });
-
-                setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Molim Vas unesite vaš token",
-                    Name = "Autorizacija korisnika",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Scheme = "bearer"
-                });
-
-                setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                    }
-                });
 
                 //Pomocu refleksije dobijamo ime XML fajla sa komentarima (ovako smo ga nazvali u Project -> Properties)
                 var xmlComments = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";

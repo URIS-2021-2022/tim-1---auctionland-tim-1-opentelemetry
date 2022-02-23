@@ -81,24 +81,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:AdMicroservice.Controllers.AuthenticationController">
-            <summary>
-            Kreirana klasa AuthenticationController
-            </summary>
-        </member>
-        <member name="M:AdMicroservice.Controllers.AuthenticationController.#ctor(AdMicroservice.Helpers.IAuthenticationHelper)">
-            <summary>
-            Injektovanje zavisnosti preko kontruktora klase AuthenticationController
-            </summary>
-            <param name="authenticationHelper"></param>
-        </member>
-        <member name="M:AdMicroservice.Controllers.AuthenticationController.Authenticate(AdMicroservice.Models.Principal)">
-            <summary>
-            Sluzi za autentifikaciju korisnika
-            </summary>
-            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
-            <returns></returns>
-        </member>
         <member name="T:AdMicroservice.Data.AdMockRepository">
             <summary>
             Kreirana klasa koja implementira interfejs IAdRepository
@@ -250,63 +232,6 @@
             Čuva promene 
             </summary>
         </member>
-        <member name="T:AdMicroservice.Data.IUserRepository">
-            <summary>
-            Kreiran interfejs IUserRepository
-            </summary>
-        </member>
-        <member name="M:AdMicroservice.Data.IUserRepository.UserWithCredentialsExists(System.String,System.String)">
-            <summary>
-            Metoda koja proverava da li postoji korisnik sa prosleđenim kredencijalima
-            </summary>
-            <param name="username"></param>
-            <param name="password"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AdMicroservice.Data.UserMockRepository">
-            <summary>
-            Mock repozitorijum koji glumi perzistenciju korisnika sistema
-            </summary>
-        </member>
-        <member name="P:AdMicroservice.Data.UserMockRepository.Users">
-            <summary>
-            Statička lista korisnika 
-            </summary>
-        </member>
-        <member name="M:AdMicroservice.Data.UserMockRepository.#ctor">
-            <summary>
-            Konstruktor klase UserMockRepository
-            </summary>
-        </member>
-        <member name="M:AdMicroservice.Data.UserMockRepository.FillData">
-            <summary>
-            Metoda koja upisuje testne podatke
-            </summary>
-        </member>
-        <member name="M:AdMicroservice.Data.UserMockRepository.UserWithCredentialsExists(System.String,System.String)">
-            <summary>
-            Proverava da li postoji korisnik sa prosleđenim kredencijalima
-            </summary>
-            <param name="username"></param>
-            <param name="password"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AdMicroservice.Data.UserMockRepository.HashPassword(System.String)">
-            <summary>
-            Vrši hash-ovanje korisničke lozinke
-            </summary>
-            <param name="password">Korisnička lozinka</param>
-            <returns>Generisan hash i salt</returns>
-        </member>
-        <member name="M:AdMicroservice.Data.UserMockRepository.VerifyPassword(System.String,System.String,System.String)">
-            <summary>
-            Proverava validnost prosleđene lozinke sa prosleđenim hash-om
-            </summary>
-            <param name="password">Korisnička lozinka</param>
-            <param name="savedHash">Sačuvan hash</param>
-            <param name="savedSalt">Sačuvan salt</param>
-            <returns></returns>
-        </member>
         <member name="T:AdMicroservice.Entities.Ad">
             <summary>
             Kreirana klasa oglas
@@ -383,91 +308,6 @@
             Kreiranje i inicijalno punjenje modela 
             </summary>
             <param name="modelBuilder"></param>
-        </member>
-        <member name="T:AdMicroservice.Entities.User">
-            <summary>
-            Kreirana klasa korisnik
-            </summary>
-        </member>
-        <member name="P:AdMicroservice.Entities.User.Id">
-            <summary>
-            ID korisnika 
-            </summary>
-        </member>
-        <member name="P:AdMicroservice.Entities.User.FirstName">
-            <summary>
-            Ime korisnika 
-            </summary>
-        </member>
-        <member name="P:AdMicroservice.Entities.User.LastName">
-            <summary>
-            Prezime korisnika 
-            </summary>
-        </member>
-        <member name="P:AdMicroservice.Entities.User.UserName">
-            <summary>
-            Korisničko ime korisnika 
-            </summary>
-        </member>
-        <member name="P:AdMicroservice.Entities.User.Email">
-            <summary>
-            Mejl korisnika
-            </summary>
-        </member>
-        <member name="P:AdMicroservice.Entities.User.Password">
-            <summary>
-            Šifra korisnika 
-            </summary>
-        </member>
-        <member name="P:AdMicroservice.Entities.User.Salt">
-            <summary>
-            Privatni ključ korisnika 
-            </summary>
-        </member>
-        <member name="T:AdMicroservice.Helpers.AuthenticationHelper">
-            <summary>
-            Kreirana klasa AuthenticationHelper
-            </summary>
-        </member>
-        <member name="M:AdMicroservice.Helpers.AuthenticationHelper.#ctor(Microsoft.Extensions.Configuration.IConfiguration,AdMicroservice.Data.IUserRepository)">
-            <summary>
-            Injektovanje zavisnosti preko konstruktora klase AuthenticationHelper
-            </summary>
-            <param name="configuration"></param>
-            <param name="userRepository"></param>
-        </member>
-        <member name="M:AdMicroservice.Helpers.AuthenticationHelper.AuthenticatePrincipal(AdMicroservice.Models.Principal)">
-            <summary>
-            Vrši autentifikaciju principala
-            </summary>
-            <param name="principal">Principal za autentifikaciju</param>
-            <returns></returns>
-        </member>
-        <member name="M:AdMicroservice.Helpers.AuthenticationHelper.GenerateJwt(AdMicroservice.Models.Principal)">
-            <summary>
-            Generiše novi token za autentifikovanog principala
-            </summary>
-            <param name="principal">Autentifikovani principal</param>
-            <returns></returns>
-        </member>
-        <member name="T:AdMicroservice.Helpers.IAuthenticationHelper">
-            <summary>
-            Kreiran interfejs IAuthenticationHelper
-            </summary>
-        </member>
-        <member name="M:AdMicroservice.Helpers.IAuthenticationHelper.AuthenticatePrincipal(AdMicroservice.Models.Principal)">
-            <summary>
-            Metoda za proveru principala korisnika 
-            </summary>
-            <param name="principal"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AdMicroservice.Helpers.IAuthenticationHelper.GenerateJwt(AdMicroservice.Models.Principal)">
-            <summary>
-            Metoda za generisanje tokena 
-            </summary>
-            <param name="principal"></param>
-            <returns></returns>
         </member>
         <member name="T:AdMicroservice.Migrations.InitialCreate">
             <summary>

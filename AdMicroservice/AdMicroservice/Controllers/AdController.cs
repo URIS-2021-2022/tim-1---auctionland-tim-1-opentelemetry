@@ -22,7 +22,6 @@ namespace AdMicroservice.Controllers
     [ApiController]
     [Route("api/ads")]
     [Produces("application/json", "application/xml")]
-    //[Authorize]
     public class AdController : ControllerBase
     {
         private readonly IAdRepository adRepository;
@@ -45,8 +44,10 @@ namespace AdMicroservice.Controllers
             this.mapper = mapper;
             this.biddingService = biddingService;
             this.loggerMicroservice = loggerMicroservice;
-            loggerDto = new LoggerDto();
-            loggerDto.Service = "AD";
+            loggerDto = new LoggerDto
+            {
+                Service = "AD"
+            };
         }
 
 
@@ -99,11 +100,6 @@ namespace AdMicroservice.Controllers
                 loggerMicroservice.CreateLog(loggerDto);
                 return NotFound();
             }
-
-            /* if (biddingService.GetPublicBiddingByIdAsync() != null)
-             {
-                 return ;
-             }*/
 
             var adWithPB = mapper.Map<AdDto>(model);
             adWithPB.PublicBidding = dto;
