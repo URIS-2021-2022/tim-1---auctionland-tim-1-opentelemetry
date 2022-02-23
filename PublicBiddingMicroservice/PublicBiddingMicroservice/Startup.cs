@@ -73,13 +73,11 @@ namespace PublicBiddingMicroservice
                         problemDetails.Status = StatusCodes.Status422UnprocessableEntity;
                         problemDetails.Title = "Došlo je do greške prilikom validacije.";
 
-                        //sve vraćamo kao UnprocessibleEntity objekat
                         return new UnprocessableEntityObjectResult(problemDetails)
                         {
                             ContentTypes = { "application/problem+json" }
                         };
                     };
-                    //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                     problemDetails.Status = StatusCodes.Status400BadRequest;
                     problemDetails.Title = "Došlo je do greške prilikom parsiranja poslatog sadržaja.";
                     return new BadRequestObjectResult(problemDetails)
