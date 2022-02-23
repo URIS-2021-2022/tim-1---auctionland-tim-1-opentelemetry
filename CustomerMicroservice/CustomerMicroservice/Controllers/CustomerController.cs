@@ -109,31 +109,41 @@ namespace CustomerMicroservice.Controllers
         public ActionResult<List<CustomerDto>> GetCustomerById(Guid customerId)
         {
             loggerDto.HttpMethodName = "GET";
-            Customer customer;
-            customer = (Customer)physicalPersonRepository.GetPhysicalPersonById(customerId);
-
-            if (customer == null)
-            {
-                customer = (Customer)legallyPersonRepository.GetLegallyPersonById(customerId);
-            }
-
-            if (customer == null)
+            if (physicalPersonRepository.GetPhysicalPersonById(customerId) is null && legallyPersonRepository.GetLegallyPersonById(customerId) is null)
             {
                 loggerDto.Response = "204 NO CONTENT";
                 loggerMicroservice.CreateLog(loggerDto);
                 return NoContent();
             }
+            if (physicalPersonRepository.GetPhysicalPersonById(customerId) is null)
+            {
+                LegallyPerson legallyPerson = legallyPersonRepository.GetLegallyPersonById(customerId);
+                AddressDto address = addressService.GetAddress(legallyPerson.AddressId).Result;
+                DocumentDto document = documentService.GetDocument(legallyPerson.DocumentID).Result;
+                PublicBiddingDto publicBidding = publicBiddingMicroservice.GetPublicBiddings(legallyPerson.PublicBiddingID).Result;
+                CustomerDto customer = mapper.Map<CustomerDto>(legallyPerson);
+                customer.Address = address;
+                customer.Document = document;
+                customer.PublicBidding = publicBidding;
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
+                return Ok(mapper.Map<CustomerDto>(customer));
+            }
+            else
+            {
+                PhysicalPerson physicalPerson = physicalPersonRepository.GetPhysicalPersonById(customerId);
+                AddressDto address = addressService.GetAddress(physicalPerson.AddressId).Result;
+                DocumentDto document = documentService.GetDocument(physicalPerson.DocumentID).Result;
+                PublicBiddingDto publicBidding = publicBiddingMicroservice.GetPublicBiddings(physicalPerson.PublicBiddingID).Result;
+                CustomerDto customer = mapper.Map<CustomerDto>(physicalPerson);
+                customer.Address = address;
+                customer.Document = document;
+                customer.PublicBidding = publicBidding;
+                loggerDto.Response = "200 OK";
+                loggerMicroservice.CreateLog(loggerDto);
+                return Ok(mapper.Map<CustomerDto>(customer));
+            }
 
-            AddressDto address = addressService.GetAddress(customer.AddressId).Result;
-            DocumentDto document = documentService.GetDocument(customer.DocumentID).Result;
-            PublicBiddingDto publicBidding = publicBiddingMicroservice.GetPublicBiddings(customer.PublicBiddingID).Result;
-            customer.Address = address;
-            customer.Document = document;
-            customer.PublicBidding = publicBidding;
-
-            loggerDto.Response = "200 OK";
-            loggerMicroservice.CreateLog(loggerDto);
-            return Ok(mapper.Map<CustomerDto>(customer));
         }
 
         /// <summary>
@@ -149,7 +159,6 @@ namespace CustomerMicroservice.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<CustomerConfirmationDto> CreateCustomer([FromBody] CustomerCreationDto customerDto)
         {
-            // komunikacija
             try
             {
                 loggerDto.HttpMethodName = "POST";
@@ -157,7 +166,7 @@ namespace CustomerMicroservice.Controllers
                 Customer customer = mapper.Map<Customer>(customerDto);
                 CustomerConfirmation confirmation;
 
-                if(customer.IsPhysicalPerson == true)
+                if(customer.IsPhysicalPerson)
                 {
                     PhysicalPerson physicalPerson = customer as PhysicalPerson;
                     confirmation = physicalPersonRepository.CreatePhysicalPerson(physicalPerson);
@@ -211,7 +220,7 @@ namespace CustomerMicroservice.Controllers
                     return NotFound();
                 }
 
-                if(customer.IsPhysicalPerson == true)
+                if(customer.IsPhysicalPerson)
                 {
                     physicalPersonRepository.DeletePhysicalPerson(customerID);
                     physicalPersonRepository.SaveChanges();
@@ -252,7 +261,7 @@ namespace CustomerMicroservice.Controllers
             try
             {
                 loggerDto.HttpMethodName = "PUT";
-                if (customer.IsPhysicalPerson == true)
+                if (customer.IsPhysicalPerson)
                 {
                     var oldCustomerPhy = physicalPersonRepository.GetPhysicalPersonById(customer.CustomerID);
                     oldCustomerPhy.CustomerID = customer.CustomerID;
