@@ -70,6 +70,6 @@ namespace ComplaintMicroservice.Models
         /// <summary>
         /// Kupac koji je podneo žalbu
         /// </summary>
-        public CustomerDto CustomerDto { get; set; }
+        public CustomerDto Customer { get; set; }
     }
 }
