@@ -20,8 +20,6 @@ namespace AddressMicroservice.Controllers
     [ApiController]
     [Route("api/addresses")]
     [Produces("application/json", "application/xml")]
-    // [Authorize]
-    //AUTORIZACIJA ne prolazi posle negerisanja tokena
     public class AddressController : ControllerBase
     {
         private readonly IAddressRepository addressRepository;
