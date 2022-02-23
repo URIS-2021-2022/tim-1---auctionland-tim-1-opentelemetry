@@ -23,9 +23,10 @@ namespace ComplaintMicroservice.Controllers
         private readonly ILoggerService loggerMicroservice;
         private readonly LoggerDto loggerDto;
         private readonly IPublicBiddingService publicBiddingService;
+        private readonly ICustomerService customerService;
 
 
-        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService loggerMicroservice, IPublicBiddingService publicBiddingService)
+        public ComplaintController(IComplaintRepository complaintRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerService loggerMicroservice, IPublicBiddingService publicBiddingService, ICustomerService customerService)
         {
             this.complaintRepository = complaintRepository;
             this.linkGenerator = linkGenerator;
@@ -36,6 +37,7 @@ namespace ComplaintMicroservice.Controllers
                 Service = "COMPLAINT"
             };
             this.publicBiddingService = publicBiddingService;
+            this.customerService = customerService;
         }
 
         /// <summary>
@@ -81,8 +83,10 @@ namespace ComplaintMicroservice.Controllers
         {
             loggerDto.HttpMethodName = "GET";
             Complaint model = complaintRepository.GetComplaintById(complaintId);
+
             PublicBiddingDto pb = publicBiddingService.GetPublicBiddingById(Guid.Parse("6a411c13-a195-48f7-8dbd-67596c3974c0")).Result;
-  
+            CustomerDto customer = customerService.GetCustomerById(Guid.Parse("2a411c13-a196-48f7-88bd-67596c3974c3")).Result;
+
             if (model == null)
             {
                 loggerDto.Response = "204 NO CONTENT";
@@ -97,6 +101,11 @@ namespace ComplaintMicroservice.Controllers
             {
                 complaintWithPB.PublicBidding = pb;
             }
+            if (customer != null)
+            {
+                complaintWithPB.Customer = customer;
+            }
+
             return Ok(complaintWithPB);
         }
 

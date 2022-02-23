@@ -22,7 +22,7 @@ namespace ComplaintMicroservice.ServiceCalls
         {
             using HttpClient client = new();
             var x = configuration["Services:LoggerMicroservice"];
-            Uri url = new($"{ configuration["Services:LoggerMicroservice"] }api/logger");
+            Uri url = new($"{ x }api/logger");
 
             HttpContent content = new StringContent(JsonConvert.SerializeObject(loggerDto));
             content.Headers.ContentType.MediaType = "application/json";

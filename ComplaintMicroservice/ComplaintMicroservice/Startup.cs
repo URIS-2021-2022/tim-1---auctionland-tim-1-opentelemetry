@@ -119,10 +119,9 @@ namespace ComplaintMicroservice
             }
 
             app.UseHttpsRedirection();
-            //app.UseAuthentication();
+            
             app.UseRouting();
 
-            //app.UseAuthorization();
             app.UseSwagger(); // da se prilikom pokretanja projekta pokrene i swagger dokumentacija
 
             app.UseSwaggerUI(setupAction =>

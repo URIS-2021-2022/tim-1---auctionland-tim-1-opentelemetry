@@ -243,6 +243,11 @@
             Status žalbe
             </summary>
         </member>
+        <member name="T:ComplaintMicroservice.Models.ComplaintByIdDto">
+            <summary>
+            Dto za žalbu sa javnim nadmetanjem i kupcem
+            </summary>
+        </member>
         <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.SubmissionDate">
             <summary>
             Datum podnošenja žalbe
@@ -296,6 +301,11 @@
         <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.PublicBidding">
             <summary>
             Javno nadmetanje na koje se žalba odnosi
+            </summary>
+        </member>
+        <member name="P:ComplaintMicroservice.Models.ComplaintByIdDto.Customer">
+            <summary>
+            Kupac koji je podneo žalbu
             </summary>
         </member>
         <member name="T:ComplaintMicroservice.Models.ComplaintConfirmationDto">
