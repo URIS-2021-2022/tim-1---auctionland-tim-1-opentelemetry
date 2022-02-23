@@ -1,6 +1,5 @@
 ﻿using AddressMicroservice.ServiceCalls;
 using AutoMapper;
-using LoggerMicroservice.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +41,7 @@ namespace ParcelMicroservice.Controllers
             this.mapper = mapper;
             this.loggerMicroservice = loggerMicroservice;
             loggerDto = new LoggerDto();
-            loggerDto.Service = "ADDRESS";
+            loggerDto.Service = "PARCEL";
         }
 
         [HttpGet]

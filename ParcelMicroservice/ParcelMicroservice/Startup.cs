@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AddressMicroservice.ServiceCalls;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -115,6 +116,7 @@ namespace ParcelMicroservice
             services.AddScoped<IPartOfParcelRepository, PartOfParcelRepository>();
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
             services.AddSingleton<IUserRepository, UserMockRepository>();
+            services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddSwaggerGen(setupAction =>
             {
             setupAction.SwaggerDoc("ParcelOpenApiSpecification", new Microsoft.OpenApi.Models.OpenApiInfo()

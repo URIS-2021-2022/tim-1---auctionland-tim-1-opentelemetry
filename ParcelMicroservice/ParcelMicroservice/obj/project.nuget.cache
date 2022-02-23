@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KaU04qNWzmSHhG7zSsDyy14jllbccoVL5P+1H8egLXCcTfN4bgGDDKi0Rl+8eCDruYnl3kL84+wTrmPVUJ+yTw==",
+  "dgSpecHash": "F0xDcO4VT5yIQwpzb93AsBp8Z4SgaveMDk+J6bdMFOfRnNsr4+a17i+Az2LZMSwcYP3ypXCCmbYjX93tn7sJfA==",
   "success": true,
-  "projectFilePath": "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj",
+  "projectFilePath": "D:\\Sedmi_semestar\\Projekat_URIS\\tim-1---auctionland-tim-1-opentelemetry\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aleksandar\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Aleksandar\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
