@@ -7,6 +7,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>ParcelMicroservice.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591;1570;API1000;IDE0017;CA1822;</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

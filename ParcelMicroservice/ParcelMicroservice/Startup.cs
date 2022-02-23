@@ -3,27 +3,19 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using ParcelMicroservice.Data;
 using ParcelMicroservice.Entities;
-using ParcelMicroservice.Helpers;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ParcelMicroservice
 {
@@ -79,7 +71,7 @@ namespace ParcelMicroservice
                         {
                             ContentTypes = { "application/problem+json" }
                         };
-                    };
+                    }
 
                     //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                     problemDetails.Status = StatusCodes.Status400BadRequest;
@@ -93,29 +85,9 @@ namespace ParcelMicroservice
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //Konfigurisanje Jwt autentifikacije za projekat
-            //Registrujemo Jwt autentifikacionu shemu i definisemo sve potrebne Jwt opcije
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
-            });
 
-
-            //services.AddSingleton<IParcelRepository, ParcelMockRepository>();
             services.AddScoped<IParcelRepository, ParcelRepository>(); //Koristimo konkretni repozitorijum
-            //services.AddSingleton<IPartOfParcelRepository, PartOfParcelMockRepository>();
             services.AddScoped<IPartOfParcelRepository, PartOfParcelRepository>();
-            services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
-            services.AddSingleton<IUserRepository, UserMockRepository>();
             services.AddScoped<ILoggerMicroservice, LoggerMicroservice>();
             services.AddSwaggerGen(setupAction =>
             {
@@ -147,7 +119,6 @@ namespace ParcelMicroservice
 
             });
 
-            //services.AddDbContextPool<ParcelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ParcelDB")));
             services.AddDbContext<ParcelContext>();
         }
 

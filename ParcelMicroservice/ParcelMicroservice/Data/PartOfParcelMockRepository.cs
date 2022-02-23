@@ -14,7 +14,7 @@ namespace ParcelMicroservice.Data
             FillData();
         }
 
-        private void FillData()
+        private static void FillData()
         {
             PartOfParcels.AddRange(new List<PartOfParcel> {
                 new PartOfParcel
@@ -45,9 +45,9 @@ namespace ParcelMicroservice.Data
 
         }
 
-        public PartOfParcel GetPartOfParcelById(Guid partOfParcelID)
+        public PartOfParcel GetPartOfParcelById(Guid PartOfParcelID)
         {
-            return PartOfParcels.FirstOrDefault(e => e.PartOfParcelID == partOfParcelID);
+            return PartOfParcels.FirstOrDefault(e => e.PartOfParcelID == PartOfParcelID);
         }
 
         public PartOfParcelConfirmation CreatePartOfParcel(PartOfParcel partOfParcel)
@@ -77,9 +77,9 @@ namespace ParcelMicroservice.Data
             model.ClassLandLabel = partOfParcel.ClassLandLabel;
         }
 
-        public void DeletePartOfParcel(Guid partOfParcelID)
+        public void DeletePartOfParcel(Guid PartOfParcelID)
         {
-            PartOfParcels.Remove(PartOfParcels.FirstOrDefault(e => e.PartOfParcelID == partOfParcelID));
+            PartOfParcels.Remove(PartOfParcels.FirstOrDefault(e => e.PartOfParcelID == PartOfParcelID));
         }
 
         public bool SaveChanges()

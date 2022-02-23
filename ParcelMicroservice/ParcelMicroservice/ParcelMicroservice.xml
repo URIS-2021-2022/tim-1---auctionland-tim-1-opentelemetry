@@ -4,40 +4,531 @@
         <name>ParcelMicroservice</name>
     </assembly>
     <members>
-        <member name="M:ParcelMicroservice.Controllers.AuthenticationController.Authenticate(ParcelMicroservice.Models.Principal)">
+        <member name="M:ParcelMicroservice.Controllers.ParcelController.GetParcels(System.String)">
             <summary>
-            Sluzi za autentifikaciju korisnika
+            Vraća sve parcele za zadati filter.
             </summary>
-            <param name="principal">Model sa podacima na osnovu kojih se vrši autentifikacija</param>
+            <param name="NumberOfParcel">Broj parcele</param>
+            <returns>Listu parcela</returns>
+            <response code="200">Vraća listu parcela</response>
+            <response code="404">Nije pronađena ni jedna jedina parcela</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ParcelMicroservice.Controllers.ParcelController.GetParcel(System.Guid)" -->
+        <member name="M:ParcelMicroservice.Controllers.ParcelController.CreateParcel(ParcelMicroservice.Models.ParcelCreationDto)">
+             <summary>
+             Kreira novu parcelu.
+             </summary>
+             <param name="model">Model parcele</param>
+             <returns>Potvrdu o kreiranoj parceli.</returns>
+             <remarks>
+             Primer zahteva za kreiranje nove parcele \
+             POST /api/parcels \
+             {     \
+            SurfaceArea = 0, \
+            NumberOfParcel = "xx/2022", \
+            RealEstateListNumber = "0 - Prepis", \
+            CultureRealStatus = "test", \
+            ClassRealStatus = "test", \
+            WorkabilityActualStatus = "test", \
+            ProtectedZoneActualStatus = "test", \
+            FormOfOwnership = "test", \
+            DrainageActualCondition = "test", \
+            MunicipalityID = Guid.Parse("2841defc-761e-40d8-b8a3-d3e58516dca7"), \
+            NameOfTheMunicipality = "test" \
+            }
+             </remarks>
+             <response code="200">Vraća kreiranu parcelu</response>
+             <response code="500">Došlo je do greške na serveru prilikom kreiranja parcele</response>
+        </member>
+        <member name="M:ParcelMicroservice.Controllers.ParcelController.UpdateParcel(ParcelMicroservice.Models.ParcelUpdateDto)">
+            <summary>
+            Ažurira jednu parcelu.
+            </summary>
+            <param name="model">Model parcele koja se ažurira</param>
+            <returns>Potvrdu o modifikovanoj parceli.</returns>
+            <response code="200">Vraća ažuriranu parcelu</response>
+            <response code="400">Parcela koja se ažurira nije pronađena</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja parcele</response>
+        </member>
+        <member name="M:ParcelMicroservice.Controllers.ParcelController.DeleteParcel(System.Guid)">
+            <summary>
+            Vrši brisanje jedne parcele na osnovu ID-ja parcele.
+            </summary>
+            <param name="parcelID">ID parcele</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Parcela je uspešno obrisana</response>
+            <response code="404">Nije pronađena parcela za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja parcele</response>
+        </member>
+        <member name="M:ParcelMicroservice.Controllers.ParcelController.GetParcelsOptions">
+            <summary>
+            Vraća opcije za rad sa parcelama
+            </summary>
             <returns></returns>
         </member>
-        <member name="M:ParcelMicroservice.Data.UserMockRepository.UserWithCredentialsExists(System.String,System.String)">
+        <member name="M:ParcelMicroservice.Controllers.PartOfParcelController.GetPartOfParcels">
             <summary>
-            Proverava da li postoji korisnik sa prosleđenim kredencijalima
+            Vraća sve delove parcele.
             </summary>
-            <param name="username"></param>
-            <param name="password"></param>
+            <returns>Lista delova parcela</returns>
+            <response code="200">Vraća listu delova parcele</response>
+            <response code="404">Nije pronađena ni jedan jedini deo parcele</response>
+        </member>
+        <member name="M:ParcelMicroservice.Controllers.PartOfParcelController.GetPartOfParcel(System.Guid)">
+            <summary>
+            Vraća jedan deo parcele na osnovu ID-ja dela parcele.
+            </summary>
+            <param name="partOfParcelID">ID dela parcele</param>
+            <returns></returns>
+            <response code="200">Vraća traženi deo parcele</response>
+        </member>
+        <member name="M:ParcelMicroservice.Controllers.PartOfParcelController.CreatePartOfParcel(ParcelMicroservice.Models.PartOfParcelCreationDto)">
+             <summary>
+             Kreira novi deo parcele.
+             </summary>
+             <param name="model">Model dela parcele</param>
+             <returns>Potvrdu o kreiranom delu parcele.</returns>
+             <remarks>
+             Primer zahteva za kreiranje novog dela parcele \
+             POST /api/parcels/partofparcels \
+             {    
+            SurfaceAreaPOP = 0,\
+            ClassID = Guid.Parse("61847780-396a-42a7-8e04-941e0d4eddf9"),\
+            ClassLandLabel = "x"\
+            }
+             </remarks>
+             <response code="200">Vraća kreiran deo parcele</response>
+             <response code="500">Došlo je do greške na serveru prilikom kreiranje dela parcele</response>
+        </member>
+        <member name="M:ParcelMicroservice.Controllers.PartOfParcelController.UpdatePartOfParcel(ParcelMicroservice.Models.PartOfParcelUpdateDto)">
+            <summary>
+            Ažurira jedan deo parcele.
+            </summary>
+            <param name="model">Model dela parcele koja se ažurira</param>
+            <returns>Potvrdu o modifikovanom delu parcele.</returns>
+            <response code="200">Vraća ažuriran deo parcele</response>
+            <response code="400">Deo parcele koji se ažurira nije pronađen</response>
+            <response code="500">Došlo je do greške na serveru prilikom ažuriranja dela parcele</response>
+        </member>
+        <member name="M:ParcelMicroservice.Controllers.PartOfParcelController.DeletePartOfParcel(System.Guid)">
+            <summary>
+            Vrši brisanje jednog dela parcele na osnovu ID-ja dela parcele.
+            </summary>
+            <param name="partOfParcelID">ID dela parcele</param>
+            <returns>Status 204 (NoContent)</returns>
+            <response code="204">Deo parcele je uspešno obrisan</response>
+            <response code="404">Nije pronađen deo parcele za brisanje</response>
+            <response code="500">Došlo je do greške na serveru prilikom brisanja dela parcele</response>
+        </member>
+        <member name="M:ParcelMicroservice.Controllers.PartOfParcelController.GetPartOfParcelsOptions">
+            <summary>
+            Vraća opcije za rad sa delovima parcele
+            </summary>
             <returns></returns>
         </member>
-        <member name="M:ParcelMicroservice.Data.UserMockRepository.HashPassword(System.String)">
+        <member name="P:ParcelMicroservice.Entities.Parcel.ParcelID">
             <summary>
-            Vrši hash-ovanje korisničke lozinke
+            ID parcele
             </summary>
-            <param name="password">Korisnička lozinka</param>
-            <returns>Generisan hash i salt</returns>
         </member>
-        <member name="M:ParcelMicroservice.Data.UserMockRepository.VerifyPassword(System.String,System.String,System.String)">
+        <member name="P:ParcelMicroservice.Entities.Parcel.SurfaceArea">
             <summary>
-            Proverava validnost prosleđene lozinke sa prosleđenim hash-om
+            Povrsina parcele
             </summary>
-            <param name="password">Korisnička lozinka</param>
-            <param name="savedHash">Sačuvan hash</param>
-            <param name="savedSalt">Sačuvan salt</param>
-            <returns></returns>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.NumberOfParcel">
+            <summary>
+            Broj parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.RealEstateListNumber">
+            <summary>
+            Lista nepokretnosti
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.CultureRealStatus">
+            <summary>
+            Kultura realno stanje
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.ClassRealStatus">
+            <summary>
+            Klasa realno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.WorkabilityActualStatus">
+            <summary>
+            Obradivost stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.ProtectedZoneActualStatus">
+            <summary>
+            Zasticena zona stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.FormOfOwnership">
+            <summary>
+            Oblik svojine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.DrainageActualCondition">
+            <summary>
+            Navodnjavanje stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.MunicipalityID">
+            <summary>
+            ID opstine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.Parcel.NameOfTheMunicipality">
+            <summary>
+            Naziv opstine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.ParcelConfirmation.ParcelID">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.ParcelConfirmation.SurfaceArea">
+            <summary>
+            Povrsina parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.ParcelConfirmation.NumberOfParcel">
+            <summary>
+            Broj parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.ParcelConfirmation.NameOfTheMunicipality">
+            <summary>
+            Naziv opstine
+            </summary>
         </member>
         <member name="M:ParcelMicroservice.Entities.ParcelContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             Popunjava bazu sa nekim inicijalnim podacima
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcel.ParcelID">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcel.PartOfParcelID">
+            <summary>
+            ID dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcel.SurfaceAreaPOP">
+            <summary>
+            Povrsina dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcel.ClassID">
+            <summary>
+            ID klase zemljista 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcel.ClassLandLabel">
+            <summary>
+            Klasa zemljista 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcel.Parcel">
+            <summary>
+            Objekat parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcelConfirmation.ParcelID">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcelConfirmation.PartOfParcelID">
+            <summary>
+            ID dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcelConfirmation.SurfaceAreaPOP">
+            <summary>
+            Povrsina dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Entities.PartOfParcelConfirmation.ClassLandLabel">
+            <summary>
+            Klasa zemljista 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelConfirmationDto.ParcelID">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelConfirmationDto.SurfaceArea">
+            <summary>
+            Povrsina parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelConfirmationDto.NumberOfParcel">
+            <summary>
+            Broj parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelConfirmationDto.NameOfTheMunicipality">
+            <summary>
+            Naziv opstine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.SurfaceArea">
+            <summary>
+            Povrsina parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.NumberOfParcel">
+            <summary>
+            Broj parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.RealEstateListNumber">
+            <summary>
+            Lista nepokretnosti
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.CultureRealStatus">
+            <summary>
+            Kultura realno stanje
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.ClassRealStatus">
+            <summary>
+            Klasa realno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.WorkabilityActualStatus">
+            <summary>
+            Obradivost stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.ProtectedZoneActualStatus">
+            <summary>
+            Zasticena zona stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.FormOfOwnership">
+            <summary>
+            Oblik svojine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.DrainageActualCondition">
+            <summary>
+            Navodnjavanje stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.MunicipalityID">
+            <summary>
+            ID opstine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelCreationDto.NameOfTheMunicipality">
+            <summary>
+            Naziv opstine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.SurfaceArea">
+            <summary>
+            Povrsina parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.NumberOfParcel">
+            <summary>
+            Broj parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.RealEstateListNumber">
+            <summary>
+            Lista nepokretnosti
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.CultureRealStatus">
+            <summary>
+            Kultura realno stanje
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.ClassRealStatus">
+            <summary>
+            Klasa realno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.WorkabilityActualStatus">
+            <summary>
+            Obradivost stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.ProtectedZoneActualStatus">
+            <summary>
+            Zasticena zona stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.FormOfOwnership">
+            <summary>
+            Oblik svojine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.DrainageActualCondition">
+            <summary>
+            Navodnjavanje stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.MunicipalityID">
+            <summary>
+            ID opstine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelDto.NameOfTheMunicipality">
+            <summary>
+            Naziv opstine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.ParcelID">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.SurfaceArea">
+            <summary>
+            Povrsina parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.NumberOfParcel">
+            <summary>
+            Broj parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.RealEstateListNumber">
+            <summary>
+            Lista nepokretnosti
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.CultureRealStatus">
+            <summary>
+            Kultura realno stanje
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.ClassRealStatus">
+            <summary>
+            Klasa realno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.WorkabilityActualStatus">
+            <summary>
+            Obradivost stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.ProtectedZoneActualStatus">
+            <summary>
+            Zasticena zona stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.FormOfOwnership">
+            <summary>
+            Oblik svojine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.DrainageActualCondition">
+            <summary>
+            Navodnjavanje stvarno stanje 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.MunicipalityID">
+            <summary>
+            ID opstine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.ParcelUpdateDto.NameOfTheMunicipality">
+            <summary>
+            Naziv opstine
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelConfirmationDto.ParcelID">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelConfirmationDto.PartOfParcelID">
+            <summary>
+            ID dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelConfirmationDto.SurfaceAreaPOP">
+            <summary>
+            Povrsina dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelConfirmationDto.ClassLandLabel">
+            <summary>
+            Klasa zemljista 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelCreationDto.ParcelID">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelCreationDto.SurfaceAreaPOP">
+            <summary>
+            Povrsina dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelCreationDto.ClassID">
+            <summary>
+            ID klase zemljista 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelCreationDto.ClassLandLabel">
+            <summary>
+            Klasa zemljista 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelDto.SurfaceAreaPOP">
+            <summary>
+            Povrsina dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelDto.ClassID">
+            <summary>
+            ID klase zemljista 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelDto.ClassLandLabel">
+            <summary>
+            Klasa zemljista 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelUpdateDto.ParcelID">
+            <summary>
+            ID parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelUpdateDto.PartOfParcelID">
+            <summary>
+            ID dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelUpdateDto.SurfaceAreaPOP">
+            <summary>
+            Povrsina dela parcele
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelUpdateDto.ClassID">
+            <summary>
+            ID klase zemljista 
+            </summary>
+        </member>
+        <member name="P:ParcelMicroservice.Models.PartOfParcelUpdateDto.ClassLandLabel">
+            <summary>
+            Klasa zemljista 
             </summary>
         </member>
     </members>

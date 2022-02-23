@@ -17,7 +17,6 @@ namespace ParcelMicroservice.Controllers
     [ApiController]
     [Route("api/parcels/partofparcels")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    //[Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class PartOfParcelController : ControllerBase
     {
         private readonly IPartOfParcelRepository partOfParcelRepository;
@@ -36,8 +35,16 @@ namespace ParcelMicroservice.Controllers
             loggerDto.Service = "PART OF PARCEL";
         }
 
-        [HttpHead]
+        /// <summary>
+        /// Vraća sve delove parcele.
+        /// </summary>
+        /// <returns>Lista delova parcela</returns>
+        /// <response code="200">Vraća listu delova parcele</response>
+        /// <response code="404">Nije pronađena ni jedan jedini deo parcele</response>
         [HttpGet]
+        [HttpHead] //Podržavamo i HTTP head zahtev koji nam vraća samo zaglavlja u odgovoru    
+        [ProducesResponseType(StatusCodes.Status200OK)] //Eksplicitno definišemo šta sve može ova akcija da vrati
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<PartOfParcel>> GetPartOfParcels()
         {
             loggerDto.HttpMethodName = "GET";
@@ -55,6 +62,14 @@ namespace ParcelMicroservice.Controllers
             return Ok(mapper.Map<List<PartOfParcelDto>>(partOfParcels));
         }
 
+        /// <summary>
+        /// Vraća jedan deo parcele na osnovu ID-ja dela parcele.
+        /// </summary>
+        /// <param name="partOfParcelID">ID dela parcele</param>
+        /// <returns></returns>
+        /// <response code="200">Vraća traženi deo parcele</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{partOfParcelID}")]
         public ActionResult<PartOfParcel> GetPartOfParcel(Guid partOfParcelID)
         {
@@ -71,8 +86,26 @@ namespace ParcelMicroservice.Controllers
             return Ok(mapper.Map<PartOfParcelDto>(model));
         }
 
+        /// <summary>
+        /// Kreira novi deo parcele.
+        /// </summary>
+        /// <param name="model">Model dela parcele</param>
+        /// <returns>Potvrdu o kreiranom delu parcele.</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje novog dela parcele \
+        /// POST /api/parcels/partofparcels \
+        /// {    
+        ///SurfaceAreaPOP = 0,\
+        ///ClassID = Guid.Parse("61847780-396a-42a7-8e04-941e0d4eddf9"),\
+        ///ClassLandLabel = "x"\
+        ///}
+        /// </remarks>
+        /// <response code="200">Vraća kreiran deo parcele</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom kreiranje dela parcele</response>
         [Consumes("application/json")]
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PartOfParcelConfirmationDto> CreatePartOfParcel([FromBody] PartOfParcelCreationDto model)
         {
             try
@@ -96,8 +129,19 @@ namespace ParcelMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira jedan deo parcele.
+        /// </summary>
+        /// <param name="model">Model dela parcele koja se ažurira</param>
+        /// <returns>Potvrdu o modifikovanom delu parcele.</returns>
+        /// <response code="200">Vraća ažuriran deo parcele</response>
+        /// <response code="400">Deo parcele koji se ažurira nije pronađen</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja dela parcele</response>
         [Consumes("application/json")]
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<PartOfParcelConfirmationDto> UpdatePartOfParcel(PartOfParcelUpdateDto model)
         {
             try
@@ -130,6 +174,17 @@ namespace ParcelMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vrši brisanje jednog dela parcele na osnovu ID-ja dela parcele.
+        /// </summary>
+        /// <param name="partOfParcelID">ID dela parcele</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Deo parcele je uspešno obrisan</response>
+        /// <response code="404">Nije pronađen deo parcele za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja dela parcele</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{partOfParcelID}")]
         public IActionResult DeletePartOfParcel(Guid partOfParcelID)
         {
@@ -158,6 +213,11 @@ namespace ParcelMicroservice.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Vraća opcije za rad sa delovima parcele
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         public IActionResult GetPartOfParcelsOptions()
         {
