@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj": {}
+    "D:\\Sedmi_semestar\\Projekat_URIS\\tim-1---auctionland-tim-1-opentelemetry\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj": {}
   },
   "projects": {
-    "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj": {
+    "D:\\Sedmi_semestar\\Projekat_URIS\\tim-1---auctionland-tim-1-opentelemetry\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj",
+        "projectUniqueName": "D:\\Sedmi_semestar\\Projekat_URIS\\tim-1---auctionland-tim-1-opentelemetry\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj",
         "projectName": "ParcelMicroservice",
-        "projectPath": "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj",
+        "projectPath": "D:\\Sedmi_semestar\\Projekat_URIS\\tim-1---auctionland-tim-1-opentelemetry\\ParcelMicroservice\\ParcelMicroservice\\ParcelMicroservice.csproj",
         "packagesPath": "C:\\Users\\Aleksandar\\.nuget\\packages\\",
-        "outputPath": "D:\\Sedmi_semestar\\URIS\\ZajednickiProjekat\\ParcelMicroservice\\ParcelMicroservice\\obj\\",
+        "outputPath": "D:\\Sedmi_semestar\\Projekat_URIS\\tim-1---auctionland-tim-1-opentelemetry\\ParcelMicroservice\\ParcelMicroservice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,5 +1,4 @@
-﻿
-using LoggerMicroservice.Entities;
+﻿using ParcelMicroservice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
