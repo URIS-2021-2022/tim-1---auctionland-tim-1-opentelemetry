@@ -27,16 +27,16 @@ namespace ParcelMicroservice.Entities
         /// <summary>
         /// Popunjava bazu sa nekim inicijalnim podacima
         /// </summary>
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<PartOfParcel>().HasKey(table => new {
+            modelBuilder.Entity<PartOfParcel>().HasKey(table => new {
                 table.ParcelID,
                 table.PartOfParcelID
             });
 
-            builder.Entity<PartOfParcel>().HasOne(v => v.Parcel).WithMany().HasForeignKey(v => v.ParcelID);
+            modelBuilder.Entity<PartOfParcel>().HasOne(v => v.Parcel).WithMany().HasForeignKey(v => v.ParcelID);
 
-            builder.Entity<Parcel>()
+            modelBuilder.Entity<Parcel>()
                 .HasData(new
                 {
                     ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"),
@@ -53,7 +53,7 @@ namespace ParcelMicroservice.Entities
                     NameOfTheMunicipality = "Čantavir"
                 });
 
-            builder.Entity<Parcel>()
+            modelBuilder.Entity<Parcel>()
                 .HasData(new
                 {
                     ParcelID = Guid.Parse("628f7390-cb85-4b69-94bd-e3e6c424d725"),
@@ -70,7 +70,7 @@ namespace ParcelMicroservice.Entities
                     NameOfTheMunicipality = "Bajmok"
                 });
 
-            builder.Entity<PartOfParcel>()
+            modelBuilder.Entity<PartOfParcel>()
                 .HasData(new
                 {
                     ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"),
@@ -80,7 +80,7 @@ namespace ParcelMicroservice.Entities
                     ClassLandLabel = "I"
                 });
 
-            builder.Entity<PartOfParcel>()
+            modelBuilder.Entity<PartOfParcel>()
                 .HasData(new
                 {
                     ParcelID = Guid.Parse("866f2352-771f-4405-a9b5-9878b0fbff0f"),

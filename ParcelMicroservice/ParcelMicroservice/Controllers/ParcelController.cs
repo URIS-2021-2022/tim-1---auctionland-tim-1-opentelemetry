@@ -1,6 +1,5 @@
 ﻿using AddressMicroservice.ServiceCalls;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -9,15 +8,12 @@ using ParcelMicroservice.Entities;
 using ParcelMicroservice.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ParcelMicroservice.Controllers
 {
     [ApiController]
     [Route("api/parcels")]
     [Produces("application/json", "application/xml")] //Sve akcije kontrolera mogu da vraćaju definisane formate
-    //[Authorize] //Ovom kontroleru mogu da pristupaju samo autorizovani korisnici
     public class ParcelController : ControllerBase
     {
         private readonly IParcelRepository parcelRepository;
@@ -26,12 +22,12 @@ namespace ParcelMicroservice.Controllers
         private readonly ILoggerMicroservice loggerMicroservice;
         private readonly LoggerDto loggerDto;
 
-        public List<String> CultureList = new List<String> { "Njive", "Vrtovi", "Voćnjaci", "Vinogradi", "Livade", "Pašnjaci", "Šume", "Trstici-močvare", "test" };
-        public List<String> ClassList = new List<String> { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "test" };
-        public List<String> WorkabilityList = new List<String> { "Obradivo", "Ostalo", "test" };
-        public List<String> ProtectedZoneList = new List<String> { "1", "2", "3", "4", "test" };
-        public List<String> FormOfOwnershipList = new List<String> { "Privatna svojina", "Državna svojina RS", "Državna svojina", "Društvena svojina", "Zadružna svojina", "Mešovita svojina", "Drugi oblici", "test" };
-        public List<String> DrainageActualConditionList = new List<String> { "Površinsko odvodnjavanje", "Podzemno odvodnjavanje", "test" };
+        private List<String> CultureList = new() { "Njive", "Vrtovi", "Voćnjaci", "Vinogradi", "Livade", "Pašnjaci", "Šume", "Trstici-močvare", "test" };
+        private List<String> ClassList = new() { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "test" };
+        private List<String> WorkabilityList = new() { "Obradivo", "Ostalo", "test" };
+        private List<String> ProtectedZoneList = new() { "1", "2", "3", "4", "test" };
+        private List<String> FormOfOwnershipList = new() { "Privatna svojina", "Državna svojina RS", "Državna svojina", "Društvena svojina", "Zadružna svojina", "Mešovita svojina", "Drugi oblici", "test" };
+        private List<String> DrainageActualConditionList = new() { "Površinsko odvodnjavanje", "Podzemno odvodnjavanje", "test" };
 
         //Pomoću dependency injection-a dodajemo potrebne zavisnosti
         public ParcelController(IParcelRepository parcelRepository, LinkGenerator linkGenerator, IMapper mapper, ILoggerMicroservice loggerMicroservice)
@@ -44,8 +40,18 @@ namespace ParcelMicroservice.Controllers
             loggerDto.Service = "PARCEL";
         }
 
+
+        /// <summary>
+        /// Vraća sve parcele za zadati filter.
+        /// </summary>
+        /// <param name="NumberOfParcel">Broj parcele</param>
+        /// <returns>Listu parcela</returns>
+        /// <response code="200">Vraća listu parcela</response>
+        /// <response code="404">Nije pronađena ni jedna jedina parcela</response>
         [HttpGet]
         [HttpHead]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult<List<ParcelDto>> GetParcels(string NumberOfParcel)
         {
             loggerDto.HttpMethodName = "GET";
@@ -63,6 +69,14 @@ namespace ParcelMicroservice.Controllers
             return Ok(mapper.Map<List<ParcelDto>>(parcels));
         }
 
+        /// <summary>
+        /// Vraća jednu parcelu na osnovu ID-ja parcele.
+        /// </summary>
+        /// <param name="parcelID">ID parceleparam>
+        /// <returns></returns>
+        /// <response code="200">Vraća traženu parcelu</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{parcelID}")]
         public ActionResult<ParcelDto> GetParcel(Guid parcelID)
         {
@@ -79,7 +93,35 @@ namespace ParcelMicroservice.Controllers
             return Ok(mapper.Map<ParcelDto>(model));
         }
 
+        /// <summary>
+        /// Kreira novu parcelu.
+        /// </summary>
+        /// <param name="model">Model parcele</param>
+        /// <returns>Potvrdu o kreiranoj parceli.</returns>
+        /// <remarks>
+        /// Primer zahteva za kreiranje nove parcele \
+        /// POST /api/parcels \
+        /// {     \
+        ///SurfaceArea = 0, \
+        ///NumberOfParcel = "xx/2022", \
+        ///RealEstateListNumber = "0 - Prepis", \
+        ///CultureRealStatus = "test", \
+        ///ClassRealStatus = "test", \
+        ///WorkabilityActualStatus = "test", \
+        ///ProtectedZoneActualStatus = "test", \
+        ///FormOfOwnership = "test", \
+        ///DrainageActualCondition = "test", \
+        ///MunicipalityID = Guid.Parse("2841defc-761e-40d8-b8a3-d3e58516dca7"), \
+        ///NameOfTheMunicipality = "test" \
+        ///}
+        /// </remarks>
+        /// <response code="200">Vraća kreiranu parcelu</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom kreiranja parcele</response>
         [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         [HttpPost]
         public ActionResult<ParcelConfirmationDto> CreateParcel([FromBody] ParcelCreationDto model)
         {
@@ -111,7 +153,18 @@ namespace ParcelMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Ažurira jednu parcelu.
+        /// </summary>
+        /// <param name="model">Model parcele koja se ažurira</param>
+        /// <returns>Potvrdu o modifikovanoj parceli.</returns>
+        /// <response code="200">Vraća ažuriranu parcelu</response>
+        /// <response code="400">Parcela koja se ažurira nije pronađena</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom ažuriranja parcele</response>
         [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut]
         public ActionResult<ParcelConfirmationDto> UpdateParcel(ParcelUpdateDto model)
         {
@@ -144,6 +197,17 @@ namespace ParcelMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vrši brisanje jedne parcele na osnovu ID-ja parcele.
+        /// </summary>
+        /// <param name="parcelID">ID parcele</param>
+        /// <returns>Status 204 (NoContent)</returns>
+        /// <response code="204">Parcela je uspešno obrisana</response>
+        /// <response code="404">Nije pronađena parcela za brisanje</response>
+        /// <response code="500">Došlo je do greške na serveru prilikom brisanja parcele</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{parcelID}")]
         public IActionResult DeleteParcel(Guid parcelID)
         {
@@ -172,6 +236,10 @@ namespace ParcelMicroservice.Controllers
             }
         }
 
+        /// <summary>
+        /// Vraća opcije za rad sa parcelama
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         public IActionResult GetParcelsOptions()
         {
