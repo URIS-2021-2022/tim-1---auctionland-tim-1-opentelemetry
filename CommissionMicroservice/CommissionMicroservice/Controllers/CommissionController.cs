@@ -38,8 +38,10 @@ namespace CommissionMicroservice.Controllers
             this.linkGenerator = linkGenerator;
             this.userService = userService;
             this.loggerMicroservice = loggerMicroservice;
-            loggerDto = new LoggerDto();
-            loggerDto.Service = "Commission";
+            loggerDto = new LoggerDto{
+                Service = "Commission"
+            };
+            
         }
 
         /// <summary>

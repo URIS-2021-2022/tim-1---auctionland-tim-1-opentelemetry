@@ -44,8 +44,10 @@ namespace CustomerMicroservice.Controllers
             this.documentService = documentService;
             this.publicBiddingMicroservice = publicBiddingMicroservice;
             this.loggerMicroservice = loggerMicroservice;
-            loggerDto = new LoggerDto();
-            loggerDto.Service = "Customer";
+            loggerDto = new LoggerDto
+            {
+                Service = "Customer"
+            };
         }
 
         /// <summary>
