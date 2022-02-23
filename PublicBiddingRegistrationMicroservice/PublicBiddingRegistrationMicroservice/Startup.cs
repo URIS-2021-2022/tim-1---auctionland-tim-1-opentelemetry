@@ -77,7 +77,7 @@ namespace PublicBiddingRegistrationMicroservice
                         {
                             ContentTypes = { "application/problem+json" }
                         };
-                    };
+                    }
 
                     //ukoliko postoji nešto što nije moglo da se parsira hoćemo da vraćamo status 400 kao i do sada
                     problemDetails.Status = StatusCodes.Status400BadRequest;
