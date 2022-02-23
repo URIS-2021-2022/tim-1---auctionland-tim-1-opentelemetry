@@ -84,6 +84,8 @@ namespace ComplaintMicroservice
             services.AddScoped<IComplaintRepository, ComplaintRepository>();           
             services.AddScoped<ILoggerService, LoggerService>();
             services.AddScoped<IPublicBiddingService, PublicBiddingService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc("ComplaintOpenApiSpecification",

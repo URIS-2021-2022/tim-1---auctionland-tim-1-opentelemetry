@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace ComplaintMicroservice.Models
 {
     /// <summary>
-    /// DTO za žalbu
+    /// Dto za žalbu sa javnim nadmetanjem i kupcem
     /// </summary>
-    public class ComplaintDto
+    public class ComplaintByIdDto
     {
         /// <summary>
         /// Datum podnošenja žalbe
@@ -61,5 +61,15 @@ namespace ComplaintMicroservice.Models
         /// </summary>
         public string ComplaintStatus { get; set; }
         #endregion
+
+        /// <summary>
+        /// Javno nadmetanje na koje se žalba odnosi
+        /// </summary>
+        public PublicBiddingDto PublicBidding { get; set; }
+
+        /// <summary>
+        /// Kupac koji je podneo žalbu
+        /// </summary>
+        public CustomerDto CustomerDto { get; set; }
     }
 }

@@ -77,7 +77,7 @@ namespace ComplaintMicroservice.Controllers
         [HttpGet("{complaintId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<ComplaintDto> GetComplaint(Guid complaintId)
+        public ActionResult<ComplaintByIdDto> GetComplaint(Guid complaintId)
         {
             loggerDto.HttpMethodName = "GET";
             Complaint model = complaintRepository.GetComplaintById(complaintId);
@@ -92,7 +92,7 @@ namespace ComplaintMicroservice.Controllers
             loggerDto.Response = "200 OK";
             loggerMicroservice.CreateLog(loggerDto);
 
-            ComplaintDto complaintWithPB = mapper.Map<ComplaintDto>(model);
+            ComplaintByIdDto complaintWithPB = mapper.Map<ComplaintByIdDto>(model);
             if (pb != null)
             {
                 complaintWithPB.PublicBidding = pb;
